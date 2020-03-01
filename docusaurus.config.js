@@ -1,11 +1,11 @@
 module.exports = {
   title: 'Onepanel Core',
   tagline: 'Build highly scalable, distributed and reproducible ML workflows on Kubernetes',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://onepanelio.github.io',
+  baseUrl: '/core-docs/',
   favicon: 'img/favicon.png',
   organizationName: 'onepanelio', // Usually your GitHub org/user name.
-  projectName: 'core', // Usually your repo name.
+  projectName: 'core-docs', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: '',
@@ -35,7 +35,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/onepaenlio/core-docs',
+            'https://github.com/onepanelio/core-docs/tree/master/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
