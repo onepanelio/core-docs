@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Onepanel Core',
-  tagline: 'Build highly scalable, distributed and reproducible ML workflows on Kubernetes',
+  tagline: 'Build highly scalable, distributed and reproducible computer vision workflows on Kubernetes',
   url: 'https://onepanelio.github.io',
   baseUrl: '/core-docs/',
   favicon: 'img/favicon.png',
