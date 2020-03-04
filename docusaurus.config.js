@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Onepanel Core',
-  tagline: 'Build highly scalable, distributed and reproducible computer vision workflows on Kubernetes',
+  tagline: 'Build highly scalable, distributed and reproducible computer vision workflows on any cloud or on-premises.',
   url: 'https://onepanelio.github.io',
   baseUrl: '/core-docs/',
   favicon: 'img/favicon.png',
@@ -14,7 +14,7 @@ module.exports = {
         src: 'img/onepanel-logo-white.svg',
       },
       links: [
-        {to: 'docs/getting-started/core-concepts', label: 'Docs', position: 'left'},
+        {to: 'docs/about/onepanel', label: 'Docs', position: 'left'},
         {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/onepanelio/core',

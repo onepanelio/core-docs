@@ -7,7 +7,8 @@
 
 module.exports = {
   someSidebar: {
-    'Getting started': ['getting-started/core-concepts'],
+    'About': ['about/onepanel', 'about/use-cases'],
+    'Getting started': ['getting-started/overview', 'getting-started/installation', 'getting-started/contributing'],
     'API reference': [
       {
         type: 'link',
@@ -19,6 +20,6 @@ module.exports = {
         label: 'Python SDK',
         href: 'https://github.com/onepanelio/python-sdk/tree/v1.0.0-beta1#onepanelcoreapi',
       }
-    ]
+    ],
   },
 };

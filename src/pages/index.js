@@ -8,20 +8,20 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Workflows as Code</>,
+    title: <>Everything as Code</>,
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Build, manage and extend reproducible workflows using Kubernetes native infrastructrue as code.
+        Workflows, environments and infrastruture are all managed and versioned as code.
       </>
     ),
   },
   {
-    title: <>Modular Architecture</>,
+    title: <>Best Practice, Modular Architecture</>,
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Pre-built components you can use out of the box or easily bring your own component and templatized environments with custom Docker images.
+        Pre-built components you can use out of the box or easily bring your own components for specialed workflows.
       </>
     ),
   },
@@ -68,8 +68,16 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/getting-started/core-concepts')}>
+              to={useBaseUrl('docs/getting-started/installation')}>
               Get Started
+            </Link>
+            <Link
+              className={classnames(
+                'button button--outline button--secondary button--lg ml-1',
+                styles.contribute,
+              )}
+              to={useBaseUrl('docs/getting-started/contributing')}>
+              Contribute
             </Link>
           </div>
         </div>
