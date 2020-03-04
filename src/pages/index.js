@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Everything as Code</>,
+    title: <>Infrastruture and Workflows as Code, Version Controlled</>,
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
@@ -17,7 +17,7 @@ const features = [
     ),
   },
   {
-    title: <>Best Practice, Modular Architecture</>,
+    title: <>Modular Architecture Based on Best Practices</>,
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
@@ -26,7 +26,7 @@ const features = [
     ),
   },
   {
-    title: <>Powered by Kubernetes</>,
+    title: <>Run Anywhere, Powered by Kubernetes</>,
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
