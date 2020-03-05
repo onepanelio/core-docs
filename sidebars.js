@@ -8,7 +8,19 @@
 module.exports = {
   someSidebar: {
     'About': ['about/onepanel', 'about/use-cases'],
-    'Getting started': ['getting-started/overview', 'getting-started/installation', 'getting-started/contributing'],
+    'Getting started': [
+      'getting-started/overview',
+      'getting-started/installing',
+      'getting-started/contributing'
+    ],
+    'Installation guides': [
+      'installation-guides/aks',
+      'installation-guides/eks',
+      'installation-guides/gke',
+      'installation-guides/linux',
+      'installation-guides/macos',
+      'installation-guides/windows',
+    ],
     'API reference': [
       {
         type: 'link',
