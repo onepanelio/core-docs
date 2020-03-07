@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Infrastruture and Workflows as Code, Version Controlled</>,
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    title: <>Infrastruture and workflows as code, version controlled</>,
+    imageUrl: 'img/workflow.png',
     description: (
       <>
         Workflows, environments and infrastruture are all managed and versioned as code.
@@ -17,8 +17,8 @@ const features = [
     ),
   },
   {
-    title: <>Modular Architecture Based on Best Practices</>,
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    title: <>Modular architecture based on best practices</>,
+    imageUrl: 'img/modularity.png',
     description: (
       <>
         Pre-built components you can use out of the box or easily bring your own components for specialed workflows.
@@ -26,8 +26,8 @@ const features = [
     ),
   },
   {
-    title: <>Run Anywhere, Powered by Kubernetes</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    title: <>Powered by Kubernetes so you can deploy anywhere</>,
+    imageUrl: 'img/k8s.png',
     description: (
       <>
         Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
@@ -45,8 +45,8 @@ function Feature({imageUrl, title, description}) {
           <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
-      <h3>{title}</h3>
-      <p>{description}</p>
+      <h3 className="text--center">{title}</h3>
+      <p className="text--center">{description}</p>
     </div>
   );
 }

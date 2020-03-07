@@ -31,6 +31,10 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
+.navbar__items--right .react-toggle {
+  display: none;
+}
+
 .button.button--secondary.button--outline:not(.button--active):not(:hover) {
   color: var(--ifm-color-secondary);
 }
