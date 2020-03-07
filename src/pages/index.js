@@ -26,7 +26,7 @@ const features = [
     ),
   },
   {
-    title: <>Powered by Kubernetes so you can deploy anywhere</>,
+    title: <>Deploy anywhere, powered by Kubernetes</>,
     imageUrl: 'img/k8s.png',
     description: (
       <>
