@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Infrastruture and workflows as code, version controlled</>,
+    title: <>Infrastruture and workflows as code with version control</>,
     imageUrl: 'img/workflow.png',
     description: (
       <>
@@ -26,7 +26,7 @@ const features = [
     ),
   },
   {
-    title: <>Deploy anywhere, powered by Kubernetes</>,
+    title: <>Powered by Kubernetes so you can deploy anywhere</>,
     imageUrl: 'img/k8s.png',
     description: (
       <>
