@@ -25,8 +25,8 @@ gcloud beta container --project $PROJECTNAME \
     --enable-autorepair 
 ```
 
-:::important
-Onepanel uses `cert-manager` to automatically renew TLS certificates. You need to setup additional firewall rules in GKE for this to work, refer to [cert-manager compatibility](https://cert-manager.io/docs/installation/compatibility/#gke) for more information.
+:::note
+The `--enable-stackdriver-kubernetes` option in above command enables Google Stackdriver for log aggregation which can incur additional charges. You can optionally remove this option and add `--logging` to `opctl` command below.
 :::
 
 ## Install Onepanel Core
@@ -35,7 +35,7 @@ Download the latest `opctl` for your operating system from [our release page](ht
 Run the following command to create `params.yaml` file for GKE:
 
 ```bash
-opctl init --provider gke --dns-provider <dns-provider> --logging
+opctl init --provider gke --dns-provider <dns-provider>
 ```
 
 :::note
@@ -63,6 +63,4 @@ Once deployment is complete, use the follownig command to get your auth token to
 ```bash
 opctl auth token
 ```
-:::important
-For GKE, you have to run a simple `kubectl` (i.e. `kubectl get nodes`) for the above command to work.
-:::
+
