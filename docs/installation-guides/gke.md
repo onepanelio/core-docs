@@ -6,23 +6,23 @@ sidebar_label: Installing on GKE
 This document outlines the installation steps for Google Kubernetes Engine (GKE).
 
 ## Launch a GKE cluster
-We recommend launching a cluster with 2 `n1-standard-4` nodes to start, with autoscaling enabled and network policy enabled. You can add additional CPU/GPU node pools as needed later.
+We recommend launching a cluster with 2 `n1-standard-4` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
 
 Example `gcloud` script:
 
 ```bash
-gcloud beta container --project $PROJECTNAME \
-    clusters create $CLUSTERNAME --zone "us-central1-a" \
-    --no-enable-basic-auth --release-channel "regular" \
-    --machine-type "n1-standard-4" --image-type "COS" \
-    --disk-type "pd-standard" --disk-size "100" \
-    --metadata disable-legacy-endpoints=true \
-    --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" \
-    --num-nodes $NUMNODES --enable-stackdriver-kubernetes \
-    --enable-ip-alias --network $NETWORK --subnetwork $SUBNETWORK \
-    --default-max-pods-per-node "110" --enable-network-policy \
-    --addons HorizontalPodAutoscaling,HttpLoadBalancing --enable-autoupgrade \
-    --enable-autorepair 
+gcloud beta container --project <project-name> clusters create <cluster-name> \
+    --zone <zone> \
+    --machine-type "n1-standard-4" \
+    --disk-type "pd-standard" \
+    --disk-size "100" \
+    --num-nodes 2 \
+    --min-nodes 0 \
+    --max-nodes 2 \
+    --enable-autoscaling \
+    --enable-stackdriver-kubernetes \
+    --enable-network-policy \
+    --addons HorizontalPodAutoscaling,HttpLoadBalancing
 ```
 
 :::note
@@ -39,15 +39,15 @@ opctl init --provider gke --dns-provider <dns-provider>
 ```
 
 :::note
-For a list of supported `--dns-provider` values see [CLI documentation]() 
+For a list of supported `--dns-provider` values see [opctl documentation]() 
 :::
 
-Populate `params.yaml` as outlined in [common installation guide](installation-guides/common)
+Populate `params.yaml` as outlined in [configuration documentation](installation-guides/configuration)
 
-Then run the following command to deploy to your cluster:
+Finally, run the following command to deploy to your cluster:
 
 ```bash
-opctl deploy
+opctl apply
 ```
 
 Once deployment completes, run the following command to get the external IP of Onepanel's gateway:
@@ -56,7 +56,11 @@ Once deployment completes, run the following command to get the external IP of O
 kubectl get service istio-ingressgateway -n istio-system
 ```
 
-This is the IP address you need to point your FQDN to in your DNS provider.
+This is the IP address you need to point your Wildcard FQDN to in your DNS provider.
+
+:::tip
+Example Wildcard FQDN would be `*.example.com` or `*.subdomain.example.com`
+:::
 
 Once deployment is complete, use the follownig command to get your auth token to log into Onepanel:
 
