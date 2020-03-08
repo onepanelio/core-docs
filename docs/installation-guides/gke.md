@@ -8,7 +8,7 @@ This document outlines the installation steps for Google Kubernetes Engine (GKE)
 ## Launch a GKE cluster
 We recommend launching a cluster with 2 `n1-standard-4` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
 
-Example `gcloud` script:
+Example `gcloud` command:
 
 ```bash
 gcloud beta container --project <project-name> clusters create <cluster-name> \
@@ -28,6 +28,12 @@ gcloud beta container --project <project-name> clusters create <cluster-name> \
 :::note
 The `--enable-stackdriver-kubernetes` option in above command enables Google Stackdriver for log aggregation which can incur additional charges. You can optionally remove this option and add `--logging` to `opctl` command below.
 :::
+
+The command above will automatically retrieve your cluster's access credentials but you can also get them by running:
+
+```
+gcloud container clusters get-credentials <cluster-name> --zone <zone>
+```
 
 ## Install Onepanel Core
 Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases)
