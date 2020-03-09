@@ -8,7 +8,7 @@ This document outlines the installation steps for Azure Kubernetes Service (AKS)
 ## Launch a AKS cluster
 We recommend launching a cluster with 2 `Standard_D4s_v3` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
 
-Example `az` command to create cluster:
+Here is a sample `az` command to create a bare minimum cluster:
 
 ```bash
 az aks create --name <cluster-name> \
@@ -26,7 +26,7 @@ az aks create --name <cluster-name> \
 ```
 
 :::note
-The `--enable-addons monitoring` option in above command enables Azure for log aggregation which can incur additional charges. You can optionally remove this option and add `--logging` to `opctl` command below.
+The `--enable-addons monitoring` flag in above command enables Azure Monitor for log aggregation which can incur additional charges. You can optionally remove this flag and add `--enable-efk-logging` to `opctl` command below.
 :::
 
 You can then get access credentials by running:
