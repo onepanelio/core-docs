@@ -13,14 +13,14 @@ Here is a sample `az` command to create a bare minimum cluster:
 ```bash
 az aks create --resource-group <resource-group> --name <cluster-name> \
     --node-count 2 \
-    --node-osdisk-size 100 \
     --node-vm-size Standard_D4s_v3 \
+    --node-osdisk-size 100 \
+    --min-count 0 \
+    --max-count 2 \
+    --enable-cluster-autoscaler \
     --enable-addons monitoring \
     --network-plugin azure \
     --network-policy azure \
-    --enable-cluster-autoscaler \
-    --min-count 0 \
-    --max-count 2 \
     --generate-ssh-keys
 ```
 
