@@ -18,9 +18,9 @@ az aks create --resource-group <resource-group> --name <cluster-name> \
     --min-count 0 \
     --max-count 2 \
     --enable-cluster-autoscaler \
-    --enable-addons monitoring \
     --network-plugin azure \
     --network-policy azure \
+    --enable-addons monitoring \
     --generate-ssh-keys
 ```
 
