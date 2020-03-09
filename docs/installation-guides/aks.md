@@ -11,8 +11,7 @@ We recommend launching a cluster with 2 `Standard_D4s_v3` nodes to start, with a
 Here is a sample `az` command to create a bare minimum cluster:
 
 ```bash
-az aks create --name <cluster-name> \
-    --resource-group <resource-group> \
+az aks create --resource-group <resource-group> --name <cluster-name> \
     --node-count 2 \
     --node-osdisk-size 100 \
     --node-vm-size Standard_D4s_v3 \
