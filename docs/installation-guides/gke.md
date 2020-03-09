@@ -11,7 +11,7 @@ We recommend launching a cluster with 2 `n1-standard-4` nodes to start, with aut
 Here is sample `gcloud` command to create a bare minimum cluster:
 
 ```bash
-gcloud beta container --project <project-name> clusters create <cluster-name> \
+gcloud container --project <project-name> clusters create <cluster-name> \
     --zone <zone> \
     --machine-type "n1-standard-4" \
     --disk-type "pd-standard" \
