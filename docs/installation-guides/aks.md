@@ -5,7 +5,7 @@ sidebar_label: Installing on AKS
 
 This document outlines the installation steps for Azure Kubernetes Service (AKS).
 
-## Launch a AKS cluster
+## Launch an AKS cluster
 We recommend launching a cluster with 2 `Standard_D4s_v3` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
 
 Here is a sample `az` command to create a bare minimum cluster:
