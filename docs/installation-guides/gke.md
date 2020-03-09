@@ -34,7 +34,7 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
 
 ## Install Onepanel Core
-Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases)
+Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
 Run the following command to create `params.yaml` file for GKE:
 
