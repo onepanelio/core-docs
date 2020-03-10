@@ -59,7 +59,7 @@ Then, enable the following required add-ons:
 microk8s.enable storage dns
 ```
 
-You can optionally enabled Kubernetes dashboard:
+You can optionally enable Kubernetes dashboard:
 
 ```bash
 microk8s.enable dashboard
