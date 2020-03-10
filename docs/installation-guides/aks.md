@@ -40,11 +40,11 @@ Download the latest `opctl` for your operating system from [our release page](ht
 Run the following command to create `params.yaml` file for AKS:
 
 ```bash
-opctl init --provider aks --dns-provider <dns-provider>
+opctl init --provider aks --enable-https --enable-cert-manager --dns-provider <dns-provider>
 ```
 
 :::note
-For a list of supported `--dns-provider` values see [opctl documentation]() 
+The `--enable-https` is optional and requires a TLS certificate, but it is highly recommended. You can optionally set the `--enable-cert-manager` and `--dns-provider` flags, so TLS certificates are automatically created and renewed via [Let's Encrypt](https://letsencrypt.org/). If you do not set this flag and your DNS provider isn't one of the [supported DNS providers](), then you have to create a wildcard certificate and manually manage it.
 :::
 
 Populate `params.yaml` as outlined in [configuration documentation](installation-guides/configuration)
