@@ -16,7 +16,9 @@ eksctl create cluster --name=<cluster-name> --region <region> \
     --node-volume-size 100 \
     --nodes-min 0 \
     --nodes-max 2 \
-    --asg-access
+    --asg-access \
+    --managed \
+    --ssh-access
 ```
 To enable auto scaling see [Enable Auto Scaling](https://eksctl.io/usage/autoscaling/)
 
