@@ -46,6 +46,10 @@ opctl init --provider gke --enable-https --enable-cert-manager --dns-provider <d
 The `--enable-https` is optional and requires a TLS certificate, but it is highly recommended. You can optionally set the `--enable-cert-manager` and `--dns-provider` flags, so TLS certificates are automatically created and renewed via [Let's Encrypt](https://letsencrypt.org/). If you do not set this flag and your DNS provider isn't one of the [supported DNS providers](), then you have to create a wildcard certificate and manually manage it.
 :::
 
+:::note
+GKE automatically adds GPU device plugins to GPU nodes, so you do not have to set the `--gpu-device-plugins` flag.
+:::
+
 Populate `params.yaml` as outlined in [configuration documentation](installation-guides/configuration)
 
 Finally, run the following command to deploy to your cluster:
