@@ -11,7 +11,7 @@ We recommend launching a cluster with 2 `m5.xlarge` nodes to start, with autosca
 Here are sample [eksctl](https://eksctl.io/introduction/installation/) commands to create a bare minimum cluster:
 
 ```bash
-eksctl --name=<cluster-name> --region <region> \
+eksctl create cluster --name=<cluster-name> --region <region> \
     --nodes 4  \
     --node-volume-size 100 \
     --nodes-min 0 \
