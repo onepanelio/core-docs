@@ -24,6 +24,10 @@ To enable network policy see [Installing Calico on Amazon EKS](https://docs.aws.
 
 To enable logging see [Enabling CloudWatch logging](https://eksctl.io/usage/cloudwatch-cluster-logging/)
 
+:::note
+You can optionally skip the logging configurtion above and add `--enable-efk-logging` to `opctl` command below.
+:::
+
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
 
 ```
