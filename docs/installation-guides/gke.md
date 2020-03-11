@@ -27,6 +27,10 @@ gcloud container --project <project-name> clusters create <cluster-name> --zone 
 The `--enable-stackdriver-kubernetes` flag in above command enables Google Stackdriver for log aggregation which can incur additional charges. You can optionally remove this flag and add `--enable-efk-logging` to `opctl` command below.
 :::
 
+:::note
+You can optionally add the `--enable-tpu` flag to enable TPUs in GKE.
+:::
+
 The command above will automatically retrieve your cluster's access credentials but you can also get them by running:
 
 ```
