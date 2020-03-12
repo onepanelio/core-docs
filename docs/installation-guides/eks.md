@@ -61,13 +61,13 @@ Finally, run the following command to deploy to your cluster:
 opctl apply
 ```
 
-Once deployment completes, run the following command to get the external IP of Onepanel's gateway:
+Once deployment completes, run the following command to get the external host of Onepanel's gateway:
 
 ```bash
 kubectl get service istio-ingressgateway -n istio-system
 ```
 
-This is the IP address you need to point your Wildcard FQDN to in your DNS provider.
+This is the host you need to point your Wildcard FQDN to in your DNS provider.
 
 :::tip
 Example Wildcard FQDN would be `*.example.com` or `*.subdomain.example.com`
