@@ -14,7 +14,7 @@ Here are sample [eksctl](https://eksctl.io/introduction/installation/) commands 
 eksctl create cluster --name=<cluster-name> --region <region> \
     --nodes 2  \
     --node-volume-size 100 \
-    --nodes-min 0 \
+    --nodes-min 1 \
     --nodes-max 2 \
     --asg-access \
     --managed \
