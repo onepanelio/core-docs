@@ -64,13 +64,13 @@ opctl apply
 Once deployment completes, run the following command to get the external host of Onepanel's gateway:
 
 ```bash
-kubectl get service istio-ingressgateway -n istio-system
+kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
-This is the host you need to point your Wildcard FQDN to in your DNS provider.
+Create a CNAME record in your DNS provider that points to the host name returned from the above command.
 
 :::tip
-Example Wildcard FQDN would be `*.example.com` or `*.subdomain.example.com`
+Note that you should use Wildcard A record, for example: `*.example.com` or `*.subdomain.example.com`
 :::
 
 Once deployment is complete, use the follownig command to get your auth token to log into Onepanel:
