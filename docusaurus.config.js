@@ -14,8 +14,9 @@ module.exports = {
         src: 'img/onepanel-logo-white.svg',
       },
       links: [
-        {to: 'docs/about/onepanel', label: 'Docs', position: 'left'},
-        {to: 'blog', label: 'Blog', position: 'left'},
+        {to: 'docs/about/onepanel', label: 'Getting Started', position: 'left'},
+        {to: 'docs/deployment/overview', label: 'Deploy and Manage', position: 'left'},
+        {to: 'blog', label: 'Changelog', position: 'left'},
         {
           href: 'https://github.com/onepanelio/core',
           label: 'GitHub',

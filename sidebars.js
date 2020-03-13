@@ -6,20 +6,11 @@
  */
 
 module.exports = {
-  someSidebar: {
+  gettingStarted: {
     'About': ['about/onepanel', 'about/use-cases'],
     'Getting started': [
       'getting-started/overview',
-      'getting-started/installing',
       'getting-started/contributing'
-    ],
-    'Installation guides': [
-      'installation-guides/aks',
-      'installation-guides/eks',
-      'installation-guides/gke',
-      'installation-guides/linux',
-      'installation-guides/macos',
-      'installation-guides/windows',
     ],
     'API reference': [
       {
@@ -34,4 +25,31 @@ module.exports = {
       }
     ],
   },
+  deployment: [
+    {
+      type: 'doc',
+      id: 'deployment/overview',
+    },
+    { 
+      type: 'category',
+      label: 'Deploy on public cloud',
+      items: [
+        'deployment/public/aks',
+        'deployment/public/eks',
+        'deployment/public/gke',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'Deploy on single node',
+      items: [
+        'deployment/single-node/linux',
+        'deployment/single-node/macos',
+        'deployment/single-node/windows',
+      ]
+    }
+  ],
+  integration: {
+
+  }
 };

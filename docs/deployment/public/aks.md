@@ -15,7 +15,7 @@ az aks create --resource-group <resource-group> --name <cluster-name> \
     --node-count 2 \
     --node-vm-size Standard_D4s_v3 \
     --node-osdisk-size 100 \
-    --min-count 0 \
+    --min-count 2 \
     --max-count 2 \
     --enable-cluster-autoscaler \
     --network-plugin azure \
@@ -31,7 +31,7 @@ The `--enable-addons monitoring` flag in above command enables Azure Monitor for
 You can then get access credentials by running:
 
 ```
-az aks get-credentials --resource-group <resource-group> --name <cluster-name>
+az aks get-credentials --resource-group <resource-group> --name <cluster-name> --admin
 ```
 
 ## Install Onepanel Core
