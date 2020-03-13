@@ -6,25 +6,20 @@
  */
 
 module.exports = {
-  gettingStarted: {
-    'About': ['about/onepanel', 'about/use-cases'],
-    'Getting started': [
-      'getting-started/overview',
-      'getting-started/contributing'
-    ],
-    'API reference': [
-      {
-        type: 'link',
-        label: 'API documentation',
-        href: 'https://onepanelio.github.io/core-api-docs/',
-      },
-      {
-        type: 'link',
-        label: 'Python SDK',
-        href: 'https://github.com/onepanelio/python-sdk/tree/v1.0.0-beta1#onepanelcoreapi',
-      }
-    ],
-  },
+  gettingStarted: [
+    {
+      type: 'doc',
+      id: 'getting-started/about',
+    },
+    {
+      type: 'doc',
+      id: 'getting-started/use-cases',
+    },
+    {
+      type: 'doc',
+      id: 'getting-started/contributing',
+    },
+  ],
   deployment: [
     {
       type: 'doc',
