@@ -8,8 +8,25 @@ Welcome to Onepanel Core Project! We are excited to have you as part of the comm
 ## Getting started as a contributor
 This document outlines project structure, guidelines and serves as single source of truth for contributions. Our goal is to make it as easy for everyone to contribute to the code base, documentation and components.
 
-## Code of Conduct
-Please make sure to read and observe our [Code of Conduct](https://github.com/onepanelio/core/blob/master/CODE_OF_CONDUCT.md).
+## Code of conduct
+Make sure to read and observe our [Code of Conduct](https://github.com/onepanelio/core/blob/master/CODE_OF_CONDUCT.md).
+
+## Coding conventions
+All code should be written in the languages and frameworks listed below and follow that language's conventions. SDKs for different language are an exception and should follow the best practices for that language.
+
+### Go
+- [Effective Go](https://golang.org/doc/effective_go.html)
+- [Go code review comments](https://github.com/golang/go/wiki/CodeReviewComments)
+
+### TypeScript and Angular
+- [Angular coding style guide](https://angular.io/guide/styleguide)
+
+### SDKs
+All SDKs should be generated with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator-cli) using our generated [API specification file](https://github.com/onepanelio/core/blob/master/api/api.swagger.json). See our Python SDK's [Makefile](https://github.com/onepanelio/python-sdk/blob/master/Makefile) for reference.
+
+## Documentation style guide
+We welcome all contributions and follow [Google Developer Documentation Style Guide](https://developers.google.com/style/highlights).
+
 
 ## Project repositories
 Onepanel Core consists of the following repositories:
