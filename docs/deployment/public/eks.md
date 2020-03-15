@@ -46,14 +46,14 @@ opctl init --provider eks --enable-https --enable-cert-manager --dns-provider <d
 ```
 
 :::note
-The `--enable-https` is optional and requires a TLS certificate, but it is highly recommended. You can optionally set the `--enable-cert-manager` and `--dns-provider` flags, so TLS certificates are automatically created and renewed via [Let's Encrypt](https://letsencrypt.org/). If you do not set this flag and your DNS provider isn't one of the [supported DNS providers](), then you have to create a wildcard certificate and manually manage it.
+The `--enable-https` is optional and requires a TLS certificate, but it is highly recommended. You can optionally set the `--enable-cert-manager` and `--dns-provider` flags, so TLS certificates are automatically created and renewed via [Let's Encrypt](https://letsencrypt.org/). If you do not set this flag and your DNS provider isn't one of the [supported DNS providers](../configuration/tls#supported-dns-providers), then you have to create a wildcard certificate and manually manage it.
 :::
 
 :::note
 If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
 :::
 
-Populate `params.yaml` as outlined in [configuration documentation](installation-guides/configuration)
+Populate `params.yaml` as outlined in [params documentation](../configuration/params)
 
 Finally, run the following command to deploy to your cluster:
 

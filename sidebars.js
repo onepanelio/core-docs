@@ -60,6 +60,15 @@ module.exports = {
         'deployment/single-node/macos',
         'deployment/single-node/windows',
       ]
+    },
+    { 
+      type: 'category',
+      label: 'Configuration',
+      items: [
+        'deployment/configuration/cli',
+        'deployment/configuration/params',
+        'deployment/configuration/tls',
+      ]
     }
   ]
 };

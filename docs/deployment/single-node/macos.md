@@ -75,7 +75,7 @@ Run the following command to create `params.yaml` file for microk8s:
 opctl init --provider microk8s --enable-efk-logging
 ```
 
-Populate `params.yaml` as outlined in [configuration documentation](installation-guides/configuration)
+Populate `params.yaml` as outlined in [params documentation](../configuration/params)
 
 Get Kubernetes config from MicroK8S:
 
