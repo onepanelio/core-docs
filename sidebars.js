@@ -9,11 +9,29 @@ module.exports = {
   gettingStarted: [
     {
       type: 'doc',
-      id: 'getting-started/about',
+      id: 'getting-started/overview',
     },
+    // {
+    //   type: 'doc',
+    //   id: 'getting-started/use-cases',
+    // },
     {
-      type: 'doc',
-      id: 'getting-started/use-cases',
+      type: 'category',
+      label: 'Concepts',
+      items: [
+        {
+          type: 'doc',
+          id: 'getting-started/concepts/namespaces'
+        },
+        {
+          type: 'doc',
+          id: 'getting-started/concepts/workflows'
+        },
+        {
+          type: 'doc',
+          id: 'getting-started/concepts/environment-variables'
+        }
+      ]
     },
     {
       type: 'doc',
@@ -43,8 +61,5 @@ module.exports = {
         'deployment/single-node/windows',
       ]
     }
-  ],
-  integration: {
-
-  }
+  ]
 };

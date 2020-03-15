@@ -25,8 +25,9 @@ All code should be written in the languages and frameworks listed below and foll
 All SDKs should be generated with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator-cli) using our generated [API specification file](https://github.com/onepanelio/core/blob/master/api/api.swagger.json). See our Python SDK's [Makefile](https://github.com/onepanelio/python-sdk/blob/master/Makefile) for reference.
 
 ## Documentation style guide
-We welcome all contributions and follow [Google Developer Documentation Style Guide](https://developers.google.com/style/highlights).
+We welcome all contributions and follow these higlights from [Google developer documentation style guide](https://developers.google.com/style/highlights).
 
+Our documentation site is built on [Docusaurus](https://v2.docusaurus.io/).
 
 ## Project repositories
 Onepanel Core consists of the following repositories:
