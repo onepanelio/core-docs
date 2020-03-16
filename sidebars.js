@@ -45,6 +45,15 @@ module.exports = {
     },
     { 
       type: 'category',
+      label: 'Configuration',
+      items: [
+        'deployment/configuration/cli',
+        'deployment/configuration/params',
+        'deployment/configuration/tls',
+      ]
+    },
+    { 
+      type: 'category',
       label: 'Deploy on public cloud',
       items: [
         'deployment/public/aks',
@@ -59,15 +68,6 @@ module.exports = {
         'deployment/single-node/linux',
         'deployment/single-node/macos',
         'deployment/single-node/windows',
-      ]
-    },
-    { 
-      type: 'category',
-      label: 'Configuration',
-      items: [
-        'deployment/configuration/cli',
-        'deployment/configuration/params',
-        'deployment/configuration/tls',
       ]
     }
   ]
