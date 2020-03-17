@@ -30,16 +30,16 @@ We welcome all contributions and follow these higlights from [Google developer d
 Our documentation site is built on [Docusaurus](https://v2.docusaurus.io/).
 
 ## Project repositories
-Onepanel Core consists of the following repositories:
+Onepanel Core consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
 
 ### Platform
-- [Core API](https://github.com/onepanelio/core/) - Code base for APIs
-- [Core UI](https://github.com/onepanelio/core-ui/) - Code base for UI
-- [CLI](https://github.com/onepanelio/cli/) - Code base for Go CLI for installing and managing Onepanel Core
-- [Manifests](https://github.com/onepanelio/core-ui/) - Kustomize manifests used by CLI for installing and managing Onepanel Core
+- [Core API](https://github.com/onepanelio/core/) - Code base for backend (Go)
+- [Core UI](https://github.com/onepanelio/core-ui/) - Code base for UI (Angular + TypeScript)
+- [CLI](https://github.com/onepanelio/cli/) - Code base for Go CLI for installation and management (Go)
+- [Manifests](https://github.com/onepanelio/core-ui/) - Kustomize manifests used by CLI for installation and management (YAML)
 
 ### SDKs
-- [Python SDK](https://github.com/onepanelio/python-sdk/) - Python SDK for making API requests and automation
+- [Python SDK](https://github.com/onepanelio/python-sdk/) - Python SDK for automation
 
 ### Documentation
 - [Documentation](https://github.com/onepanelio/core-docs/) - The repository for this site
