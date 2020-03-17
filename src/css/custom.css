@@ -16,6 +16,7 @@
   --ifm-code-font-size: 95%;
   --ifm-navbar-link-color: var(--ifm-color-secondary);
   --ifm-navbar-link-hover-color: var(--ifm-color-secondary-lightest);
+  --ifm-heading-color: var(--ifm-color-primary-darker);
 }
 
 .navbar--light {
