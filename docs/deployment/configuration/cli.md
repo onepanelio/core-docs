@@ -1,6 +1,6 @@
 ---
-title: Quick start
-sidebar_label: Quick start
+title: Quickstart
+sidebar_label: Quickstart
 ---
 
 ## Install `opctl`
@@ -35,7 +35,7 @@ opectl init --provider <provider-name> --enable-https --enable-cert-manager --dn
 Refer to [TLS certificates](../configuration/tls) section for more information and a list of supported DNS providers.
 :::
 
-To add ElasticSearch, Fluentd and Kibana (EFK) logging, add the `--enable-logging` flag.
+To add ElasticSearch, Fluentd, and Kibana (EFK) logging, add the `--enable-logging` flag.
 
 
 :::note

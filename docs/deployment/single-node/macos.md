@@ -7,7 +7,7 @@ This document outlines the installation steps for macOS.
 
 ## Install MicroK8s with Multipass
 
-First install Multipass:
+First, install Multipass:
 
 ```bash
 brew cask install multipass

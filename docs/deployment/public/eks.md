@@ -27,7 +27,7 @@ To enable network policy see [Installing Calico on Amazon EKS](https://docs.aws.
 To enable logging see [Enabling CloudWatch logging](https://eksctl.io/usage/cloudwatch-cluster-logging/)
 
 :::note
-You can optionally skip the logging configurtion above and add `--enable-efk-logging` to `opctl` command below.
+You can optionally skip the logging configuration above and add `--enable-efk-logging` to `opctl` command below.
 :::
 
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
@@ -73,7 +73,7 @@ Create a CNAME record in your DNS provider that points to the host name returned
 Note that you should use a wildcard CNAME record, for example: `*.example.com` or `*.subdomain.example.com`
 :::
 
-Once deployment is complete, use the follownig command to get your auth token to log into Onepanel:
+Once deployment is complete, use the following command to get your auth token to log into Onepanel:
 
 ```bash
 opctl auth token
