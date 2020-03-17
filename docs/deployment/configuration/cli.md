@@ -15,11 +15,15 @@ opectl init --provider <provider-name>
 
 Available provider options are: `microk8s` for local installation or `aks`, `eks` and `gke` for public cloud installations.
 
-To enable HTTPS but manage the TLS certificate yourself:
+HTTPS is not enabled by default, to enable HTTPS but manage the TLS certificate yourself:
 
 ```bash
 opectl init --provider <provider-name> --enable-https
 ```
+
+:::note
+HTTPS is not supported in local installations.
+:::
 
 To enable HTTPS and enable automatic TLS management:
 
@@ -30,6 +34,8 @@ opectl init --provider <provider-name> --enable-https --enable-cert-manager --dn
 :::tip
 Refer to [TLS certificates](../configuration/tls) section for more information and a list of supported DNS providers.
 :::
+
+To add ElasticSearch, Fluentd and Kibana (EFK) logging, add the `--enable-logging` flag.
 
 
 :::note
