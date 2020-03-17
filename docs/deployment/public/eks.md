@@ -3,7 +3,7 @@ title: EKS installation guide
 sidebar_label: Installing on EKS
 ---
 
-This document outlines the installation steps for Amazon Elastice Kubernetes Service (EKS).
+This document outlines the installation steps for Amazon Elastic Kubernetes Service (EKS).
 
 ## Launch an EKS cluster
 We recommend launching a cluster with 2 `m5.xlarge` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.

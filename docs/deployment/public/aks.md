@@ -71,7 +71,7 @@ Create an A record in your DNS provider that points to the IP returned from the 
 Note that you should use a wildcard A record, for example: `*.example.com` or `*.subdomain.example.com`
 :::
 
-Once deployment is complete, use the follownig command to get your auth token to log into Onepanel:
+Once deployment is complete, use the following command to get your auth token to log into Onepanel:
 
 ```bash
 opctl auth token

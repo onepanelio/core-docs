@@ -21,7 +21,7 @@ const features = [
     imageUrl: 'img/modularity.png',
     description: (
       <>
-        Pre-built components you can use out of the box or easily bring your own components for specialed workflows.
+        Pre-built components you can use out of the box or easily bring your own components for specialized workflows.
       </>
     ),
   },
