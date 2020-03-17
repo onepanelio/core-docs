@@ -6,13 +6,13 @@ sidebar_label: Contributing
 Welcome to Onepanel Core Project! We are excited to have you as part of the community and welcome all contributions.
 
 ## Getting started as a contributor
-This document outlines project structure, guidelines and serves as single source of truth for contributions. Our goal is to make it as easy for everyone to contribute to the code base, documentation and components.
+This document outlines project structure, guidelines and serves as a single source of truth for contributions. Our goal is to make it as easy for everyone to contribute to the code base, documentation, and components.
 
 ## Code of conduct
 Make sure to read and observe our [Code of Conduct](https://github.com/onepanelio/core/blob/master/CODE_OF_CONDUCT.md).
 
 ## Coding conventions
-All code should be written in the languages and frameworks listed below and follow that language's conventions. SDKs for different language are an exception and should follow the best practices for that language.
+All code should be written in the languages and frameworks listed below and follow that language's conventions. SDKs for different languages are an exception and should follow the best practices for that language.
 
 ### Go
 - [Effective Go](https://golang.org/doc/effective_go.html)
@@ -25,7 +25,7 @@ All code should be written in the languages and frameworks listed below and foll
 All SDKs should be generated with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator-cli) using our generated [API specification file](https://github.com/onepanelio/core/blob/master/api/api.swagger.json). See our Python SDK's [Makefile](https://github.com/onepanelio/python-sdk/blob/master/Makefile) for reference.
 
 ## Documentation style guide
-We welcome all contributions and follow these higlights from [Google developer documentation style guide](https://developers.google.com/style/highlights).
+We welcome all contributions and follow these highlights from [Google developer documentation style guide](https://developers.google.com/style/highlights).
 
 Our documentation site is built on [Docusaurus](https://v2.docusaurus.io/).
 
