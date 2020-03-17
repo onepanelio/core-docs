@@ -7,11 +7,7 @@ This document outlines the installation steps for macOS.
 
 ## Install MicroK8s with Multipass
 
-First, install Multipass:
-
-```bash
-brew cask install multipass
-```
+First, install Multipass by following [Installing on macOS](https://multipass.run/docs/installing-on-macos)
 
 With multipass installed, you can now create a VM to run MicroK8s. At least 4 Gigabytes of RAM and 40G of storage is recommended – you can pass these requirements when you launch the VM:
 
@@ -32,7 +28,7 @@ Name                    State             IPv4             Release
 microk8s-vm             RUNNING           10.72.145.216    Ubuntu 18.04 LTS
 ```
 
-Take a note of this IP as you will need it for your `params.yaml` file and for accessing the application.
+Take a note of this IP as you will need to add it to your `params.yaml`.
 
 Run a shell into your VM:
 
@@ -80,7 +76,7 @@ Populate `params.yaml` as outlined in [params documentation](../configuration/pa
 Get Kubernetes config from MicroK8S:
 
 ```bash
-multipass exec <microk8s-vm-name> -- /snap/bin/microk8s.config > kubeconfig
+multipass exec microk8s-vm -- /snap/bin/microk8s.config > kubeconfig
 ```
 
 Finally, run the following command to deploy to your cluster:
