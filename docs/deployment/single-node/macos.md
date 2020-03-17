@@ -89,7 +89,7 @@ Finally, run the following command to deploy to your cluster:
 KUBECONFIG=./kubeconfig opctl apply
 ```
 
-Once deployment is complete, use the follownig command to get your auth token to log into Onepanel:
+Once deployment is complete, use the following command to get your auth token to log into Onepanel:
 
 ```bash
 KUBECONFIG=./kubeconfig opctl auth token
