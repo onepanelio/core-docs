@@ -17,6 +17,11 @@
   --ifm-navbar-link-color: var(--ifm-color-secondary);
   --ifm-navbar-link-hover-color: var(--ifm-color-secondary-lightest);
   --ifm-heading-color: var(--ifm-color-primary-darker);
+  --ifm-font-size-base: 16px;
+}
+
+.hero__title {
+  color: var(--ifm-font-base-color-inverse);
 }
 
 .navbar--light {
