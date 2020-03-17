@@ -29,6 +29,12 @@ module.exports = {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} Onepanel, Inc.`,
     },
+    algolia: {
+      appId: 'onepanelio',
+      apiKey: '882b068ae95b9413f0e9ef625db7964e',
+      indexName: 'onepanelio',
+      algoliaOptions: {}, // Optional, if provided by Algolia
+    },
   },
   presets: [
     [
