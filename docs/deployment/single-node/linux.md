@@ -73,7 +73,7 @@ opctl init --provider microk8s --enable-efk-logging
 
 Populate `params.yaml` as outlined in [params documentation](../configuration/params)
 
-Get Kubernetes config from MicroK8S:
+Get Kubernetes config from MicroK8s:
 
 ```bash
 multipass exec microk8s-vm -- /snap/bin/microk8s.config > kubeconfig
