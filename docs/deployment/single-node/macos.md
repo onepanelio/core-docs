@@ -65,7 +65,7 @@ You can optionally enable Kubernetes dashboard:
 microk8s.enable dashboard
 ```
 
-## Install Onepanel Core
+## Install Onepanel
 
 Download the latest `opctl` for macOS from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
@@ -95,4 +95,4 @@ Once deployment is complete, use the follownig command to get your auth token to
 KUBECONFIG=./kubeconfig opctl auth token
 ```
 
-You can then access Onepanel Core by going to `http://<microk8s-vm-ip>:<uiHTTPort>`
+You can then access Onepanel by going to `http://<microk8s-vm-ip>:<uiHTTPort>`

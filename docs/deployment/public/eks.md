@@ -36,7 +36,7 @@ The `eksctl` command above will automatically retrieve your cluster's access cre
 eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
 ```
 
-## Install Onepanel Core
+## Install Onepanel
 Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
 Run the following command to create `params.yaml` file for EKS:

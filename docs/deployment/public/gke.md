@@ -37,7 +37,7 @@ The command above will automatically retrieve your cluster's access credentials 
 gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
 
-## Install Onepanel Core
+## Install Onepanel
 Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
 Run the following command to create `params.yaml` file for GKE:

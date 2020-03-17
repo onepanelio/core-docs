@@ -3,7 +3,7 @@ title: Overview
 sidebar_label: Overview
 ---
 
-You can install Onepanel Core on:
+You can install Onepanel on:
 
 - Public cloud
 - Single node cluster on desktop, edge or cloud

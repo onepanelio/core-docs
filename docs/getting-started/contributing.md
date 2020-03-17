@@ -30,7 +30,7 @@ We welcome all contributions and follow these higlights from [Google developer d
 Our documentation site is built on [Docusaurus](https://v2.docusaurus.io/).
 
 ## Project repositories
-Onepanel Core consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
+Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
 
 ### Platform
 - [Core API](https://github.com/onepanelio/core/) - Code base for backend (Go)
