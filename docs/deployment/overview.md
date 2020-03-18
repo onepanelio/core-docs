@@ -18,7 +18,8 @@ Follow these guides to install on single node cluster or desktop.
 
 ## Installing on a single node cluster
 
-Follow these guides to install on a single-node cluster or your desktop.
+Follow these guides to install on a single-node cluster in the cloud or on your desktop.
 
 - To install on MicroK8s follow [MicroK8s installation guide](single-node/microk8s)
+- To install on Minikube follow [Minikube installation guide](single-node/minikube)
 
