@@ -1,13 +1,47 @@
 ---
-title: macOS installation guide
-sidebar_label: Installing on macOS
+title: MikroK8s installation guide
+sidebar_label: Installing on MikroK8s
 ---
 
-This document outlines the installation steps for macOS.
+This document outlines the installation steps for single node installation using [Multipass](https://multipass.run/) VM and [MicroK8s](https://microk8s.io/).
 
 ## Install MicroK8s with Multipass
 
-First, install Multipass by following [Installing on macOS](https://multipass.run/docs/installing-on-macos)
+First, install Multipass for your operating system:
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="linux"
+  values={[
+    { label: 'Linux', value: 'linux', },
+    { label: 'macOS', value: 'macos', },
+    { label: 'Windows', value: 'windows', },
+  ]
+}>
+<TabItem value="linux">
+
+:::important Instructions
+See [Installing on Linux](https://multipass.run/docs/installing-on-linux)
+:::
+
+</TabItem>
+<TabItem value="macos">
+
+:::important Instructions
+See [Installing on macOS](https://multipass.run/docs/installing-on-macos)
+:::
+
+</TabItem>
+<TabItem value="windows">
+
+:::important Instructions
+See [Installing on Windows](https://multipass.run/docs/installing-on-windows)
+:::
+
+</TabItem>
+</Tabs>
 
 With multipass installed, you can now create a VM to run MicroK8s. At least 4 Gigabytes of RAM and 40G of storage is recommended – you can pass these requirements when you launch the VM:
 
@@ -55,20 +89,18 @@ Then, enable the following required add-ons:
 microk8s.enable storage dns
 ```
 
-You can optionally enable Kubernetes dashboard:
-
 ```bash
 microk8s.enable dashboard
 ```
 
 ## Install Onepanel
 
-Download the latest `opctl` for macOS from [our release page](https://github.com/onepanelio/cli/releases/latest)
+Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
 Run the following command to create `params.yaml` file for microk8s:
 
 ```bash
-opctl init --provider microk8s --enable-efk-logging
+opctl init --provider microk8s
 ```
 
 Populate `params.yaml` as outlined in [params documentation](../configuration/params)
@@ -85,7 +117,11 @@ Finally, run the following command to deploy to your cluster:
 KUBECONFIG=./kubeconfig opctl apply
 ```
 
-Once deployment is complete, use the following command to get your auth token to log into Onepanel:
+:::important
+The CLI will display the URL for accessing Onepanel once the deployment completes.
+:::
+
+Use the following command to get your auth token to log into Onepanel:
 
 ```bash
 KUBECONFIG=./kubeconfig opctl auth token

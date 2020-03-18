@@ -11,10 +11,10 @@ module.exports = {
       type: 'doc',
       id: 'getting-started/overview',
     },
-    // {
-    //   type: 'doc',
-    //   id: 'getting-started/use-cases',
-    // },
+    {
+      type: 'doc',
+      id: 'getting-started/quickstart',
+    },
     {
       type: 'category',
       label: 'Concepts',
@@ -65,9 +65,7 @@ module.exports = {
       type: 'category',
       label: 'Deploy on single node',
       items: [
-        'deployment/single-node/linux',
-        'deployment/single-node/macos',
-        'deployment/single-node/windows',
+        'deployment/single-node/microk8s',
       ]
     }
   ]

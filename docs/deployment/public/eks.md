@@ -61,7 +61,7 @@ Finally, run the following command to deploy to your cluster:
 opctl apply
 ```
 
-Once deployment completes, run the following command to get the external host of Onepanel's gateway:
+Once the deployment completes, run the following command to get the external host of Onepanel's gateway:
 
 ```bash
 kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
@@ -70,10 +70,14 @@ kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.l
 Create a CNAME record in your DNS provider that points to the host name returned from the above command.
 
 :::tip
-Note that you should use a wildcard CNAME record, for example: `*.example.com` or `*.subdomain.example.com`
+Note that you should use a wildcard `CNAME` record, for example: `*.example.com` or `*.subdomain.example.com`
 :::
 
-Once deployment is complete, use the following command to get your auth token to log into Onepanel:
+:::important
+The CLI will display instructions for setting up your DNS once the deployment is completed.
+:::
+
+Use the following command to get your auth token to log into Onepanel:
 
 ```bash
 opctl auth token
