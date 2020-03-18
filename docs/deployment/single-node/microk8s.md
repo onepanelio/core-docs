@@ -1,6 +1,6 @@
 ---
-title: MikroK8s installation guide
-sidebar_label: Installing on MikroK8s
+title: MicroK8s installation guide
+sidebar_label: Installing on MicroK8s
 ---
 
 This document outlines the installation steps for single node installation using [Multipass](https://multipass.run/) VM and [MicroK8s](https://microk8s.io/).
@@ -49,7 +49,7 @@ With multipass installed, you can now create a VM to run MicroK8s. At least 4 Gi
 multipass launch --name microk8s-vm --mem 4G --disk 40G
 ```
 
-You can now find the IP address which has been allocated. Running:
+You can now find the IP address which has been allocated by running:
 
 ```bash
 multipass list

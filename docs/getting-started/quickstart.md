@@ -8,10 +8,6 @@ The quickest way to get started is to install and run Onepanel locally on your d
 Installing and running Onepanel is easy. First, you install the CLI (`opctl`). Using `opctl`, you will generate a `params.yaml` file and configure your deployment. Once complete, you can access your deployment from any browser, use your Kubernetes auth to login and finally run a workflow.
 
 ## Step 0: Create a local Kubernetes cluster
-:::note
-If you have a Kubernetes cluster already running locally, you can skip to [Step 1: Install Onepanel](#step-1-install-onepanel)
-:::
-
 You can run a single-node Kubernetes cluster on your desktop using a [Multipass](https://multipass.run/) VM and [MicroK8s](https://microk8s.io/) 
 
 First, install Multipass for your operating system:
