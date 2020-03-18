@@ -97,3 +97,66 @@ certManager:
         "client_x509_cert_url": "cert_url"
       }
 ```
+
+#### AzureDNS
+
+The flag is `azuredns`, as in 
+
+```bash
+opctl init ... --dns-provider azuredns
+```
+
+:::note
+This guide has been adapted from the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/azuredns/) 
+:::
+
+This guide assumes you have `azure-cli` installed.
+
+
+First set some variables for your project
+
+
+```bash
+# Choose a name for the service principal that contacts azure DNS to present the challenge
+$ AZURE_CERT_MANAGER_NEW_SP_NAME=NEW_SERVICE_PRINCIPAL_NAME
+# This is the name of the resource group that you have your dns zone in
+$ AZURE_DNS_ZONE_RESOURCE_GROUP=AZURE_DNS_ZONE_RESOURCE_GROUP
+# The DNS zone name. It should be something like domain.com or sub.domain.com
+$ AZURE_DNS_ZONE=AZURE_DNS_ZONE
+```
+
+Then run,
+
+```bash
+az ad sp create-for-rbac --name $AZURE_CERT_MANAGER_NEW_SP_NAME
+```
+
+Look at the output, it should be something like this.
+
+```{
+     "appId": "app_id",
+     "displayName": "display_name",
+     "name": "http://something",
+     "password": "password",
+     "tenant": "tenant"
+   }
+```
+
+You will also need the id from 
+
+```bash
+az account show
+```
+
+Here's how the `params.yaml` portion connects to the above keys and variables.
+
+```yaml
+certManager:
+  azuredns:
+    clientId: appId
+    environment: AzurePublicCloud
+    hostedZoneName: $AZURE_DNS_ZONE
+    resourceGroupName: $AZURE_DNS_ZONE_RESOURCE_GROUP
+    spPassword: password
+    subscriptionId: this comes from `az account show` then the id field.
+    tenantId: tenant``` 
