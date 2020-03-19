@@ -198,3 +198,96 @@ certManager:
         "client_x509_cert_url": "cert_url"
       }
 ```
+
+### Route53
+
+The flag is `route53`, as in 
+
+```bash
+opctl init ... --dns-provider route53
+```
+
+:::note
+This guide has been adapted from the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/route53/) 
+:::
+
+:::note
+This guide assumes you have a hosted zone set up in Route53.
+:::
+
+
+#### Set up a IAM Role
+
+In order to solve the DNS01 challenge, cert-manager needs permissions to add records to Route53.
+
+Create a IAM policy with the following permissions:
+
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "route53:GetChange",
+            "Resource": "arn:aws:route53:::change/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+              "route53:ChangeResourceRecordSets",
+              "route53:ListResourceRecordSets"
+            ],
+            "Resource": "arn:aws:route53:::hostedzone/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "route53:ListHostedZonesByName",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+#### Credentials
+
+You have two options for the set up - either create a user or a role and attach that policy from above. Using a role is considered best practice because you do not have to store permanent credentials in a secret.
+
+We currently only support providing an accessKeyID and secretAccessKey for credentials.
+
+
+#### Cross Account Access
+
+Example: Account A manages a Route53 DNS Zone. Now you want account X to be able to manage records in that zone.
+
+First, create a role with the policy above (let’s call the role dns-manager) and attach a trust relationship like the one below. Make sure role cert-manager in account X exists:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::XXXXXXXXXXX:role/cert-manager"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
+This allows the role cert-manager in account X to manage the Route53 DNS Zone in account A.
+
+
+#### Resulting Yaml
+
+Finally, with everything setup as above, you can configure your yaml as follows,
+
+```yaml
+certManager:
+  route53:
+    access_key: <aws-access-key>
+    region: <aws-region>
+    secret_key: <aws-secret-key>
+```
