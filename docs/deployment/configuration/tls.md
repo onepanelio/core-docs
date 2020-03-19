@@ -88,7 +88,7 @@ certManager:
 ``` 
 
 
-### CloudFlare
+### Cloudflare
 
 The flag is `cloudflare`, as in 
 
@@ -121,7 +121,7 @@ Here's how the `params.yaml` should look with the above token.
 certManager:
   cloudflare:
     apiToken: <api-token goes here>
-    email: <yourCloudFlareEmail@example.com>
+    email: <yourCloudflareEmail@example.com>
 ``` 
 
 ### Google CloudDNS
