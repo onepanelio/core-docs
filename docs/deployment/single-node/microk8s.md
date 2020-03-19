@@ -86,11 +86,11 @@ sudo usermod -a -G microk8s ubuntu
 Then, enable the following required add-ons:
 
 ```bash
-microk8s.enable storage dns
+sudo microk8s.enable storage dns
 ```
 
 ```bash
-microk8s.enable dashboard
+sudo microk8s.enable dashboard
 ```
 
 ## Install Onepanel
