@@ -38,9 +38,9 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
 
 ## Install Onepanel
-Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
+1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
-Run the following command to create `params.yaml` file for GKE:
+2. Run the following command to create `params.yaml` file for GKE:
 
 ```bash
 opctl init --provider gke --enable-https --enable-cert-manager --dns-provider <dns-provider>
@@ -54,21 +54,21 @@ The `--enable-https` is optional and requires a TLS certificate, but it is highl
 GKE automatically adds GPU device plugins to GPU nodes, so you do not have to set the `--gpu-device-plugins` flag.
 :::
 
-Populate `params.yaml` as outlined in [params documentation](../configuration/params)
+3. Populate `params.yaml` as outlined in [configuration files](../configuration/files)
 
-Finally, run the following command to deploy to your cluster:
+4. Finally, run the following command to deploy to your cluster:
 
 ```bash
 opctl apply
 ```
 
-Once the deployment completes, run the following command to get the external IP of Onepanel's gateway:
+5. Once the deployment completes, run the following command to get the external IP of Onepanel's gateway:
 
 ```bash
 kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
-Create an A record in your DNS provider that points to the IP returned from the above command.
+6. Create an A record in your DNS provider that points to the IP returned from the above command.
 
 :::tip
 Note that you should use a wildcard `A` record, for example: `*.example.com` or `*.subdomain.example.com`
@@ -78,7 +78,7 @@ Note that you should use a wildcard `A` record, for example: `*.example.com` or 
 The CLI will display instructions for setting up your DNS once the deployment is completed.
 :::
 
-Use the following command to get your auth token to log into Onepanel:
+7. Use the following command to get your auth token to log into Onepanel:
 
 ```bash
 opctl auth token

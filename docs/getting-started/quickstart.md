@@ -94,23 +94,23 @@ sudo microk8s.enable storage dns
 
 ## Step 1: Install Onepanel
 
-Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
+1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
-Run the following command to create the `params.yaml` file for microk8s:
+2. Run the following command to create `params.yaml` file for microk8s:
 
 ```bash
 opctl init --provider microk8s
 ```
 
-Populate `params.yaml` as outlined in [params documentation](../configuration/params)
+3. Populate `params.yaml` as outlined in [configuration files](../configuration/files)
 
-Get Kubernetes config from MicroK8s:
+4. Get Kubernetes config from MicroK8s:
 
 ```bash
 multipass exec microk8s-vm -- /snap/bin/microk8s.config > kubeconfig
 ```
 
-Finally, run the following command to deploy to your cluster:
+5. Finally, run the following command to deploy to your cluster:
 
 ```bash
 KUBECONFIG=./kubeconfig opctl apply
@@ -120,10 +120,8 @@ KUBECONFIG=./kubeconfig opctl apply
 The CLI will display the URL for accessing Onepanel once the deployment completes.
 :::
 
-Use the following command to get your auth token to log into Onepanel:
+6. Use the following command to get your auth token to log into Onepanel:
 
 ```bash
 KUBECONFIG=./kubeconfig opctl auth token
 ```
-
-You can then access Onepanel by going to `http://<microk8s-vm-ip>:<uiHTTPort>`

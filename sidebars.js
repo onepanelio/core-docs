@@ -48,7 +48,7 @@ module.exports = {
       label: 'Configuration',
       items: [
         'deployment/configuration/cli',
-        'deployment/configuration/params',
+        'deployment/configuration/files',
         'deployment/configuration/tls',
       ]
     },

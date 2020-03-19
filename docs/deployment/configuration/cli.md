@@ -1,13 +1,13 @@
 ---
-title: Quickstart
-sidebar_label: Quickstart
+title: CLI Quickstart
+sidebar_label: CLI Quickstart
 ---
 
 ## Install `opctl`
 Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
-## Initializing `params.yaml` file
-You can initialize a params.yaml template by running:
+## Initializing configuration file
+You can initialize configuration files by running the following command. See [configuration files](files) section for more information.
 
 ```bash
 opectl init --provider <provider-name>
@@ -36,7 +36,6 @@ Refer to [TLS certificates](../configuration/tls) section for more information a
 :::
 
 To add ElasticSearch, Fluentd, and Kibana (EFK) logging, add the `--enable-logging` flag.
-
 
 :::note
 Onepanel's admin CLI serves as a thin abstraction layer on top of `kubectl` and `kustomize`, therefore the CLI can easily be extended to manage additional Kubernetes modules.

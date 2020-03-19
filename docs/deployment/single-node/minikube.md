@@ -25,17 +25,17 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
 
 ## Install Onepanel
 
-Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
+1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
 
-Run the following command to create `params.yaml` file for minikube:
+2. Run the following command to create `params.yaml` file for minikube:
 
 ```bash
 opctl init --provider minikube
 ```
 
-Populate `params.yaml` as outlined in [params documentation](../configuration/params)
+3. Populate `params.yaml` as outlined in [configuration files](../configuration/files)
 
-Finally, run the following command to deploy to your cluster:
+4. Finally, run the following command to deploy to your cluster:
 
 ```bash
 opctl apply
@@ -45,10 +45,8 @@ opctl apply
 The CLI will display the URL for accessing Onepanel once the deployment completes.
 :::
 
-Use the following command to get your auth token to log into Onepanel:
+5. Use the following command to get your auth token to log into Onepanel:
 
 ```bash
 opctl auth token
 ```
-
-You can then access Onepanel by going to `http://<microk8s-vm-ip>:<uiHTTPort>`

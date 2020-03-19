@@ -175,13 +175,13 @@ gcloud iam service-accounts keys create key.json \
 
 This command will save the credentials into `key.json`.
 
-Open up that file and copy it's contents.
+Open up that file and copy its contents.
 Paste them into your `params.yaml`, so you should have something like this
 
 ```yaml
 certManager:
-  commonName: *.website.com
-  email: test@email.com
+  commonName: *.example.com
+  email: admin@example.com
   clouddns:
     projectId: my-project-id
     data: >
