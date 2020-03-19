@@ -160,3 +160,39 @@ certManager:
     spPassword: password
     subscriptionId: this comes from `az account show` then the id field.
     tenantId: tenant``` 
+
+
+#### CloudFlare
+
+The flag is `cloudflare`, as in 
+
+```bash
+opctl init ... --dns-provider cloudflare
+```
+
+:::note
+This guide has been adapted from the [cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/) 
+:::
+
+Currently only API Tokens are supported.
+
+To create an API Token, login to your CloudFlare account and go to
+*User Profile > API Tokens > API Tokens*. 
+
+The following settings are recommended:
+
+* Permissions:
+  * Zone - DNS - Edit
+  * Zone - Zone - Read
+* Zone Resources:
+  * Include - All Zones
+
+Once you create your token, copy it.
+
+Here's how the `params.yaml` should look with the above token.
+
+```yaml
+certManager:
+  cloudflare:
+    apiToken: <api-token goes here>
+    email: <yourCloudFlareEmail@example.com>`` 
