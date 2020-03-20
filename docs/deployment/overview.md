@@ -10,13 +10,13 @@ You can install Onepanel on:
 
 ## Installing on public cloud
 
-Follow these guides to install on single node cluster or desktop.
+Follow these guides to install Onepanel in public cloud.
 
 - To install on Azure Kubernetes Engine (AKS) follow [AKS installation guide](public/aks)
 - To install on Google Kubernetes Engine (GKE) follow [GKE installation guide](public/gke)
 - To install on Elastic Kubernetes Service (EKS) follow [EKS installation guide](public/eks)
 
-## Installing on a single node cluster
+## Installing on a single-node cluster
 
 Follow these guides to install on a single-node cluster in the cloud or on your desktop.
 
