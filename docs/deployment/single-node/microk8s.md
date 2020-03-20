@@ -95,15 +95,15 @@ sudo microk8s.enable dashboard
 
 ## Install Onepanel
 
-1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
+1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest).
 
-2. Run the following command to create `params.yaml` file for microk8s:
+2. Run the following command to initialize a `params.yaml` template for microk8s:
 
 ```bash
 opctl init --provider microk8s
 ```
 
-3. Populate `params.yaml` as outlined in [configuration files](../configuration/files)
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](../configuration/files) section.
 
 4. Get Kubernetes config from MicroK8s:
 

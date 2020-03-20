@@ -37,9 +37,9 @@ eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
 ```
 
 ## Install Onepanel
-1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
+1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest).
 
-2. Run the following command to create `params.yaml` file for EKS:
+2. Run the following command to initialize a `params.yaml` template for EKS:
 
 ```bash
 opctl init --provider eks --enable-https --enable-cert-manager --dns-provider <dns-provider>
@@ -53,7 +53,7 @@ The `--enable-https` is optional and requires a TLS certificate, but it is highl
 If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
 :::
 
-3. Populate `params.yaml` as outlined in [configuration files](../configuration/files)
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](../configuration/files) section.
 
 4. Finally, run the following command to deploy to your cluster:
 

@@ -38,9 +38,9 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
 
 ## Install Onepanel
-1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
+1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest).
 
-2. Run the following command to create `params.yaml` file for GKE:
+2. Run the following command to initialize a `params.yaml` template for GKE:
 
 ```bash
 opctl init --provider gke --enable-https --enable-cert-manager --dns-provider <dns-provider>
@@ -54,7 +54,7 @@ The `--enable-https` is optional and requires a TLS certificate, but it is highl
 GKE automatically adds GPU device plugins to GPU nodes, so you do not have to set the `--gpu-device-plugins` flag.
 :::
 
-3. Populate `params.yaml` as outlined in [configuration files](../configuration/files)
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](../configuration/files) section.
 
 4. Finally, run the following command to deploy to your cluster:
 

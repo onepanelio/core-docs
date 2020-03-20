@@ -25,15 +25,15 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
 
 ## Install Onepanel
 
-1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
+1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest).
 
-2. Run the following command to create `params.yaml` file for minikube:
+2. Run the following command to initialize a `params.yaml` template for minikube:
 
 ```bash
 opctl init --provider minikube
 ```
 
-3. Populate `params.yaml` as outlined in [configuration files](../configuration/files)
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](../configuration/files) section.
 
 4. Finally, run the following command to deploy to your cluster:
 
