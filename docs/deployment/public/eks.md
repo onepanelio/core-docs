@@ -61,20 +61,16 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 opctl apply
 ```
 
-5. Once the deployment completes, run the following command to get the external host of Onepanel's gateway:
+5. Once the deployment completes, the CLI will display the hostname and wildcard domain you need to use to setup your DNS. You can also get the hostname by running:
 
 ```bash
 kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
-6. Create a CNAME record in your DNS provider that points to the host name returned from the above command.
+6. Create a `CNAME` record in your DNS provider based on the instructions above.
 
 :::tip
 Note that you should use a wildcard `CNAME` record, for example: `*.example.com` or `*.subdomain.example.com`
-:::
-
-:::important
-The CLI will display instructions for setting up your DNS once the deployment is completed.
 :::
 
 7. Use the following command to get your auth token to log into Onepanel:
