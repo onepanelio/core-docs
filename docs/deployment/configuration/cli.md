@@ -4,7 +4,7 @@ sidebar_label: CLI Quickstart
 ---
 
 ## Install `opctl`
-Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest)
+Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest)
 
 ## Initializing configuration file
 You can initialize configuration files by running the following command. See [configuration files](files) section for more information.

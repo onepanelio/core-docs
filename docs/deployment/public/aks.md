@@ -35,7 +35,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
 ```
 
 ## Install Onepanel
-1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/cli/releases/latest).
+1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
 
 2. Run the following command to initialize a `params.yaml` template for AKS:
 
