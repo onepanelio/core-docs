@@ -9,10 +9,6 @@ module.exports = {
   gettingStarted: [
     {
       type: 'doc',
-      id: 'getting-started/overview',
-    },
-    {
-      type: 'doc',
       id: 'getting-started/quickstart',
     },
     {
