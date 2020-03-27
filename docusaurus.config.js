@@ -1,12 +1,13 @@
 module.exports = {
-  title: 'Onepanel Core',
+  title: 'Onepanel CE',
   tagline: 'Build highly scalable, distributed and reproducible computer vision workflows on any cloud or on-premises.',
-  url: 'https://onepanelio.github.io',
-  baseUrl: '/core-docs/',
+  url: 'https://docs.onepanel.ai',
+  baseUrl: '/',
   favicon: 'img/favicon.png',
   organizationName: 'onepanelio', // Usually your GitHub org/user name.
   projectName: 'core-docs', // Usually your repo name.
   themeConfig: {
+    disableDarkMode: true,
     navbar: {
       title: '',
       logo: {

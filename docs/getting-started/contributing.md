@@ -3,7 +3,7 @@ title: Contributing
 sidebar_label: Contributing
 ---
 
-Welcome to Onepanel Core Project! We are excited to have you as part of the community and welcome all contributions.
+Welcome to Onepanel CE Project! We are excited to have you as part of the community and welcome all contributions.
 
 ## Getting started as a contributor
 This document outlines project structure, guidelines and serves as a single source of truth for contributions. Our goal is to make it as easy for everyone to contribute to the code base, documentation, and components.
