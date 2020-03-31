@@ -3,7 +3,7 @@ title: Quick start
 sidebar_label: Quick start
 ---
 
-The quickest way to get started is to install and run Onepanel locally on your desktop. You can then deploy it on [public cloud](../deployment/overview#installing-on-public-cloud) to leverage distributed execution on more powerful machines.
+The quickest way to get started is to install and run Onepanel locally on your desktop. You can then deploy it on [public cloud](/docs/deployment/overview#installing-on-public-cloud) to leverage distributed execution on more powerful machines.
 
 Installing and running Onepanel is easy. First, you install the CLI (`opctl`). Using `opctl`, you will generate a `params.yaml` file and configure your deployment. Once complete, you can access your deployment from any browser, use your Kubernetes auth to login and finally run a workflow.
 
@@ -102,7 +102,7 @@ sudo microk8s.enable storage dns
 opctl init --provider microk8s
 ```
 
-3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](../deployment/configuration/files) section.
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 
 4. Get Kubernetes config from MicroK8s:
 

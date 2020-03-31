@@ -103,7 +103,7 @@ sudo microk8s.enable dashboard
 opctl init --provider microk8s
 ```
 
-3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](../configuration/files) section.
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 
 4. Get Kubernetes config from MicroK8s:
 

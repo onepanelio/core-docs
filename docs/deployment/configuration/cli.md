@@ -32,7 +32,7 @@ opectl init --provider <provider-name> --enable-https --enable-cert-manager --dn
 ```
 
 :::tip
-Refer to [TLS certificates](../configuration/tls) section for more information and a list of supported DNS providers.
+Refer to [TLS certificates](/docs/deployment/configuration/tls) section for more information and a list of supported DNS providers.
 :::
 
 To add ElasticSearch, Fluentd, and Kibana (EFK) logging, add the `--enable-logging` flag.

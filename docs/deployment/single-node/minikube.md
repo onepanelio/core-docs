@@ -33,7 +33,7 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
 opctl init --provider minikube
 ```
 
-3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](../configuration/files) section.
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 
 4. Finally, run the following command to deploy to your cluster:
 
