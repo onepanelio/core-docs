@@ -164,3 +164,24 @@
   stroke: #f1c40f;
   fill: #f1c40f;
 }
+
+.integrations.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 10px;
+}
+
+.integrations .grid-item {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 160px;
+  margin: 10px;
+  padding: 10px;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.integrations .grid-item img {
+  width: 40px;
+  height: 40px;
+}
