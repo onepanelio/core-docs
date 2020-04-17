@@ -18,7 +18,6 @@ module.exports = {
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
         {to: 'docs/deployment/overview', label: 'Deploy and Manage', position: 'left'},
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
-        {to: 'docs/integrations/overview', label: 'Integrations', position: 'left'},
         {to: 'blog', label: 'Changelog', position: 'left'},
         {
           href: 'https://github.com/onepanelio/core',
