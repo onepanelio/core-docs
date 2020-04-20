@@ -118,6 +118,21 @@ application:
   # Use an IP address if running local, use `minikube ip` or `multipass list` to get this IP
   # In the cloud, use a first-level or multi-level subdomain like app.example.com or app.sub.example.com
   host: <ip-or-fqdn>
+  # Node pool or group label keys and values used for AutoScaling and for NodeSelectors
+  # The provider will set these label key and values on your nodes automatically
+  # These can also be customized depending on your provider  
+  nodePool:
+    label: <node-pool-label>
+    # Add more by following the format
+    # - name: <name>
+    #   value: <value>
+    #   default: <true|false>
+    options:
+      - name: 'Use friendly name 1'
+        value: <value-1>
+        default: true
+      - name: 'Use friendly name 2'
+        value: <value-2>
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Component: Artifact repository
 # Description: S3 compatible object storage for storing files across Onepanel
