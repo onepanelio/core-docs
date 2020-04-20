@@ -118,6 +118,19 @@ application:
   # Use an IP address if running local, use `minikube ip` or `multipass list` to get this IP
   # In the cloud, use a first-level or multi-level subdomain like app.example.com or app.sub.example.com
   host: <ip-or-fqdn>
+  # Node pool key/values are used for nodeSelector and autoscaling.
+  nodePool:
+    label: <node-pool-label>
+    # Add more by following the format
+    # - name: <name>
+    #   value: <value>
+    #   default: <true|false>
+    options:
+    - name: 'CPU: 2, Ram: 8GB'
+      value: Standard_D2s_v3 #Cloud provider specific machine type
+    - name: <name-2>
+      value: <value-2>
+      default: true
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Component: Artifact repository
 # Description: S3 compatible object storage for storing files across Onepanel
