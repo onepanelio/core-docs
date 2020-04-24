@@ -6,6 +6,7 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'onepanelio', // Usually your GitHub org/user name.
   projectName: 'core-docs', // Usually your repo name.
+  plugins: ['@docusaurus/plugin-google-analytics'],
   themeConfig: {
     disableDarkMode: true,
     navbar: {
@@ -34,6 +35,9 @@ module.exports = {
       apiKey: '882b068ae95b9413f0e9ef625db7964e',
       indexName: 'onepanelio',
       algoliaOptions: {}, // Optional, if provided by Algolia
+    },
+    googleAnalytics: {
+      trackingID: 'UA-106005416-5',
     },
   },
   presets: [
