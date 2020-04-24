@@ -126,11 +126,10 @@ application:
     # Add more by following the format
     # - name: <name>
     #   value: <value>
-    #   default: <true|false>
+    # The first option will be used as default.
     options:
       - name: 'Use friendly name 1'
         value: <value-1>
-        default: true
       - name: 'Use friendly name 2'
         value: <value-2>
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
