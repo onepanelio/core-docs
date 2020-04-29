@@ -29,8 +29,9 @@ application:
   # In the cloud, use a first-level or multi-level subdomain like example.com or sub.example.com
   domain: <ip-or-domain>
   # The Fully Qualified Domain (FQDN) where Onepanel will be hosted.
-  # If you have a domain like example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com
-  fqdn: <fqdn>
+  # Use the same IP address as `domain` above if running local, use `minikube ip` or `multipass list` to get this IP
+  # In the cloud, if `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
+  fqdn: <ip-or-fqdn>
   # Node pool or group label keys and values used for AutoScaling and for NodeSelectors
   # The provider will set these label key and values on your nodes automatically
   # These can also be customized depending on your provider
@@ -137,8 +138,9 @@ application:
   # In the cloud, use a first-level or multi-level subdomain like example.com or sub.example.com
   domain: <ip-or-domain>
   # The Fully Qualified Domain (FQDN) where Onepanel will be hosted.
-  # If you have a domain like example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com
-  fqdn: <fqdn>
+  # Use the same IP address as `domain` above if running local, use `minikube ip` or `multipass list` to get this IP
+  # In the cloud, if `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
+  fqdn: <ip-or-fqdn>
   # Node pool or group label keys and values used for AutoScaling and for NodeSelectors
   # The provider will set these label key and values on your nodes automatically
   # These can also be customized depending on your provider
@@ -217,9 +219,9 @@ certManager:
 
   # - - - - - - - - - - - - - End DNS Provider Selection - - - - - - - - - - - - - -
   
-  # Enter a wildcard domain name
-  # Examples: *.example.com or *.subdomain.example.com
-  commonName: <wildcard-fqdn>
+  # Enter a wildcard domain of the value you set in `domain` above
+  # Examples: "*.example.com" or "*.sub.example.com" (include quotes)
+  commonName: <wildcard-domain>
   # Enter certificate admin email
   # Example: admin@example.com
   email: <cert-admin-email>
