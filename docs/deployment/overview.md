@@ -18,8 +18,5 @@ Follow these guides to install Onepanel in public cloud.
 
 ## Installing on a single-node cluster
 
-Follow these guides to install on a single-node cluster in the cloud or on your desktop.
-
-- To install on MicroK8s follow [MicroK8s installation guide](/docs/deployment/single-node/microk8s)
-- To install on Minikube follow [Minikube installation guide](/docs/deployment/single-node/minikube)
+Coming soon
 

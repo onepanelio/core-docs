@@ -8,9 +8,7 @@ The quickest way to get started is to install and run Onepanel locally on your d
 Installing and running Onepanel is easy. First, you install the CLI (`opctl`). Using `opctl`, you will generate a `params.yaml` file and configure your deployment. Once complete, you can access your deployment from any browser, use your Kubernetes auth to login and finally run a workflow.
 
 ## Step 0: Create a local Kubernetes cluster
-You can run a single-node Kubernetes cluster on your desktop using a [Multipass](https://multipass.run/) VM and [MicroK8s](https://microk8s.io/) 
-
-First, install Multipass for your operating system:
+First, create a Kubernetes cluster in one of the following cloud providers:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -18,26 +16,26 @@ import TabItem from '@theme/TabItem';
 <Tabs
   defaultValue="linux"
   values={[
-    { label: 'Linux', value: 'linux', },
-    { label: 'macOS', value: 'macos', },
-    { label: 'Windows', value: 'windows', },
+    { label: 'Azure AKS', value: 'aks', },
+    { label: 'Amazon EKS', value: 'eks', },
+    { label: 'Google GKE', value: 'gke', },
   ]
 }>
-<TabItem value="linux">
+<TabItem value="aks">
 
 :::important Instructions
 See [Installing on Linux](https://multipass.run/docs/installing-on-linux)
 :::
 
 </TabItem>
-<TabItem value="macos">
+<TabItem value="eks">
 
 :::important Instructions
 See [Installing on macOS](https://multipass.run/docs/installing-on-macos)
 :::
 
 </TabItem>
-<TabItem value="windows">
+<TabItem value="gke">
 
 :::important Instructions
 See [Installing on Windows](https://multipass.run/docs/installing-on-windows)

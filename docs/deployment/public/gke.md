@@ -62,10 +62,10 @@ GKE automatically adds GPU device plugins to GPU nodes, so you do not have to se
 opctl apply
 ```
 
-5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get the IP by running:
+5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
 ```bash
-kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+opctl app ip
 ```
 
 6. Create an `A` record in your DNS provider based on the instructions above.

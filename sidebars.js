@@ -56,14 +56,6 @@ module.exports = {
         'deployment/public/eks',
         'deployment/public/gke',
       ]
-    },
-    { 
-      type: 'category',
-      label: 'Deploy on single node',
-      items: [
-        'deployment/single-node/microk8s',
-        'deployment/single-node/minikube',
-      ]
     }
   ]
 };

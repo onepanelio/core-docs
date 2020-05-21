@@ -25,7 +25,7 @@ az aks create --resource-group <resource-group> --name <cluster-name> \
 ```
 
 :::note
-The `--enable-addons monitoring` flag in above command enables Azure Monitor for log aggregation which can incur additional charges. You can optionally remove this flag and add `--enable-efk-logging` to `opctl` command below.
+The `--enable-addons monitoring` flag in the command above enables Azure Monitor for log aggregation which can incur additional charges. You can optionally remove this flag and add `--enable-efk-logging` to `opctl` command below.
 :::
 
 You can then get access credentials by running:
@@ -59,10 +59,10 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 opctl apply
 ```
 
-5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get the IP by running:
+5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
 ```bash
-kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+opctl app ip
 ```
 
 6. Create an `A` record in your DNS provider based on the instructions above.

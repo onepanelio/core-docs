@@ -61,10 +61,10 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 opctl apply
 ```
 
-5. Once the deployment completes, the CLI will display the hostname and wildcard domain you need to use to setup your DNS. You can also get the hostname by running:
+5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
 ```bash
-kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+opctl app ip
 ```
 
 6. Create a `CNAME` record in your DNS provider based on the instructions above.
