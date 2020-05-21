@@ -1,6 +1,6 @@
 ---
-title: CLI Quickstart
-sidebar_label: CLI Quickstart
+title: CLI overview
+sidebar_label: CLI overview
 ---
 
 ## Install `opctl`
@@ -28,7 +28,10 @@ HTTPS is not supported in local installations.
 To enable HTTPS and enable automatic TLS management:
 
 ```bash
-opectl init --provider <provider-name> --enable-https --enable-cert-manager --dns-provider <dns-provider-name>
+opectl init --provider <provider-name> \
+    --enable-https \
+    --enable-cert-manager \
+    --dns-provider <dns-provider-name>
 ```
 
 :::tip

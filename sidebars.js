@@ -41,20 +41,20 @@ module.exports = {
     },
     { 
       type: 'category',
+      label: 'Deployment',
+      items: [
+        'deployment/public/aks',
+        'deployment/public/eks',
+        'deployment/public/gke',
+      ]
+    },
+    { 
+      type: 'category',
       label: 'Configuration',
       items: [
         'deployment/configuration/cli',
         'deployment/configuration/files',
         'deployment/configuration/tls',
-      ]
-    },
-    { 
-      type: 'category',
-      label: 'Deploy on public cloud',
-      items: [
-        'deployment/public/aks',
-        'deployment/public/eks',
-        'deployment/public/gke',
       ]
     }
   ]

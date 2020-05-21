@@ -5,7 +5,7 @@ sidebar_label: Quick start
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Installing and running Onepanel is easy. First, you install the CLI (`opctl`). Using `opctl`, you will generate a `params.yaml` file and configure your deployment. Once complete, you can access your deployment from any browser, use your Kubernetes auth to login and finally run a workflow.
+It's easy to get started with Onepanel. First, install the CLI (`opctl`) and then using `opctl`, generate a `params.yaml` file and configure your deployment. Once complete, you can access your deployment from any browser, use your Kubernetes auth to login and finally run a workflow.
 
 ## Step 0: Create a Kubernetes cluster
 First, create a Kubernetes cluster in one of the following cloud providers:
@@ -136,33 +136,51 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 <TabItem value="aks">
 
 ```bash
-opctl init --provider aks --enable-https --enable-cert-manager --dns-provider <dns-provider>
+opctl init --provider aks \
+  --enable-https \
+  --enable-cert-manager \
+  --dns-provider <dns-provider>
 ```
+
+:::note
+If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+:::
 
 </TabItem>
 <TabItem value="eks">
 
 ```bash
-opctl init --provider eks --enable-https --enable-cert-manager --dns-provider <dns-provider>
+opctl init --provider eks \
+  --enable-https \
+  --enable-cert-manager \
+  --dns-provider <dns-provider>
 ```
+
+:::note
+If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+:::
 
 </TabItem>
 <TabItem value="gke">
 
 ```bash
-opctl init --provider gke --enable-https --enable-cert-manager --dns-provider <dns-provider>
+opctl init --provider gke \
+  --enable-https \
+  --enable-cert-manager \
+  --dns-provider <dns-provider>
 ```
+
+:::note
+GKE automatically adds GPU device plugins to GPU nodes, so you do not have to set the `--gpu-device-plugins` flag.
+:::
 
 </TabItem>
 </Tabs>
 
 :::note
-The `--enable-https` is optional and requires a TLS certificate, but it is highly recommended. You can optionally set the `--enable-cert-manager` and `--dns-provider` flags, so TLS certificates are automatically created and renewed via [Let's Encrypt](https://letsencrypt.org/). If you do not set this flag and your DNS provider isn't one of the [supported DNS providers](/docs/deployment/configuration/tls#supported-dns-providers), then you have to create a wildcard certificate and manually manage it.
+The `--enable-https` flag is optional and requires a TLS certificate, but it is highly recommended. You can optionally set the `--enable-cert-manager` and `--dns-provider` flags, so TLS certificates are automatically created and renewed via [Let's Encrypt](https://letsencrypt.org/). If you do not set this flag and your DNS provider isn't one of the [supported DNS providers](/docs/deployment/configuration/tls#supported-dns-providers), then you have to create a wildcard certificate and manually manage it.
 :::
 
-:::note
-If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-:::
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 

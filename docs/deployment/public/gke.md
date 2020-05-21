@@ -1,6 +1,6 @@
 ---
-title: GKE installation guide
-sidebar_label: Installing on GKE
+title: GKE deployment guide
+sidebar_label: GKE deployment
 ---
 
 This document outlines the installation steps for Google Kubernetes Engine (GKE).
@@ -43,11 +43,14 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 2. Run the following command to initialize a `params.yaml` template for GKE:
 
 ```bash
-opctl init --provider gke --enable-https --enable-cert-manager --dns-provider <dns-provider>
+opctl init --provider gke \
+    --enable-https \
+    --enable-cert-manager \
+    --dns-provider <dns-provider>
 ```
 
 :::note
-The `--enable-https` is optional and requires a TLS certificate, but it is highly recommended. You can optionally set the `--enable-cert-manager` and `--dns-provider` flags, so TLS certificates are automatically created and renewed via [Let's Encrypt](https://letsencrypt.org/). If you do not set this flag and your DNS provider isn't one of the [supported DNS providers](/docs/deployment/configuration/tls#supported-dns-providers), then you have to create a wildcard certificate and manually manage it.
+The `--enable-https` flag is optional and requires a TLS certificate, but it is highly recommended. You can optionally set the `--enable-cert-manager` and `--dns-provider` flags, so TLS certificates are automatically created and renewed via [Let's Encrypt](https://letsencrypt.org/). If you do not set this flag and your DNS provider isn't one of the [supported DNS providers](/docs/deployment/configuration/tls#supported-dns-providers), then you have to create a wildcard certificate and manually manage it.
 :::
 
 :::note
