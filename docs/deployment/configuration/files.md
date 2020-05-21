@@ -219,9 +219,6 @@ certManager:
 
   # - - - - - - - - - - - - - End DNS Provider Selection - - - - - - - - - - - - - -
   
-  # Enter a wildcard domain of the value you set in `domain` above
-  # Examples: "*.example.com" or "*.sub.example.com" (include quotes)
-  commonName: <wildcard-domain>
   # Enter certificate admin email
   # Example: admin@example.com
   email: <cert-admin-email>
