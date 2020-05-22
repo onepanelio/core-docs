@@ -21,6 +21,10 @@ module.exports = {
         },
         {
           type: 'doc',
+          id: 'getting-started/concepts/workspaces'
+        },
+        {
+          type: 'doc',
           id: 'getting-started/concepts/workflows'
         },
         {
