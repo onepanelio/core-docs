@@ -58,6 +58,46 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 
+#### Figuring out values for nodePool in `params.yaml`
+```bash
+  nodePool:
+    label: beta.kubernetes.io/instance-type
+    # Add more by following the format:
+    # - name: <name>
+    #   value: <value>
+    # The first option will be used as default.
+    options:
+    - name: 'MainNode'
+      value: m5.large
+```
+You need to figure out information about your nodes.
+Execute:
+```bash
+kubectl get nodes --show-labels
+```
+You will get output similar to:
+```bash
+alpha.eksctl.io/cluster-name=alexeks,
+alpha.eksctl.io/nodegroup-name=ng-8c1e9e1a,
+beta.kubernetes.io/arch=amd64,
+beta.kubernetes.io/instance-type=m5.large, #<---
+beta.kubernetes.io/os=linux,
+eks.amazonaws.com/nodegroup-image=ami-065418523a44331e5,
+eks.amazonaws.com/nodegroup=ng-8c1e9e1a,
+failure-domain.beta.kubernetes.io/region=us-west-2,
+failure-domain.beta.kubernetes.io/zone=us-west-2d,
+kubernetes.io/arch=amd64,
+kubernetes.io/hostname=ip-192-168-4-243.us-west-2.compute.internal,
+kubernetes.io/os=linux
+```
+We want the values:
+
+```bash
+beta.kubernetes.io/instance-type=m5.large
+```
+
+Use these to fill out that section.
+
 4. Finally, run the following command to deploy to your cluster:
 
 ```bash
