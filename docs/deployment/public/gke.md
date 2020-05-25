@@ -62,7 +62,7 @@ GKE automatically adds GPU device plugins to GPU nodes, so you do not have to se
 #### Figuring out values for nodePool in `params.yaml`
 ```bash
   nodePool:
-    label: default-pool
+    label: beta.kubernetes.io/instance-type
     # Add more by following the format:
     # - name: <name>
     #   value: <value>
@@ -83,7 +83,7 @@ beta.kubernetes.io/fluentd-ds-ready=true,
 beta.kubernetes.io/instance-type=n1-standard-4, #<----------------------------
 beta.kubernetes.io/masq-agent-ds-ready=true,
 beta.kubernetes.io/os=linux,
-cloud.google.com/gke-nodepool=default-pool, #<------------------------------
+cloud.google.com/gke-nodepool=default-pool,
 cloud.google.com/gke-os-distribution=cos,
 failure-domain.beta.kubernetes.io/region=us-west1,
 failure-domain.beta.kubernetes.io/zone=us-west1-a,
