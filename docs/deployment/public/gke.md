@@ -97,7 +97,6 @@ We want the values:
 
 ```bash
 beta.kubernetes.io/instance-type=n1-standard-4
-cloud.google.com/gke-nodepool=default-pool
 ```
 
 Use these to fill out that section.
