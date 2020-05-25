@@ -34,6 +34,34 @@ module.exports = {
       ]
     },
     {
+      type: 'category',
+      label: 'Use Cases',
+      items: [
+        {
+          type: 'category',
+          label: 'Computer Vision',
+          items:[
+            type: 'category',
+            label: 'CVAT',
+            items: [
+              {
+                type: 'doc',
+                id: 'getting-started/use-cases/computervision/annotation/cvat/adcvat_quick_guide
+              },
+              {
+                type: 'doc',
+                id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation
+              }
+              {
+                type: 'doc',
+                id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model
+              }
+            ]
+          ]
+         }
+       ]
+    },
+    {
       type: 'doc',
       id: 'getting-started/contributing',
     },
