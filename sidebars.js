@@ -46,7 +46,7 @@ module.exports = {
             items: [
               {
                 type: 'doc',
-                id: 'getting-started/use-cases/computervision/annotation/cvat/adcvat_quick_guide
+                id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide
               },
               {
                 type: 'doc',
