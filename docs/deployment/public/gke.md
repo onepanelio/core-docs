@@ -59,6 +59,49 @@ GKE automatically adds GPU device plugins to GPU nodes, so you do not have to se
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 
+#### Figuring out values for nodePool in `params.yaml`
+```bash
+  nodePool:
+    label: default-pool
+    # Add more by following the format:
+    # - name: <name>
+    #   value: <value>
+    # The first option will be used as default.
+    options:
+    - name: 'MainNode'
+      value: n1-standard-4
+```
+You need to figure out information about your nodes.
+Execute:
+```bash
+kubectl get nodes --show-labels
+```
+You will get output similar to:
+```bash
+beta.kubernetes.io/arch=amd64,
+beta.kubernetes.io/fluentd-ds-ready=true,
+beta.kubernetes.io/instance-type=n1-standard-4, #<----------------------------
+beta.kubernetes.io/masq-agent-ds-ready=true,
+beta.kubernetes.io/os=linux,
+cloud.google.com/gke-nodepool=default-pool, #<------------------------------
+cloud.google.com/gke-os-distribution=cos,
+failure-domain.beta.kubernetes.io/region=us-west1,
+failure-domain.beta.kubernetes.io/zone=us-west1-a,
+kubernetes.io/arch=amd64,
+kubernetes.io/hostname=gke-alexme-default-pool-b2c91de9-45dl,
+kubernetes.io/os=linux,
+node.kubernetes.io/masq-agent-ds-ready=true,
+projectcalico.org/ds-ready=true
+```
+We want the values:
+
+```bash
+beta.kubernetes.io/instance-type=n1-standard-4
+cloud.google.com/gke-nodepool=default-pool
+```
+
+Use these to fill out that section.
+
 4. Finally, run the following command to deploy to your cluster:
 
 ```bash
