@@ -69,7 +69,7 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/getting-started/quickstart')}>
-              Get Started
+              GET STARTED
             </Link>
             <Link
               className={classnames(
@@ -77,8 +77,11 @@ function Home() {
                 styles.contribute,
               )}
               to={useBaseUrl('docs/getting-started/contributing')}>
-              Contribute
+              CONTRIBUTE
             </Link>
+          </div>
+          <div className="hero__video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/nyWOiT22m38" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </header>
