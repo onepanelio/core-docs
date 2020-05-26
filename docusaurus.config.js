@@ -9,6 +9,7 @@ module.exports = {
   plugins: ['@docusaurus/plugin-google-analytics'],
   themeConfig: {
     disableDarkMode: true,
+    sidebarCollapsible: false,
     navbar: {
       title: '',
       logo: {
