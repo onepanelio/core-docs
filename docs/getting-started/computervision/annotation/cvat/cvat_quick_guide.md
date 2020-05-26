@@ -132,7 +132,7 @@ Now, you give this task a name you like. Then, labels that you are interested in
 
 ## Manual Annotation
 Once you have created a new task, you can start annotating your data. CVAT supports points, box, polylines, polygons for annotation. So, the first thing you should do is go to left sidebar and select the type of annotation you want as shown below. 
-![Select Annotation](/static/img/rectangle_new_cvat.PNG?raw=true)
+![Select Annotation](/static/img/rectange_new_cvat.PNG?raw=true)
 
 ### Points
 If you want to annotate points, then select Points instead of Box which is a default choice. Once you select points, you can start annotating by clicking on Create Shape, clicking on image where you want to put the point and then click on stop shape. Or alternatively you can use keyboard shortcut N instead of Create Shape/Stop Shape. Make sure you periodically save your annotation by pressing ctrl + s.
@@ -164,7 +164,7 @@ There, you can select the Tensorflow OD API for bounding boxes or Mask RCNN for 
 
 For TensorFlow OD API, we support multiple models. In fact, its dynamic. You can also train the model you like as long as it is supported by Tensorflow Object Detection API. 
 
-![Create Annotation Model](/static/img/4.PNG?raw=true)
+![Create Annotation Model](/static/img/create_new_annotation_model.PNG?raw=true)
 
 ### How to choose the model:
 If you are unsure about which model to use, we usually suggest ssd-mobilenet-v2 since ssd-based models are faster and accurate enough for most of the work. Faster-rcnn (frcnn) models are more accurate in general but they will be relatively slow during training as well inference. If accuracy is more important to you, we suggest you go with frcnn-res50-coco model.
