@@ -9,6 +9,9 @@ In order to use CVAT on Onepanel, we need to create a new Workspace for CVAT. Mo
 We will be using following yaml file to create the workspace.
 
 ```yaml
+#specify all the required containers for cvat
+#this is very similar to the original docker-compose.yml file
+#specify containers, env vars, ports, volumes for each container
 containers:
 - name: cvat-db
   image: postgres:10-alpine
@@ -33,6 +36,7 @@ containers:
   - containerPort: 6379
     name: tcp
 - name: cvat
+  #use docker image from docker hum
   image: onepanel/cvat:v0.6.23
   env:
   - name: DJANGO_MODWSGI_EXTRA_ARGS
@@ -89,6 +93,7 @@ routes:
   - destination:
       port:
         number: 80
+#notify on slack once it got finished
 postExecutionWorkflow:
   entrypoint: main
   templates:
