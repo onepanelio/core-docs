@@ -1,14 +1,14 @@
 ---
-title: Creating Annotation Models on CVAT
-sidebar_label: Create Annotation Model
+title: Creating annotation models on CVAT
+sidebar_label: Create annotation model
 ---
 
 
-## Why Pre-Annotate?
+## Why pre-annotate?
 Pre-annotation will cut the time to annotate large amounts of data by orders of magnitude.  The idea is simple, annotate once then QC each successive dataset after.
 Once you have annotated enough data, you can train a model to pre-annotate the rest of your images with a few button clicks.
 
-## Training Object Detection Model Through CVAT
+## Training object detection model through CVAT
 
 1 - Annotate enough images in your CVAT task.  
 2 - Go back to your CVAT dashboard and click on `Create New Annotation Model` in that task. You will see a popup with a few options.  
@@ -132,7 +132,7 @@ Depending upon your data, you can set epochs to train your model. There is no st
 ***Model***: https://c.onepanel.io/onepanel-demo/datasets/ssd-mobilenet-v2-coco/details
 
 
-## Training Segmentation Model through CVAT
+## Training segmentation model through CVAT
 The process to train a Mask-RCNN model on CVAT is similar to the above process except that you need to select Mask-RCNN after clicking on Create Annotation Model.
 ***Parameters***: Even though you don't need to enter any parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
 We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs through `--stage1_epochs`, `--stage2_epochs`, and `--stage3_epochs`.
