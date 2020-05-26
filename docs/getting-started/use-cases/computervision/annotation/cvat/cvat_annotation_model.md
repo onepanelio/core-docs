@@ -20,7 +20,7 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 7. Mount this new dataset to the CVAT workspace and click the button for the Model manager.  Then select files in tf_annotation_model folder.  
 8. Click TF_Annotion button for the current task.  
 
-![CVAT flowchart](/static/img/auto-annotation-v.2.0.png?raw=true)
+![CVAT flowchart](/img/auto-annotation-v.2.0.png)
 
 
 ## Arguments (optional)
