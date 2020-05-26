@@ -40,23 +40,25 @@ module.exports = {
         {
           type: 'category',
           label: 'Computer Vision',
-          items:[
-            type: 'category',
-            label: 'CVAT',
-            items: [
-              {
-                type: 'doc',
-                id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide
-              },
-              {
-                type: 'doc',
-                id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation
-              }
-              {
-                type: 'doc',
-                id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model
-              }
-            ]
+          items: [
+            {
+              type: 'category',
+              label: 'CVAT',
+              items: [
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide'
+                },
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation'
+                },
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model'
+                }
+              ]
+            }
           ]
          }
        ]
