@@ -43,7 +43,7 @@ module.exports = {
           items: [
             {
               type: 'category',
-              label: 'CVAT auto annotation',
+              label: 'Image/video auto annotation',
               items: [
                 {
                   type: 'doc',

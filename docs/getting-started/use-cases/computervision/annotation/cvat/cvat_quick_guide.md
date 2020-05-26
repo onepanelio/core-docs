@@ -1,12 +1,19 @@
 ---
-title: Quick guide - CVAT
-sidebar_label: Quick guide
+title: Quick start
+sidebar_label: Quick start
 ---
+
+For this quick start, we'll be using OpenCV's [Computer Vision Annotation Tool (CVAT)](https://github.com/opencv/cvat). You will be able to use an existing model to pre-annotate your images or videos and then continuously train and improve your model on new data.
 
 ## Setup
 
-In order to use CVAT on Onepanel, we need to create a new Workspace for CVAT. More information on Workspaces can be found [here](https://docs.onepanel.ai/docs/getting-started/concepts/workspaces).
-We will be using following yaml file to create the workspace.
+In order to use CVAT on Onepanel, we need to create a new Workspace for CVAT. More information on Workspaces can be found [here](/docs/getting-started/concepts/workspaces).
+
+We will be using following Workspace Template to create the Workspace:
+
+:::note
+A copy of this template is readily available in "Template Builder"
+:::
 
 ```yaml
 #specify all the required containers for cvat
