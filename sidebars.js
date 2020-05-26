@@ -35,15 +35,15 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Use Cases',
+      label: 'Use cases',
       items: [
         {
           type: 'category',
-          label: 'Computer Vision',
+          label: 'Computer vision',
           items: [
             {
               type: 'category',
-              label: 'CVAT',
+              label: 'CVAT auto annotation',
               items: [
                 {
                   type: 'doc',
