@@ -1,24 +1,24 @@
 ---
-title: Semi-autmatic Annotation with CVAT
-sidebar_label: Automatic Annotation
+title: Semi-autmatic annotation with CVAT
+sidebar_label: Automatic annotation
 ---
 
 
-## Semi-automatic Annotation on CVAT
+## Semi-automatic annotation on CVAT
 
 You can use your TensorFlow or OpenVINO model to pre-annotate your data. This can save you a lot of time since you don't have to annotate images from scratch. On Onepanel, you can leverage these features to pre-annotate your bounding boxes or polygon masks. You can also use Object Tracking to track objects in a sequence of frames.
 
-## Uploading Your Model on CVAT
+## Uploading your model on CVAT
 Before using any type of semi-automatic annotation, you will need to upload your model on CVAT Model Manager by clicking on Models. To upload your model, go to your CVAT dashboard and click on Models. A pop up window will appear where you can give a name to your model, select the source of your files (local or cloud), and select files. For TF Annotation and Segmentation, you will need two files- model and classes.csv. For TF Annotation, the model should be Tensorflow Frozen Graph (.pb). For Segmentation, it should be Keras model (.h5).
 
-## Semi-automatic Annotation of Bounding Boxes
+## Semi-automatic annotation of bounding boxes
 The first step is to upload your model on CVAT or use our default model which are available on CVAT. Now, find Actions button for the task on which you want to run pre-annotation. Click on Automatic Annotation, a pop up will appear where you can select the model you want to use for pre-annotation. Once you select the model, an automatic class mapping will appear, you can modify it if you want. Once done, click on Start. Once it is done, you can go into your task and check out the pre-annotation.
 
-## Semi-automatic Annotation of Polygon Masks (Segmentation)
+## Semi-automatic annotation of polygon masks (segmentation)
 For segmentation, you will have to attach the model to your workspace. Click on Add Dataset, search for maskrcnn-default and click on Add. Once done, please follow above procedure to upload it on your Model Manager. Now, on your CVAT dashboard, go to a task where you would like to run this pre-annotation model on, find `Run Auto Segmentation` button and click on it. Similar to the above, a list of models will appear. Select the model and hit Start. Your pre-annotation will be started.
 Please note that the Mask RCNN model is a compute-intensive model. It would require at least a single GPU machine.
 
-## Hardware Requirements 
+## Hardware requirements 
 For training a model( Create New Annotation Model), you can choose any GPU machine from the list. All of our models will work on any of the GPU machine. But if you want to train it faster, then we suggest you select machines with multiple GPUs (i.e 8 V100).
 
 For pre-annotation, you can use a CPU machine (32gb or above) for TF Annotation (bounding box). But It will be considerably slower. So, we suggest you choose a GPU machine for pre-annotation. 
