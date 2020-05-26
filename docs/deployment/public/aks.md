@@ -56,6 +56,45 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 
+#### Figuring out values for nodePool in `params.yaml`
+```bash
+  nodePool:
+    label: beta.kubernetes.io/instance-type
+    # Add more by following the format:
+    # - name: <name>
+    #   value: <value>
+    # The first option will be used as default.
+    options:
+    - name: 'MainNode'
+      value: Standard_D4s_v3
+```
+You need to figure out information about your nodes.
+Execute:
+```bash
+kubectl get nodes --show-labels
+```
+You will get output similar to:
+```bash
+agentpool=nodepool1,
+beta.kubernetes.io/arch=amd64,
+beta.kubernetes.io/instance-type=Standard_D4s_v3, #<---
+beta.kubernetes.io/os=linux,
+failure-domain.beta.kubernetes.io/region=eastus,
+failure-domain.beta.kubernetes.io/zone=0,
+kubernetes.azure.com/cluster=MC_dev_alexaz_eastus,
+kubernetes.azure.com/mode=system,kubernetes.azure.com/role=agent,
+kubernetes.io/arch=amd64,kubernetes.io/hostname=aks-nodepool1-23378484-vmss000000,
+kubernetes.io/os=linux,
+kubernetes.io/role=agent,
+node-role.kubernetes.io/agent=,
+storageprofile=managed,storagetier=Premium_LRS
+```
+We want the values:
+
+```bash
+beta.kubernetes.io/instance-type=Standard_D4s_v3,
+```
+
 4. Finally, run the following command to deploy to your cluster:
 
 ```bash
