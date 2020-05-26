@@ -34,6 +34,36 @@ module.exports = {
       ]
     },
     {
+      type: 'category',
+      label: 'Use cases',
+      items: [
+        {
+          type: 'category',
+          label: 'Computer vision',
+          items: [
+            {
+              type: 'category',
+              label: 'Image/video auto annotation',
+              items: [
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide'
+                },
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation'
+                },
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model'
+                }
+              ]
+            }
+          ]
+         }
+       ]
+    },
+    {
       type: 'doc',
       id: 'getting-started/contributing',
     },
