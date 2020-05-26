@@ -47,15 +47,15 @@ module.exports = {
               items: [
                 {
                   type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide'
                 },
                 {
                   type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation'
                 },
                 {
                   type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model'
                 }
               ]
             }
