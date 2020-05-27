@@ -103,7 +103,7 @@ module.exports = {
       items: [
         'reference/workspaces/templates',
         'reference/workspaces/launching',
-        'reference/workspaces/pause_and_resume',
+        'reference/workspaces/pause-and-resume',
         'reference/workspaces/upgrade',
         'reference/workspaces/delete',
       ]

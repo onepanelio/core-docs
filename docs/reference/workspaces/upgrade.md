@@ -1,4 +1,4 @@
 ---
-title: Switching machine types
-sidebar_label: Switching machine types
+title: Switching node pools
+sidebar_label: Switching node pool
 ---
