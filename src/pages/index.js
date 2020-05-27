@@ -8,11 +8,11 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Infrastruture and workflows as code with version control</>,
+    title: <>Infrastructure and workflows as code with version control</>,
     imageUrl: 'img/workflow.png',
     description: (
       <>
-        Workflows, environments and infrastruture are all managed and versioned as code.
+        Workflows, environments and infrastructure are all managed and versioned as code.
       </>
     ),
   },
@@ -21,7 +21,7 @@ const features = [
     imageUrl: 'img/modularity.png',
     description: (
       <>
-        Pre-built components you can use out of the box or easily bring your own components for specialized workflows.
+        Components you can use out of the box or easily bring your own specialized components.
       </>
     ),
   },
@@ -33,7 +33,7 @@ const features = [
         Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
       </>
     ),
-  },
+  }
 ];
 
 function Feature({imageUrl, title, description}) {

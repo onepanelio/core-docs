@@ -8,10 +8,14 @@ Workspaces are full Linux computing environments that can be paused and resumed 
 You can also trigger [Workflows](/docs/getting-started/concepts/workflows) from Workspaces using Onepanel's [Python SDK](https://github.com/onepanelio/python-sdk).
 
 :::note
-See [Environment Variables](/docs/getting-started/concepts/environment-variables) for more information on how environment variables can be added to Workspaces.
+See [Environment variables](/docs/getting-started/concepts/environment-variables) for more information on how environment variables can be added to Workspaces.
 :::
 
 ## Workspace Templates
+
+:::tip
+See Reference section for more information on defining [Workspace Templates](/docs/reference/workspaces/templates)
+:::
 
 You can define reusable templates for Workspaces. Workspace Templates are a combination of Docker images and a YAML definition. Here's a simple NGINX Workspace Template definition:
 

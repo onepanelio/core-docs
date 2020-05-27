@@ -3,29 +3,36 @@ title: Workflows
 sidebar_label: Workflows
 ---
 
+Workflows allow you to compose and chain multiple tasks or tools in a reproducible, scalable manner. Workflows are defined as Directed Acyclic Graphs (DAG), where each task can contain one or more Docker containers. This allows you to run each taks in the DAG on a single machine or on a different machines with their own dedicated resources. For example, you can create a Workflow that scrapes data from multiple sources, runs each task on a dedicated CPU machine and then passes this data to a different task that trains a model on the scraped data on a GPU machine.
+
+Onepanel Workflows are similar to AWS Step Functions, but are Kubernetes-native, are defined by YAML and Docker images and each task in the Workflow can run on different machines. They can also be run on any cloud provider that supports Kubernetes.
 
 :::note
-See [Environment Variables](/docs/getting-started/concepts/environment-variables) for more information on how environment variables can be added to Workspaces.
+See [Environment variables](/docs/getting-started/concepts/environment-variables) for more information on how environment variables can be added to Workspaces.
 :::
 
 :::note
-Onepanel's Workflows and Workflow Templates are based on the excellent [Argo Workflows](https://github.com/argoproj/argo) project. Most functionality is the same except that Onepanel Workflows entrypoint should always be a [DAG template](https://github.com/argoproj/argo/tree/master/examples#steps) and do not support [Steps templates](https://github.com/argoproj/argo/tree/master/examples#steps).
+Onepanel's Workflows are based on the excellent [Argo Workflows](https://github.com/argoproj/argo) project. Most functionality is the same, one exception is that Onepanel Workflows entrypoint should always be a [DAG template](https://github.com/argoproj/argo/tree/master/examples#steps) and do not support [Steps templates](https://github.com/argoproj/argo/tree/master/examples#steps). We also inject certain fields and abstract Argo to provide additional functionality and to simplify Workflow creation.
 :::
 
 ##  Workflow Templates
 
-All workflow templates are defined as Directed Acyclic Graphs (DAG):
+:::tip
+See Reference section for more information on defining [Workflow Templates](/docs/reference/workflows/templates)
+:::
+
+You can define reusable templates for Workflows. All Workflow Templates are defined as Directed Acyclic Graphs (DAG), here's an example of how a DAG template is defined:
 
 ```yaml
 # The template to use as entrypoint
 entrypoint: main
 templates:
-- name: main            # Name of template
-  dag:                  # Indicates that this is a DAG template
+- name: main            
+  dag:                      # Indicates that this is a DAG template
     tasks:
-    - name: A           # First task to execute
-      template: echo    # The template to use for first task in DAG
-      arguments:
+    - name: A               # First task to execute
+      template: echo        # The template to use for first task in DAG
+      arguments:            # Arguments to pass into the "echo" template
         parameters:
         - name: message
           value: A
@@ -50,57 +57,11 @@ templates:
         parameters:
         - name: message
           value: D
-- name: echo
-  inputs:
+- name: echo                # Definition of "echo" template used by the nodes in DAG
+  inputs:                   # Name of inputs 
     parameters:
     - name: message
   container:
     image: alpine:3.7
     command: [echo, "{{inputs.parameters.message}}"]
-```
-
-### Inputs and Outputs
-
-```yaml
-entrypoint: main
-arguments:
-  parameters:
-  - name: model-path
-    value: my-data/output
-templates:
-- name: main
-  dag:
-    tasks:
-    - name: input-output
-      template: input-output
-- name: input-output
-  container:
-    args:
-    - |
-      printenv \
-      && ls /tmp/input \
-        && mkdir -p /tmp/output \
-        && echo "hello" > /tmp/output/message.txt \
-        && sleep 15
-    command:
-    - bash
-    - -c
-    image: bash
-  inputs:
-    artifacts:
-    # Download files from S3 prefix random/input into local folder /tmp/input/
-    # # This downloads from the default S3 artifact repository for this namespace
-    - name: input
-      path: /tmp/input/
-      s3:
-        key: my-data/input
-  outputs:
-    artifacts:
-    # Upload files from local /tmp/output folder to S3 prefix random/output
-    # This uploads to the default S3 artifact repository for this namespace
-    - name: message
-      path: /tmp/output
-      s3:
-        key: '{{workflow.parameters.model-path}}'
-
 ```
