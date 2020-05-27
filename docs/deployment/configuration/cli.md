@@ -10,7 +10,7 @@ Download the latest `opctl` for your operating system from [our release page](ht
 You can initialize configuration files by running the following command. See [configuration files](/docs/deployment/configuration/files) section for more information.
 
 ```bash
-opectl init --provider <provider-name>
+opctl init --provider <provider-name>
 ```
 
 Available provider options are: `microk8s` for local installation or `aks`, `eks` and `gke` for public cloud installations.
@@ -18,7 +18,7 @@ Available provider options are: `microk8s` for local installation or `aks`, `eks
 HTTPS is not enabled by default, to enable HTTPS but manage the TLS certificate yourself:
 
 ```bash
-opectl init --provider <provider-name> --enable-https
+opctl init --provider <provider-name> --enable-https
 ```
 
 :::note
@@ -28,7 +28,7 @@ HTTPS is not supported in local installations.
 To enable HTTPS and enable automatic TLS management:
 
 ```bash
-opectl init --provider <provider-name> \
+opctl init --provider <provider-name> \
     --enable-https \
     --enable-cert-manager \
     --dns-provider <dns-provider-name>
