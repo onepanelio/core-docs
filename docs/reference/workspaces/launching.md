@@ -20,6 +20,12 @@ Check out [Workspace Templates](/docs/reference/workspaces/templates) for more i
 
 5. Click on *CREATE AND RUN*
 
+6. Your workspace will start launching. You can either wait for it on the listing page ![Workspace list launching](/img/workspace_list_launching.png)
+
+   Or click *Open* to go to the detail page, where it will automatically switch to the content when ready. ![Workspace detail launching](/img/workspace_detail_launching.png)
+
+
+
 ## From Workspace templates page
 
 1. Click on *Workspaces* in the top navigation bar.  ![Workspaces selected in navigation bar](/img/navigation_select_workspaces.png)
@@ -32,3 +38,6 @@ Check out [Workspace Templates](/docs/reference/workspaces/templates) for more i
 
 5. Click on *CREATE AND RUN*
  
+6. Your workspace will start launching. You can either wait for it on the listing page ![Workspace list launching](/img/workspace_list_launching.png)
+
+   Or click *Open* to go to the detail page, where it will automatically switch to the content when ready. ![Workspace detail launching](/img/workspace_detail_launching.png)
