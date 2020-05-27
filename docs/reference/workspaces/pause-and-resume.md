@@ -6,9 +6,9 @@ sidebar_label: Pause and resume
 You can pause and resume your workspaces. Pausing a workspace keeps the storage around, but stops the running machine.
 You can then resume a workspace to start the machine back up. 
 
-# Pause
+## Pause
 
-## Pause from workspace list
+### From workspace list
 
 1. From the workspace list page, click the three dots to get the list of actions.
    ![Workspace list pause](/img/workspace_list_pause.png)
@@ -16,7 +16,7 @@ You can then resume a workspace to start the machine back up.
    ![Workspace list workspace paused](/img/workspace_list_workspace_paused.png)
 
 
-## Pause from workspace detail
+### From workspace detail
 
 1. From the workspace detail page, click the Onepanel icon
  
@@ -32,9 +32,9 @@ You can then resume a workspace to start the machine back up.
 ![Workspace detail paused](/img/workspace_detail_paused.png)
 
 
-# Resume
+## Resume
 
-## Resume from workspace list
+### From workspace list
 
 1. From the workspace list page, click the three dots to get the list of actions.
     ![Workspace list resume](/img/workspace_list_resume.png)
@@ -42,7 +42,7 @@ You can then resume a workspace to start the machine back up.
 2. Click resume. The workspace will switch to a resuming state and then resume.
     ![Workspace list workspace resumed](/img/workspace_list_workspace_resumed.png)
      
-## Resume from workspace detail
+### From workspace detail
 
 1. From the workspace detail page, click the resume button
  
