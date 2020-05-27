@@ -8,7 +8,7 @@ You can then resume a workspace to start the machine back up.
 
 # Pause
 
-## From Workspace List
+## Pause from workspace list
 
 1. From the workspace list page, click the three dots to get the list of actions.
    ![Workspace list pause](/img/workspace_list_pause.png)
@@ -16,7 +16,7 @@ You can then resume a workspace to start the machine back up.
    ![Workspace list workspace paused](/img/workspace_list_workspace_paused.png)
 
 
-## From Workspace Detail
+## Pause from workspace detail
 
 1. From the workspace detail page, click the Onepanel icon
  
@@ -34,7 +34,7 @@ You can then resume a workspace to start the machine back up.
 
 # Resume
 
-## From Workspace List
+## Resume from workspace list
 
 1. From the workspace list page, click the three dots to get the list of actions.
     ![Workspace list resume](/img/workspace_list_resume.png)
@@ -42,7 +42,7 @@ You can then resume a workspace to start the machine back up.
 2. Click resume. The workspace will switch to a resuming state and then resume.
     ![Workspace list workspace resumed](/img/workspace_list_workspace_resumed.png)
      
-## From Workspace Detail
+## Resume from workspace detail
 
 1. From the workspace detail page, click the resume button
  
