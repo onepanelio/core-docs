@@ -102,6 +102,10 @@ module.exports = {
       label: 'Workspaces',
       items: [
         'reference/workspaces/templates',
+        'reference/workspaces/launching',
+        'reference/workspaces/pause_and_resume',
+        'reference/workspaces/upgrade',
+        'reference/workspaces/delete',
       ]
     },
     { 
