@@ -3,9 +3,9 @@ title: Workflows
 sidebar_label: Workflows
 ---
 
-Workflows allow you to compose and chain multiple tasks or tools in a reproducible, scalable manner. Workflows are defined as Directed Acyclic Graphs (DAG), where each node can contain one or more Docker containers. This allows you to run each node in the DAG on a single machine or on a different machines with their own dedicated resources. For example, you can create a Workflow that scrapes data from multiple sources, runs each node on a dedicated CPU machine and then pass this data to a different node in the DAG that trains a model on this data on a GPU machine.
+Workflows allow you to compose and chain multiple tasks or tools in a reproducible, scalable manner. Workflows are defined as Directed Acyclic Graphs (DAG), where each task can contain one or more Docker containers. This allows you to run each taks in the DAG on a single machine or on a different machines with their own dedicated resources. For example, you can create a Workflow that scrapes data from multiple sources, runs each task on a dedicated CPU machine and then passes this data to a different task that trains a model on the scraped data on a GPU machine.
 
-They are similar to AWS Step Functions, but are Kubernetes-native and are defined by YAML and Docker images. They can also be run on any cloud provider that supports Kubernetes.
+Onepanel Workflows are similar to AWS Step Functions, but are Kubernetes-native, are defined by YAML and Docker images and each task in the Workflow can run on different machines. They can also be run on any cloud provider that supports Kubernetes.
 
 :::note
 See [Environment variables](/docs/getting-started/concepts/environment-variables) for more information on how environment variables can be added to Workspaces.
