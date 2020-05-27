@@ -6,7 +6,6 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'onepanelio', // Usually your GitHub org/user name.
   projectName: 'core-docs', // Usually your repo name.
-  plugins: ['@docusaurus/plugin-google-analytics'],
   themeConfig: {
     disableDarkMode: true,
     sidebarCollapsible: false,

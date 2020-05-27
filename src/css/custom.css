@@ -85,6 +85,10 @@
   border-left: 8px solid #7633db;
 }
 
+.admonition a {
+  color: var(--ifm-link-color);
+}
+
 .admonition h5 {
   color: #7633db;
 }
@@ -97,7 +101,8 @@
 /** native types */
 .admonition-caution {
   background-color: rgba(230, 126, 34, 0.1);
-  border-left: 8px solid #e67e22;
+  border-left: 8px solid;
+  border-color: var(--ifm-color-caution);
   color: var(--ra-color-text-dark);
 }
 
@@ -112,7 +117,8 @@
 
 .admonition-tip {
   background-color: rgba(46, 204, 113, 0.1);
-  border-left: 8px solid #2ecc71;
+  border-left: 8px solid;
+  border-color: var(--ifm-color-success);
   color: var(--ra-color-text-dark);
 }
 
@@ -157,7 +163,8 @@
 
 .admonition-note {
   background-color: rgba(241, 196, 15, 0.1);
-  border-left: 8px solid #f1c40f;
+  border-left: 8px solid;
+  border-color:  #f1c40f;
 }
 
 .admonition-note h5 {
