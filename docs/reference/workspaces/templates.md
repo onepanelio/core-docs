@@ -115,7 +115,7 @@ routes:
 
 ### postExecutionWorkflow
 
-This is a DAG workflow that runs after your workspace is ready. Check out [argo DAG](https://github.com/argoproj/argo/blob/master/examples/README.md#dag) for more information.
+This is a DAG workflow that runs after your workspace is ready. Check out [Workflow templates](/docs/reference/workflows/templates) for more information.
 
 ## More involved example
 
