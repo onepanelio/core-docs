@@ -56,8 +56,7 @@ templates:
 
 ## Artifacts
 
-When running Workflows, it is very common to have steps that generate or consume artifacts. Often, the output artifacts of one step may be used as input artifacts to a subsequent step.
-
+When running Workflows, it is very common to have steps that generate or consume artifacts. Often, the output artifacts of one task may be used as input artifacts to a subsequent task.
 
 Example below shows how you can download or upload artifacts from or to different object storage locations:
 
