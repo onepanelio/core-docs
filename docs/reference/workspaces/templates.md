@@ -3,6 +3,10 @@ title: Workspace Templates
 sidebar_label: Workspace Templates
 ---
 
+:::tip
+See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workspaces) for a list of ready to use Workspace Template.
+:::
+
 ## Getting started with Workspace Templates
 
 You can define reusable templates for Workspaces. Workspace Templates are a combination of Docker images and a YAML definition. Here's a simple NGINX Workspace Template definition:

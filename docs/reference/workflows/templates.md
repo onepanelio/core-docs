@@ -3,6 +3,10 @@ title: Workflow Templates
 sidebar_label: Workflow Templates
 ---
 
+:::tip
+See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workflows) for a list of ready to use Workflow Templates.
+:::
+
 ## Getting started with Workflow Templates
 
 You can define reusable templates for Workflows. All Workflow Templates are defined as Directed Acyclic Graphs (DAG), here's an example of how a DAG template is defined:
@@ -50,18 +54,17 @@ templates:
     command: [echo, "{{inputs.parameters.message}}"]
 ```
 
-## Inputs and outputs
+## Artifacts
 
-There are two types of inputs and outputs:
+When running Workflows, it is very common to have steps that generate or consume artifacts. Often, the output artifacts of one step may be used as input artifacts to a subsequent step.
 
-- Parameters: These are string or number values.
-- Artifacts: These are paths to actual files or directories stored in the object storage of your choice.
 
-You can define inputs and outputs artifacts as follows:
+Example below shows how you can download or upload artifacts from or to different object storage locations:
 
 ```yaml
 entrypoint: main
 arguments:
+  # Workflow parameters which will be set by user via Web UI, SDK or API
   parameters:
   - name: model-path
     value: my-data/output
@@ -94,11 +97,45 @@ templates:
         key: my-data/input
   outputs:
     artifacts:
-    # Upload files from local /tmp/output folder to S3 prefix random/output
+    # Upload files from local /tmp/output folder to default object storage location that is configured for this namespace
+    # This is set to artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}} by default
+    - name: output-one
+      path: /tmp/output
+    # Upload files from local /tmp/output folder to S3 prefix my-data/output
     # This uploads to the default S3 artifact repository for this namespace
-    - name: message
+    - name: output-two
+      path: /tmp/output
+      s3:
+        # Reference to the Workflow parameter that was set by user
+        key: '{{workflow.parameters.model-path}}'
+    # Upload files from local /tmp/output folder to the S3 prefix my-data/output in bucket defined below
+    - name: output-three
       path: /tmp/output
       s3:
         key: '{{workflow.parameters.model-path}}'
+        endpoint: storage.googleapis.com
+        bucket: my-bucket-name
+        accessKeySecret:
+          name: my-s3-credentials
+          key: accessKey
+        secretKeySecret:
+          name: my-s3-credentials
+          key: secretKey
 
+```
+
+Artifacts can be packaged as Tarballs and gzipped by specifying an archive strategy, using the `archive` field:
+
+```yaml
+...
+  outputs:
+    artifacts:
+    # Upload files from local /tmp/output folder to default object storage location that is configured for this namespace
+    # This is set to artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}} by default
+    - name: output-one
+      path: /tmp/output
+      # Tar and gzip contents of /tmp/output folder and upload to the namespace configured artifact repository
+      archive:
+        tar: {}
+...
 ```
