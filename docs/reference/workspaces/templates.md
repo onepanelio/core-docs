@@ -1,21 +1,9 @@
 ---
-title: Workspaces
-sidebar_label: Workspaces
+title: Workspace Templates
+sidebar_label: Workspace Templates
 ---
 
-Workspaces are full Linux computing environments that can be paused and resumed at any time, while persisting your data. They can be used to run single applications like JupyterLab, VSCode and annotation tools like [CVAT](https://github.com/opencv/cvat). You can also upgrade or downgrade resources in Workspaces, for example you can switch to a GPU machine and back at any time.
-
-You can also trigger [Workflows](/docs/getting-started/concepts/workflows) from Workspaces using Onepanel's [Python SDK](https://github.com/onepanelio/python-sdk).
-
-:::note
-See [Environment variables](/docs/getting-started/concepts/environment-variables) for more information on how environment variables can be added to Workspaces.
-:::
-
-## Workspace Templates
-
-:::tip
-See Reference section for more information on defining [Workspace Templates](/docs/reference/workspaces/templates)
-:::
+## Getting started with Workspace Templates
 
 You can define reusable templates for Workspaces. Workspace Templates are a combination of Docker images and a YAML definition. Here's a simple NGINX Workspace Template definition:
 

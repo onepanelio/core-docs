@@ -91,5 +91,25 @@ module.exports = {
         'deployment/configuration/tls',
       ]
     }
+  ],
+  reference: [
+    {
+      type: 'doc',
+      id: 'reference/overview',
+    },
+    { 
+      type: 'category',
+      label: 'Workspaces',
+      items: [
+        'reference/workspaces/templates',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'Workflows',
+      items: [
+        'reference/workflows/templates',
+      ]
+    },
   ]
 };
