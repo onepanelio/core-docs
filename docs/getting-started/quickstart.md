@@ -20,6 +20,10 @@ First, create a Kubernetes cluster in one of the following cloud providers:
 }>
 <TabItem value="aks">
 
+:::important
+Make sure [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) (`az`) is installed before proceeding.
+:::
+
 We recommend launching a cluster with 2 `Standard_D4s_v3` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
 
 Here is a sample `az` command to create a bare minimum cluster:
@@ -51,9 +55,13 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
 </TabItem>
 <TabItem value="eks">
 
+:::important
+Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) is installed before proceeding.
+:::
+
 We recommend launching a cluster with 2 `m5.xlarge` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
 
-Here are sample [eksctl](https://eksctl.io/introduction/installation/) commands to create a bare minimum cluster:
+Here are sample `eksctl` commands to create a bare minimum cluster:
 
 ```bash
 eksctl create cluster --name=<cluster-name> --region <region> \
@@ -83,6 +91,10 @@ eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
 
 </TabItem>
 <TabItem value="gke">
+
+:::important
+Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is installed before proceeding.
+:::
 
 We recommend launching a cluster with 2 `n1-standard-4` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
 
