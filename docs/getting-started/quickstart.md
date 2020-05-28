@@ -123,6 +123,49 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
 
+<Tabs
+  defaultValue="linux"
+  values={[
+    { label: 'Linux', value: 'linux', },
+    { label: 'macOS', value: 'macos', },
+  ]
+}>
+<TabItem value="linux">
+
+```bash
+# Download the binary
+curl -sLO https://github.com/onepanelio/core/releases/download/v0.9.0/opctl-linux-amd64
+
+# Make binary executable
+chmod +x opctl-linux-amd64
+
+# Move binary to path
+mv ./opctl-linux-amd64 /usr/local/bin/opctl
+
+# Test installation
+opctl version
+```
+
+</TabItem>
+<TabItem value="macos">
+
+```bash
+# Download the binary
+curl -sLO https://github.com/onepanelio/core/releases/download/v0.9.0/opctl-macos-amd64
+
+# Make binary executable
+chmod +x opctl-macos-amd64
+
+# Move binary to path
+mv ./opctl-macos-amd64 /usr/local/bin/opctl
+
+# Test installation
+opctl version
+```
+
+</TabItem>
+</Tabs>
+
 2. Run the following command to initialize a `params.yaml` template for your provider:
 
 <Tabs
