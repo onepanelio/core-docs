@@ -27,7 +27,7 @@ Next, create a Kubernetes cluster in one of the following cloud providers:
 }>
 <TabItem value="aks">
 
-:::important
+:::note
 Make sure [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) (`az`) is installed before proceeding.
 :::
 
@@ -56,7 +56,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
 </TabItem>
 <TabItem value="eks">
 
-:::important
+:::note
 Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) is installed before proceeding.
 :::
 
@@ -83,7 +83,7 @@ eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
 </TabItem>
 <TabItem value="gke">
 
-:::important
+:::note
 Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is installed before proceeding.
 :::
 
@@ -191,13 +191,17 @@ opctl init --provider gke
 </TabItem>
 </Tabs>
 
-3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration files](/docs/deployment/configuration/files) for more detailed information.
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
-4. Finally, run the following command to deploy to your cluster:
+4. Finally, run the following command to deploy Onepanel to your cluster:
 
 ```bash
 opctl apply
 ```
+
+:::note
+If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, run `kubectl get pods --all-namespaces` to see if there are any crashing pods.
+:::
 
 5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
@@ -205,7 +209,7 @@ opctl apply
 opctl app ip
 ```
 
-6. Create an `A` or `CNAME` record in your DNS provider based on the instructions above.
+6. Create the appropriate DNS record in your DNS provider based on the instructions above.
 
 7. Use the following command to get your auth token to log into Onepanel:
 
