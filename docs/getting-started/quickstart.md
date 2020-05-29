@@ -5,10 +5,13 @@ sidebar_label: Quick start
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-It's easy to get started with Onepanel. First, install the CLI (`opctl`) and then using `opctl`, generate a `params.yaml` file and configure your deployment. Once complete, you can access your deployment from any browser, use your Kubernetes auth to login and finally run a workflow.
+It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and then using `opctl`, you generate a `params.yaml` file and update it to configure your deployment. Once complete, you can access your deployment from any browser using your Kubernetes authentication token. Finally, you can run a Workflow or create a Workspace.
 
-## Step 0: Create a Kubernetes cluster
-First, create a Kubernetes cluster in one of the following cloud providers:
+## Step 0: Understand the concepts
+First, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
+
+## Step 1: Create a Kubernetes cluster
+Next, create a Kubernetes cluster in one of the following cloud providers:
 
 <Tabs
   defaultValue="aks"
@@ -130,8 +133,7 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 </TabItem>
 </Tabs>
 
-
-## Step 1: Install Onepanel
+## Step 2: Install Onepanel
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
 
@@ -258,3 +260,7 @@ opctl app ip
 ```bash
 opctl auth token
 ```
+
+## Step 3: Create a simple Workflow
+
+## Step 4: Create a Workspace
