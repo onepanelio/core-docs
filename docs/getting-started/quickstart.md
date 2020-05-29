@@ -211,12 +211,42 @@ opctl app ip
 
 6. Create the appropriate DNS record in your DNS provider based on the instructions above.
 
-7. Use the following command to get your auth token to log into Onepanel:
+7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a token screen as showng below:
+
+8. Use the following command to get your auth token to log into Onepanel:
 
 ```bash
 opctl auth token
 ```
 
 ## Step 3: Create a simple Workflow
+Let's first create a simple Directed Acyclic Graph (DAG) Workflow Template:
 
-## Step 4: Create a Workspace
+1. Click **Workflows** in the top menu.
+
+![](/img/quickstart-231711.png)
+
+
+2. Click **Create Template**.
+
+![](/img/quickstart-231935.png)
+
+3. Enter "Test DAG" for "Template Name", and select "DAG". This will pre-fill a sample DAG.
+
+![](/img/quickstart-232332.png)
+
+4. Click **Save** to save your template.
+
+5. You should now be on the "Workflow details" page. Click **Execute Workflow**.
+
+![](/img/quickstart-232622.png)
+
+6. A modal will be displayed, click **Execute**.
+
+![](/img/quickstart-232824.png)
+
+7. The workflow will start executing. You can click on every task to see details and running logs.
+
+![](/img/quickstart-232904.png)
+
+8. You have now setup Onepanel and run a simple Workflow.
