@@ -180,8 +180,6 @@ Paste them into your `params.yaml`, so you should have something like this
 
 ```yaml
 certManager:
-  commonName: *.example.com
-  email: admin@example.com
   clouddns:
     projectId: my-project-id
     serviceAccountKey: |
