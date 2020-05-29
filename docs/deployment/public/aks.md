@@ -103,13 +103,17 @@ The `--enable-https` flag is optional and requires a TLS certificate, but it is 
 If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
 :::
 
-3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration files](/docs/deployment/configuration/files) for more detailed information.
 
 4. Finally, run the following command to deploy to your cluster:
 
 ```bash
 opctl apply
 ```
+
+:::note
+If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, run `kubectl get pods --all-namespaces` to see if there are any crashing pods.
+:::
 
 5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
