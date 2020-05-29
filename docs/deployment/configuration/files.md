@@ -239,7 +239,7 @@ Onepanel Workflows will automatically upload or download artifacts from `artifac
 ### certManager
 If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.
 
-See [TLS certificates](http://localhost:3000/docs/deployment/configuration/tls) for more information about configuring this section.
+See [TLS certificates](/docs/deployment/configuration/tls) for more information about configuring this section.
 
 ### database
 This is the database settings section. 
