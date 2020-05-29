@@ -184,7 +184,7 @@ certManager:
   email: admin@example.com
   clouddns:
     projectId: my-project-id
-    data: >
+    serviceAccountKey: |
       {
         "type": "service_account",
         "project_id": "my-project-id",
