@@ -6,9 +6,9 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'onepanelio', // Usually your GitHub org/user name.
   projectName: 'core-docs', // Usually your repo name.
-  plugins: ['@docusaurus/plugin-google-analytics'],
   themeConfig: {
     disableDarkMode: true,
+    sidebarCollapsible: false,
     navbar: {
       title: '',
       logo: {
@@ -18,6 +18,7 @@ module.exports = {
       links: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
         {to: 'docs/deployment/overview', label: 'Deploy and Manage', position: 'left'},
+        {to: 'docs/reference/overview', label: 'Reference', position: 'left'},
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
         // {to: 'blog', label: 'Changelog', position: 'left'},
         {

@@ -2,10 +2,16 @@
 title: GKE deployment guide
 sidebar_label: GKE deployment
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This document outlines the installation steps for Google Kubernetes Engine (GKE).
 
 ## Launch a GKE cluster
+:::important
+Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is installed before proceeding.
+:::
+
 We recommend launching a cluster with 2 `n1-standard-4` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
 
 Here is sample `gcloud` command to create a bare minimum cluster:
@@ -40,6 +46,49 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
 
+<Tabs
+  defaultValue="linux"
+  values={[
+    { label: 'Linux', value: 'linux', },
+    { label: 'macOS', value: 'macos', },
+  ]
+}>
+<TabItem value="linux">
+
+```bash
+# Download the binary
+curl -sLO https://github.com/onepanelio/core/releases/download/v0.9.0/opctl-linux-amd64
+
+# Make binary executable
+chmod +x opctl-linux-amd64
+
+# Move binary to path
+mv ./opctl-linux-amd64 /usr/local/bin/opctl
+
+# Test installation
+opctl version
+```
+
+</TabItem>
+<TabItem value="macos">
+
+```bash
+# Download the binary
+curl -sLO https://github.com/onepanelio/core/releases/download/v0.9.0/opctl-macos-amd64
+
+# Make binary executable
+chmod +x opctl-macos-amd64
+
+# Move binary to path
+mv ./opctl-macos-amd64 /usr/local/bin/opctl
+
+# Test installation
+opctl version
+```
+
+</TabItem>
+</Tabs>
+
 2. Run the following command to initialize a `params.yaml` template for GKE:
 
 ```bash
@@ -57,13 +106,17 @@ The `--enable-https` flag is optional and requires a TLS certificate, but it is 
 GKE automatically adds GPU device plugins to GPU nodes, so you do not have to set the `--gpu-device-plugins` flag.
 :::
 
-3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
+3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration files](/docs/deployment/configuration/files) for more detailed information.
 
 4. Finally, run the following command to deploy to your cluster:
 
 ```bash
 opctl apply
 ```
+
+:::note
+If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, run `kubectl get pods --all-namespaces` to see if there are any crashing pods.
+:::
 
 5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 

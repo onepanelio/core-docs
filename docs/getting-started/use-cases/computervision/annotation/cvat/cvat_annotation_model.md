@@ -5,11 +5,17 @@ sidebar_label: Create annotation model
 
 
 ## Why pre-annotate?
+<<<<<<< HEAD
 Pre-annotation will cut the time to annotate large amounts of data by orders of magnitude.  The idea is simple, annotate once then QC each successive dataset after.
+=======
+Pre-annotation will cut the time to annotate large amounts of data by orders of magnitude. The idea is simple, annotate once then QC each successive dataset after.
+
+>>>>>>> master
 Once you have annotated enough data, you can train a model to pre-annotate the rest of your images with a few button clicks.
 
 ## Training object detection model through CVAT
 
+<<<<<<< HEAD
 1 - Annotate enough images in your CVAT task.  
 2 - Go back to your CVAT dashboard and click on `Create New Annotation Model` in that task. You will see a popup with a few options.  
 3 - Select the appropriate model type (TensorFlow OD API recommended) and then select the model (i.e ssd-mobilenet-v2-coco-201).  
@@ -20,6 +26,18 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 8 - Click TF_Annotion button for the current task.  
 
 ![CVAT flowchart](/static/img/auto-annotation-v.2.0.png?raw=true)
+=======
+1. Annotate enough images in your CVAT task.  
+2. Go back to your CVAT dashboard and click on `Create New Annotation Model` in that task. You will see a popup with a few options.  
+3. Select the appropriate model type (TensorFlow OD API recommended) and then select the model (i.e ssd-mobilenet-v2-coco-201).  
+4. Select the machine type. A machine with multiple GPUs will speed up your training process.    
+5. Enter optional arguments. See below for more details.  
+6. Click on link to new model in email that will be sent to you once model training completes - locate the tf_annoation_model folder and inspect the contents.  
+7. Mount this new dataset to the CVAT workspace and click the button for the Model manager.  Then select files in tf_annotation_model folder.  
+8. Click TF_Annotion button for the current task.  
+
+![CVAT flowchart](/img/auto-annotation-v.2.0.png)
+>>>>>>> master
 
 
 ## Arguments (optional)

@@ -35,15 +35,15 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Use Cases',
+      label: 'Use cases',
       items: [
         {
           type: 'category',
-          label: 'Computer Vision',
+          label: 'Computer vision',
           items: [
             {
               type: 'category',
-              label: 'CVAT',
+              label: 'Image/video auto annotation',
               items: [
                 {
                   type: 'doc',
@@ -91,5 +91,29 @@ module.exports = {
         'deployment/configuration/tls',
       ]
     }
+  ],
+  reference: [
+    {
+      type: 'doc',
+      id: 'reference/overview',
+    },
+    { 
+      type: 'category',
+      label: 'Workspaces',
+      items: [
+        'reference/workspaces/templates',
+        'reference/workspaces/launching',
+        'reference/workspaces/pause-and-resume',
+        'reference/workspaces/upgrade',
+        'reference/workspaces/delete',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'Workflows',
+      items: [
+        'reference/workflows/templates',
+      ]
+    },
   ]
 };
