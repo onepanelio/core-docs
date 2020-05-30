@@ -118,7 +118,7 @@ If the command completes but it indicates that your cluster is not ready, you ca
 5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
 ```bash
-opctl app ip
+opctl app status
 ```
 
 6. Create an `A` record in your DNS provider based on the instructions above.
