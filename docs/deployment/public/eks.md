@@ -43,6 +43,10 @@ The `eksctl` command above will automatically retrieve your cluster's access cre
 eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
 ```
 
+:::note
+If you are not the person that created the cluster, you will need to be [added to the cluster](https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html) before you can use `kubectl` with these credentials.
+:::
+
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
 
