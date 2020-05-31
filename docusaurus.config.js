@@ -22,9 +22,14 @@ module.exports = {
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
         // {to: 'blog', label: 'Changelog', position: 'left'},
         {
-          href: 'https://github.com/onepanelio/core',
-          label: 'GitHub',
+          href: 'https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg',
           position: 'right',
+          className: 'header-icon-link header-slack-link',
+        },
+        {
+          href: 'https://github.com/onepanelio/core',
+          position: 'right',
+          className: 'header-icon-link header-github-link',
         },
       ],
     },
