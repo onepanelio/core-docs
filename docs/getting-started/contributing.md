@@ -51,8 +51,7 @@ An example is:
 fix: issue where workspace page crashed upon three refreshes.
 ```
 
-* Add the appropriate /kind label (enhancement, bug, etc)
-* Set the milestone
+* Add the a /kind label in your PR description (enhancement, bug, etc)
 
 ## Project repositories
 Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
