@@ -45,22 +45,34 @@ When making a pull request,
 
 The types are
 
-  * **fix** - fixing something
-  * **feature** - adding a feature
-  * **clean** - cleaning up code
-  * **chore** - something mundane like updating a version number
-  * **docs** - updating documents
-  * **tests** - adding tests
+ * **fix** - fixing something
+ * **feature** - adding a feature
+ * **clean** - cleaning up code
+ * **chore** - something mundane like updating a version number
+ * **docs** - updating documents
+ * **tests** - adding tests
   
 An example is: 
 
 ```
-fix: issue where workspace page crashed upon three refreshes.
+fix: issue where workspace page crashed upon three refreshes
 ```
 
 ### Add a /kind label
 
 A /kind label helps further identify what the pull request is for
+
+The types are
+
+ * bug
+ * enhancement
+ * docs
+
+An example is:
+
+```
+\kind enhancement
+```
 
 
 ## Project repositories
