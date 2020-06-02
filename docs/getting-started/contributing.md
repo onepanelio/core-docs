@@ -37,7 +37,14 @@ All commits should follow [Conventional Commits](https://www.conventionalcommits
 
 When making a pull request, 
 
-* Prefix the name with 
+1. Prefix the name with the type of commit (fix, feature, docs, etc)
+2. Add a /kind label in the description (enhancement, bug, etc)
+
+
+### Prefix the name with the type
+
+The types are
+
   * **fix** - fixing something
   * **feature** - adding a feature
   * **clean** - cleaning up code
@@ -51,7 +58,10 @@ An example is:
 fix: issue where workspace page crashed upon three refreshes.
 ```
 
-* Add the a /kind label in your PR description (enhancement, bug, etc)
+### Add a /kind label
+
+A /kind label helps further identify what the pull request is for
+
 
 ## Project repositories
 Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
