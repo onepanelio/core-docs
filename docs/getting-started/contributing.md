@@ -71,7 +71,7 @@ The types are
 An example is:
 
 ```
-\kind enhancement
+/kind enhancement
 ```
 
 
