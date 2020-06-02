@@ -29,6 +29,31 @@ We welcome all contributions and follow these highlights from [Google developer 
 
 Our documentation site is built on [Docusaurus](https://v2.docusaurus.io/).
 
+## Commits
+
+All commits should follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) as closely as possible.
+
+## Pull Requests
+
+When making a pull request, 
+
+* Prefix the name with 
+  * **fix** - fixing something
+  * **feature** - adding a feature
+  * **clean** - cleaning up code
+  * **chore** - something mundane like updating a version number
+  * **docs** - updating documents
+  * **tests** - adding tests
+  
+An example is: 
+
+```
+fix: issue where workspace page crashed upon three refreshes.
+```
+
+* Add the appropriate /kind label (enhancement, bug, etc)
+* Set the milestone
+
 ## Project repositories
 Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
 
