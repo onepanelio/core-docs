@@ -61,7 +61,7 @@ If you are not the person that created the cluster, you will need to be [added t
 
 ```bash
 # Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/download/v0.9.0/opctl-linux-amd64
+curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-linux-amd64
 
 # Make binary executable
 chmod +x opctl-linux-amd64
@@ -78,7 +78,7 @@ opctl version
 
 ```bash
 # Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/download/v0.9.0/opctl-macos-amd64
+curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-macos-amd64
 
 # Make binary executable
 chmod +x opctl-macos-amd64
