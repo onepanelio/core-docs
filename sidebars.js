@@ -90,6 +90,10 @@ module.exports = {
         'deployment/configuration/files',
         'deployment/configuration/tls',
       ]
+    },
+    { 
+      type: 'doc',
+      id: 'deployment/troubleshooting/overview'
     }
   ],
   reference: [
