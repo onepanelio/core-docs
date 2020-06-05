@@ -64,6 +64,11 @@
   color: var(--ifm-color-secondary);
 }
 
+.navbar__logo {
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;

@@ -13,7 +13,7 @@ module.exports = {
       title: '',
       logo: {
         alt: 'Onepanel logo',
-        src: 'img/onepanel-logo-white.svg',
+        src: 'img/onepanel-logo-blue-white.png',
       },
       links: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
