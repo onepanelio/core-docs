@@ -34,6 +34,38 @@ az aks create --resource-group <resource-group> --name <cluster-name> \
 The `--enable-addons monitoring` flag in the command above enables Azure Monitor for log aggregation which can incur additional charges. You can optionally remove this flag and add `--enable-efk-logging` to `opctl` command below.
 :::
 
+:::note
+You can specify the version of the cluster.
+Get a list of versions by running:
+```shell script
+az aks get-versions --location eastus --output table
+```
+Example output
+```text
+KubernetesVersion    Upgrades
+-------------------  -------------------------------------------------
+1.18.2(preview)      None available
+1.18.1(preview)      1.18.2(preview)
+1.17.5(preview)      1.18.1(preview), 1.18.2(preview)
+1.17.4(preview)      1.17.5(preview), 1.18.1(preview), 1.18.2(preview)
+1.16.9               1.17.4(preview), 1.17.5(preview)
+1.16.8               1.16.9, 1.17.4(preview), 1.17.5(preview)
+1.15.11              1.16.8, 1.16.9
+1.15.10              1.15.11, 1.16.8, 1.16.9
+1.14.8               1.15.10, 1.15.11
+1.14.7               1.14.8, 1.15.10, 1.15.11
+```
+
+Add the flag to the above command:
+```shell script
+az aks create --resource-group <resource-group> --name <cluster-name> \
+    --node-count 2 \
+    --kubernetes-version 1.16.9 \
+    ...
+```
+
+:::
+
 You can then get access credentials by running:
 
 ```
@@ -54,7 +86,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
 
 ```bash
 # Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/download/v0.9.0/opctl-linux-amd64
+curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-linux-amd64
 
 # Make binary executable
 chmod +x opctl-linux-amd64
@@ -71,7 +103,7 @@ opctl version
 
 ```bash
 # Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/download/v0.9.0/opctl-macos-amd64
+curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-macos-amd64
 
 # Make binary executable
 chmod +x opctl-macos-amd64
@@ -118,7 +150,7 @@ If the command completes but it indicates that your cluster is not ready, you ca
 5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
 ```bash
-opctl app ip
+opctl app status
 ```
 
 6. Create an `A` record in your DNS provider based on the instructions above.

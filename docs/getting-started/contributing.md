@@ -29,6 +29,52 @@ We welcome all contributions and follow these highlights from [Google developer 
 
 Our documentation site is built on [Docusaurus](https://v2.docusaurus.io/).
 
+## Commits
+
+All commits should follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) as closely as possible.
+
+## Pull Requests
+
+When making a pull request, 
+
+1. Prefix the name with the type of commit (fix, feature, docs, etc)
+2. Add a /kind label in the description (enhancement, bug, etc)
+
+
+### Prefix the name with the type
+
+The types are
+
+ * **fix** - fixing something
+ * **feature** - adding a feature
+ * **clean** - cleaning up code
+ * **chore** - something mundane like updating a version number
+ * **docs** - updating documents
+ * **tests** - adding tests
+  
+An example is: 
+
+```
+fix: issue where workspace page crashed upon three refreshes
+```
+
+### Add a /kind label
+
+A /kind label helps further identify what the pull request is for
+
+The types are
+
+ * bug
+ * enhancement
+ * docs
+
+An example is:
+
+```
+/kind enhancement
+```
+
+
 ## Project repositories
 Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
 
