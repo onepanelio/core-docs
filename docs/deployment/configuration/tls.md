@@ -124,6 +124,17 @@ certManager:
     email: <yourCloudflareEmail@example.com>
 ``` 
 
+:::note
+If your token has an non-alphanumerical character, surround the token with single quotes.
+```yaml
+certManager:
+  cloudflare:
+    apiToken: '<api-token goes here>'
+    email: <yourCloudflareEmail@example.com>
+``` 
+
+:::
+
 ### Google CloudDNS
 
 The flag is `clouddns`, as in 
