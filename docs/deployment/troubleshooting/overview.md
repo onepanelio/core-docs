@@ -2,88 +2,67 @@
 title: Troubleshooting
 sidebar_label: Troubleshooting
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
-This document outlines trouble shooting for various topics.
+This document outlines steps to troubleshoot issues that may arise after initial deployment of Onepanel.
 
-## You deployed to a cloud provided cluster using CloudFlare as DNS provider.
 
-Issue:
-- You enter the URL into your browser and the page does not load.
+## General troubleshooting steps
 
-### Debugging steps:
+Once you have setup DNS accordingly but the site isn't showing up or you can't login, double check that you have set up DNS correctly:
 
-#### Make sure all the pods are running with no errors
+```bash
+opctl app status
+```
 
-Execute:
-```shell script
+The command above will return a result similar to the following:
+
+```
+Your deployment is ready.
+
+In your DNS, add an A record for *.sub.example.com and point it to '52.225.33.112'
+Once complete, your application will be running at https://app.sub.example.com
+```
+
+:::note
+Depending on your provider, the `opctl app status` may prompt you to set up a `CNAME` record.
+:::
+
+If you see "Your deployment is ready", double check that your DNS record is correct, then ping the domain in the URL above to confirm it is ready:
+
+```bash
+$ ping app.sub.example.com
+PING app.sub.example.com (52.225.33.112) 56(84) bytes of data.
+```
+
+If you see "Not all required pods are running. Your deployment is not ready.", run the following command:
+
+```bash
 kubectl get pods -A
 ```
 
-Check if all are running. If some are pending, wait for them to complete.
-- If they take a long time, they may not be scheduling correctly.
+For `Pending` pods, check the `Age`, if it has been less than 5 minutes, wait and check again.
 
-If some are showing an error, check the pod logs with `kubectl log` or check
-the pod in more detail with `kubectl describe` 
+If the pods are showing `Error` or have been in `Pending` state for more than 5 minutes, check the pod in more details by running `kubectl describe` for more details. You can also check the pod log by running `kubectl logs`. 
 
-#### Test to see if the DNS is setup correctly.
+In most cases, pods stuck in `Pending` state could mean that you need to add another node to your cluster.
 
-We want to check that the domain is pointed to your IP.
 
-Use `ping` shell command.
+## Troubleshooting deployments with cert-manager
+Onepanel uses [cert-manager](https://cert-manager.io/) to automatically manages TLS certificates when you install Onepanel with the following flags:
 
-```text
-$ ping app.web-demo.onepanel.ai
-PING app.web-demo.onepanel.ai (52.224.34.111) 56(84) bytes of data.
-```
-- This is pointing to the right IP
-
-#### Check your Cloudflare API Token Value
-
-If your token was typo'd when entered, that can cause an issue.
-
-If the token has non-alphanumerical characters, surround the token with single quotes.
-
-Example:
-```yaml
-certManager:
-  # DNS Provider: Cloudflare
-  # Docs: https://onepanelio.github.io/core-docs/docs/deployment/configuration/tls#cloudflare
-  # CLI flag: --dns-provider=cloudflare
-  cloudflare:
-    apiToken: token123ab_c
-    email:
-```
-Should be
-```yaml
-certManager:
-  # DNS Provider: Cloudflare
-  # Docs: https://onepanelio.github.io/core-docs/docs/deployment/configuration/tls#cloudflare
-  # CLI flag: --dns-provider=cloudflare
-  cloudflare:
-    apiToken: 'token123ab_c'
-    email:
+```bash
+opctl init ... --enable-cert-manager --dns-provider <provider>
 ```
 
-Then run `optcl apply` again.
+All cert-manager resources in Onepanel are installed in the `istio-system` namespace.
 
-#### Investigating kubernetes resources
+If you have enabled cert-manager and your application after following [General troubleshooting steps](#general-troubleshooting-steps), then you're most likely running into certificate issues.
 
-You can use this as a resource:
-- https://cert-manager.io/docs/faq/acme/
+You can troubleshoot these issues by following the steps in [Troubleshooting Issuing ACME Certificates](https://cert-manager.io/docs/faq/acme/). Make sure to run all the commands in the `istio-system` namespace. For example to get the certificate that Onepanel uses:
 
-But in short:
-- Check the status of the following resources (namespace: istio-system)
+```bash
+kubectl describe certificate cert-manager-wildcard-certificate -n istio-system
+```
 
-certificate(s) 
-- kubectl get certificates -n istio-system
-- kubectl describe certificate <resource_name> -n istio-system
-
-certificaterequest(s)
-
-order(s)
-
-challenge(s)
-
-There is a good chance that one of these will describe what the issue is.
+## Still having issues?
+Join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
