@@ -224,12 +224,12 @@ Let's first create a simple Directed Acyclic Graph (DAG) Workflow Template:
 
 1. Click **Workflows** in the top menu.
 
-![](/img/quickstart-231711.png)
+<img src="/img/quickstart-231711.png" alt="drawing" width="400px"/>
 
 
 2. Click **Create Template**.
 
-![](/img/quickstart-231935.png)
+<img src="/img/quickstart-231935.png" alt="drawing" width="400px"/>
 
 3. Enter "Test DAG" for "Template Name", and select "DAG". This will pre-fill a sample DAG.
 
