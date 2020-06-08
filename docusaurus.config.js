@@ -61,4 +61,7 @@ module.exports = {
       },
     ],
   ],
+  scripts: [
+    '/js/gtm.js'
+  ],
 };
