@@ -211,6 +211,10 @@ opctl app status
 
 6. Create the appropriate DNS record in your DNS provider based on the instructions above.
 
+:::tip
+If you don't have a domain name handy or you're waiting for your DNS record to propogate, you can set up a [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) to quickly test the deployment.
+:::
+
 7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
 :::note
