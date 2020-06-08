@@ -119,7 +119,7 @@ opctl apply
 ```
 
 :::note
-If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, run `kubectl get pods --all-namespaces` to see if there are any crashing pods.
+If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page.
 :::
 
 5. Once the deployment completes, the CLI will display the IP and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
@@ -130,11 +130,21 @@ opctl app status
 
 6. Create a `CNAME` record in your DNS provider based on the instructions above.
 
-:::tip
-Note that you should use a wildcard `CNAME` record, for example: `*.example.com` or `*.subdomain.example.com`
+:::note
+You should use a wildcard `CNAME` record, for example: `*.example.com` or `*.subdomain.example.com`
 :::
 
-7. Use the following command to get your auth token to log into Onepanel:
+:::tip
+If you're waiting for your DNS record to propogate, you can set up a [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) to quickly test the deployment.
+:::
+
+7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
+
+:::note
+If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
+:::
+
+8. Use the following command to get your auth token to log into Onepanel:
 
 ```bash
 opctl auth token
