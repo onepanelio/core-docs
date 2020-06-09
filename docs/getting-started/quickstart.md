@@ -10,7 +10,7 @@ It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and
 :::important
 The steps in the Quick start allow you to quickly setup a Onepanel cluster for testing. To setup a production cluster with TLS and auto scaling enabled see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud).
 
-You can also [add components](/docs/deployment/upgrade/overview) to make this cluster production ready.
+You can also [add components](/docs/deployment/upgrade/overview) at later time to make this cluster production ready.
 :::
 
 Before getting started, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
