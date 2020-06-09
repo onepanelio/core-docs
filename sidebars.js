@@ -93,6 +93,10 @@ module.exports = {
     },
     { 
       type: 'doc',
+      id: 'deployment/upgrade/overview'
+    },
+    { 
+      type: 'doc',
       id: 'deployment/troubleshooting/overview'
     }
   ],

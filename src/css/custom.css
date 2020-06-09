@@ -18,6 +18,11 @@
   --ifm-navbar-link-hover-color: var(--ifm-color-secondary-lightest);
   --ifm-heading-color: var(--ifm-color-primary-darker);
   --ifm-font-size-base: 16px;
+  --ifm-list-left-padding: 1.25rem;
+}
+
+ol > li::marker {
+  font-weight: bold;
 }
 
 .header-icon-link {
