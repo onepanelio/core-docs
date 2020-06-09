@@ -18,17 +18,29 @@
   --ifm-navbar-link-hover-color: var(--ifm-color-secondary-lightest);
   --ifm-heading-color: var(--ifm-color-primary-darker);
   --ifm-font-size-base: 16px;
+  --ifm-list-left-padding: 1.25rem;
+  --ifm-navbar-link-hover-color: rgb(255, 255, 255);
+  --ifm-navbar-link-color: rgb(255, 255, 255, 0.8);
+}
+
+ol > li::marker {
+  font-weight: bold;
+}
+
+.menu__link--sublist::after {
+  background-size: 1.25rem 1.25rem;
 }
 
 .header-icon-link {
   padding: 8px;
+  opacity: 0.8;
 }
 
-.header-github-link:hover {
-  opacity: 0.6;
+.header-icon-link:hover {
+  opacity: 1;
 }
 
-.header-github-link:before {
+.header-github-link::before {
   content: '';
   width: 24px;
   height: 24px;
@@ -37,11 +49,7 @@
     no-repeat;
 }
 
-.header-slack-link:hover {
-  opacity: 0.6;
-}
-
-.header-slack-link:before {
+.header-slack-link::before {
   content: '';
   width: 24px;
   height: 24px;
@@ -209,6 +217,22 @@
 .admonition-note .admonition-icon svg {
   stroke: #f1c40f;
   fill: #f1c40f;
+}
+
+.admonition-info {
+  background-color: transparent;
+  border-left: 8px solid;
+  border-color: var(--ifm-toc-border-color);
+  color: var(--ra-color-text-dark);
+}
+
+.admonition-info h5 {
+  color: var(--ifm-toc-border-color);
+}
+
+.admonition-info .admonition-icon svg {
+  stroke: var(--ifm-toc-border-color);
+  fill: var(--ifm-toc-border-color);
 }
 
 .integrations.grid-container {

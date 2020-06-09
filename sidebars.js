@@ -43,7 +43,7 @@ module.exports = {
           items: [
             {
               type: 'category',
-              label: 'Image/video auto annotation',
+              label: 'Auto annotation with CVAT',
               items: [
                 {
                   type: 'doc',
@@ -90,6 +90,10 @@ module.exports = {
         'deployment/configuration/files',
         'deployment/configuration/tls',
       ]
+    },
+    { 
+      type: 'doc',
+      id: 'deployment/upgrade/overview'
     },
     { 
       type: 'doc',
