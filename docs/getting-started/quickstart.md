@@ -161,7 +161,7 @@ opctl version
 <TabItem value="windows">
 
 :::info
-Download the [latest executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
 :::
 
 </TabItem>
