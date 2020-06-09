@@ -121,13 +121,14 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
   values={[
     { label: 'Linux', value: 'linux', },
     { label: 'macOS', value: 'macos', },
+    { label: 'Windows', value: 'windows', },
   ]
 }>
 <TabItem value="linux">
 
 ```bash
 # Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-linux-amd64
+curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-linux-amd64
 
 # Make binary executable
 chmod +x opctl-linux-amd64
@@ -144,7 +145,7 @@ opctl version
 
 ```bash
 # Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-macos-amd64
+curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-macos-amd64
 
 # Make binary executable
 chmod +x opctl-macos-amd64
@@ -155,6 +156,13 @@ mv ./opctl-macos-amd64 /usr/local/bin/opctl
 # Test installation
 opctl version
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+:::info
+Download the [latest executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+:::
 
 </TabItem>
 </Tabs>

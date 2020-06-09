@@ -216,6 +216,22 @@ ol > li::marker {
   fill: #f1c40f;
 }
 
+.admonition-info {
+  background-color: transparent;
+  border-left: 8px solid;
+  border-color: var(--ifm-toc-border-color);
+  color: var(--ra-color-text-dark);
+}
+
+.admonition-info h5 {
+  color: var(--ifm-toc-border-color);
+}
+
+.admonition-info .admonition-icon svg {
+  stroke: var(--ifm-toc-border-color);
+  fill: var(--ifm-toc-border-color);
+}
+
 .integrations.grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
