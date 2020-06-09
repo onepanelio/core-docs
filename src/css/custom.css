@@ -19,6 +19,8 @@
   --ifm-heading-color: var(--ifm-color-primary-darker);
   --ifm-font-size-base: 16px;
   --ifm-list-left-padding: 1.25rem;
+  --ifm-navbar-link-hover-color:rgb(255,255,255);
+  --ifm-navbar-link-color: rgb(255,255,255, 0.8);
 }
 
 ol > li::marker {
@@ -31,13 +33,14 @@ ol > li::marker {
 
 .header-icon-link {
   padding: 8px;
+  opacity: 0.8;
 }
 
-.header-github-link:hover {
-  opacity: 0.6;
+.header-icon-link:hover {
+  opacity: 1;
 }
 
-.header-github-link:before {
+.header-github-link::before {
   content: '';
   width: 24px;
   height: 24px;
@@ -46,11 +49,7 @@ ol > li::marker {
     no-repeat;
 }
 
-.header-slack-link:hover {
-  opacity: 0.6;
-}
-
-.header-slack-link:before {
+.header-slack-link::before {
   content: '';
   width: 24px;
   height: 24px;
