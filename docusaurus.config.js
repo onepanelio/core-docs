@@ -8,7 +8,6 @@ module.exports = {
   projectName: 'core-docs', // Usually your repo name.
   themeConfig: {
     disableDarkMode: true,
-    sidebarCollapsible: false,
     navbar: {
       title: '',
       logo: {

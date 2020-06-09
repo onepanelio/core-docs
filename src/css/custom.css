@@ -25,6 +25,10 @@ ol > li::marker {
   font-weight: bold;
 }
 
+.menu__link--sublist:after {
+  background-size: 1.25rem 1.25rem;
+}
+
 .header-icon-link {
   padding: 8px;
 }
