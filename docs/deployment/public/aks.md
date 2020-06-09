@@ -80,6 +80,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
   values={[
     { label: 'Linux', value: 'linux', },
     { label: 'macOS', value: 'macos', },
+    { label: 'Windows', value: 'windows', },
   ]
 }>
 <TabItem value="linux">
@@ -116,6 +117,14 @@ opctl version
 ```
 
 </TabItem>
+<TabItem value="windows">
+
+:::info
+Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+:::
+
+</TabItem>
+
 </Tabs>
 
 2. Run the following command to initialize a `params.yaml` template for AKS:

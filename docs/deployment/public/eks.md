@@ -55,6 +55,7 @@ If you are not the person that created the cluster, you will need to be [added t
   values={[
     { label: 'Linux', value: 'linux', },
     { label: 'macOS', value: 'macos', },
+    { label: 'Windows', value: 'windows', },
   ]
 }>
 <TabItem value="linux">
@@ -89,6 +90,13 @@ mv ./opctl-macos-amd64 /usr/local/bin/opctl
 # Test installation
 opctl version
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+:::info
+Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+:::
 
 </TabItem>
 </Tabs>
