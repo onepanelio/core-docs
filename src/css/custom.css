@@ -19,8 +19,8 @@
   --ifm-heading-color: var(--ifm-color-primary-darker);
   --ifm-font-size-base: 16px;
   --ifm-list-left-padding: 1.25rem;
-  --ifm-navbar-link-hover-color:rgb(255,255,255);
-  --ifm-navbar-link-color: rgb(255,255,255, 0.8);
+  --ifm-navbar-link-hover-color: rgb(255 , 255, 255);
+  --ifm-navbar-link-color: rgb(255 , 255, 255, 0.8);
 }
 
 ol > li::marker {
