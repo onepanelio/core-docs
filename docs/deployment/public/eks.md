@@ -120,6 +120,10 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration files](/docs/deployment/configuration/files) for more detailed information.
 
+:::tip
+It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or a similar tool.
+:::
+
 4. Finally, run the following command to deploy to your cluster:
 
 ```bash

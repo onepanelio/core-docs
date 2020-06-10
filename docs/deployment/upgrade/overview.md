@@ -3,10 +3,14 @@ title: Adding or upgrading components
 sidebar_label: Upgrading
 ---
 
-Before adding features or upgrading your cluster, we highly recommend you back up your `params.yaml` file. You can optionally commit it into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or similar tools.
+Before adding features or upgrading your cluster, we highly recommend you back up your `params.yaml` file. 
 
 :::tip
-We also highly recommend to try these steps on a copy of the production cluster first.
+It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or a similar tool.
+:::
+
+:::important
+Try these steps on a copy of the production cluster first.
 :::
 
 ## Adding components
