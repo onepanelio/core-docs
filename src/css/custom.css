@@ -58,12 +58,28 @@ ol > li::marker {
     no-repeat;
 }
 
+.header-community-label {
+  padding-right: 0.2rem;
+}
+
+.button--primary {
+  background-color: #ff9100;
+  border-color: #ff9100;
+  color: #ffffff;
+}
+
+.button--primary.button--outline {
+  background-color: transparent;
+  border-color: #ff9100;
+  color: #ff9100;
+}
+
 .hero__title {
   color: var(--ifm-font-base-color-inverse);
 }
 
 .hero__video {
-  margin-top: var(--ifm-paragraph-margin-bottom);
+  margin-top: 2rem;
 }
 
 .navbar--light {

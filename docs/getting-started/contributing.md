@@ -29,21 +29,9 @@ We welcome all contributions and follow these highlights from [Google developer 
 
 Our documentation site is built on [Docusaurus](https://v2.docusaurus.io/).
 
-## Commits
+## Making pull requests
 
-All commits should follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) as closely as possible.
-
-## Pull Requests
-
-When making a pull request, 
-
-1. Prefix the name with the type of commit (fix, feature, docs, etc)
-2. Add a /kind label in the description (enhancement, bug, etc)
-
-
-### Prefix the name with the type
-
-The types are
+When making a pull request, prefix the name with one of the following [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) types:
 
  * **fix** - fixing something
  * **feature** - adding a feature
@@ -58,25 +46,8 @@ An example is:
 fix: issue where workspace page crashed upon three refreshes
 ```
 
-### Add a /kind label
-
-A /kind label helps further identify what the pull request is for
-
-The types are
-
- * bug
- * enhancement
- * docs
-
-An example is:
-
-```
-/kind enhancement
-```
-
-
 ## Project repositories
-Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
+Onepanel consists of the following repositories. For more information on making contributions, see `CONTRIBUTING.md` in each repository.
 
 ### Platform
 - [Core API](https://github.com/onepanelio/core/) - Code base for backend (Go)
@@ -86,6 +57,9 @@ Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in e
 
 ### SDKs
 - [Python SDK](https://github.com/onepanelio/python-sdk/) - Python SDK for automation
+
+### Templates
+- [Templates](https://github.com/onepanelio/templates) - Various Workspace and Workflow Templates
 
 ### Documentation
 - [Documentation](https://github.com/onepanelio/core-docs/) - The repository for this site
