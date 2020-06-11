@@ -86,12 +86,44 @@ sudo usermod -a -G microk8s ubuntu
 Then, enable the following required add-ons:
 
 ```bash
-sudo microk8s.enable storage dns
+sudo microk8s.enable storage dns rbac
 ```
 
 ```bash
 sudo microk8s.enable dashboard
 ```
+
+Enable TokenRequest feature by passing in extra argument to the api server.
+```shell script
+nano /var/snap/microk8s/current/args/kube-apiserver
+```
+Add the lines:
+```text
+--service-account-signing-key-file=${SNAP_DATA}/certs/serviceaccount.key
+--service-account-key-file=${SNAP_DATA}/certs/serviceaccount.key
+--service-account-issuer=api
+--service-account-api-audiences=api,nats
+```
+Make sure this line is set to these values:
+```text
+--authorization-mode=RBAC,Node
+```
+
+Save your changes.
+Execute to make changes take effect
+```shell script
+sudo systemctl restart snap.microk8s.daemon-apiserver
+```
+
+Check microk8s is running with `microk8s status`
+:::note
+If you see a "not running" error, run `microk8s inspect`.
+- Since the api server was just changed, it's most likely that's where the error is.
+- Check what reports as "FAIL"
+- Assuming it's the api server
+- Untar the report file, go to the daemon-apiserver folder, open `journal` log file.
+- Search for "error" and see what comes up.
+:::
 
 ## Install Onepanel
 
