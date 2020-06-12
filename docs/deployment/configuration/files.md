@@ -266,3 +266,20 @@ database:
 :::important
 For a production environment, use a managed database service and set the configuration accordingly.
 :::
+
+### Metal LB
+This is to configure a load balancer for local or bare-metal deployments.
+
+Example:
+```yaml
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Component: Application and kubernetes load balancing on non-cloud deployments.
+# Description: MetalLB, LoadBalancer
+# CLI flag: --enable-metallb
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+metalLb:
+  addresses:
+  - 10.1.31.1/24
+```
+
+### Multipass, Microk8s, and Metal LB
