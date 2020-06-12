@@ -1,6 +1,7 @@
 ---
 title: Workspace Templates
 sidebar_label: Workspace Templates
+description: Creating Workspace Templates for multiple environments like CVAT, VS Code, JupyterLab on Onepanel
 ---
 
 :::tip

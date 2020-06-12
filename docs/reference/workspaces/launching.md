@@ -1,6 +1,7 @@
 ---
 title: Launching a Workspace
 sidebar_label: Launching a Workspace
+description: Launching workspaces on Onepanel
 ---
 
 :::tip

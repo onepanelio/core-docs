@@ -1,6 +1,7 @@
 ---
 title: Quick start
 sidebar_label: Quick start
+description: Get started with Onepanel on AKS, EKS or GKE
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

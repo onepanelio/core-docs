@@ -1,6 +1,7 @@
 ---
 title: Switching node pools
 sidebar_label: Switching node pool
+description: Switching to GPU Workspaces on Onepanel
 ---
 
 You can change the node pool used for a running workspace.

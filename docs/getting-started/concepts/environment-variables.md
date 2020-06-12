@@ -1,6 +1,7 @@
 ---
 title: Environment variables
 sidebar_label: Environment variables
+description: Manage environment variables on Onepanel
 ---
 
 Environment variables are unique to each namespace and will automatically added to any container in [Workspaces](/docs/getting-started/concepts/workspaces) or [Workflows](/docs/getting-started/concepts/workflows).

@@ -1,6 +1,7 @@
 ---
 title: AKS deployment guide
 sidebar_label: AKS deployment
+description: Deploy Onepanel on Azure Kubernetes Service (AKS)
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
