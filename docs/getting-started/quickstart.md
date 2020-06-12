@@ -111,6 +111,24 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
 
 </TabItem>
+<TabItem value="minikube">
+
+:::note
+Make sure [Minikube](https://minikube.sigs.k8s.io/docs/start/) (`minikube`) is installed before proceeding.
+:::
+
+```shell script
+minikube start --memory '16gb' --cpus=4 --disk-size '40g' \
+    --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
+    --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub \
+    --extra-config=apiserver.service-account-issuer=api \
+    --extra-config=apiserver.service-account-api-audiences=api,nats \
+    --extra-config=apiserver.authorization-mode=Node,RBAC
+```
+
+Your kubectl context will be automatically updated once minikube finishes starting.
+
+</TabItem>
 </Tabs>
 
 ## Step 2: Install Onepanel
