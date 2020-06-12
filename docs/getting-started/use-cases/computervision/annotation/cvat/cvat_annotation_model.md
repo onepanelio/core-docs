@@ -1,6 +1,7 @@
 ---
 title: Creating annotation models on CVAT
 sidebar_label: Create annotation model
+description: Onepanel use case - computer vision automatic annotation
 ---
 
 
