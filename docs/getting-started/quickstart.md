@@ -23,6 +23,8 @@ Next, create a Kubernetes cluster in one of the following cloud providers:
     { label: 'Azure AKS', value: 'aks', },
     { label: 'Amazon EKS', value: 'eks', },
     { label: 'Google Cloud GKE', value: 'gke', },
+    { label: 'Minikube', value: 'minikube', },
+    { label: 'Microk8s', value: 'microk8s', },
   ]
 }>
 <TabItem value="aks">
