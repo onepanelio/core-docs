@@ -1,6 +1,7 @@
 ---
 title: GKE deployment guide
 sidebar_label: GKE deployment
+description: Deploy Onepanel on Google Kubernetes Engine (GKE)
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

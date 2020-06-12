@@ -1,6 +1,7 @@
 ---
 title: Namespaces
 sidebar_label: Namespaces
+description: Isolate teams or projects on Onepanel using Namespaces
 ---
 
 Namespaces in Onepanel are thin abstractions of [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). 

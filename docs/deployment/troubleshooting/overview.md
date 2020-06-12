@@ -1,6 +1,7 @@
 ---
 title: Troubleshooting
 sidebar_label: Troubleshooting
+description: Troubleshooting deployments
 ---
 
 This document outlines steps to troubleshoot issues that may arise after initial deployment of Onepanel.

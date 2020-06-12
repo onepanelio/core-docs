@@ -1,6 +1,7 @@
 ---
 title: Contributing
 sidebar_label: Contributing
+description: Contribute to Onepanel by creating issues, updating documentation or submitting code
 ---
 
 Welcome to Onepanel CE Project! We are excited to have you as part of the community and welcome all contributions.

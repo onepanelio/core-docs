@@ -1,6 +1,7 @@
 ---
 title: EKS deployment guide
 sidebar_label: EKS deployment
+description: Deploy Onepanel on Amazon Elastic Kubernetes Service (EKS)
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

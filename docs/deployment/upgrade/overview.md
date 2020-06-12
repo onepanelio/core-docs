@@ -1,6 +1,7 @@
 ---
 title: Adding or upgrading components
 sidebar_label: Upgrading
+description: Adding components or upgrading Onepanel to the latest version
 ---
 
 Before adding features or upgrading your cluster, we highly recommend you back up your `params.yaml` file. 

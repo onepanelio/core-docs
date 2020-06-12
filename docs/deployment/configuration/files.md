@@ -1,6 +1,7 @@
 ---
 title: Configuration files
 sidebar_label: Configuration files
+description: Onepanel provider specific configuration files
 ---
 
 There are two files generated after running `opctl init --provider <provider>`:

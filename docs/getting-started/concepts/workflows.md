@@ -1,6 +1,7 @@
 ---
 title: Workflows
 sidebar_label: Workflows
+description: Onepanel Workflows allow you to compose and chain multiple tasks or tools in a reproducible, scalable manner
 ---
 
 Workflows allow you to compose and chain multiple tasks or tools in a reproducible, scalable manner. Workflows are defined as Directed Acyclic Graphs (DAG), where each task can contain one or more Docker containers. This allows you to run each task in the DAG on a single machine or on a different machines with their own dedicated resources. For example, you can create a Workflow that scrapes data from multiple sources, runs each task on a dedicated CPU machine and then passes this data to a different task that trains a model on the scraped data on a GPU machine.

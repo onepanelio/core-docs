@@ -1,6 +1,7 @@
 ---
-title: Deleting a Workspace
-sidebar_label: Deleting a Workspace
+title: Terminating a Workspace
+sidebar_label: Terminating a Workspace
+description: Terminating a Onepanel Workspace
 ---
 
 Deleting a workspace removes the workspace completely from the system. 

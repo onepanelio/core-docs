@@ -1,6 +1,7 @@
 ---
 title: MicroK8s installation guide
 sidebar_label: Installing on MicroK8s
+description: Deploy Onepanel on MicroK8s
 ---
 
 This document outlines the installation steps for single node installation using [Multipass](https://multipass.run/) VM and [MicroK8s](https://microk8s.io/).
