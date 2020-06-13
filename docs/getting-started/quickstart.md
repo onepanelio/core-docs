@@ -129,6 +129,74 @@ minikube start --memory '16gb' --cpus=4 --disk-size '40g' \
 Your kubectl context will be automatically updated once minikube finishes starting.
 
 </TabItem>
+<TabItem value="microk8s">
+
+:::note
+We recommend installing multipass for virtualization, and then install microk8s inside.
+Make sure [Multipass](https://multipass.run/docs) (`multipass`) is installed before proceeding.
+:::
+
+```shell script
+multipass launch --name microk8s-vm --mem 16G --disk 40G --cpus 4
+```
+
+Multipass creates a virtual machine (VM). Inside that VM, we will create a kubernetes
+cluster with microk8s.
+
+Run a shell into your VM:
+
+```bash
+multipass shell microk8s-vm
+```
+
+Install the MicroK8s snap and configure the network:
+
+```bash
+sudo snap install microk8s --classic --channel=1.18/stable
+sudo iptables -P FORWARD ACCEPT
+```
+
+You will also need to add `ubuntu` user to `microk8s` group as follows:
+
+```bash
+sudo usermod -a -G microk8s ubuntu
+# Re-enter bash session for group changes
+```
+
+Then, enable the following required add-ons:
+
+```bash
+sudo microk8s.enable storage dns rbac dashboard
+```
+
+Enable TokenRequest feature (required by Istio) by passing in extra argument to the api server.
+```shell script
+nano /var/snap/microk8s/current/args/kube-apiserver
+```
+Add the lines:
+```text
+--service-account-signing-key-file=${SNAP_DATA}/certs/serviceaccount.key
+--service-account-key-file=${SNAP_DATA}/certs/serviceaccount.key
+--service-account-issuer=api
+--service-account-api-audiences=api,nats
+```
+Make sure this line is set to these values:
+```text
+--authorization-mode=RBAC,Node
+```
+
+Save your changes.
+Execute to make changes take effect
+```shell script
+sudo systemctl restart snap.microk8s.daemon-apiserver
+```
+
+Exit out of the VM for the next steps.
+```shell script
+exit
+```
+
+</TabItem>
 </Tabs>
 
 ## Step 2: Install Onepanel
