@@ -313,6 +313,12 @@ opctl init --provider microk8s --enable-metallb
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
+:::important
+For `multipass` hosting `microk8s`, extra configuration is required for the
+host to talk to onepanel hosted by microk8s.
+Please see instructions: [host to microk8s via multipass](/docs/deployment/configuration/files#multipass-microk8s-and-metal-lb)
+:::
+
 4. Finally, run the following command to deploy Onepanel to your cluster:
 
 ```bash
