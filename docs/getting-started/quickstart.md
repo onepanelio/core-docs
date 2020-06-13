@@ -254,6 +254,8 @@ opctl version
     { label: 'Azure AKS', value: 'aks', },
     { label: 'Amazon EKS', value: 'eks', },
     { label: 'Google Cloud GKE', value: 'gke', },
+    { label: 'Minikube', value: 'minikube', },
+    { label: 'Microk8s', value: 'microk8s', },
   ]
 }>
 <TabItem value="aks">
@@ -275,6 +277,36 @@ opctl init --provider eks
 ```bash
 opctl init --provider gke
 ```
+
+</TabItem>
+
+<TabItem value="minikube">
+
+```bash
+opctl init --provider minikube
+```
+
+:::note
+If you do not have a loadbalancer setup, you can use metallb
+```shell script
+opctl init --provider minikube --enable-metallb
+```
+:::
+
+</TabItem>
+
+<TabItem value="microk8s">
+
+```bash
+opctl init --provider microk8s
+```
+
+:::note
+If you do not have a loadbalancer setup, you can use metallb
+```shell script
+opctl init --provider microk8s --enable-metallb
+```
+:::
 
 </TabItem>
 </Tabs>
