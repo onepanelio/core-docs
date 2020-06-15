@@ -2,6 +2,8 @@
 title: Configuration files
 sidebar_label: Configuration files
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 There are two files generated after running `opctl init --provider <provider>`:
 
@@ -281,5 +283,77 @@ metalLb:
   addresses:
   - 10.1.31.1/24
 ```
+
+How to get the address range.
+<Tabs
+  defaultValue="minikube"
+  values={[
+    { label: 'Minikube', value: 'minikube', },
+    { label: 'Microk8s', value: 'microk8s', },
+  ]
+}>
+<TabItem value="minikube">
+
+```shell script
+ifconfig -a
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.157.130  netmask 255.255.255.0  broadcast 192.168.157.255
+        inet6 fe80::9446:9952:69d3:d185  prefixlen 64  scopeid 0x20<link>
+        ether 00:0c:29:2e:78:11  txqueuelen 1000  (Ethernet)
+        RX packets 46355  bytes 58715549 (58.7 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 10838  bytes 1159449 (1.1 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+[...Other Output...]
+```
+In our case, we have `192.168.157.130`
+
+So we can use `192.168.157.0/24` for a range of `192.168.157.0` to `192.168.157.255`
+
+```yaml
+metalLb:
+  addresses:
+  - 192.168.157.0/24
+# or
+# - 192.168.157.0-192.168.157.255
+```
+</TabItem>
+<TabItem value="microk8s">
+
+Get inside the VM of multipass.
+
+```shell script
+multipass shell microk8s-vm
+```
+
+```shell script
+ifconfig -a
+cni0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1450
+        inet 10.1.31.1  netmask 255.255.255.0  broadcast 0.0.0.0
+        inet6 fe80::58ce:8dff:fe5e:2be5  prefixlen 64  scopeid 0x20<link>
+        ether 5a:ce:8d:5e:2b:e5  txqueuelen 1000  (Ethernet)
+        RX packets 37251  bytes 4363323 (4.3 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 38095  bytes 9152263 (9.1 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+[...Other output...]
+```
+
+We want CNI because it's the Container Network Interface.
+
+In our case, we have `10.1.31.1`
+
+So we can use `10.1.31.0/24` for a range of `10.1.31.0` to `10.1.31.255`
+
+```yaml
+metalLb:
+  addresses:
+  - 10.1.31.1/24
+# or
+# - 10.1.31.0 - 10.1.31.255
+```
+
+</TabItem>
+</Tabs>
 
 ### Multipass, Microk8s, and Metal LB
