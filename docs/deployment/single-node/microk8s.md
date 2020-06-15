@@ -46,7 +46,7 @@ See [Installing on Windows](https://multipass.run/docs/installing-on-windows)
 With multipass installed, you can now create a VM to run MicroK8s. At least 4 Gigabytes of RAM and 40G of storage is recommended – you can pass these requirements when you launch the VM:
 
 ```bash
-multipass launch --name microk8s-vm --mem 16G --disk 40G
+multipass launch --name microk8s-vm --mem 16G --disk 40G --cpus 4
 ```
 
 You can now find the IP address which has been allocated by running:
@@ -81,19 +81,16 @@ You will also need to add `ubuntu` user to `microk8s` group as follows:
 
 ```bash
 sudo usermod -a -G microk8s ubuntu
+# Re-enter bash session for group changes
 ```
 
 Then, enable the following required add-ons:
 
 ```bash
-sudo microk8s.enable storage dns rbac
+sudo microk8s.enable storage dns rbac dashboard
 ```
 
-```bash
-sudo microk8s.enable dashboard
-```
-
-Enable TokenRequest feature by passing in extra argument to the api server.
+Enable TokenRequest feature (required by Istio) by passing in extra argument to the api server.
 ```shell script
 nano /var/snap/microk8s/current/args/kube-apiserver
 ```
@@ -134,6 +131,15 @@ If you see a "not running" error, run `microk8s inspect`.
 ```bash
 opctl init --provider microk8s
 ```
+
+:::note
+If you don't have a loadbalancer, and want to use a local one, you can use metallb.
+```shell script
+opctl init --provider microk8s --enable-metallb
+```
+Add to `params.yaml`
+:::
+
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 
