@@ -46,7 +46,7 @@ See [Installing on Windows](https://multipass.run/docs/installing-on-windows)
 With multipass installed, you can now create a VM to run MicroK8s. At least 4 Gigabytes of RAM and 40G of storage is recommended – you can pass these requirements when you launch the VM:
 
 ```bash
-multipass launch --name microk8s-vm --mem 16G --disk 40G --cpus 4
+multipass launch --name microk8s-vm --mem 8G --disk 40G --cpus 4 # 16G ram for Istio, recommended
 ```
 
 You can now find the IP address which has been allocated by running:

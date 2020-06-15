@@ -118,7 +118,7 @@ Make sure [Minikube](https://minikube.sigs.k8s.io/docs/start/) (`minikube`) is i
 :::
 
 ```shell script
-minikube start --memory '16gb' --cpus=4 --disk-size '40g' \
+minikube start --memory '8gb' --cpus=4 --disk-size '40g' \
     --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
     --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub \
     --extra-config=apiserver.service-account-issuer=api \
@@ -137,7 +137,7 @@ Make sure [Multipass](https://multipass.run/docs) (`multipass`) is installed bef
 :::
 
 ```shell script
-multipass launch --name microk8s-vm --mem 16G --disk 40G --cpus 4
+multipass launch --name microk8s-vm --mem 8G --disk 40G --cpus 4 #16G ram recommended for Istio
 ```
 
 Multipass creates a virtual machine (VM). Inside that VM, we will create a kubernetes
