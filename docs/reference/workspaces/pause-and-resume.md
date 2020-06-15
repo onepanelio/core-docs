@@ -1,6 +1,7 @@
 ---
 title: Pause and resume
 sidebar_label: Pause and resume
+description: Pausing and resuming Workspaces on Onepanel
 ---
 
 You can pause and resume your workspaces. Pausing a workspace keeps the storage around, but stops the running machine.

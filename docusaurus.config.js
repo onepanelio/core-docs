@@ -8,7 +8,6 @@ module.exports = {
   projectName: 'core-docs', // Usually your repo name.
   themeConfig: {
     disableDarkMode: true,
-    sidebarCollapsible: false,
     navbar: {
       title: '',
       logo: {
@@ -21,6 +20,11 @@ module.exports = {
         {to: 'docs/reference/overview', label: 'Reference', position: 'left'},
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
         // {to: 'blog', label: 'Changelog', position: 'left'},
+        {
+          position: 'right',
+          label: 'Join the community:',
+          className: 'header-community-label',
+        },
         {
           href: 'https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg',
           position: 'right',

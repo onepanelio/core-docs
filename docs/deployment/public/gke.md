@@ -1,6 +1,7 @@
 ---
 title: GKE deployment guide
 sidebar_label: GKE deployment
+description: Deploy Onepanel on Google Kubernetes Engine (GKE)
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -51,6 +52,7 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
   values={[
     { label: 'Linux', value: 'linux', },
     { label: 'macOS', value: 'macos', },
+    { label: 'Windows', value: 'windows', },
   ]
 }>
 <TabItem value="linux">
@@ -87,6 +89,13 @@ opctl version
 ```
 
 </TabItem>
+<TabItem value="windows">
+
+:::info
+Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+:::
+
+</TabItem>
 </Tabs>
 
 2. Run the following command to initialize a `params.yaml` template for GKE:
@@ -107,6 +116,10 @@ GKE automatically adds GPU device plugins to GPU nodes, so you do not have to se
 :::
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration files](/docs/deployment/configuration/files) for more detailed information.
+
+:::tip
+It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or a similar tool.
+:::
 
 4. Finally, run the following command to deploy to your cluster:
 

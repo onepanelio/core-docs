@@ -1,6 +1,7 @@
 ---
 title: EKS deployment guide
 sidebar_label: EKS deployment
+description: Deploy Onepanel on Amazon Elastic Kubernetes Service (EKS)
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -55,6 +56,7 @@ If you are not the person that created the cluster, you will need to be [added t
   values={[
     { label: 'Linux', value: 'linux', },
     { label: 'macOS', value: 'macos', },
+    { label: 'Windows', value: 'windows', },
   ]
 }>
 <TabItem value="linux">
@@ -91,6 +93,13 @@ opctl version
 ```
 
 </TabItem>
+<TabItem value="windows">
+
+:::info
+Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+:::
+
+</TabItem>
 </Tabs>
 
 2. Run the following command to initialize a `params.yaml` template for EKS:
@@ -111,6 +120,10 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 :::
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration files](/docs/deployment/configuration/files) for more detailed information.
+
+:::tip
+It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or a similar tool.
+:::
 
 4. Finally, run the following command to deploy to your cluster:
 

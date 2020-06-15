@@ -1,6 +1,7 @@
 ---
 title: Quick start
 sidebar_label: Quick start
+description: Get started with Onepanel on AKS, EKS or GKE
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -8,13 +9,14 @@ import TabItem from '@theme/TabItem';
 It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and then using `opctl`, you generate a `params.yaml` file and update it to configure your deployment. Once complete, you can access your deployment from any browser using your Kubernetes authentication token. Finally, you can run a Workflow or create a Workspace.
 
 :::important
-The steps in the Quick start allow you to quickly setup a Onepanel cluster for testing. To setup a production cluster with TLS and auto scaling enabled see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud)
+The steps in the Quick start allow you to quickly setup a Onepanel cluster for testing. To setup a production cluster with TLS and auto scaling enabled see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud).
+
+You can also [add components](/docs/deployment/upgrade/overview) at later time to make this cluster production ready.
 :::
 
-## Step 0: Understand the concepts
-First, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
+Before getting started, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
 
-## Step 1: Create a Kubernetes cluster
+## Step 0: Create a Kubernetes cluster
 Next, create a Kubernetes cluster in one of the following cloud providers:
 
 <Tabs
@@ -199,7 +201,7 @@ exit
 </TabItem>
 </Tabs>
 
-## Step 2: Install Onepanel
+## Step 1: Install Onepanel
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
 
@@ -208,13 +210,14 @@ exit
   values={[
     { label: 'Linux', value: 'linux', },
     { label: 'macOS', value: 'macos', },
+    { label: 'Windows', value: 'windows', },
   ]
 }>
 <TabItem value="linux">
 
 ```bash
 # Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-linux-amd64
+curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-linux-amd64
 
 # Make binary executable
 chmod +x opctl-linux-amd64
@@ -231,7 +234,7 @@ opctl version
 
 ```bash
 # Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-macos-amd64
+curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-macos-amd64
 
 # Make binary executable
 chmod +x opctl-macos-amd64
@@ -242,6 +245,13 @@ mv ./opctl-macos-amd64 /usr/local/bin/opctl
 # Test installation
 opctl version
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+:::info
+Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+:::
 
 </TabItem>
 </Tabs>
@@ -353,7 +363,7 @@ If the application is not loading, visit our [Troubleshooting](/docs/deployment/
 opctl auth token
 ```
 
-## Step 3: Create a simple Workflow
+## Step 2: Create a simple Workflow
 Let's first create a simple Directed Acyclic Graph (DAG) Workflow Template:
 
 1. Click **Workflows** in the top menu.

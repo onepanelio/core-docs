@@ -1,6 +1,7 @@
 ---
 title: Workflow Templates
 sidebar_label: Workflow Templates
+description: Creating Workflow Templates for training models, ETL tasks and more on Onepanel 
 ---
 
 :::tip

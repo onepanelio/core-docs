@@ -1,6 +1,7 @@
 ---
 title: TLS certificates
 sidebar_label: TLS certificates
+description: Enabling fully managed TLS certificates on Onepanel
 ---
 
 TLS certificate can be added in two ways:
