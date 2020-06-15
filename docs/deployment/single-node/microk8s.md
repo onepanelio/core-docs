@@ -94,6 +94,11 @@ Enable TokenRequest feature (required by Istio) by passing in extra argument to 
 ```shell script
 nano /var/snap/microk8s/current/args/kube-apiserver
 ```
+
+:::note
+If you don't see any content, try exiting the multipass vm and entering again.
+:::
+
 Add the lines:
 ```text
 --service-account-signing-key-file=${SNAP_DATA}/certs/serviceaccount.key
