@@ -1,6 +1,6 @@
 ---
-title: MicroK8s installation guide
-sidebar_label: Installing on MicroK8s
+title: MicroK8s deployment guide
+sidebar_label: MicroK8s deployment
 ---
 
 This document outlines the installation steps for single node installation using [Multipass](https://multipass.run/) VM and [MicroK8s](https://microk8s.io/).

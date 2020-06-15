@@ -1,6 +1,6 @@
 ---
-title: Minikube installation guide
-sidebar_label: Installing on Minikube
+title: Minikube deployment guide
+sidebar_label: Minikube deployment
 ---
 
 This document outlines the installation steps for single node installation using [Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/).
