@@ -312,14 +312,15 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 ```
 In our case, we have `192.168.157.130`
 
-So we can use `192.168.157.0/24` for a range of `192.168.157.0` to `192.168.157.255`
+This means the addresses before 130 are used.
+We want to use `minikube ip +1` to `255`
+
+So we can use a range of `192.168.157.131` to `192.168.157.255`
 
 ```yaml
 metalLb:
   addresses:
-  - 192.168.157.0/24
-# or
-# - 192.168.157.0-192.168.157.255
+  - 192.168.157.131-192.168.157.255
 ```
 </TabItem>
 <TabItem value="microk8s">
