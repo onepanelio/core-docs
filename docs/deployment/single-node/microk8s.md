@@ -142,7 +142,6 @@ If you don't have a loadbalancer, and want to use a local one, you can use metal
 ```shell script
 opctl init --provider microk8s --enable-metallb
 ```
-Add to `params.yaml`
 :::
 
 
