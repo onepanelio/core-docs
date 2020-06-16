@@ -402,16 +402,6 @@ Next, enter into multipass VM
 multipass shell microk8s-vm
 ```
 
-Get the address range with `ifconfig -a`
-:::note
-See [configuration metallb](/docs/deployment/configuration/files#metal-lb) for more detailed information. 
-:::
-
-Assuming we have the address `10.1.31.1` for `cni0`, and used the address range
-`  - 10.1.31.1/24` for metallb...
-
-We might have this for our istio gateway.
-
 ```shell script
 ubuntu@microk8s-vm:~$ microk8s.kubectl get services -n istio-system
 NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                                                                      AGE
