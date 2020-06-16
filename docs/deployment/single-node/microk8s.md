@@ -269,8 +269,6 @@ Now, go back to your host machine, open your internet browser and go to:
 
 You should see the website load up.
 
-
-
 7. Use the following command to get your auth token to log into Onepanel:
 
 ```bash
