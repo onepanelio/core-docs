@@ -148,10 +148,8 @@ Add to `params.yaml`
 
 3. Populate `params.yaml` before applying, follow the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
 
-:::important
-For `multipass` hosting `microk8s`, extra configuration is required for the
-host to talk to onepanel hosted by microk8s.
-Please see instructions: [host to microk8s via multipass](/docs/deployment/configuration/files#multipass-microk8s-and-metal-lb)
+:::note
+See [configuration metallb](/docs/deployment/configuration/files#metal-lb) for metallb specific details. 
 :::
 
 4. Get Kubernetes config from MicroK8s:
