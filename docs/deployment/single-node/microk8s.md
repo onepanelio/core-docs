@@ -208,6 +208,7 @@ Next, enter into multipass VM
 multipass shell microk8s-vm
 ```
 
+:::note Execute inside the multipass VM
 ```shell script
 microk8s.kubectl get services -n istio-system
 ```
@@ -251,9 +252,7 @@ Example output.
 </html>
 ```
 
-:::note
-Debug the request with `curl -vvv app.alex.xyz`
-:::
+You can debug the request with `curl -vvv app.alex.xyz`
 
 We need a listener running on port 80. That listener should direct traffic
 to the istio gateway.
@@ -263,8 +262,9 @@ sudo apt install socat
 sudo socat TCP-LISTEN:80,fork TCP:app.alex.xyz:80
 ```
 This will run actively in the current terminal prompt.
+:::
 
-Now, go back to your host machine browser and go to:
+Now, go back to your host machine, open your internet browser and go to:
 `app.alex.xyz`.
 
 You should see the website load up.
