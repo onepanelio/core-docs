@@ -9,7 +9,7 @@ This document outlines the installation steps for single node installation using
 
 See [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) and follow the instructions for your operating system.
 
-Once Minikube is installed, start it with at least 16 Gigabytes of RAM, 4 CPUs, and 40G of storage (for Istio) – you can pass these requirements as follows:
+Once Minikube is installed, start it with at least 8 Gigabytes of RAM, 4 CPUs, and 40G of storage (for Istio) – you can pass these requirements as follows:
 
 ```bash
 minikube start --memory '8gb' --cpus=4 --disk-size '40g' \

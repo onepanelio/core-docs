@@ -119,6 +119,8 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 Make sure [Minikube](https://minikube.sigs.k8s.io/docs/start/) (`minikube`) is installed before proceeding.
 :::
 
+Run the following `minikube` command to create a cluster:
+
 ```shell script
 minikube start --memory '8gb' --cpus=4 --disk-size '40g' \
     --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
@@ -133,17 +135,46 @@ Your kubectl context will be automatically updated once minikube finishes starti
 </TabItem>
 <TabItem value="microk8s">
 
-:::note
-We recommend installing multipass for virtualization, and then install microk8s inside.
-Make sure [Multipass](https://multipass.run/docs) (`multipass`) is installed before proceeding.
+First, install Multipass for your operating system:
+
+<Tabs
+  defaultValue="linux"
+  values={[
+    { label: 'Linux', value: 'linux', },
+    { label: 'macOS', value: 'macos', },
+    { label: 'Windows', value: 'windows', },
+  ]
+}>
+<TabItem value="linux">
+
+:::info Instructions
+See [Installing on Linux](https://multipass.run/docs/installing-on-linux)
 :::
 
+</TabItem>
+<TabItem value="macos">
+
+:::info Instructions
+See [Installing on macOS](https://multipass.run/docs/installing-on-macos)
+:::
+
+</TabItem>
+<TabItem value="windows">
+
+:::info Instructions
+See [Installing on Windows](https://multipass.run/docs/installing-on-windows)
+:::
+
+</TabItem>
+</Tabs>
+
+Run the following `multipass` command to launch Multipass:
+
 ```shell script
-multipass launch --name microk8s-vm --mem 8G --disk 40G --cpus 4 #16G ram recommended for Istio
+multipass launch --name microk8s-vm --mem 8G --disk 40G --cpus 4 # 8G ram recommended for Istio
 ```
 
-Multipass creates a virtual machine (VM). Inside that VM, we will create a kubernetes
-cluster with microk8s.
+Multipass creates a virtual machine (VM). Inside that VM, we will create a Kubernetes cluster with microk8s.
 
 Run a shell into your VM:
 
@@ -171,7 +202,8 @@ Then, enable the following required add-ons:
 sudo microk8s.enable storage dns rbac dashboard
 ```
 
-Enable TokenRequest feature (required by Istio) by passing in extra argument to the api server.
+Enable TokenRequest feature (required by Istio) by passing in extra argument to `kube-apiserver`.
+
 ```shell script
 nano /var/snap/microk8s/current/args/kube-apiserver
 ```
