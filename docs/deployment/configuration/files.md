@@ -408,12 +408,12 @@ NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)    
 istio-ingressgateway   LoadBalancer   10.152.183.166   10.1.31.0     15020:31979/TCP,80:31394/TCP,443:30038/TCP,15029:32204/TCP,15030:32688/TCP,15031:31420/TCP,15032:30575/TCP,15443:30386/TCP   3d3h
 ```
 
-Add an entry to the `/etc/hosts` file.
+Inside the multipass VM, add an entry to the `/etc/hosts` file.
 ```shell script
 sudo nano /etc/hosts
 ```
 ```text
-10.174.163.1 app.alex.xyz
+10.1.31.0 app.alex.xyz
 ```
 
 Once you have entered and saved the host change, verify you the onepanel website
