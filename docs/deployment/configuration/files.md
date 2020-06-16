@@ -40,14 +40,12 @@ application:
     uiPath: /
   # First namespace that will be created in Onepanel, more can be added later
   defaultNamespace: default
-  # Domain or IP where Onepanel is hosted
-  # Use an IP address if running local, use `minikube ip` or `multipass list` to get this IP
+  # Domain where Onepanel is hosted.
   # In the cloud, use a first-level or multi-level subdomain like example.com or sub.example.com
-  domain: <ip-or-domain>
+  domain: <domain>
   # The Fully Qualified Domain (FQDN) where Onepanel will be hosted.
-  # Use the same IP address as `domain` above if running local, use `minikube ip` or `multipass list` to get this IP
   # In the cloud, if `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
-  fqdn: <ip-or-fqdn>
+  fqdn: <fqdn>
   # Node pool or group label keys and values used for AutoScaling and for NodeSelectors
   # The provider will set these label key and values on your nodes automatically
   # These can also be customized depending on your provider
@@ -183,8 +181,16 @@ This is the first [Namespace](/docs/getting-started/concepts/namespaces) you wan
 #### domain
 This is the domain for your Onepanel resources. Some resources like Workspaces create subdomains of this domain so they can be accessed by a browser. This can be a top level domain like `example.com` or a subdomain `sub.example.com`.
 
+:::important
+Domains, not ip addresses, are required with Istio.
+:::
+
 #### fqdn
 This is where Onepanel UI and API will be deployed. This should be a subdomain of the `domain` field mentioned above. Example: `app.example.com` or `app.sub.example.com`.
+
+:::important
+Domains, not ip addresses, are required with Istio.
+:::
 
 #### nodePool
 Depending on your provider, these are either called node pools or node groups. They are labels on Kubernetes nodes that Onepanel uses for auto scaling nodes on demand.
