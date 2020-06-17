@@ -93,7 +93,7 @@ certManager:
 
   # DNS Provider: AzureDNS
   # Docs: https://onepanelio.github.io/core-docs/docs/deployment/configuration/tls#azuredns
-  # CLI flag: --dns-provider=azuredns
+  # CLI flag: --cert-manager-dns-provider=azuredns
   azuredns:
     clientId: <service-provider-app-id>
     spPassword: <service-provider-password>
@@ -104,19 +104,19 @@ certManager:
     environment: AzurePublicCloud
   # DNS Provider: Google CloudDNS
   # Docs: https://onepanelio.github.io/core-docs/docs/deployment/configuration/tls#google-clouddns
-  # CLI flag: --dns-provider=clouddns
+  # CLI flag: --cert-manager-dns-provider=clouddns
   clouddns:
     projectId: <project-id>
     serviceAccountKey: <key.json-file-data>
   # DNS Provider: Cloudflare
   # Docs: https://onepanelio.github.io/core-docs/docs/deployment/configuration/tls#cloudflare
-  # CLI flag: --dns-provider=cloudflare
+  # CLI flag: --cert-manager-dns-provider=cloudflare
   cloudflare:
     apiToken: <api-token>
     email: <email>
   # DNS Provider: Amazon Route53
   # Docs: https://onepanelio.github.io/core-docs/docs/deployment/configuration/tls#route53
-  # CLI flag: --dns-provider=route53
+  # CLI flag: --cert-manager-dns-provider=route53
   route53:
     region: <aws-region>
     access_key: <aws-access-key>
@@ -253,7 +253,7 @@ See references:
 Must be one of: `docker`, `kubelet`, `k8sapi`, `pns`
 
 ### certManager
-If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.
+If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--cert-manager-dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.
 
 See [TLS certificates](/docs/deployment/configuration/tls) for more information about configuring this section.
 

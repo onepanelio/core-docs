@@ -19,7 +19,7 @@ opctl init ... --enable-https
 To enable HTTPS and HTTPS redirection and enable automated certificate manage through [Let's Encrypt](https://letsencrypt.org), add the following flags to `opctl init`:
 
 ```bash
-opctl init ... --enable-https --enable-cert-manager --dns-provider <supported-dns-provider>
+opctl init ... --enable-https --enable-cert-manager --cert-manager-dns-provider <supported-dns-provider>
 ```
 
 ## Supported DNS providers
@@ -29,7 +29,7 @@ opctl init ... --enable-https --enable-cert-manager --dns-provider <supported-dn
 The flag is `azuredns`, as in 
 
 ```bash
-opctl init ... --dns-provider azuredns
+opctl init ... --cert-manager-dns-provider azuredns
 ```
 
 :::note
@@ -94,7 +94,7 @@ certManager:
 The flag is `cloudflare`, as in 
 
 ```bash
-opctl init ... --dns-provider cloudflare
+opctl init ... --cert-manager-dns-provider cloudflare
 ```
 
 :::note
@@ -141,7 +141,7 @@ certManager:
 The flag is `clouddns`, as in 
 
 ```bash
-opctl init ... --dns-provider clouddns
+opctl init ... --cert-manager-dns-provider clouddns
 ```
 
 :::note
@@ -214,7 +214,7 @@ certManager:
 The flag is `route53`, as in 
 
 ```bash
-opctl init ... --dns-provider route53
+opctl init ... --cert-manager-dns-provider route53
 ```
 
 :::note

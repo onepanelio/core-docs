@@ -28,7 +28,7 @@ To enable HTTPS and enable automatic TLS management:
 opctl init --provider <provider-name> \
     --enable-https \
     --enable-cert-manager \
-    --dns-provider <dns-provider-name>
+    --cert-manager-dns-provider <cert-manager-dns-provider-name>
 ```
 
 :::tip

@@ -52,7 +52,7 @@ In most cases, pods stuck in `Pending` state could mean that you need to add ano
 Onepanel uses [cert-manager](https://cert-manager.io/) to automatically manages TLS certificates when you install Onepanel with the following flags:
 
 ```bash
-opctl init ... --enable-cert-manager --dns-provider <provider>
+opctl init ... --enable-cert-manager --cert-manager-dns-provider <provider>
 ```
 
 All cert-manager resources in Onepanel are installed in the `istio-system` namespace.

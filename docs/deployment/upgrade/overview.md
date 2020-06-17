@@ -26,7 +26,7 @@ opctl init --provider gke
 You can enable https and cert-manager by running:
 
 ```bash
-opctl init --provider gke --enable-https --enabl-cert-manager --dns-provider clouddns
+opctl init --provider gke --enable-https --enabl-cert-manager --cert-manager-dns-provider clouddns
 ```
 
 2. Review your `params.yaml` file and complete the new fields accordingly.
