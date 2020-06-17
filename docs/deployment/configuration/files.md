@@ -240,6 +240,18 @@ artifactRepository:
 Onepanel Workflows will automatically upload or download artifacts from `artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}`. See [Workflow artifacts](/docs/reference/workflows/templates#artifacts) for more information.
 :::
 
+### containerRuntimeExecutor
+This parameter allows you to adjust the workflow executors that argo uses.
+Specifies the container runtime interface to use (default: docker).
+
+Some are more performant than others, some are more secure.
+
+See references:
+- https://github.com/argoproj/argo/blob/master/docs/workflow-executors.md#docker-docker
+- https://github.com/argoproj/argo/blob/master/docs/workflow-controller-configmap.yaml
+
+Must be one of: `docker`, `kubelet`, `k8sapi`, `pns`
+
 ### certManager
 If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.
 
