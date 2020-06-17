@@ -10,9 +10,21 @@ See our [Templates repository](https://github.com/onepanelio/templates/tree/mast
 
 ## Getting started with Workspace Templates
 
-You can define reusable templates for Workspaces. Workspace Templates are a combination of Docker images and a YAML definition. Here's a simple NGINX Workspace Template definition:
+You can define reusable templates for Workspaces. Workspace Templates are a combination of Docker images and a YAML definition. Each section in this template abstracts and simplifies Kubernetes YAML and at the same time provides maximum flexibility.
+
+Here's a simple NGINX Workspace Template definition:
 
 ```yaml
+# (optional) Custom parameters that will be rendered in Workspace creation form and available in CLI
+arguments:
+  parameters:
+  - name: storage-class # Name, only alphanumeric characters and `-` allowed (required)
+    value: ssd # Default value (required)
+    displayName: Storage class
+    type: select.select # How to render this parameter in Workspace creation form in Web UI
+    options: # type of select.select and input.radio allow you to set options
+    - name: SSD
+      value: ssd
 # Docker containers that are part of the Workspace
 containers:
 - name: http # A name for this container. Used to identify the container from any others you have.
@@ -41,7 +53,18 @@ routes:
   - destination:
       port:
         number: 80 # This MUST match a port from ports above. Here, it matches the http port above.
-# DAG Workflow to be executed once a Workspace action completes
+# (optional) volumeClaimTemplates allows you to override the volumes that Onepanel automatically generates
+# This is useful if you want to define your own storageClass or make the storage size static
+volumeClaimTemplates:
+- metadata:
+    name: data # Name of volume, if same as any `containers.volumeMounts.name`, Onepanel will use this template
+  spec:
+    accessModes: [ "ReadWriteOnce" ] # Storage access mode
+    storageClassName: '{{workspace.parameters.storage-class}}' # Use a storageClass based on user input, if not defined, defaults to `onepanel`
+    resources:
+      requests:
+        storage: 10Gi # Set storage size to 10Gi and don't allow the user to change it
+# (optional) DAG Workflow to be executed once a Workspace action completes
 postExecutionWorkflow:
   entrypoint: main
   templates:
@@ -61,6 +84,67 @@ postExecutionWorkflow:
 ```
 
 ## Sections
+
+### arguments (optional)
+#### parameters
+
+You can define and use parameters in your Workspace Templates. These parameters are displayed in the Workspace creation form (or are made available via CLI) and can be referenced in the template like so:
+
+```yaml
+'{{workspace.parameters.<parameter-name>}}'
+```
+
+The syntax for parameter definitions are as follows:
+
+```yaml
+arguments:
+  parameters:
+  - name: storage-class # Name, only alphanumeric characters and `-` allowed (required)
+    value: ssd # Default value (required)
+    displayName: Storage class
+    type: select.select # How to render this parameter in Workspace creation form in Web UI
+    options: # type of select.select and input.radio allow you to set options
+    - name: SSD
+      value: ssd
+```
+
+If a parameter is defined, `name` and `value` are required.
+
+- `name` is the name of the parameters, only alphanumeric characters and `-` allowed
+- `value` is the default value for the parameter
+- `displayName` is the text that is displayed to the user
+- `type` indicates how the parameter is rendered in the Workspace creation form in the Web UI. Possible values are:
+    - `input.text` renders a textbox
+    - `input.number` renders a textbox that only accepts numbers
+    - `input.radio` renders radio buttons
+    - `select.select` renders a dropdown
+    - `textarea.textarea` renders a textarea
+- `options` define opionts if `type` is `select.select` or `input.radio`
+
+Example:
+
+```yaml {3-9,16}
+arguments:
+  parameters:
+  - name: storage-class
+    value: ssd
+    displayName: Storage class
+    type: select.select
+    options:
+    - name: SSD
+      value: ssd
+...
+volumeClaimTemplates:
+- metadata:
+    name: data
+  spec:
+    accessModes: [ "ReadWriteOnce" ]
+    storageClassName: '{{workspace.parameters.storage-class}}'  # Use a storageClass based on user input
+    resources:
+      requests:
+        storage:
+...
+```
 
 ### containers
 
@@ -111,10 +195,15 @@ routes:
   route:
   - destination:
       port:
-        number: 80 # this is the port key under ports.
+        number: 80 # this is the port number under ports.
 ```
 
-### postExecutionWorkflow
+### volumeClaimTemplates (optional)
+By setting the `volumeClaimTemplates` field, you can override the volumes that Onepanel automatically generates. This is useful if you want to define your own `storageClass` or make the storage size to a static number.
+
+Note that the automatically generated volume is overwritten only if the `name` in `volumeClaimTemplates` matches the `volumeMounts` name.
+
+### postExecutionWorkflow (optional)
 
 This is a DAG workflow that runs after your workspace is ready. Check out [Workflow templates](/docs/reference/workflows/templates) for more information.
 
@@ -205,7 +294,7 @@ postExecutionWorkflow: # let me know in slack when it's ready
 
 The comments in the YAML above should provide most of the information about the setup.
 
-The key points here are
+The key points here are:
 
 * We can have multiple containers running on the same workspace
 * The `ports` section can be thought of as a mapping for `routes` to use
