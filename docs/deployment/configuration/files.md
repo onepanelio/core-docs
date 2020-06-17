@@ -247,8 +247,8 @@ Specifies the container runtime interface to use (default: docker).
 Some are more performant than others, some are more secure.
 
 See references:
-- https://github.com/argoproj/argo/blob/master/docs/workflow-executors.md#docker-docker
-- https://github.com/argoproj/argo/blob/master/docs/workflow-controller-configmap.yaml
+- [Argo Workflow Executors](https://github.com/argoproj/argo/blob/master/docs/workflow-executors.md#docker-docker)
+- [Argo Workflow ConfigMap](https://github.com/argoproj/argo/blob/master/docs/workflow-controller-configmap.yaml)
 
 Must be one of: `docker`, `kubelet`, `k8sapi`, `pns`
 
