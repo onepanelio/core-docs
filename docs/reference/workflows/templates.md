@@ -55,6 +55,68 @@ templates:
     command: [echo, "{{inputs.parameters.message}}"]
 ```
 
+## Parameters
+
+You can define and use parameters in your Workflow Templates. These parameters are displayed in the Workflow creation form (or are made available via CLI) and can be referenced in the template like so:
+
+```yaml
+'{{workflow.parameters.<parameter-name>}}'
+```
+
+The syntax for parameter definitions are as follows:
+
+```yaml
+arguments:
+  parameters:
+  - name: storage-class # Name, only alphanumeric characters and `-` allowed (required)
+    value: ssd  # Default value (required)
+    displayName: Storage class
+    type: select.select # How to render this parameter in Workflow creation form in Web UI
+    options:  # type of select.select and input.radio allow you to set options
+    - name: SSD
+      value: ssd
+```
+
+If a parameter is defined, `name` and `value` are required.
+
+- `name` is the name of the parameters, only alphanumeric characters and `-` allowed
+- `value` is the default value for the parameter
+- `displayName` is the text that is displayed to the user
+- `type` indicates how the parameter is rendered in the Workflow creation form in the Web UI. Possible values are:
+    - `input.text` renders a textbox
+    - `input.number` renders a textbox that only accepts numbers
+    - `input.radio` renders radio buttons
+    - `select.select` renders a dropdown
+    - `textarea.textarea` renders a textarea
+- `options` define options if `type` is `select.select` or `input.radio`
+
+Example:
+
+```yaml {3-11,22}
+arguments:
+  parameters:
+  - name: message-text
+    value: my-message-2 # default value
+    displayName: Message text
+    type: select.select
+    options:
+    - name: my-message-1
+      value: my-message-1
+    - name: my-message-2
+      value: my-message-2
+entrypoint: main
+templates:
+- name: main
+  dag:
+    tasks:
+    - name: A
+      template: echo
+      arguments:
+        parameters:
+        - name: message
+          value: '{{workflow.parameters.message-text}}'
+```
+
 ## Artifacts
 
 When running Workflows, it is very common to have steps that generate or consume artifacts. Often, the output artifacts of one task may be used as input artifacts to a subsequent task.
