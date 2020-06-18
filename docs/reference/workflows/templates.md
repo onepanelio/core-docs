@@ -88,7 +88,7 @@ If a parameter is defined, `name` and `value` are required.
     - `input.radio` renders radio buttons
     - `select.select` renders a dropdown
     - `textarea.textarea` renders a textarea
-- `options` define opionts if `type` is `select.select` or `input.radio`
+- `options` define options if `type` is `select.select` or `input.radio`
 
 Example:
 
