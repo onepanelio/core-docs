@@ -313,6 +313,10 @@ multipass shell microk8s-vm
 
 ```shell script
 ifconfig -a
+```
+
+You'll get something like this
+```shell script
 cni0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1450
         inet 10.1.31.1  netmask 255.255.255.0  broadcast 0.0.0.0
         inet6 fe80::58ce:8dff:fe5e:2be5  prefixlen 64  scopeid 0x20<link>
