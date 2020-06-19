@@ -20,6 +20,7 @@ Before getting started, take a look at [concepts](/docs/getting-started/concepts
 Next, create a Kubernetes cluster in one of the following cloud providers:
 
 <Tabs
+  groupId="cloud-provider"
   defaultValue="aks"
   values={[
     { label: 'Azure AKS', value: 'aks', },
@@ -122,7 +123,7 @@ Make sure [Minikube](https://minikube.sigs.k8s.io/docs/start/) (`minikube`) is i
 Run the following `minikube` command to create a cluster:
 
 ```shell script
-minikube start --memory '8gb' --cpus=4 --disk-size '40g' \
+minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
     --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
     --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub \
     --extra-config=apiserver.service-account-issuer=api \
@@ -138,6 +139,7 @@ Your kubectl context will be automatically updated once minikube finishes starti
 First, install Multipass for your operating system:
 
 <Tabs
+  groupId="operating-system"
   defaultValue="linux"
   values={[
     { label: 'Linux', value: 'linux', },
@@ -238,6 +240,7 @@ exit
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
 
 <Tabs
+  groupId="operating-systems"
   defaultValue="linux"
   values={[
     { label: 'Linux', value: 'linux', },
@@ -291,6 +294,7 @@ Download the [attached executable](https://github.com/onepanelio/core/releases/l
 2. Run the following command to initialize a `params.yaml` template for your provider:
 
 <Tabs
+  groupId="cloud-provider"
   defaultValue="aks"
   values={[
     { label: 'Azure AKS', value: 'aks', },
@@ -387,106 +391,137 @@ If you don't have a domain name handy or you're waiting for your DNS record to p
 If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
 :::
 
-8. To get access to this new cluster via browser, we need to carry out extra steps.
 
-Example request flow
+8. Network setup
 
-<img src="/img/multipass_request_flow.png" alt="Request Flow with Multipass" width="800px"/>
+<Tabs
+  groupId="cloud-provider"
+  defaultValue="aks"
+  values={[
+    { label: 'Azure AKS', value: 'aks', },
+    { label: 'Amazon EKS', value: 'eks', },
+    { label: 'Google Cloud GKE', value: 'gke', },
+    { label: 'Minikube', value: 'minikube', },
+    { label: 'Microk8s', value: 'microk8s', },
+  ]
+}>
+    <TabItem value="aks">
+     None
+    </TabItem>
+    <TabItem value="eks">
+     None
+    </TabItem>
+    <TabItem value="gke">
+     None
+    </TabItem>
+    <TabItem value="minikube">
+     None
+    </TabItem>
 
-Execute these steps in the host machine.
+    <TabItem value="microk8s">
+     8. To get access to this new cluster via browser, we need to carry out extra steps.
+     
+     Example request flow
+     
+     <img src="/img/multipass_request_flow.png" alt="Request Flow with Multipass" width="800px"/>
+     
+     Execute these steps in the host machine.
+     
+     ```shell script
+     multipass list
+     ```
+     
+     Grab the IP address for your microk8s.
+     Example:
+     ```text
+     Name                    State             IPv4             Image
+     microk8s-vm             Running           10.174.163.50    Ubuntu 18.04 LTS
+     ```
+     
+     Add an entry to your hosts file to point to the fqdn you setup in `params.yaml`
+     Example entry:
+     ```yaml
+       # The Fully Qualified Domain (FQDN) where Onepanel will be hosted.
+       # If `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
+       fqdn: app.alex.xyz
+     ```
+     
+     Entry to `/etc/hosts`
+     ```text
+     10.174.163.50 app.alex.xyz
+     ```
+     
+     Adding this entry means the host browser will try to access the multipass vm we setup
+     for microk8s.
+     
+     Next, enter into multipass VM
+     ```shell script
+     multipass shell microk8s-vm
+     ```
+     
+     :::note Execute inside the multipass VM
+     ```shell script
+     microk8s.kubectl get services -n istio-system
+     ```
+     
+     ```text
+     NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                                                                      AGE
+     istio-ingressgateway   LoadBalancer   10.152.183.166   10.1.31.0     15020:31979/TCP,80:31394/TCP,443:30038/TCP,15029:32204/TCP,15030:32688/TCP,15031:31420/TCP,15032:30575/TCP,15443:30386/TCP   3d3h
+     ```
+     
+     Inside the multipass VM, add an entry to the `/etc/hosts` file.
+     ```shell script
+     sudo nano /etc/hosts
+     ```
+     ```text
+     10.1.31.0 app.alex.xyz
+     ```
+     
+     Once you have entered and saved the host change, verify you the onepanel website
+     is running.
+     
+     ```shell script
+     curl app.alex.xyz # Your params.yaml fqdn entry
+     ```
+     
+     Example output.
+     ```text
+     <!doctype html>
+     <html lang="en">
+     <head>
+       <meta charset="utf-8">
+       <title>Onepanel</title>
+       <base href="/">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon.png">
+       <link rel="icon" type="image/png" sizes="96x96" href="assets/icon/favicon.png">
+       <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon.png">
+     <link rel="stylesheet" href="styles.9b8cd86ace5a9057a37e.css"></head>
+     <body>
+       <app-root></app-root>
+     <script src="runtime-es2015.edb2fcf2778e7bf1d426.js" type="module"></script><script src="runtime-es5.edb2fcf2778e7bf1d426.js" nomodule defer></script><script src="polyfills-es5.6696c533341b95a3d617.js" nomodule defer></script><script src="polyfills-es2015.2987770fde9daa1d8a2e.js" type="module"></script><script src="main-es2015.b17adb3826cd9f5e4a29.js" type="module"></script><script src="main-es5.b17adb3826cd9f5e4a29.js" nomodule defer></script></body>
+     </html>
+     ```
+     
+     You can debug the request with `curl -vvv app.alex.xyz`
+     
+     We need a listener running on port 80. That listener should direct traffic
+     to the istio gateway.
+     
+     ```shell script
+     sudo apt install socat
+     sudo socat TCP-LISTEN:80,fork TCP:app.alex.xyz:80
+     ```
+     This will run actively in the current terminal prompt.
+     :::
+     
+     Now, go back to your host machine, open your internet browser and go to:
+     `app.alex.xyz`.
+     
+     You should see the website load up.
+    </TabItem>
 
-```shell script
-multipass list
-```
-
-Grab the IP address for your microk8s.
-Example:
-```text
-Name                    State             IPv4             Image
-microk8s-vm             Running           10.174.163.50    Ubuntu 18.04 LTS
-```
-
-Add an entry to your hosts file to point to the fqdn you setup in `params.yaml`
-Example entry:
-```yaml
-  # The Fully Qualified Domain (FQDN) where Onepanel will be hosted.
-  # If `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
-  fqdn: app.alex.xyz
-```
-
-Entry to `/etc/hosts`
-```text
-10.174.163.50 app.alex.xyz
-```
-
-Adding this entry means the host browser will try to access the multipass vm we setup
-for microk8s.
-
-Next, enter into multipass VM
-```shell script
-multipass shell microk8s-vm
-```
-
-:::note Execute inside the multipass VM
-```shell script
-microk8s.kubectl get services -n istio-system
-```
-
-```text
-NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                                                                      AGE
-istio-ingressgateway   LoadBalancer   10.152.183.166   10.1.31.0     15020:31979/TCP,80:31394/TCP,443:30038/TCP,15029:32204/TCP,15030:32688/TCP,15031:31420/TCP,15032:30575/TCP,15443:30386/TCP   3d3h
-```
-
-Inside the multipass VM, add an entry to the `/etc/hosts` file.
-```shell script
-sudo nano /etc/hosts
-```
-```text
-10.1.31.0 app.alex.xyz
-```
-
-Once you have entered and saved the host change, verify you the onepanel website
-is running.
-
-```shell script
-curl app.alex.xyz # Your params.yaml fqdn entry
-```
-
-Example output.
-```text
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Onepanel</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="assets/icon/favicon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon.png">
-<link rel="stylesheet" href="styles.9b8cd86ace5a9057a37e.css"></head>
-<body>
-  <app-root></app-root>
-<script src="runtime-es2015.edb2fcf2778e7bf1d426.js" type="module"></script><script src="runtime-es5.edb2fcf2778e7bf1d426.js" nomodule defer></script><script src="polyfills-es5.6696c533341b95a3d617.js" nomodule defer></script><script src="polyfills-es2015.2987770fde9daa1d8a2e.js" type="module"></script><script src="main-es2015.b17adb3826cd9f5e4a29.js" type="module"></script><script src="main-es5.b17adb3826cd9f5e4a29.js" nomodule defer></script></body>
-</html>
-```
-
-You can debug the request with `curl -vvv app.alex.xyz`
-
-We need a listener running on port 80. That listener should direct traffic
-to the istio gateway.
-
-```shell script
-sudo apt install socat
-sudo socat TCP-LISTEN:80,fork TCP:app.alex.xyz:80
-```
-This will run actively in the current terminal prompt.
-:::
-
-Now, go back to your host machine, open your internet browser and go to:
-`app.alex.xyz`.
-
-You should see the website load up.
+</Tabs>
 
 9. Use the following command to get your auth token to log into Onepanel:
 
