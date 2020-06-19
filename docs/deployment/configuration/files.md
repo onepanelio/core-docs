@@ -165,34 +165,34 @@ logging:
 ## Sections
 What follows is a more detailed description of each section of the `params.yaml` file.
 
-### application
+### Application
 This is where you set the basic application configuration. 
 
 Below are the sections you will need to adjust.
 
-#### cloud
+#### Cloud
 Everything under this section is generated and should not be manually changed.  
 
 The `insecure` field is set to `true` by default and will be set to `false` if you add the `--enable-https` when running `opctl init`.
 
-#### defaultNamespace
+#### DefaultNamespace
 This is the first [Namespace](/docs/getting-started/concepts/namespaces) you want created. This could be a project name or a team name. It is set to `default` by default but we recommend you use something more meaningful.
 
-#### domain
+#### Domain
 This is the domain for your Onepanel resources. Some resources like Workspaces create subdomains of this domain so they can be accessed by a browser. This can be a top level domain like `example.com` or a subdomain `sub.example.com`.
 
 :::important
 Domains, not ip addresses, are required with Istio.
 :::
 
-#### fqdn
+#### FQDN
 This is where Onepanel UI and API will be deployed. This should be a subdomain of the `domain` field mentioned above. Example: `app.example.com` or `app.sub.example.com`.
 
 :::important
 Domains, not ip addresses, are required with Istio.
 :::
 
-#### nodePool
+#### NodePool
 
 Depending on your provider, these are either called node pools or node groups. They are labels on Kubernetes nodes that Onepanel uses for auto scaling nodes on demand.
 
@@ -241,7 +241,7 @@ nodePool:
       value: Standard_NC6
 ```
 
-### artifactRepository
+### ArtifactRepository
 This section allows you to setup the default object storage for your Workflow and Workspace artifacts, which includes Workflow log storage. Onepanel currently supports any S3 compatible artifact repository such as AWS, GCS and Minio. Support for additional object storages is coming soon.
 
 Here's an example AWS S3 configuration:
@@ -260,12 +260,12 @@ artifactRepository:
 Onepanel Workflows will automatically upload or download artifacts from `artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}`. See [Workflow artifacts](/docs/reference/workflows/templates#artifacts) for more information.
 :::
 
-### certManager
+### CertManager
 If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.
 
 See [TLS certificates](/docs/deployment/configuration/tls) for more information about configuring this section.
 
-### database
+### Database
 This is the database settings section. 
 
 For a test cluster, you can set the database `host` to `postgres` and use any `username` or `password`. This database will be automatically created in the cluster with the information you entered.
