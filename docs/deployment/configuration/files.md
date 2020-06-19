@@ -26,16 +26,6 @@ The template below is automatically generated when your run `opctl init` for you
 # Description: Onepanel application information
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 application:
-  cloud:
-    # GRPC port for API
-    apiGRPCPort: 8887
-    # Path of API relative to host
-    apiPath: /api
-    # HTTP or HTTPS - Do not change, determined by `opctl init --enable-https`
-    # CLI flag: --enable-https
-    insecure: false
-    # Path of UI relative to host
-    uiPath: /
   # First namespace that will be created in Onepanel, more can be added later
   defaultNamespace: default
   # Domain or IP where Onepanel is hosted
@@ -46,6 +36,9 @@ application:
   # Use the same IP address as `domain` above if running local, use `minikube ip` or `multipass list` to get this IP
   # In the cloud, if `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
   fqdn: <ip-or-fqdn>
+  # HTTP or HTTPS - Do not change, determined by `opctl init --enable-https`
+  # CLI flag: --enable-https
+  insecure: false
   # Node pool or group label keys and values used for AutoScaling and for NodeSelectors
   # The provider will set these label key and values on your nodes automatically
   # These can also be customized depending on your provider
@@ -170,11 +163,6 @@ This is where you set the basic application configuration.
 
 Below are the sections you will need to adjust.
 
-#### cloud
-Everything under this section is generated and should not be manually changed.  
-
-The `insecure` field is set to `true` by default and will be set to `false` if you add the `--enable-https` when running `opctl init`.
-
 #### defaultNamespace
 This is the first [Namespace](/docs/getting-started/concepts/namespaces) you want created. This could be a project name or a team name. It is set to `default` by default but we recommend you use something more meaningful.
 
@@ -183,6 +171,9 @@ This is the domain for your Onepanel resources. Some resources like Workspaces c
 
 #### fqdn
 This is where Onepanel UI and API will be deployed. This should be a subdomain of the `domain` field mentioned above. Example: `app.example.com` or `app.sub.example.com`.
+
+#### insecure
+The `insecure` field is set to `true` by default and will be set to `false` if you add the `--enable-https` when running `opctl init`.
 
 #### nodePool
 Depending on your provider, these are either called node pools or node groups. They are labels on Kubernetes nodes that Onepanel uses for auto scaling nodes on demand.
@@ -240,18 +231,6 @@ artifactRepository:
 Onepanel Workflows will automatically upload or download artifacts from `artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}`. See [Workflow artifacts](/docs/reference/workflows/templates#artifacts) for more information.
 :::
 
-### containerRuntimeExecutor
-This parameter allows you to adjust the workflow executors that argo uses.
-Specifies the container runtime interface to use (default: docker).
-
-Some are more performant than others, some are more secure.
-
-See references:
-- [Argo Workflow Executors](https://github.com/argoproj/argo/blob/master/docs/workflow-executors.md#docker-docker)
-- [Argo Workflow ConfigMap](https://github.com/argoproj/argo/blob/master/docs/workflow-controller-configmap.yaml)
-
-Must be one of: `docker`, `kubelet`, `k8sapi`, `pns`
-
 ### certManager
 If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.
 
@@ -282,3 +261,12 @@ database:
 :::important
 For a production environment, use a managed database service and set the configuration accordingly.
 :::
+
+### workflowEngine
+#### containerRuntimeExecutor
+The executor workflow engine uses to perform certain actions like monitoring pod logs, collecting artifacts, managing container lifecycles, etc.
+
+The possible values are `docker` and `pns`:
+
+- `docker` is more reliable, however it mounts the `docker.sock` of the host makes it less secure.
+- `pns` is more secure, however in some versions of Kubernetes, it tends to fail on tasks that take less than 15 seconds.
