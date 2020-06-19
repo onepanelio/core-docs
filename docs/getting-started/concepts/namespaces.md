@@ -16,3 +16,7 @@ Namespaces follow the same naming standard of their Kubernetes counterparts. The
 - contain only lowercase alphanumeric characters or ‘-’
 - start with an alphanumeric character
 - end with an alphanumeric character
+
+:::important
+Onepanel additionally creates network policies that prevent resources in one namespace from accessing resources in the other.
+:::
