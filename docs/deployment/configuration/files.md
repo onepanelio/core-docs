@@ -193,6 +193,7 @@ Domains, not ip addresses, are required with Istio.
 :::
 
 #### nodePool
+
 Depending on your provider, these are either called node pools or node groups. They are labels on Kubernetes nodes that Onepanel uses for auto scaling nodes on demand.
 
 A common `label` to identify these is `beta.kubernetes.io/instance-type` which most cloud providers automatically set. The value of this label is usually set to the instance type of the cloud provider.
@@ -202,6 +203,17 @@ You can see all labels on your nodes by running:
 ```bash
 kubectl get nodes --show-labels
 ```
+
+:::note
+For minikube, you can use this configuration.
+```yaml
+  nodePool:
+    label: minikube.k8s.io/minikube
+    options:
+    - name: 'Minikube'
+      value: minikube
+```
+:::
 
 Note that this lists many different labels, so you can pick and choose any label key/value that is unique to that node.
 
@@ -304,31 +316,30 @@ How to get the address range.
 }>
 <TabItem value="minikube">
 
+
+First, find minikube's ip.
+
 ```shell script
-ifconfig -a
-ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.157.130  netmask 255.255.255.0  broadcast 192.168.157.255
-        inet6 fe80::9446:9952:69d3:d185  prefixlen 64  scopeid 0x20<link>
-        ether 00:0c:29:2e:78:11  txqueuelen 1000  (Ethernet)
-        RX packets 46355  bytes 58715549 (58.7 MB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 10838  bytes 1159449 (1.1 MB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-[...Other Output...]
+minikube ip
 ```
-In our case, we have `192.168.157.130`
 
-This means the addresses before 130 are used.
-We want to use `minikube ip +1` to `255`
+For the first part of the range, use `minikube ip + 1`
 
-So we can use a range of `192.168.157.131` to `192.168.157.255`
+So if `minikube ip` gives us `192.168.64.64`
+
+We use `192.168.64.65`
+
+For the second part of the range, change the last part to `255`
+
+So we can use a range of `192.168.64.65` to `192.168.64.255`
 
 ```yaml
 metalLb:
   addresses:
-  - 192.168.157.131-192.168.157.255
+  - 192.168.64.65-192.168.64.255
 ```
 </TabItem>
+
 <TabItem value="microk8s">
 
 Get inside the VM of multipass.
@@ -366,5 +377,3 @@ metalLb:
 
 </TabItem>
 </Tabs>
-
-### Multipass, Microk8s, and Metal LB
