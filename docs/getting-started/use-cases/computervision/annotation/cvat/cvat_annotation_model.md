@@ -11,14 +11,15 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 
 ## Training object detection model through CVAT
 
+![Create Annotation Model](/img/create_annotation_model_base.PNG)
+
 1. Annotate enough images in your CVAT task.  
-2. Go back to your CVAT dashboard and click on `Create New Annotation Model` in that task. You will see a popup with a few options.  
-3. Select the appropriate model type (TensorFlow OD API recommended) and then select the model (i.e ssd-mobilenet-v2-coco-201).  
-4. Select the machine type. A machine with multiple GPUs will speed up your training process.    
-5. Enter optional arguments. See below for more details.  
-6. Click on link to new model in email that will be sent to you once model training completes - locate the tf_annoation_model folder and inspect the contents.  
-7. Mount this new dataset to the CVAT workspace and click the button for the Model manager.  Then select files in tf_annotation_model folder.  
-8. Click TF_Annotion button for the current task.  
+2. Go back to your CVAT dashboard and click on Actions and find `Create New Annotation Model` in that task. You will see a popup with a few options.  
+3. Select the appropriate model type (TensorFlow OD API or MaskRCNN) and then select the model (i.e ssd-mobilenet-v2-coco-201).  
+4. Select the machine type. A machine with multiple GPUs will speed up your training process.  
+5. Select the base model to start training from. These are the models that you trained previously in this namespace. This is optional. By default, a model trained on COCO will be used. Please make sure that the base model you select is compatible with the current task. The number of classes should be same, and if you use model trained on other types of data then accuracy might deteriorate.
+6. Enter optional arguments. See below for more details.  
+9. Your trained model, checkpoints, and classes file will be stored on your s3 bucket.
 
 ![CVAT flowchart](/img/auto-annotation-v.2.0.png)
 
@@ -38,6 +39,9 @@ If you select a Machine type with 4 GPUs (Tesla V100), the following command can
 `epochs=300000;num_clones=4`
 
 - Note that num_clones is 4 because there are 4 GPUs available.
+
+For MaskRCNN, you might want to set epochs for all three stages as follows. The MaskRCNN template will use all available GPUs for training.
+`--stage1_epochs=1;--stage2_epochs=2;--stage3_epochs=3;`
 
 ## Choosing the right base model
 
@@ -151,3 +155,15 @@ You can also add your own base models to CVAT via Onepanel.  Please email us at
 You can find the code that triggers dataset creation, base model pulling, model training, and model conversion here:
 
 https://github.com/onepanelio/cvat-training
+
+
+## How to run inference on test data using trained model
+
+Often you are required to make prediction on test data. Using CVAT on Onepanel, you can easily train/test your model and visualize output. Once you have the trained model, upload it to the CVAT by clicking on `Create new model` on `models` tab.
+
+Now, create a task with your test data.
+
+Click on Actions for that task and select Automatic annotation. Select the model you just uploaded and hit submit. It will run the inference using the model you selected. Below is a sample frame whose output was generated using the trained model.
+
+![Inference Output](/img/inference_output.PNG)
+
