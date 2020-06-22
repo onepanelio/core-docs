@@ -19,7 +19,7 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 4. Select the machine type. A machine with multiple GPUs will speed up your training process.  
 5. Select the base model to start training from. These are the models that you trained previously in this namespace. This is optional. By default, a model trained on COCO will be used. Please make sure that the base model you select is compatible with the current task. The number of classes should be same, and if you use model trained on other types of data then accuracy might deteriorate.
 6. Enter optional arguments. See below for more details.  
-9. Your trained model, checkpoints, and classes file will be stored on your s3 bucket.
+7. Your trained model, checkpoints, and classes file will be stored on your s3 bucket.
 
 ![CVAT flowchart](/img/auto-annotation-v.2.0.png)
 
@@ -156,7 +156,6 @@ You can find the code that triggers dataset creation, base model pulling, model 
 
 https://github.com/onepanelio/cvat-training
 
-
 ## How to run inference on test data using trained model
 
 Often you are required to make prediction on test data. Using CVAT on Onepanel, you can easily train/test your model and visualize output. Once you have the trained model, upload it to the CVAT by clicking on `Create new model` on `models` tab.
@@ -166,4 +165,3 @@ Now, create a task with your test data.
 Click on Actions for that task and select Automatic annotation. Select the model you just uploaded and hit submit. It will run the inference using the model you selected. Below is a sample frame whose output was generated using the trained model.
 
 ![Inference Output](/img/inference_output.PNG)
-
