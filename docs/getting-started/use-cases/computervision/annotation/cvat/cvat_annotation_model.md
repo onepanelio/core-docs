@@ -63,8 +63,6 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
-***Model***: https://c.onepanel.io/onepanel-demo/datasets/frcnn-inc-resv2-atr-coco/details
-
 
 ### frcnn-nas-coco:
 
@@ -78,8 +76,6 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
-***Model***: https://c.onepanel.io/onepanel-demo/datasets/frcnn-nas-coco/details
-
 
 ### frcnn-res101-coco: 
 
@@ -92,8 +88,6 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
-***Model***: https://c.onepanel.io/onepanel-demo/datasets/frcnn-res101-coco/details
-
 
 ### frcnn-res50-coco
 
@@ -105,8 +99,6 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
-***Model***: https://c.onepanel.io/onepanel-demo/datasets/frcnn-res50-lowp/details
-
 
 ### frcnn-res50-lowp
 
@@ -117,9 +109,6 @@ For how to set epochs, you can take a look at first model since both models are 
 Please note that current implementation of faster-rcnn inTensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
-
-***Model***: https://c.onepanel.io/onepanel-demo/datasets/frcnn-res50-coco/details
-
 
 
 ### ssd-mobilenet-v2-coco:
@@ -133,8 +122,6 @@ This model is a good place to start if you don't have any specific model in mind
 Depending upon your data, you can set epochs to train your model. There is no standard value which can work for all datasets. You generally have to try different number of epochs to get the best model. Ideally, you do so by monitoring loss of your model while training. But if you are looking for a recommendation. Then, we recommend you set epochs as follows: (number of images / batch_size (default: 24)) * 1000. For instance, if you have 100 images, then your epochs will be 4000 (rounded). Please note that the model will be trained using a pre-trained model, so you don't need to train as long as you would have to when not using the pre-trained model.
 
 ***Defaults***: batch_size: 24, learning_rate: 0.004, epochs=15000
-
-***Model***: https://c.onepanel.io/onepanel-demo/datasets/ssd-mobilenet-v2-coco/details
 
 
 ## Training segmentation model through CVAT
