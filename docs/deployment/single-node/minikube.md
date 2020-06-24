@@ -12,7 +12,7 @@ See [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 Once Minikube is installed, start it with at least 8 Gigabytes of RAM, 4 CPUs, and 40G of storage (for Istio) – you can pass these requirements as follows:
 
 ```bash
-minikube start --memory '8gb' --cpus=4 --disk-size '40g' \
+minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
     --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
     --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub \
     --extra-config=apiserver.service-account-issuer=api \
