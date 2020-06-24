@@ -7,7 +7,7 @@ description: Adding components or upgrading Onepanel to the latest version
 Before adding features or upgrading your cluster, we highly recommend you back up your `params.yaml` file. 
 
 :::tip
-It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or a similar tool.
+It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or use a secret management service like [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/), [AWS Secret Manager](https://aws.amazon.com/secrets-manager/), [GCP Secret Manager](https://cloud.google.com/secret-manager) or [HashiCorp Vault](https://www.vaultproject.io/).
 :::
 
 :::important

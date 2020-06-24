@@ -14,7 +14,7 @@ There are two files generated after running `opctl init --provider <provider>`:
 For further information on populating the `params.yaml` file, refer to the sections below. This information is also available inside the generated `params.yaml` template.
 
 :::tip
-It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or a similar tool.
+It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or use a secret management service like [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/), [AWS Secret Manager](https://aws.amazon.com/secrets-manager/), [GCP Secret Manager](https://cloud.google.com/secret-manager) or [HashiCorp Vault](https://www.vaultproject.io/).
 :::
 
 ## Content of configuration file `params.yaml`
@@ -135,10 +135,7 @@ This is where you set the basic application configuration.
 
 The `insecure` field is set to `true` by default and will be set to `false` if you add the `--enable-https` when running `opctl init`.
 
-Below are the sections you will need to adjust.
-
-
-#### DefaultNamespace
+#### defaultNamespace
 This is the first [Namespace](/docs/getting-started/concepts/namespaces) you want created. This could be a project name or a team name. It is set to `default` by default but we recommend you use something more meaningful.
 
 #### Domain
@@ -155,8 +152,10 @@ This is where Onepanel UI and API will be deployed. This should be a subdomain o
 Domains, not ip addresses, are required with Istio.
 :::
 
-#### NodePool
+#### insecure
+The `insecure` field is set to `true` by default and will be set to `false` if you add the `--enable-https` when running `opctl init`.
 
+#### nodePool
 Depending on your provider, these are either called node pools or node groups. They are labels on Kubernetes nodes that Onepanel uses for auto scaling nodes on demand.
 
 A common `label` to identify these is `beta.kubernetes.io/instance-type` which most cloud providers automatically set. The value of this label is usually set to the instance type of the cloud provider.
@@ -344,3 +343,12 @@ metalLb:
 
 </TabItem>
 </Tabs>
+
+### workflowEngine
+#### containerRuntimeExecutor
+The executor workflow engine uses to perform certain actions like monitoring pod logs, collecting artifacts, managing container lifecycles, etc.
+
+The possible values are `docker` and `pns`:
+
+- `docker` is more reliable, however it mounts the `docker.sock` of the host makes it less secure.
+- `pns` is more secure, however in some versions of Kubernetes, it tends to fail on tasks that take less than 15 seconds.
