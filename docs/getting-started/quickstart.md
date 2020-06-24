@@ -431,7 +431,6 @@ opctl init --provider microk8s --enable-metallb
 </TabItem>
 </Tabs>
 
-
 :::note
 If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page.
 :::
@@ -453,7 +452,6 @@ If you don't have a domain name handy or you're waiting for your DNS record to p
 :::note
 If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
 :::
-
 
 8. Network setup
 

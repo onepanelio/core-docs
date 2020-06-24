@@ -278,7 +278,6 @@ Getting the address range
 }>
 <TabItem value="minikube">
 
-
 First, find minikube's ip.
 
 ```shell script
