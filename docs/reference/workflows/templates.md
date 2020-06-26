@@ -186,6 +186,8 @@ templates:
 
 ```
 
+### Archive
+
 Artifacts can be packaged as Tarballs and gzipped by specifying an archive strategy, using the `archive` field:
 
 ```yaml
@@ -199,5 +201,23 @@ Artifacts can be packaged as Tarballs and gzipped by specifying an archive strat
       # Tar and gzip contents of /tmp/output folder and upload to the namespace configured artifact repository
       archive:
         tar: {}
+...
+```
+
+### Optional
+
+You can also mark both input and output artifacts as optional by setting `optional` to `true`. In this case, if they don't exist, the Workflow will not throw an error:
+
+```yaml
+...
+  inputs:
+    artifacts:
+    # Download files from S3 prefix random/input into local folder /tmp/input/
+    # # This downloads from the default S3 artifact repository for this namespace
+    - name: input
+      path: /tmp/input/
+      optional: true # Don't throw an error if the file doesn't exist in the S3 location
+      s3:
+        key: my-data/input
 ...
 ```
