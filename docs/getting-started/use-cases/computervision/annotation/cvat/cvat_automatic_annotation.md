@@ -1,6 +1,7 @@
 ---
-title: Semi-autmatic annotation with CVAT
+title: Semi-automatic annotation with CVAT
 sidebar_label: Automatic annotation
+description: Onepanel use case - computer vision automatic annotation
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 title: CLI overview
 sidebar_label: CLI overview
+description: Manage your Onepanel deployment using the CLI
 ---
 
 ## Install `opctl`
