@@ -39,7 +39,7 @@ Make sure [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-c
 Run this `az` command to create a bare minimum cluster with 2 `Standard_D4s_v3` nodes:
 
 ```bash
-az aks create --resource-group <resource-group> --name <cluster-name> \
+az aks create --resource-group <resource-group> --name <cluster-name> --location <region> \
     --node-count 2 \
     --node-vm-size Standard_D4s_v3 \
     --node-osdisk-size 100 \
