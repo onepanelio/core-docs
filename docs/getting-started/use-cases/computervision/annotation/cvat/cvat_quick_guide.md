@@ -223,8 +223,3 @@ Now, create a task with your test data.
 Click on Actions for that task and select Automatic annotation. Select the model you just uploaded and hit submit. It will run the inference using the model you selected. Below is a sample frame whose output was generated using the trained model.
 
 ![Inference Output](/img/inference_output.PNG)
-
-
-
-
-
