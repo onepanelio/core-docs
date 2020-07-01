@@ -45,7 +45,7 @@ containers:
     name: tcp
 - name: cvat
   #use docker image from docker hum
-  image: onepanel/cvat:v0.6.23
+  image: onepanel/cvat:v0.7.8
   env:
   - name: DJANGO_MODWSGI_EXTRA_ARGS
     value: ""
@@ -70,10 +70,16 @@ containers:
   - name: models
     mountPath: /home/django/models
 - name: cvat-ui
-  image: onepanel/cvat-ui:v0.6.23
+  image: onepanel/cvat-ui:v0.7.8
   ports:
   - containerPort: 80
     name: http
+- name: filesyncer
+  image: onepanel/filesyncer:v0.0.4
+  command: ['python3', 'main.py']
+  volumeMounts:
+  - name: share
+    mountPath: /mnt/share
 ports:
 - name: cvat-ui
   port: 80
@@ -133,10 +139,10 @@ In order to use several features of CVAT such as training an annotaiton model we
 ![Set Enviornment Variable](/img/env_set.PNG)
 
 You need to set following environment variables:
-- **AWS_BUCKET_NAME**: Bucket you want to store your data into.
+- **AWS_BUCKET_NAME**: Bucket you want to store your data into. Here, data refers to the dataset that will be used for training models.
 - **AWS_ACCESS_KEY_ID**: AWS access key for training new annotation models.
 - **AWS_SECRET_ACCESS_KEY**: AWS secret access key for training new annotation models.
-- **AWS_S3_PREFIX**: Directory in `AWS_BUCKET_NAME` where all the data will be stored.
+- **AWS_S3_PREFIX**: Directory in `AWS_BUCKET_NAME` where all the data will be stored. Here, data refers to the dataset that will be used for training models.
 - **ONEPANEL_OD_TEMPLATE_ID**: Template ID for Tensorflow Object Detection. Required only if you are training a new annotation model.
 - **ONEPANEL_MASKRCNN_TEMPLATE_ID**: Template ID for MaskRCNN Segmentation. Required only if you are training a new annotation model.
 - **ONEPANEL_AUTHORIZATION**: Token/password for Onepanel login.
@@ -149,6 +155,10 @@ You need to set following environment variables:
   - `up`: One way sync. Uploads all data from local folder to S3. If you delete files from local folder it will delete those files from S3 as well.
   - `both`: Two way sync. Syncs files in both direction.
 - **SYNC_DELAY**: Specifies time in seconds for the syncer to check for file updates. Default is `900` seconds.
+
+:::note
+Setting up `SYNC_DIRECTION` to `up` will delete files from cloud storage if you delete files from local storage.
+:::
 
 
 ## Creating new tasks
@@ -204,8 +214,12 @@ You can also select the base model to finetune on top of. The list of base model
 ### How to choose the model:
 If you are unsure about which model to use, we usually suggest ssd-mobilenet-v2 since ssd-based models are faster and accurate enough for most of the work. Faster-rcnn (frcnn) models are more accurate in general but they will be relatively slow during training as well inference. If accuracy is more important to you, we suggest you go with frcnn-res50-coco model.
 
+## How to run inference on test data using trained model
 
+Often you are required to make prediction on test data. Using CVAT on Onepanel, you can easily train/test your model and visualize output. Once you have the trained model, upload it to the CVAT by clicking on `Create new model` on `models` tab.
 
+Now, create a task with your test data.
 
+Click on Actions for that task and select Automatic annotation. Select the model you just uploaded and hit submit. It will run the inference using the model you selected. Below is a sample frame whose output was generated using the trained model.
 
-
+![Inference Output](/img/inference_output.PNG)
