@@ -20,7 +20,7 @@ module.exports = {
         {to: 'docs/reference/overview', label: 'Reference', position: 'left'},
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
         {href: 'https://github.com/onepanelio/core/releases', label: 'Releases', position: 'left'},
-        {href: 'https://github.com/onepanelio/core/milestones', label: 'Roadmap', position: 'left'},
+        {href: 'https://github.com/onepanelio/core/milestones?direction=asc&sort=due_date&state=open', label: 'Roadmap', position: 'left'},
         // {to: 'blog', label: 'Changelog', position: 'left'},
         {
           position: 'right',
