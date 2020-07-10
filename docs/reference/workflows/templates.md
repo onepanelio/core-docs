@@ -5,7 +5,7 @@ description: Creating Workflow Templates for training models, ETL tasks and more
 ---
 
 :::tip
-See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workflows) for a list of ready to use Workflow Templates. You can also use these as reference for defining youur own Workflow Templates.
+See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workflows) for a list of ready to use Workflow Templates.
 :::
 
 ## Getting started with Workflow Templates
