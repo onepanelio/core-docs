@@ -21,6 +21,10 @@ module.exports = {
         },
         {
           type: 'doc',
+          id: 'getting-started/concepts/workspaces'
+        },
+        {
+          type: 'doc',
           id: 'getting-started/concepts/workflows'
         },
         {
@@ -28,6 +32,36 @@ module.exports = {
           id: 'getting-started/concepts/environment-variables'
         }
       ]
+    },
+    {
+      type: 'category',
+      label: 'Use cases',
+      items: [
+        {
+          type: 'category',
+          label: 'Computer vision',
+          items: [
+            {
+              type: 'category',
+              label: 'Auto annotation with CVAT',
+              items: [
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide'
+                },
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation'
+                },
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model'
+                }
+              ]
+            }
+          ]
+         }
+       ]
     },
     {
       type: 'doc',
@@ -41,6 +75,17 @@ module.exports = {
     },
     { 
       type: 'category',
+      label: 'Deployment',
+      items: [
+        'deployment/public/aks',
+        'deployment/public/eks',
+        'deployment/public/gke',
+        'deployment/single-node/microk8s',
+        'deployment/single-node/minikube',
+      ]
+    },
+    { 
+      type: 'category',
       label: 'Configuration',
       items: [
         'deployment/configuration/cli',
@@ -49,21 +94,45 @@ module.exports = {
       ]
     },
     { 
+      type: 'doc',
+      id: 'deployment/upgrade/overview'
+    },
+    { 
+      type: 'doc',
+      id: 'deployment/troubleshooting/overview'
+    }
+  ],
+  reference: [
+    {
+      type: 'doc',
+      id: 'reference/overview',
+    },
+    { 
       type: 'category',
-      label: 'Deploy on public cloud',
+      label: 'Workspaces',
       items: [
-        'deployment/public/aks',
-        'deployment/public/eks',
-        'deployment/public/gke',
+        'reference/workspaces/templates',
+        'reference/workspaces/launching',
+        'reference/workspaces/pause-and-resume',
+        'reference/workspaces/upgrade',
+        'reference/workspaces/delete',
       ]
     },
     { 
       type: 'category',
-      label: 'Deploy on single node',
+      label: 'Workflows',
       items: [
-        'deployment/single-node/microk8s',
-        'deployment/single-node/minikube',
+        'reference/workflows/templates',
+        'reference/workflows/create_workflow',
+        'reference/workflows/execute'
       ]
-    }
+    },
+    {
+      type: 'category',
+      label: 'Settings',
+      items: [
+        'reference/settings/environments',
+      ]
+    },
   ]
 };

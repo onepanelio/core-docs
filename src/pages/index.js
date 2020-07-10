@@ -8,11 +8,11 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Infrastruture and workflows as code with version control</>,
+    title: <>Infrastructure and workflows as code with version control</>,
     imageUrl: 'img/workflow.png',
     description: (
       <>
-        Workflows, environments and infrastruture are all managed and versioned as code.
+        Workflows, environments and infrastructure are all managed and versioned as code.
       </>
     ),
   },
@@ -21,7 +21,7 @@ const features = [
     imageUrl: 'img/modularity.png',
     description: (
       <>
-        Pre-built components you can use out of the box or easily bring your own components for specialized workflows.
+        Components you can use out of the box or easily bring your own specialized components.
       </>
     ),
   },
@@ -33,7 +33,7 @@ const features = [
         Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
       </>
     ),
-  },
+  }
 ];
 
 function Feature({imageUrl, title, description}) {
@@ -57,7 +57,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="Build highly scalable, distributed and reproducible computer vision workflows on Kubernetes.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -65,11 +65,11 @@ function Home() {
           <div className={styles.buttons}>
             <Link
               className={classnames(
-                'button button--outline button--secondary button--lg',
+                'button button--primary button--lg',
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/getting-started/quickstart')}>
-              Get Started
+              GET STARTED
             </Link>
             <Link
               className={classnames(
@@ -77,8 +77,11 @@ function Home() {
                 styles.contribute,
               )}
               to={useBaseUrl('docs/getting-started/contributing')}>
-              Contribute
+              CONTRIBUTE
             </Link>
+          </div>
+          <div className="hero__video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/nyWOiT22m38" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </header>

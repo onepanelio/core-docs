@@ -12,18 +12,28 @@ module.exports = {
       title: '',
       logo: {
         alt: 'Onepanel logo',
-        src: 'img/onepanel-logo-white.svg',
+        src: 'img/onepanel-logo-blue-white.png',
       },
       links: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
         {to: 'docs/deployment/overview', label: 'Deploy and Manage', position: 'left'},
+        {to: 'docs/reference/overview', label: 'Reference', position: 'left'},
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
-        {to: 'docs/integrations/overview', label: 'Integrations', position: 'left'},
-        {to: 'blog', label: 'Changelog', position: 'left'},
+        // {to: 'blog', label: 'Changelog', position: 'left'},
+        {
+          position: 'right',
+          label: 'Join the community:',
+          className: 'header-community-label',
+        },
+        {
+          href: 'https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg',
+          position: 'right',
+          className: 'header-icon-link header-slack-link',
+        },
         {
           href: 'https://github.com/onepanelio/core',
-          label: 'GitHub',
           position: 'right',
+          className: 'header-icon-link header-github-link',
         },
       ],
     },
@@ -35,6 +45,9 @@ module.exports = {
       apiKey: '882b068ae95b9413f0e9ef625db7964e',
       indexName: 'onepanelio',
       algoliaOptions: {}, // Optional, if provided by Algolia
+    },
+    googleAnalytics: {
+      trackingID: 'UA-106005416-5',
     },
   },
   presets: [
@@ -51,5 +64,8 @@ module.exports = {
         },
       },
     ],
+  ],
+  scripts: [
+    '/js/gtm.js'
   ],
 };

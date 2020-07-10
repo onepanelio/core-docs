@@ -1,6 +1,7 @@
 ---
 title: Contributing
 sidebar_label: Contributing
+description: Contribute to Onepanel by creating issues, updating documentation or submitting code
 ---
 
 Welcome to Onepanel CE Project! We are excited to have you as part of the community and welcome all contributions.
@@ -29,8 +30,25 @@ We welcome all contributions and follow these highlights from [Google developer 
 
 Our documentation site is built on [Docusaurus](https://v2.docusaurus.io/).
 
+## Making pull requests
+
+When making a pull request, prefix the name with one of the following [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) types:
+
+ * **fix** - fixing something
+ * **feature** - adding a feature
+ * **clean** - cleaning up code
+ * **chore** - something mundane like updating a version number
+ * **docs** - updating documents
+ * **tests** - adding tests
+  
+An example is: 
+
+```
+fix: issue where workspace page crashed upon three refreshes
+```
+
 ## Project repositories
-Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in each repository for more information.
+Onepanel consists of the following repositories. For more information on making contributions, see `CONTRIBUTING.md` in each repository.
 
 ### Platform
 - [Core API](https://github.com/onepanelio/core/) - Code base for backend (Go)
@@ -40,6 +58,9 @@ Onepanel consists of the following repositories. See `CONTRIBUTING.md` file in e
 
 ### SDKs
 - [Python SDK](https://github.com/onepanelio/python-sdk/) - Python SDK for automation
+
+### Templates
+- [Templates](https://github.com/onepanelio/templates) - Various Workspace and Workflow Templates
 
 ### Documentation
 - [Documentation](https://github.com/onepanelio/core-docs/) - The repository for this site

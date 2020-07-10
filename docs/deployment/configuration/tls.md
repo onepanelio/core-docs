@@ -1,6 +1,7 @@
 ---
 title: TLS certificates
 sidebar_label: TLS certificates
+description: Enabling fully managed TLS certificates on Onepanel
 ---
 
 TLS certificate can be added in two ways:
@@ -124,6 +125,17 @@ certManager:
     email: <yourCloudflareEmail@example.com>
 ``` 
 
+:::note
+If your token has an non-alphanumerical character, surround the token with single quotes.
+```yaml
+certManager:
+  cloudflare:
+    apiToken: '<api-token goes here>'
+    email: <yourCloudflareEmail@example.com>
+``` 
+
+:::
+
 ### Google CloudDNS
 
 The flag is `clouddns`, as in 
@@ -180,11 +192,9 @@ Paste them into your `params.yaml`, so you should have something like this
 
 ```yaml
 certManager:
-  commonName: *.example.com
-  email: admin@example.com
   clouddns:
     projectId: my-project-id
-    data: >
+    serviceAccountKey: |
       {
         "type": "service_account",
         "project_id": "my-project-id",
