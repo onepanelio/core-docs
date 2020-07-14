@@ -186,6 +186,18 @@ templates:
 
 ```
 
+Using GCS
+```yaml
+...
+    - name: output-three
+      path: /tmp/output
+      gcs:
+        bucket: bucketofplenty
+        key: /your/path
+        serviceAccountKeySecret:
+          name: onepanel
+          key: serviceAccountKey
+```
 ### Archive
 
 Artifacts can be packaged as Tarballs and gzipped by specifying an archive strategy, using the `archive` field:
