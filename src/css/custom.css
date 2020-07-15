@@ -74,8 +74,14 @@ ol > li::marker {
   color: #ff9100;
 }
 
+.hero__name {
+  color: var(--ifm-font-base-color-inverse);
+  font-size: 3rem;
+}
+
 .hero__title {
   color: var(--ifm-font-base-color-inverse);
+  font-size: 2rem;
 }
 
 .hero__video {

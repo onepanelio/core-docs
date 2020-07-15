@@ -8,6 +8,42 @@ import styles from './styles.module.css';
 
 const features = [
   {
+    title: <>Image and video annotation with automatic pre-annotation</>,
+    imageUrl: 'img/workflow.png',
+    description: (
+      <>
+        Annotate images and video using <a href="https://github.com/opencv/cvat" target="_blank">CVAT</a>, with object tracking and semi-automatic annotation of bounding boxes and polygon masks.
+      </>
+    ),
+  },
+  {
+    title: <>Build your models with GPU optimized frameworks and IDEs</>,
+    imageUrl: 'img/workflow.png',
+    description: (
+      <>
+        Workspaces that upgrade or downgrade to and from GPUs machines, preloaded with PyTorch, TensorFlow, JupyterLab, VSCode and <a href="https://github.com/onepanelio/templates/tree/master/workspaces" target="_blank">more</a>. 
+      </>
+    ),
+  },
+  {
+    title: <>Create pipelines as code for model training and data processing</>,
+    imageUrl: 'img/workflow.png',
+    description: (
+      <>
+        Build reproducible training and data processing pipelines that can perform parallel or distributed tasks on multiple machines.
+      </>
+    ),
+  },
+  {
+    title: <>Track experiments and visualize model metrics</>,
+    imageUrl: 'img/workflow.png',
+    description: (
+      <>
+        Track and visualize model metrics and expriments with TensorBoard and ModelDB, or bring your own experiment tracking tools.
+      </>
+    ),
+  },
+  {
     title: <>Infrastructure and workflows as code with version control</>,
     imageUrl: 'img/workflow.png',
     description: (
@@ -56,11 +92,12 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`${siteConfig.title}`}
-      description="Build highly scalable, distributed and reproducible computer vision workflows on Kubernetes.">
+      title="Onepanel"
+      description="Unified platform for production vision AI; offering solutions for development, labeling, training, pipelines and serverless deployments on an open and extensible infrastrucure.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
+          <h1 className="hero__name">Onepanel</h1>
+          <h2 className="hero__title">{siteConfig.title}</h2>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
@@ -80,9 +117,9 @@ function Home() {
               CONTRIBUTE
             </Link>
           </div>
-          <div className="hero__video">
+          {/* <div className="hero__video">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/nyWOiT22m38" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
+          </div> */}
         </div>
       </header>
       <main>

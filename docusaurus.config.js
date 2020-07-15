@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Onepanel CE',
-  tagline: 'Build highly scalable, distributed and reproducible computer vision workflows on any cloud or on-premises.',
+  title: 'Full stack vision AI on Kubernetes',
+  tagline: 'Onepanel is a unified platform for production vision AI; offering solutions for development, labeling, training, pipelines and serverless deployments on an open and extensible infrastructure.',
   url: 'https://docs.onepanel.ai',
   baseUrl: '/',
   favicon: 'img/favicon.png',
