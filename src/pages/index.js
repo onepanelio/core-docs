@@ -44,20 +44,29 @@ const features = [
     ),
   },
   {
-    title: <>Infrastructure and workflows as code with version control</>,
+    title: <>Web-based VNC environments that you can access with your browser</>,
     imageUrl: 'img/workflow.png',
     description: (
       <>
-        Workflows, environments and infrastructure are all managed and versioned as code.
+        Access and share tools like AirSim, Carla, Gazebo or OpenAI Gym through your browser with VNC enabled workspaces. 
       </>
     ),
   },
   {
-    title: <>Modular architecture based on best practices</>,
+    title: <>Bring your own tools as reproducible templates</>,
     imageUrl: 'img/modularity.png',
     description: (
       <>
-        Components you can use out of the box or easily bring your own specialized components.
+        Easily bring your own specialized cloud-native tools for development, annotation, pipelines and more.
+      </>
+    ),
+  },
+  {
+    title: <>Infrastructure and workflows as code</>,
+    imageUrl: 'img/workflow.png',
+    description: (
+      <>
+        Workflows, environments and infrastructure are all defined as code and version controlled, make them reproducible and portable.
       </>
     ),
   },
