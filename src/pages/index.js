@@ -66,7 +66,7 @@ const features = [
     imageUrl: 'img/workflow.png',
     description: (
       <>
-        Workflows, environments and infrastructure are all defined as code and version controlled, make them reproducible and portable.
+        Workflows, environments and infrastructure are all defined as code and version controlled, making them reproducible and portable.
       </>
     ),
   },
