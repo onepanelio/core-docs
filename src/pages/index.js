@@ -102,7 +102,7 @@ function Home() {
   return (
     <Layout
       title="Onepanel"
-      description="Unified platform for production vision AI; offering solutions for development, labeling, training, pipelines and serverless deployments on an open and extensible infrastrucure.">
+      description="Onepanel is a unified vision AI platform with fully integrated modules for model building, semi-automated labeling, training, pipelines and model serving.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__name">Onepanel</h1>
