@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>Image and video annotation with automatic pre-annotation</>,
-    imageUrl: 'img/workflow.png',
+    imageUrl: 'img/landing/ann.png',
     description: (
       <>
         Annotate images and video using <a href="https://github.com/opencv/cvat" target="_blank">CVAT</a>, with object tracking and semi-automatic annotation of bounding boxes and polygon masks.
@@ -18,7 +18,7 @@ const features = [
   },
   {
     title: <>Build your models with GPU optimized frameworks and IDEs</>,
-    imageUrl: 'img/workflow.png',
+    imageUrl: 'img/landing/env.png',
     description: (
       <>
         Workspaces that upgrade or downgrade to and from GPUs machines, preloaded with PyTorch, TensorFlow, JupyterLab, VSCode and <a href="https://github.com/onepanelio/templates/tree/master/workspaces" target="_blank">more</a>. 
@@ -27,7 +27,7 @@ const features = [
   },
   {
     title: <>Create pipelines as code for model training and data processing</>,
-    imageUrl: 'img/workflow.png',
+    imageUrl: 'img/landing/pip.png',
     description: (
       <>
         Build reproducible training and data processing pipelines that can perform parallel or distributed tasks on multiple machines.
@@ -36,7 +36,7 @@ const features = [
   },
   {
     title: <>Track experiments and visualize model metrics</>,
-    imageUrl: 'img/workflow.png',
+    imageUrl: 'img/landing/met.png',
     description: (
       <>
         Track and visualize model metrics and expriments with TensorBoard and ModelDB, or bring your own experiment tracking tools.
@@ -45,7 +45,7 @@ const features = [
   },
   {
     title: <>Web-based VNC environments that you can access with your browser</>,
-    imageUrl: 'img/workflow.png',
+    imageUrl: 'img/landing/vnc.png',
     description: (
       <>
         Access and share tools like AirSim, Carla, Gazebo or OpenAI Gym through your browser with VNC enabled workspaces. 
@@ -54,7 +54,7 @@ const features = [
   },
   {
     title: <>Bring your own tools as reproducible templates</>,
-    imageUrl: 'img/modularity.png',
+    imageUrl: 'img/landing/mod.png',
     description: (
       <>
         Easily bring your own specialized cloud-native tools for development, annotation, pipelines and more.
@@ -62,8 +62,17 @@ const features = [
     ),
   },
   {
+    title: <>Integrate additional environments and pipelines using APIs and SDKs</>,
+    imageUrl: 'img/landing/sdk.png',
+    description: (
+      <>
+        Extend Onepanel with our powerful REST APIs and SDKs to further automate your pipelines and environments.
+      </>
+    ),
+  },
+  {
     title: <>Infrastructure and workflows as code</>,
-    imageUrl: 'img/workflow.png',
+    imageUrl: 'img/landing/iac.png',
     description: (
       <>
         Workflows, environments and infrastructure are all defined as code and version controlled, making them reproducible and portable.
@@ -72,7 +81,7 @@ const features = [
   },
   {
     title: <>Powered by Kubernetes so you can deploy anywhere</>,
-    imageUrl: 'img/k8s.png',
+    imageUrl: 'img/landing/k8s.png',
     description: (
       <>
         Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
