@@ -127,6 +127,26 @@ database:
   username: <username>
 ```
 
+If you use `--artifact-repository-provider gcs`, that changes the `artifactRepository`:
+```yaml
+artifactRepository:
+ gcs:
+    # Name of bucket, example: my-bucket
+    bucket: <bucket-name>
+    # Endpoint for S3 compatible storage
+    # Supported provider endpoints:
+    #   AWS: s3.amazonaws.com
+    #   GCS: storage.googleapis.com
+    #   Minio: my-minio-endpoint.default:9000
+    endpoint: storage.googleapis.com
+    # Change to true if endpoint does NOT support HTTPS
+    insecure: false
+    # Key Format for objects stored by Workflows. This can reference Workflow variables
+    keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
+    serviceAccountKey: |
+      <key.json-file-data>
+```
+
 ## Sections
 What follows is a more detailed description of each section of the `params.yaml` file.
 
@@ -217,6 +237,38 @@ artifactRepository:
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
 ```
+
+Here's an example Google Cloud GCS configuration:
+
+```yaml
+artifactRepository:
+ gcs:
+    bucket: mygreatbucket
+    endpoint: storage.googleapis.com
+    insecure: false
+    keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
+    serviceAccountKey: |
+      {
+        "type": "service_account",
+        "project_id": "my-project-id",
+        "private_key_id": "private_key_id",
+        "private_key": "private_key",
+        "client_email": "client_email",
+        "client_id": "client_id",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "cert_url"
+      }
+```
+
+:::note
+You can get the serviceAccount JSON via gcloud.
+```shell script
+gcloud iam service-accounts keys create key.json \
+   --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
+```
+:::
 
 :::important
 Onepanel Workflows will automatically upload or download artifacts from `artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}`. See [Workflow artifacts](/docs/reference/workflows/templates#artifacts) for more information.
