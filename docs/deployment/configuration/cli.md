@@ -14,8 +14,7 @@ You can initialize configuration files by running the following command. See [co
 opctl init --provider <provider-name>
 ```
 
-Available provider options are: `aks`, `eks` and `gke` for public cloud installations.
-- `minikube`, `microk8s` for local installations.
+Available provider options are: `aks`, `eks` and `gke` for public cloud installations and `minikube`, `microk8s` for local installations.
 
 HTTPS is not enabled by default, to enable HTTPS but manage the TLS certificate yourself:
 
