@@ -266,7 +266,7 @@ artifactRepository:
 You can get the serviceAccount JSON via gcloud.
 ```shell script
 gcloud iam service-accounts keys create key.json \
-   --iam-account dns01-solver@$PROJECT_ID.iam.gserviceaccount.com
+   --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
 ```
 :::
 
