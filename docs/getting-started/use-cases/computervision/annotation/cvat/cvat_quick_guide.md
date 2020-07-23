@@ -130,7 +130,7 @@ Here, we used Docker images for CVAT to create the Workspaces and exposed few po
 
 ## Creating super user
 
-CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you execute CVAT workflow. You can set `username` and `password` via environment variables shown below. If you don't specify those variables, the default `username` and `password` will be `admin`
+CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you execute CVAT workflow. You can set `username` and `password` via environment variables shown below. If you don't specify those variables, the default `username` and `password` will be `onepaneladmin`
 
 
 ## Setting up environment variables
@@ -146,8 +146,8 @@ You need to set following environment variables:
 - **ONEPANEL_OD_TEMPLATE_ID**: Template ID for Tensorflow Object Detection. Required only if you are training a new annotation model.
 - **ONEPANEL_MASKRCNN_TEMPLATE_ID**: Template ID for MaskRCNN Segmentation. Required only if you are training a new annotation model.
 - **ONEPANEL_AUTHORIZATION**: Token/password for Onepanel login.
-- **DJANGO_SUPERUSER_USERNAME**: Username for the superuser. Default is `admin`.
-- **DJANGO_SUPERUSER_PASSWORD**: Password for the superuser. Default is `admin`.
+- **DJANGO_SUPERUSER_USERNAME**: Username for the superuser. Default is `onepaneladmin`.
+- **DJANGO_SUPERUSER_PASSWORD**: Password for the superuser. Default is `onepaneladmin`.
 - **SYNC_S3_BUCKET_NAME**: Bucket to sync shared storage (`share` drive will be used for the same) with. You will be able to use data available on this bucket while creating new tasks and models.
 - **SYNC_S3_PREFIX**: Prefix (directory) to use for above bucket. By default its empty. Thus, all data in that bucket will be fetched.
 - **SYNC_DIRECTION**: Direction for SYNC. Options: `down`, `up`, `both`.
