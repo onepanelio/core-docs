@@ -453,7 +453,7 @@ If you don't have a domain name handy or you're waiting for your DNS record to p
 If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
 :::
 
-8. Network setup
+8. Depending on your provider, you may need to take the following steps to access the application:
 
 <Tabs
   groupId="cloud-provider"
@@ -467,16 +467,32 @@ If the application is not loading, visit our [Troubleshooting](/docs/deployment/
   ]
 }>
 <TabItem value="aks">
- None
+
+:::info
+ No additional steps required.
+:::
+
 </TabItem>
 <TabItem value="eks">
- None
+
+:::info
+ No additional steps required.
+:::
+
 </TabItem>
 <TabItem value="gke">
- None
+
+:::info
+ No additional steps required.
+:::
+
 </TabItem>
 <TabItem value="minikube">
- None
+
+:::info
+ No additional steps required.
+:::
+
 </TabItem>
 <TabItem value="microk8s">
 To get access to this new cluster via browser, we need to carry out extra steps.
