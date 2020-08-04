@@ -21,7 +21,6 @@
   --ifm-list-left-padding: 1.25rem;
   --ifm-navbar-link-hover-color: rgb(255, 255, 255);
   --ifm-navbar-link-color: rgb(255, 255, 255, 0.8);
-  --ifm-link-decoration: underline;
 }
 
 ol > li::marker {
@@ -30,6 +29,10 @@ ol > li::marker {
 
 .menu__link--sublist::after {
   background-size: 1.25rem 1.25rem;
+}
+
+.features_src-pages- a {
+  text-decoration: underline;
 }
 
 .header-icon-link {
