@@ -144,9 +144,9 @@ function Home() {
               CONTRIBUTE
             </Link>
           </div>
-          {/* <div className="hero__video">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/nyWOiT22m38" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div> */}
+          <div className="hero__video">
+            <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
         </div>
       </header>
       <main>
