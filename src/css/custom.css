@@ -21,6 +21,7 @@
   --ifm-list-left-padding: 1.25rem;
   --ifm-navbar-link-hover-color: rgb(255, 255, 255);
   --ifm-navbar-link-color: rgb(255, 255, 255, 0.8);
+  --ifm-link-decoration: underline;
 }
 
 ol > li::marker {
@@ -74,8 +75,14 @@ ol > li::marker {
   color: #ff9100;
 }
 
+.hero__name {
+  color: var(--ifm-font-base-color-inverse);
+  font-size: 3rem;
+}
+
 .hero__title {
   color: var(--ifm-font-base-color-inverse);
+  font-size: 2rem;
 }
 
 .hero__video {

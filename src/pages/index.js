@@ -8,26 +8,89 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Infrastructure and workflows as code with version control</>,
-    imageUrl: 'img/workflow.png',
+    title: <>Image and video annotation with automatic pre-annotation</>,
+    imageUrl: 'img/landing/ann.png',
     description: (
       <>
-        Workflows, environments and infrastructure are all managed and versioned as code.
+        Annotate images and video using <a href="https://github.com/opencv/cvat" target="_blank">CVAT</a>, with object tracking and semi-automatic annotation of bounding boxes and polygon masks.
       </>
     ),
   },
   {
-    title: <>Modular architecture based on best practices</>,
-    imageUrl: 'img/modularity.png',
+    title: <>Deploy complete aerial imaging pipelines with photogrammetry tools</>,
+    imageUrl: 'img/landing/odm.png',
     description: (
       <>
-        Components you can use out of the box or easily bring your own specialized components.
+        Leverage tools like <a href="https://github.com/OpenDroneMap/WebODM" target="_blank">WebODM</a> with GPUs to accelerate image processing and to perform pre-annotation for object detection.
+      </>
+    ),
+  },
+  {
+    title: <>Build your models with GPU optimized frameworks and IDEs</>,
+    imageUrl: 'img/landing/env.png',
+    description: (
+      <>
+        Workspaces that upgrade or downgrade to and from GPUs machines, preloaded with PyTorch, TensorFlow, JupyterLab, VSCode and <a href="https://github.com/onepanelio/templates/tree/master/workspaces" target="_blank">more</a>. 
+      </>
+    ),
+  },
+  {
+    title: <>Create pipelines as code for model training and data processing</>,
+    imageUrl: 'img/landing/pip.png',
+    description: (
+      <>
+        Build reproducible training and data processing pipelines that can perform parallel or distributed tasks on multiple machines.
+      </>
+    ),
+  },
+  {
+    title: <>Track experiments and visualize model metrics</>,
+    imageUrl: 'img/landing/met.png',
+    description: (
+      <>
+        Track and visualize model metrics and expriments with TensorBoard and ModelDB, or bring your own experiment tracking tools.
+      </>
+    ),
+  },
+  {
+    title: <>Web-based VNC environments that you can access with your browser</>,
+    imageUrl: 'img/landing/vnc.png',
+    description: (
+      <>
+        Access and share tools like AirSim, Carla, Gazebo or OpenAI Gym through your browser with VNC enabled workspaces. 
+      </>
+    ),
+  },
+  {
+    title: <>Bring your own tools as reproducible templates</>,
+    imageUrl: 'img/landing/mod.png',
+    description: (
+      <>
+        Easily bring your own specialized cloud-native tools for development, annotation, pipelines and more.
+      </>
+    ),
+  },
+  {
+    title: <>Integrate additional environments and pipelines using APIs and SDKs</>,
+    imageUrl: 'img/landing/sdk.png',
+    description: (
+      <>
+        Extend Onepanel with our powerful REST APIs and SDKs to further automate your pipelines and environments.
+      </>
+    ),
+  },
+  {
+    title: <>Infrastructure and workflows as code</>,
+    imageUrl: 'img/landing/iac.png',
+    description: (
+      <>
+        Workflows, environments and infrastructure are all defined as code and version controlled, making them reproducible and portable.
       </>
     ),
   },
   {
     title: <>Powered by Kubernetes so you can deploy anywhere</>,
-    imageUrl: 'img/k8s.png',
+    imageUrl: 'img/landing/k8s.png',
     description: (
       <>
         Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
@@ -56,11 +119,12 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`${siteConfig.title}`}
-      description="Build highly scalable, distributed and reproducible computer vision workflows on Kubernetes.">
+      title="Onepanel"
+      description="Onepanel is a unified vision AI platform with fully integrated modules for model building, semi-automated labeling, training, pipelines and model serving.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
+          <h1 className="hero__name">Onepanel</h1>
+          <h2 className="hero__title">{siteConfig.title}</h2>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
@@ -81,7 +145,7 @@ function Home() {
             </Link>
           </div>
           <div className="hero__video">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/nyWOiT22m38" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </header>
