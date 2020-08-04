@@ -8,6 +8,28 @@ description: Information regarding [ModelDB](https://github.com/VertaAI/modeldb)
 
 [ModelDB](https://github.com/VertaAI/modeldb) is an open-source system to version machine learning models including their ingredients code, data, config, and environment and to track ML metadata across the model lifecycle.
 
+## Using the SDK
+
+In order to use the verta SDK in a workspace, run this to set up the connection.
+
+```python
+from verta import Client
+import os
+
+url = os.getenv("ONEPANEL_SERVICES_MODELDB_API_URL")
+
+client = Client(url, _connect=False)
+client._conn.auth['onepanel-auth-token'] = "<your token here>"
+
+# Code below is a sample to create a project and experiment.
+
+proj = client.set_project("My first ModelDB project")
+expt = client.set_experiment("Default Experiment")
+
+# log the first run
+run = client.set_experiment_run("Second Run")
+```
+
 ## Configuration
 
 ModelDB needs two parts, a database and cloud storage.
