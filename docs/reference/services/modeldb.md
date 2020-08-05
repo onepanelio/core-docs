@@ -8,6 +8,32 @@ description: Information regarding [ModelDB](https://github.com/VertaAI/modeldb)
 
 [ModelDB](https://github.com/VertaAI/modeldb) is an open-source system to version machine learning models including their ingredients code, data, config, and environment and to track ML metadata across the model lifecycle.
 
+## Cloud Storage Setup
+
+In order to allow your deployment to access cloud storage such as S3, you need to update the CORS configuration for the bucket.
+
+The configuration below is sufficient, 
+where 
+
+`$ORIGIN` = `https://modeldb--$application.defaultNamespace.$application.domain`
+
+These `$` values come from your `params.yaml`
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+<CORSRule>
+    <AllowedOrigin>$ORIGIN</AllowedOrigin>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>PUT</AllowedMethod>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedMethod>DELETE</AllowedMethod>
+    <AllowedHeader>*</AllowedHeader>
+</CORSRule>
+</CORSConfiguration>
+```
+
 ## Using the SDK
 
 In order to use the verta SDK in a workspace, run this to set up the connection.
