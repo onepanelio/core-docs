@@ -125,5 +125,13 @@ module.exports = {
         'reference/workflows/templates',
       ]
     },
+    {
+      type: 'category',
+      label: 'Services',
+      items: [
+        'reference/services/overview',
+        'reference/services/modeldb'
+      ]
+    },
   ]
 };
