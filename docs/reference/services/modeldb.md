@@ -10,7 +10,7 @@ description: Information regarding [ModelDB](https://github.com/VertaAI/modeldb)
 
 ## Using the SDK
 
-In order to use the verta SDK in a workspace, run this to set up the connection.
+In order to use ModelDB's SDK in a Workspace, run this to set up the connection.
 
 ```python
 from verta import Client
@@ -29,6 +29,10 @@ expt = client.set_experiment("Default Experiment")
 # log the first run
 run = client.set_experiment_run("Second Run")
 ```
+
+:::important
+See [ModelDB documentation](https://docs.verta.ai/en/master/examples/examples.html) for examples using ModelDB's SDK with various frameworks.
+:::
 
 ## Configuration
 

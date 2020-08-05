@@ -409,9 +409,9 @@ The possible values are `docker` and `pns`:
 Services are additional tools or applications you want to install alongside the main deployment.
 These are set up to allow distributed workloads and are always available, unlike Workspaces.
 
-Each service has its own configuration, consult the [services reference](/docs/reference/services) for more information.
+Each Service has its own configuration, consult the [Services reference](/docs/reference/services/overview) for more information.
 
-Here's an example of using a [ModelDB](https://github.com/VertaAI/modeldb) service.
+Here's an example of adding a [ModelDB](https://github.com/VertaAI/modeldb) Service.
 
 ```yaml
 services:
