@@ -190,7 +190,7 @@ kubectl get nodes --show-labels
 For minikube, you can use this configuration.
 ```yaml
 nodePool:
-  label: minikube.k8s.io/minikube
+  label: minikube.k8s.io/name
   options:
   - name: 'Minikube'
     value: minikube
