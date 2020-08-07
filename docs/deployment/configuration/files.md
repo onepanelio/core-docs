@@ -195,6 +195,13 @@ nodePool:
   - name: 'Minikube'
     value: minikube
 ```
+
+Verify with:
+```shell script
+kubectl get nodes --show-labels
+```
+
+The label has to exist for workspaces to run.
 :::
 
 Note that this lists many different labels, so you can pick and choose any label key/value that is unique to that node.
