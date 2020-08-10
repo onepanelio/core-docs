@@ -88,6 +88,7 @@ containers:
 # You can add multiple FileSyncer sidecar containers if needed
 - name: filesyncer
   image: onepanel/filesyncer:s3
+  imagePullPolicy: Always
   args:
   - download
   env:

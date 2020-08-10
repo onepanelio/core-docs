@@ -614,6 +614,8 @@ To train a new model, first make sure you have some annotated data in a task. Th
 
 ![Train a model from CVAT](/img/create_annotation_model_base.png)
 
-Here, you can select model to train. In this case, it's MaskRCNN. Please note you can add your models as well. Once you select the model, you will see a list of parameter for that model (Onepanel Workflow) which you can modify or use default model. If your workflow does not have `dump-format` parameter set, then you will also have to select the Dump Format (i.e MS COCO or TFRecords) as well based on which workflow your model/workflow supports.
+Here, you can select model to train. In this case, it's MaskRCNN. Most of the parameters visible above are related to the model (MaskRCNN). Number of classes should be equal to number of classes you have in that CVAT task + 1 for background. However, it is important to note that frames and corresponding annotation will be automatically dumped onto the cloud object storage (path: `<your-namespace>/annotation-dump/<time-stamp>/`) that you used while setting up Onepanel. Similary, output of a workflow (i.e trained model) will also be uploaded to cloud storage (path: `<your-namespace>/workflow-data/<workflow-uid>/<time-stamp>/`). Here, you can also select the checkpoint path from previously trained model. You can leave it empty if you don't have an appropriate, previously trained model.
 
-For more information about CVAT on Onepanel, please read our [docs on CVAT](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide).
+Please note you can add your models as well. Once you select the model, you will see a list of parameter for that model (Onepanel Workflow) which you can modify or use default model. If your workflow does not have `dump-format` parameter set, then you will also have to select the Dump Format (i.e MS COCO or TFRecords) as well based on which workflow your model/workflow supports.
+
+For more information about CVAT on Onepanel, please refer to our [docs on CVAT](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide).
