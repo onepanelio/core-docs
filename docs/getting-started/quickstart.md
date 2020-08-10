@@ -622,3 +622,10 @@ Let's first create a simple Directed Acyclic Graph (DAG) Workflow Template:
 ![](/img/quickstart-232904.png)
 
 8. You have now setup Onepanel and run a simple Workflow.
+
+## Step 3 (Optional): Annotating in CVAT
+You can use the built-in CVAT to annotate visual data (images, videos) and you can also directly train object detection or segmentation model from CVAT which you can use later to pre-annotate new data. This dramatically reduces time it takes to train new models and use them to pre-annotate new data. Moreover, apart from default models that we provide, you easily add new models or even modify exising model workflows.
+
+![Train a model from CVAT](/img/create_annotation_model_base.png)
+
+For more information about CVAT on Onepanel, please read our [docs on CVAT](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide.md).
