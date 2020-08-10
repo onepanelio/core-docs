@@ -204,15 +204,13 @@ Once you submit your model, click on Models again and you will find your model i
 Once you have the models in Model Manager. Click on Automatic Annotation under Actions menu. Then, you will be asked to select the model you want to use for pre-annotation. You can also control the class mapping from your task’s classes to model’s classes. Once done, click on Submit to start pre-annotation. Once it's done, you can click on the task link to access the annotation.
 
 ## Training new annotation model
-Onepanel also allows you to further finetune your model for annotation. Once you are done with your annotation or adjustment to pre-annotation, you can train a new model on it. To do so, go to dashboard and click on Actions under the task for which you want to train a model.
+Onepanel also allows you to further finetune your model for annotation. Once you are done with your annotation or adjustment to pre-annotation, you can train a new model on it. To do so, go to dashboard and click on Actions under the task for which you want to train a model. Then, select `Execute training workflow`.
 
-There, you can select the Tensorflow OD API for bounding boxes or Mask RCNN for segmentation.
+There, you can select any training workflows you like. You can add your own training workflows or support for model as well. Checkout more about Onepanel Workflow [here](/docs/getting-started/reference/workflows/templates.md). For refernce, you can also use our default workflows for MaskRCNN and Tensorflow Object Detection API.
 
-For TensorFlow OD API, we support multiple models. In fact, its dynamic. You can also train the model you like as long as it is supported by Tensorflow Object Detection API. 
+By default, you can use either Tensorflow OD API for bounding boxes or Mask RCNN for segmentation.
 
-![Create Annotation Model](/img/create_annotation_model_base.PNG)
-
-You can also select the base model to finetune on top of. The list of base models are models that you trained previously. This is optional. By default, a model trained on COCO will be used. For more information, see section on `Create annotation model`.
+![Create Annotation Model](/img/create_annotation_model_base.png)
 
 ### How to choose the model:
 If you are unsure about which model to use, we usually suggest ssd-mobilenet-v2 since ssd-based models are faster and accurate enough for most of the work. Faster-rcnn (frcnn) models are more accurate in general but they will be relatively slow during training as well as inference. If accuracy is more important to you, we suggest you go with frcnn-res50-coco model.

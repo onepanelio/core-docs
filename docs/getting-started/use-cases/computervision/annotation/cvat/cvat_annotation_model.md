@@ -12,11 +12,11 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 
 ## Training object detection model through CVAT
 
-![Create Annotation Model](/img/create_annotation_model_base.PNG)
+![Create Annotation Model](/img/create_annotation_model_base.png)
 
 1. Annotate enough images in your CVAT task.  
-2. Go back to your CVAT dashboard and click on Actions and find `Create New Annotation Model` in that task. You will see a popup with a few options.  
-3. Select the appropriate model type (TensorFlow OD API or MaskRCNN) and then select the model (i.e ssd-mobilenet-v2-coco-201).  
+2. Go back to your CVAT dashboard and click on Actions and find `Execute training workflow` in that task. You will see a popup with a few options.  
+3. Select the appropriate model type (TensorFlow OD API or MaskRCNN by default, you can add your own model as well) and then select the model (i.e ssd-mobilenet-v2-coco).  
 4. Select the machine type. A machine with multiple GPUs will speed up your training process.  
 5. Select the base model to start training from. These are the models that you trained previously in this namespace. This is optional. By default, a model trained on COCO will be used. Please make sure that the base model you select is compatible with the current task. The number of classes should be same, and if you use model trained on other types of data then accuracy might deteriorate.
 6. Enter optional arguments. See below for more details.  
@@ -153,3 +153,7 @@ Now, create a task with your test data.
 Click on Actions for that task and select Automatic annotation. Select the model you just uploaded and hit submit. It will run the inference using the model you selected. Below is a sample frame whose output was generated using the trained model.
 
 ![Inference Output](/img/inference_output.PNG)
+
+## Notes
+
+Please note that these instructions are for default models that we provide. You can always edit these workflows or even add your own workflows/models and train them.
