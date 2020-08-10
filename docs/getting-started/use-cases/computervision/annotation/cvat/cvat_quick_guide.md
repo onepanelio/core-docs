@@ -206,7 +206,7 @@ Once you have the models in Model Manager. Click on Automatic Annotation under A
 ## Training new annotation model
 Onepanel also allows you to further finetune your model for annotation. Once you are done with your annotation or adjustment to pre-annotation, you can train a new model on it. To do so, go to dashboard and click on Actions under the task for which you want to train a model. Then, select `Execute training workflow`.
 
-There, you can select any training workflows you like. You can add your own training workflows or support for model as well. Checkout more about Onepanel Workflow [here](/docs/getting-started/reference/workflows/templates.md). For refernce, you can also use our default workflows for MaskRCNN and Tensorflow Object Detection API.
+There, you can select any training workflows you like. You can add your own training workflows or support for model as well. Checkout more about Onepanel Workflow [here](/docs/getting-started/concepts/workflows). For refernce, you can also use our default workflows for MaskRCNN and Tensorflow Object Detection API.
 
 By default, you can use either Tensorflow OD API for bounding boxes or Mask RCNN for segmentation.
 
