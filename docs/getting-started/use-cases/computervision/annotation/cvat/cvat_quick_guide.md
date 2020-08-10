@@ -216,9 +216,3 @@ You can also select the base model to finetune on top of. The list of base model
 
 ### How to choose the model:
 If you are unsure about which model to use, we usually suggest ssd-mobilenet-v2 since ssd-based models are faster and accurate enough for most of the work. Faster-rcnn (frcnn) models are more accurate in general but they will be relatively slow during training as well as inference. If accuracy is more important to you, we suggest you go with frcnn-res50-coco model.
-
-
-
-
-
-
