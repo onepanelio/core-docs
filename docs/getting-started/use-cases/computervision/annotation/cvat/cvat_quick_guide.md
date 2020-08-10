@@ -20,6 +20,13 @@ A copy of this template is readily available in "Template Builder"
 #specify all the required containers for cvat
 #this is very similar to the original docker-compose.yml file
 #specify containers, env vars, ports, volumes for each container
+# Workspace arguments
+arguments:
+  parameters:
+  - name: storage-prefix
+    displayName: Directory in default object storage
+    value: workflow-data
+    hint: Location of data and models in default object storage, will continuously sync to '/mnt/share'
 containers:
 - name: cvat-db
   image: postgres:10-alpine
@@ -31,21 +38,20 @@ containers:
   - name: POSTGRES_HOST_AUTH_METHOD
     value: trust
   - name: PGDATA
-    value: /var/lib/postgresql/data
+    value: /var/lib/psql/data
   ports:
   - containerPort: 5432
     name: tcp
   volumeMounts:
   - name: db
-    mountPath: /var/lib/postgresql
+    mountPath: /var/lib/psql
 - name: cvat-redis
   image: redis:4.0-alpine
   ports:
   - containerPort: 6379
     name: tcp
 - name: cvat
-  #use docker image from docker hum
-  image: onepanel/cvat:v0.6.23
+  image: onepanel/cvat:v0.7.12-defaultuser-dynamic-workflow-5
   env:
   - name: DJANGO_MODWSGI_EXTRA_ARGS
     value: ""
@@ -69,11 +75,32 @@ containers:
     mountPath: /home/django/logs
   - name: models
     mountPath: /home/django/models
+  - name: share
+    mountPath: /home/django/share
+  - name: sys-namespace-config
+    mountPath: /etc/onepanel
+    readOnly: true
 - name: cvat-ui
-  image: onepanel/cvat-ui:v0.6.23
+  image: onepanel/cvat-ui:v0.7.12-defaultuser-dynamic-workflow-5
   ports:
   - containerPort: 80
     name: http
+# You can add multiple FileSyncer sidecar containers if needed
+- name: filesyncer
+  image: onepanel/filesyncer:s3
+  args:
+  - download
+  env:
+  - name: FS_PATH
+    value: /mnt/share
+  - name: FS_PREFIX
+    value: '{{workflow.namespace}}/{{workspace.parameters.storage-prefix}}'
+  volumeMounts:
+  - name: share
+    mountPath: /mnt/share
+  - name: sys-namespace-config
+    mountPath: /etc/onepanel
+    readOnly: true
 ports:
 - name: cvat-ui
   port: 80
@@ -86,7 +113,7 @@ ports:
 routes:
 - match:
   - uri:
-      regex: /api/.*|/git/.*|/tensorflow/.*|/auto_annotation/.*|/analytics/.*|/.*|/admin/.*|/documentation/.*|/dextr/.*|/reid/.*
+      regex: /api/.*|/git/.*|/tensorflow/.*|/onepanelio/.*|/tracking/.*|/auto_annotation/.*|/analytics/.*|/static/.*|/admin/.*|/documentation/.*|/dextr/.*|/reid/.*
   - queryParams:
       id:
         regex: \d+.*
@@ -94,6 +121,7 @@ routes:
   - destination:
       port:
         number: 8080
+  timeout: 600s
 - match:
   - uri:
       prefix: /
@@ -101,54 +129,39 @@ routes:
   - destination:
       port:
         number: 80
-#notify on slack once it got finished
-postExecutionWorkflow:
-  entrypoint: main
-  templates:
-  - name: main
-    dag:
-       tasks:
-       - name: slack-notify
-         template: slack-notify
-  -  name: slack-notify
-     container:
-       image: technosophos/slack-notify
-       args:
-       - SLACK_USERNAME=onepanel SLACK_TITLE="Your workspace is ready" SLACK_ICON=https://www.gravatar.com/avatar/5c4478592fe00878f62f0027be59c1bd SLACK_MESSAGE="Your workspace is now running" ./slack-notify
-       command:
-       - sh
-       - -c
+  timeout: 600s
+# DAG Workflow to be executed once a Workspace action completes (optional)
+# Uncomment the lines below if you want to send Slack notifications
+#postExecutionWorkflow:
+#  entrypoint: main
+#  templates:
+#  - name: main
+#    dag:
+#       tasks:
+#       - name: slack-notify
+#         template: slack-notify
+#  - name: slack-notify
+#     container:
+#       image: technosophos/slack-notify
+#       args:
+#       - SLACK_USERNAME=onepanel SLACK_TITLE="Your workspace is ready" SLACK_ICON=https://www.gravatar.com/avatar/5c4478592fe00878f62f0027be59c1bd SLACK_MESSAGE="Your workspace is now running" ./slack-notify
+#       command:
+#       - sh
+#       - -c
+
 ```
 
 Here, we used Docker images for CVAT to create the Workspaces and exposed few ports for CVAT's use. 
 
 ## Creating super user
 
-CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you execute CVAT workflow. You can set `username` and `password` via environment variables shown below. If you don't specify those variables, the default `username` and `password` will be `admin`
+CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you create a new CVAT workspace. By default, the username is `admin` and password is your onepanel token.
 
 
 ## Setting up environment variables
 
-In order to use several features of CVAT such as training an annotaiton model we need to set some environment variables. You can easily set environment variables by clicking Settings button on top nav bar. This will open up a settings page, where you can set environment variables. Following is an example of setting an environment variable.
+You don't need to set any environment variables to use default features. But you may need to set some environment variables for your custom features (i.e slack notifications). You can easily set environment variables by clicking Settings button on top nav bar. This will open up a settings page, where you can set environment variables. Following is an example of setting an environment variable.
 ![Set Enviornment Variable](/img/env_set.PNG)
-
-You need to set following environment variables:
-- **AWS_BUCKET_NAME**: Bucket you want to store your data into.
-- **AWS_ACCESS_KEY_ID**: AWS access key for training new annotation models.
-- **AWS_SECRET_ACCESS_KEY**: AWS secret access key for training new annotation models.
-- **AWS_S3_PREFIX**: Directory in `AWS_BUCKET_NAME` where all the data will be stored.
-- **ONEPANEL_OD_TEMPLATE_ID**: Template ID for Tensorflow Object Detection. Required only if you are training a new annotation model.
-- **ONEPANEL_MASKRCNN_TEMPLATE_ID**: Template ID for MaskRCNN Segmentation. Required only if you are training a new annotation model.
-- **ONEPANEL_AUTHORIZATION**: Token/password for Onepanel login.
-- **DJANGO_SUPERUSER_USERNAME**: Username for the superuser. Default is `admin`.
-- **DJANGO_SUPERUSER_PASSWORD**: Password for the superuser. Default is `admin`.
-- **SYNC_S3_BUCKET_NAME**: Bucket to sync shared storage (`share` drive will be used for the same) with. You will be able to use data available on this bucket while creating new tasks and models.
-- **SYNC_S3_PREFIX**: Prefix (directory) to use for above bucket. By default its empty. Thus, all data in that bucket will be fetched.
-- **SYNC_DIRECTION**: Direction for SYNC. Options: `down`, `up`, `both`.
-  - `down`: One way sync. Downloads all data from s3 to local folder.
-  - `up`: One way sync. Uploads all data from local folder to S3. If you delete files from local folder it will delete those files from S3 as well.
-  - `both`: Two way sync. Syncs files in both direction.
-- **SYNC_DELAY**: Specifies time in seconds for the syncer to check for file updates. Default is `900` seconds.
 
 
 ## Creating new tasks
@@ -202,7 +215,7 @@ For TensorFlow OD API, we support multiple models. In fact, its dynamic. You can
 You can also select the base model to finetune on top of. The list of base models are models that you trained previously. This is optional. By default, a model trained on COCO will be used. For more information, see section on `Create annotation model`.
 
 ### How to choose the model:
-If you are unsure about which model to use, we usually suggest ssd-mobilenet-v2 since ssd-based models are faster and accurate enough for most of the work. Faster-rcnn (frcnn) models are more accurate in general but they will be relatively slow during training as well inference. If accuracy is more important to you, we suggest you go with frcnn-res50-coco model.
+If you are unsure about which model to use, we usually suggest ssd-mobilenet-v2 since ssd-based models are faster and accurate enough for most of the work. Faster-rcnn (frcnn) models are more accurate in general but they will be relatively slow during training as well as inference. If accuracy is more important to you, we suggest you go with frcnn-res50-coco model.
 
 
 
