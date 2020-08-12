@@ -12,58 +12,52 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 
 ## Training object detection model through CVAT
 
-![Create Annotation Model](/img/create_annotation_model_base.png)
+![CVAT flowchart](/img/auto-annotation-v.2.0.png)
 
 1. Annotate enough images in your CVAT task.  
 2. Go back to your CVAT dashboard and click on Actions and find `Execute training workflow` in that task. You will see a popup with a few options.  
-3. Select the appropriate model type (TensorFlow OD API or MaskRCNN by default, you can add your own model as well) and then select the model (i.e ssd-mobilenet-v2-coco).  
+3. Select the appropriate model type (TensorFlow OD API or MaskRCNN, you can add your own model as well) and then select the model (i.e ssd-mobilenet-v2-coco).  
 4. Select the machine type. A machine with multiple GPUs will speed up your training process.  
-5. Select the base model to start training from. These are the models that you trained previously in this namespace. This is optional. By default, a model trained on COCO will be used. Please make sure that the base model you select is compatible with the current task. The number of classes should be same, and if you use model trained on other types of data then accuracy might deteriorate.
-6. Enter optional arguments. See below for more details.  
-7. Your trained model, checkpoints, and classes file will be stored on your s3 bucket.
-
-![CVAT flowchart](/img/auto-annotation-v.2.0.png)
+5. Select the checkpoint model to start training from. These are the models that you trained previously in this namespace. This is optional. By default, a model trained on COCO will be used. Please make sure that the base model you select is compatible with the current task. The number of classes should be same, and if you use model trained on other types of data then accuracy might deteriorate.
+6. Enter right hyperparameters. See below for more details on hyperparameters.  
+7. Your trained model, checkpoints, and classes file will be stored on your cloud storage (i.e s3 bucket).
 
 
-## Arguments (optional)
+## TensorFlow Object Detection API
 
-You can optionally specify some arguments in the `Arguments` field seperated by `;`. 
+You can use any of the models that we support for TensorFlow Object Detection API to train your custom pre-annotation models. Here, we provide a brief explanation on how to choose one model over another based on your needs. Some models are faster than others, whereas some are more accurate than others.  We hope this information will help you choose the right model for your task. 
 
-Here is a sample: `epochs=100;batch_size=24`. 
+![TensorFlow Object Detection Workflow](/img/tf-object-detection.png)
 
+### Hyperparameters
+
+You can specify some arguments in the `Hyperparameters` field seperated by new line. 
+
+Here is a sample for Tensorflow Object Detection API: 
+
+```
+epochs=100
+num-classes=81
+``` 
+
+Details:
 - epochs : number of epochs to train your model for. By default, we will train for an appropriate number of epochs depending upon the model.
 - batch_size : batch size for the training
 - initial_learning_rate : initial learning rate for the model. We recommend you do not change this.
 - num_clones (default=1): number of GPUs to train the model 
+- schedule-step-1: step 1 for linear learning rate decay
+- schedule-step-2: step 2 for linear learning rate decay
 
 If you select a Machine type with 4 GPUs (Tesla V100), the following command can be used:
-`epochs=300000;num_clones=4`
+`num_clones=4`
 
 - Note that num_clones is 4 because there are 4 GPUs available.
 
-For MaskRCNN, you might want to set epochs for all three stages as follows. The MaskRCNN template will use all available GPUs for training.
-`--stage1_epochs=1;--stage2_epochs=2;--stage3_epochs=3;`
-
 ## Choosing the right base model
 
-You can use any of the models that we support to train your custom pre-annotation models. Here, we provide a brief explanation on how to choose one model over another based on your needs. Some models are faster than others, whereas some are more accurate than others.  We hope this information will help you choose the right model for your task. 
-
-* Note that we don't support Yolo and MaskRCNN models yet.
-
-* We currently support a few faster-rcnn models. All of these models are similar except that of the backbone used for the feature extraction. The backbones used are, in increasing order of complexity (i.e more layers), ResNet50, ResNet101, InceptionResNetV2. As the model complexity increases the computation requirement will also increase. If you have very complicated data (i.e hundreds of annotations in one image), then it is recommended that you choose complex model (i.e InceptionResNetV2).
+* We currently support several faster-rcnn models. All of these models are similar except that of the backbone used for the feature extraction. The backbones used are, in increasing order of complexity (i.e more layers), ResNet50, ResNet101, InceptionResNetV2. As the model complexity increases the computation requirement will also increase. If you have very complicated data (i.e hundreds of annotations in one image), then it is recommended that you choose complex model (i.e InceptionResNetV2).
 
 * Faster-rcnn models are generally more accurate than ssd models. However, sometimes you are better off using ssd models if your data is easy to learn (i.e 1 or 2 bounding box per image).
-
-### frcnn-inc-resv2-atr-coco: 
-
-This is a type of faster-rcnn model with InceptionResNetV2 backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2).
-
-Depending upon your data, you can set epochs to train your model. There is no standard value which can work for all datasets. You generally have to try different number of epochs to get the best model. Ideally, you do so by monitoring loss of your model while training. But if you are looking for a recommendation. Then, we recommend you set epochs as follows: (number of images / batch_size (default: 1)) * 500. For instance, if you have 100 images, then your epochs will be 50000(rounded). Please note that the model will be trained using a pre-trained model, so you don't need to train as long as you would have to when not using the pre-trained model.
-
-Please note that current implementation of faster-rcnn inTensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
-
-***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
-
 
 ### frcnn-nas-coco:
 
@@ -90,6 +84,17 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 
+### frcnn-res101-lowp
+
+This is a type of faster-rcnn model with ResNet101 backbone with low number of proposals. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
+
+For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
+
+Please note that current implementation of faster-rcnn inTensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
+
+***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
+
+
 ### frcnn-res50-coco
 
  This is a type of faster-rcnn model with ResNet50 backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
@@ -101,15 +106,6 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 
-### frcnn-res50-lowp
-
-This is a type of faster-rcnn model with ResNet50 backbone with low number of proposals. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
-
-For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
-
-Please note that current implementation of faster-rcnn inTensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
-
-***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 
 ### ssd-mobilenet-v2-coco:
@@ -125,16 +121,30 @@ Depending upon your data, you can set epochs to train your model. There is no st
 ***Defaults***: batch_size: 24, learning_rate: 0.004, epochs=15000
 
 
+
+
 ## Training segmentation model through CVAT
+
+MaskRCNN is a popular model for segmentation tasks. We use [this](https://github.com/matterport/Mask_RCNN) implementation of MaskRCNN for training and inference.
+
 The process to train a Mask-RCNN model on CVAT is similar to the above process except that you need to select Mask-RCNN after clicking on Create Annotation Model.
-***Parameters***: Even though you don't need to enter any parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
-We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs through `--stage1_epochs`, `--stage2_epochs`, and `--stage3_epochs`.
+
+![MaskRCNN Workflow](/img/create_annotation_model_base.png)
+
+***Parameters***: The only required parameter is number of classes. Please make sure you pass-in correct number of classes. For MaskRCNN, the number of classes will be number of classes in CVAT plus one for background. Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
+We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
+
+```
+stage-1-epochs=1
+stage-2-epochs=2
+stage-3-epochs=3
+```
 
 If you have few images (few hundreds), then we recommend you set total epochs (stage1+stage2+stage3) less than 10. We advise you set more epochs for stage1 than others. As your data size increases or the complexity of your data increases you might want to increase epochs. 
 
 If you have ~1000 images then you don't have to set any parameters, CVAT will take care of it.
 
-## Adding your own base model to CVAT
+## Adding your own model to CVAT
 
 You can also add your own base models to CVAT via Onepanel.  Please email us at info@onepanel.io to learn how.
 
