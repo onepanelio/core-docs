@@ -44,7 +44,7 @@ Details:
 - epochs : number of epochs to train your model for. By default, we will train for an appropriate number of epochs depending upon the model.
 - batch_size : batch size for the training
 - initial_learning_rate : initial learning rate for the model. We recommend you do not change this.
-- num_clones (default=1): number of GPUs to train the model 
+- num-clones (default=1): number of GPUs to train the model 
 - schedule-step-1: step 1 for linear learning rate decay
 - schedule-step-2: step 2 for linear learning rate decay
 
