@@ -22,7 +22,6 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 6. Enter right hyperparameters. See below for more details on hyperparameters.  
 7. Your trained model, checkpoints, and classes file will be stored on your cloud storage (i.e s3 bucket).
 
-
 ## TensorFlow Object Detection API
 
 You can use any of the models that we support for TensorFlow Object Detection API to train your custom pre-annotation models. Here, we provide a brief explanation on how to choose one model over another based on your needs. Some models are faster than others, whereas some are more accurate than others.  We hope this information will help you choose the right model for your task. 
@@ -35,9 +34,8 @@ You can specify some arguments in the `Hyperparameters` field seperated by new l
 
 Here is a sample for Tensorflow Object Detection API: 
 
-```
+```python
 epochs=100
-num-classes=81
 ``` 
 
 Details:
@@ -48,20 +46,20 @@ Details:
 - schedule-step-1: step 1 for linear learning rate decay
 - schedule-step-2: step 2 for linear learning rate decay
 
-If you select a Machine type with 4 GPUs (Tesla V100), the following command can be used:
+Please note that number of classes will be automatically populated if you have `sys-num-classes` parameter defined in a workflow. Also, if you select a Machine type with 4 GPUs (Tesla V100), the following command can be used:
 `num_clones=4`
 
 - Note that num_clones is 4 because there are 4 GPUs available.
 
 ## Choosing the right base model
 
-* We currently support several faster-rcnn models. All of these models are similar except that of the backbone used for the feature extraction. The backbones used are, in increasing order of complexity (i.e more layers), ResNet50, ResNet101, InceptionResNetV2. As the model complexity increases the computation requirement will also increase. If you have very complicated data (i.e hundreds of annotations in one image), then it is recommended that you choose complex model (i.e InceptionResNetV2).
+- We currently support several faster-rcnn models. All of these models are similar except that of the backbone used for the feature extraction. The backbones used are, in increasing order of complexity (i.e more layers), ResNet50, ResNet101, InceptionResNetV2. As the model complexity increases the computation requirement will also increase. If you have very complicated data (i.e hundreds of annotations in one image), then it is recommended that you choose complex model (i.e InceptionResNetV2).
 
-* Faster-rcnn models are generally more accurate than ssd models. However, sometimes you are better off using ssd models if your data is easy to learn (i.e 1 or 2 bounding box per image).
+- Faster-rcnn models are generally more accurate than ssd models. However, sometimes you are better off using ssd models if your data is easy to learn (i.e 1 or 2 bounding box per image).
 
 ### frcnn-nas-coco:
 
-* If you are using `frcnn-nas-coco`, then please choose a machine with at least 2 GPUs as this model requires more memory. A machine with 1 GPU will throw an error.
+- If you are using `frcnn-nas-coco`, then please choose a machine with at least 2 GPUs as this model requires more memory. A machine with 1 GPU will throw an error.
 
 This is a type of faster-rcnn model with NAS backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2).
 
@@ -82,7 +80,6 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
-
 
 ### frcnn-res101-lowp
 
@@ -131,7 +128,7 @@ The process to train a Mask-RCNN model on CVAT is similar to the above process e
 
 ![MaskRCNN Workflow](/img/create_annotation_model_base.png)
 
-***Parameters***: The only required parameter is number of classes. Please make sure you pass-in correct number of classes. For MaskRCNN, the number of classes will be number of classes in CVAT plus one for background. Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
+***Parameters***: Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
 We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
 
 ```
