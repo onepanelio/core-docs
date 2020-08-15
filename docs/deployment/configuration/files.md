@@ -127,6 +127,26 @@ database:
   username: <username>
 ```
 
+If you use `--artifact-repository-provider gcs`, that changes the `artifactRepository`:
+```yaml
+artifactRepository:
+ gcs:
+    # Name of bucket, example: my-bucket
+    bucket: <bucket-name>
+    # Endpoint for S3 compatible storage
+    # Supported provider endpoints:
+    #   AWS: s3.amazonaws.com
+    #   GCS: storage.googleapis.com
+    #   Minio: my-minio-endpoint.default:9000
+    endpoint: storage.googleapis.com
+    # Change to true if endpoint does NOT support HTTPS
+    insecure: false
+    # Key Format for objects stored by Workflows. This can reference Workflow variables
+    keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
+    serviceAccountKey: |
+      <key.json-file-data>
+```
+
 ## Sections
 What follows is a more detailed description of each section of the `params.yaml` file.
 
@@ -170,11 +190,18 @@ kubectl get nodes --show-labels
 For minikube, you can use this configuration.
 ```yaml
 nodePool:
-  label: minikube.k8s.io/minikube
+  label: minikube.k8s.io/name
   options:
   - name: 'Minikube'
     value: minikube
 ```
+
+Verify with:
+```shell script
+kubectl get nodes --show-labels
+```
+
+The label has to exist for workspaces to run.
 :::
 
 Note that this lists many different labels, so you can pick and choose any label key/value that is unique to that node.
@@ -217,6 +244,38 @@ artifactRepository:
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
 ```
+
+Here's an example Google Cloud GCS configuration:
+
+```yaml
+artifactRepository:
+ gcs:
+    bucket: mygreatbucket
+    endpoint: storage.googleapis.com
+    insecure: false
+    keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
+    serviceAccountKey: |
+      {
+        "type": "service_account",
+        "project_id": "my-project-id",
+        "private_key_id": "private_key_id",
+        "private_key": "private_key",
+        "client_email": "client_email",
+        "client_id": "client_id",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "cert_url"
+      }
+```
+
+:::note
+You can get the serviceAccount JSON via gcloud.
+```shell script
+gcloud iam service-accounts keys create key.json \
+   --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
+```
+:::
 
 :::important
 Onepanel Workflows will automatically upload or download artifacts from `artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}`. See [Workflow artifacts](/docs/reference/workflows/templates#artifacts) for more information.
@@ -351,3 +410,29 @@ The possible values are `docker` and `pns`:
 
 - `docker` is more reliable, however it mounts the `docker.sock` of the host makes it less secure.
 - `pns` is more secure, however in some versions of Kubernetes, it tends to fail on tasks that take less than 15 seconds.
+
+### services
+
+Services are additional tools or applications you want to install alongside the main deployment.
+These are set up to allow distributed workloads and are always available, unlike Workspaces.
+
+Each Service has its own configuration, consult the [Services reference](/docs/reference/services/overview) for more information.
+
+Here's an example of adding a [ModelDB](https://github.com/VertaAI/modeldb) Service.
+
+```yaml
+services:
+  modelDb:
+    artifactRepository:
+      s3:
+        # An s3 bucket to store your modeldb artifacts
+        bucket: example-modeldb-test
+        region: us-west-2
+    database:
+      # The name of the database where modeldb records will be stored.
+      # This will be automatically created if it does not exist
+      databaseName: modeldb
+      # This must be a database that already exists. It is used to establish a connection
+      # so the system can create the databaseName.
+      defaultDatabaseName: postgres
+```
