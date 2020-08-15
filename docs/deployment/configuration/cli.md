@@ -16,6 +16,15 @@ opctl init --provider <provider-name>
 
 Available provider options are: `aks`, `eks` and `gke` for public cloud installations and `minikube`, `microk8s` for local installations.
 
+To use an artifact repository other than `s3` use the `--artifact-repository-provider` flag:
+
+```bash
+opctl init --provider <provider-name> \
+    --artifact-repository-provider <object-storage-provider>
+```
+
+Available options for `--artifact-repository-provider` are `s3` and `gcs`.
+
 HTTPS is not enabled by default, to enable HTTPS but manage the TLS certificate yourself:
 
 ```bash
@@ -34,18 +43,6 @@ opctl init --provider <provider-name> \
 :::tip
 Refer to [TLS certificates](/docs/deployment/configuration/tls) section for more information and a list of supported DNS providers.
 :::
-
-To use an artifact repository other than `s3` use the `--artifact-repository-provider` flag:
-
-```bash
-opctl init --provider <provider-name> \
-    --enable-https \
-    --enable-cert-manager \
-    --dns-provider <dns-provider-name>
-    --artifact-repository-provider <object-storage-provider>
-```
-
-Available options for `--artifact-repository-provider` are `s3` and `gcs`.
 
 
 To add ElasticSearch, Fluentd, and Kibana (EFK) logging, add the `--enable-logging` flag.
