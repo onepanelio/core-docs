@@ -368,10 +368,6 @@ opctl init --provider microk8s --enable-metallb
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
-:::note
-See [configuration metallb](/docs/deployment/configuration/files#metal-lb) for metallb specific details. 
-:::
-
 4. Finally, run the following command to deploy Onepanel to your cluster:
 
 <Tabs

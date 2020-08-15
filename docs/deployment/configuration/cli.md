@@ -35,9 +35,18 @@ opctl init --provider <provider-name> \
 Refer to [TLS certificates](/docs/deployment/configuration/tls) section for more information and a list of supported DNS providers.
 :::
 
-To set the artifact repository provider, use the `--artifact-repository-provider s3` flag.
-- Default is `s3`
-- Supported values are `s3`, `gcs`
+To use an artifact repository other than `s3` use the `--artifact-repository-provider` flag:
+
+```bash
+opctl init --provider <provider-name> \
+    --enable-https \
+    --enable-cert-manager \
+    --dns-provider <dns-provider-name>
+    --artifact-repository-provider <object-storage-provider>
+```
+
+Available options for `--artifact-repository-provider` are `s3` and `gcs`.
+
 
 To add ElasticSearch, Fluentd, and Kibana (EFK) logging, add the `--enable-logging` flag.
 
