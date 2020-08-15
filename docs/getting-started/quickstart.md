@@ -607,34 +607,31 @@ You should see the website load up.
 opctl auth token
 ```
 
-## Step 2: Create a simple Workflow
-Let's first create a simple Directed Acyclic Graph (DAG) Workflow Template:
+## Step 2: Launch CVAT for annotation
+You can use the built-in CVAT to annotate visual data (images, videos). To launch CVAT, click on Workspaces, and you will find Create Workspace button as shown below.
 
-1. Click **Workflows** in the top menu.
+![Create Workspace](/img/create_workspaces_button_in_workspaces_page.png)
 
-<img src="/img/quickstart-231711.png" alt="drawing" width="400px"/>
+Now, select CVAT, machine type, you can also modify other parameters such as disk size. Once done, click on `CREATE AND RUN`. This will launch a new CVAT workspace. Please note that minimum RAM requirement for CVAT is 16GB.
 
+![Create CVAT](/img/launch_cvat.png)
 
-2. Click **Create Template**.
+Once in CVAT, you can annotate imges with bounding boxes, polygons, polylines, points, etc.
 
-<img src="/img/quickstart-231935.png" alt="drawing" width="400px"/>
+![CVAT sample](/img/draw_shape.PNG)
 
-3. Enter "Test DAG" for "Template Name", and select "DAG". This will pre-fill a sample DAG.
+## Step 3: Train a model on annotated data
 
-![](/img/quickstart-232332.png)
+Onepanel CE allows you to train a deep learning model on annotated data in CVAT in a matter of a few clicks. 
 
-4. Click **Save** to save your template.
+You can directly train object detection or segmentation model from CVAT which you can use later to pre-annotate new data. This dramatically reduces time it takes to train new models and use them to pre-annotate new data. Moreover, apart from default models that we provide, you easily add new models or even modify exising model workflows.
 
-5. You should now be on the "Workflow details" page. Click **Execute Workflow**.
+To train a new model, first make sure you have some annotated data in a task. Then, click Actions or Menu button for a CVAT task on which you want to train a model. Click on `Execute training workflow`. You will see following pop up window.
 
-![](/img/quickstart-232622.png)
+![Train a model from CVAT](/img/create_annotation_model_base.png)
 
-6. A modal will be displayed, click **Execute**.
+Here, you can select model to train. In this case, it's MaskRCNN. Most of the parameters visible above are related to the model (MaskRCNN). Number of classes should be equal to number of classes you have in that CVAT task + 1 for background. However, it is important to note that frames and corresponding annotation will be automatically dumped onto the cloud object storage (path: `<your-namespace>/annotation-dump/<time-stamp>/`) that you used while setting up Onepanel. Similary, output of a workflow (i.e trained model) will also be uploaded to cloud storage (path: `<your-namespace>/workflow-data/<workflow-uid>/<time-stamp>/`). Here, you can also select the checkpoint path from previously trained model. You can leave it empty if you don't have an appropriate, previously trained model.
 
-![](/img/quickstart-232824.png)
+Please note you can add your models as well. Once you select the model, you will see a list of parameter for that model (Onepanel Workflow) which you can modify or use default model. If your workflow does not have `dump-format` parameter set, then you will also have to select the Dump Format (i.e MS COCO or TFRecords) as well based on which workflow your model/workflow supports.
 
-7. The workflow will start executing. You can click on every task to see details and running logs.
-
-![](/img/quickstart-232904.png)
-
-8. You have now setup Onepanel and run a simple Workflow.
+For more information about CVAT on Onepanel, please refer to our [docs on CVAT](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide).
