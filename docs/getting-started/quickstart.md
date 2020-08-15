@@ -319,12 +319,20 @@ Download the [attached executable](https://github.com/onepanelio/core/releases/l
 opctl init --provider aks
 ```
 
+:::note
+If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+:::
+
 </TabItem>
 <TabItem value="eks">
 
 ```bash
 opctl init --provider eks
 ```
+
+:::note
+If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+:::
 
 </TabItem>
 <TabItem value="gke">
@@ -348,6 +356,10 @@ opctl init --provider minikube --enable-metallb
 ```
 :::
 
+:::note
+If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+:::
+
 </TabItem>
 
 <TabItem value="microk8s">
@@ -363,8 +375,18 @@ opctl init --provider microk8s --enable-metallb
 ```
 :::
 
+:::note
+If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+:::
+
 </TabItem>
 </Tabs>
+
+:::important
+You can use different object storage than S3 by setting the `--artifact-repository-provider` flag. 
+
+See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+:::
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
@@ -546,7 +568,7 @@ istio-ingressgateway   LoadBalancer   10.152.183.166   10.1.31.0     15020:31979
   
 Inside the multipass VM, add an entry to the `/etc/hosts` file using the EXTERNAL-IP from above.
 ```shell script
-sudo nano /etc/hosts
+sudo nano /etc/hosts  
 ```
   
 ```text
