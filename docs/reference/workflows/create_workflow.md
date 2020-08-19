@@ -14,10 +14,10 @@ Check out [Workflow Templates](https://github.com/onepanelio/templates/tree/mast
 
 2. Click *Create Template* ![](/img/workflow_create.png)
 
-3. Select template from which best suit your requirement ![](/img/workflow_template_github.png)
+3. You can select from our predefined templates or generate your own templates. ![](/img/workflow_template_github.png)
 
-4. Copy .YAML configuration ![](/img/workflow_template_yaml.png)
+4. Copy yaml configuration ![](/img/workflow_template_yaml.png)
 
-5. And then paste to generate your workflow template, once satisfied with the parameters and settings click *Save* ![](/img/workflow_create_template.png)
+5. And paste it on the editor, once satisfied with your settings click *Save* ![](/img/workflow_create_template.png)
 
-6. Additionally, you can edit your templates or clone if you want to adjust parameters with different settings.
+6. Additionally, you can edit clone or edit your existing templates.
