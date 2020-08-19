@@ -1,10 +1,10 @@
 ---
-title: Execute a Workflow Template
-sidebar_label: Executing a Template
-description: guide on how to execute/stop and re-run workflow templates
+title: Executing a Workflow
+sidebar_label: Executing a Workflow
+description: How to execute, stop and re-run Workflows in Onepanel
 ---
 
-## Worksflow page
+## Execute a Workflow
 
 1. Click *View* on the workflow that you want to execute ![](/img/workflow_view_template.png)
 
@@ -16,12 +16,12 @@ description: guide on how to execute/stop and re-run workflow templates
 
     ![](/img/workflow_logs.png)
     
-## Terminating a Running Instance
+## Terminate a Workflow
 
-1. Click *Terminate* on a running instance ![](/img/workflow_terminate.png)
+1. Click *Terminate* on a running Workflow ![](/img/workflow_terminate.png)
 
 2. And confirm by clicking *Terminate* again ![](/img/workflow_terminate_confirm.png)
 
-## Rerunning Terminated Instance
+## Re-run a Workflow
 
-1. To rerun a terminated/completed instance, click *Run Again* ![](/img/workflow_rerun.png)
+1. To re-run a terminated/completed Workflow, click *Run Again* ![](/img/workflow_rerun.png)

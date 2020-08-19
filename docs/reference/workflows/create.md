@@ -1,7 +1,7 @@
 ---
-title: Creating a New Workflow Template
-sidebar_label: Creating a Template
-description: Guide on how to create a new template
+title: Creating a Workflow Template
+sidebar_label: Creating a Workflow Template
+description: Creating Workflow Templates using UI for training models, ETL tasks and more on Onepanel
 ---
 
 :::tip
@@ -9,7 +9,8 @@ The system comes with some predefined Workflow templates or you can create your 
 Check out [Workflow Templates](https://github.com/onepanelio/templates/tree/master/workflows) for more information
 :::
 
-## Workflow Template Creation
+## Create a Workflow Template
+
 1. Click *Workflows* in the top navigation bar. ![](/img/navigation_select_workflow.png)
 
 2. Click *Create Template* ![](/img/workflow_create.png)

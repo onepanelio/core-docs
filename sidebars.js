@@ -123,6 +123,8 @@ module.exports = {
       label: 'Workflows',
       items: [
         'reference/workflows/templates',
+        'reference/workflows/create',
+        'reference/workflows/execute'
       ]
     },
   ]
