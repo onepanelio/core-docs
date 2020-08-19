@@ -56,6 +56,10 @@ module.exports = {
                 {
                   type: 'doc',
                   id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model'
+                },
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model'
                 }
               ]
             }
