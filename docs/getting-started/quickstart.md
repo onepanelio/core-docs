@@ -121,6 +121,15 @@ Make sure [Minikube](https://minikube.sigs.k8s.io/docs/start/) (`minikube`) is i
 :::
 
 Run the following `minikube` command to create a cluster:
+<Tabs
+  groupId="cloud-provider-2"
+  defaultValue="linux"
+  values={[
+      { label: 'Linux', value: 'linux', },
+      { label: 'Windows', value: 'windows', },
+      ]
+      }>
+<TabItem value="linux">
 
 ```shell script
 minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
@@ -130,6 +139,20 @@ minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
     --extra-config=apiserver.service-account-api-audiences=api,nats \
     --extra-config=apiserver.authorization-mode=Node,RBAC
 ```
+</TabItem>
+
+<TabItem value="windows">
+
+```shell script
+minikube start --driver=virtualbox --memory="8gb" --cpus=4 --disk-size="40gb"^
+    --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key^
+    --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub^
+    --extra-config=apiserver.service-account-issuer=api^
+    --extra-config=apiserver.service-account-api-audiences=api,nats^
+    --extra-config=apiserver.authorization-mode=Node,RBAC
+```
+</TabItem>
+</Tabs>
 
 Your kubectl context will be automatically updated once minikube finishes starting.
 
