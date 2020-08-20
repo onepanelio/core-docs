@@ -122,7 +122,7 @@ Make sure [Minikube](https://minikube.sigs.k8s.io/docs/start/) (`minikube`) is i
 
 Run the following `minikube` command to create a cluster:
 <Tabs
-  groupId="cloud-provider-2"
+  groupId="operating-systems"
   defaultValue="linux"
   values={[
       { label: 'Linux', value: 'linux', },
