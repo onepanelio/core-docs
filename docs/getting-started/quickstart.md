@@ -66,6 +66,15 @@ Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksct
 :::
 
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
+<Tabs
+  groupId="operating-system"
+  defaultValue="linux"
+  values={[
+      { label: 'Linux', value: 'linux', },
+      { label: 'Windows', value: 'windows', },
+      ]
+      }>
+<TabItem value="linux">
 
 ```bash
 eksctl create cluster --name=<cluster-name> --region <region> \
@@ -78,6 +87,23 @@ eksctl create cluster --name=<cluster-name> --region <region> \
     --managed \
     --ssh-access
 ```
+</TabItem>
+
+<TabItem value="windows">
+
+```shell script
+eksctl create cluster --name=<cluster-name> --region <region>^
+    --nodes 2^
+    --node-type m5.xlarge^
+    --node-volume-size 100^
+    --nodes-min 2^
+    --nodes-max 2^
+    --asg-access^
+    --managed^
+    --ssh-access
+```
+</TabItem>
+</Tabs>
 
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
 
@@ -121,6 +147,15 @@ Make sure [Minikube](https://minikube.sigs.k8s.io/docs/start/) (`minikube`) is i
 :::
 
 Run the following `minikube` command to create a cluster:
+<Tabs
+  groupId="operating-systems"
+  defaultValue="linux"
+  values={[
+      { label: 'Linux', value: 'linux', },
+      { label: 'Windows', value: 'windows', },
+      ]
+      }>
+<TabItem value="linux">
 
 ```shell script
 minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
@@ -130,6 +165,20 @@ minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
     --extra-config=apiserver.service-account-api-audiences=api,nats \
     --extra-config=apiserver.authorization-mode=Node,RBAC
 ```
+</TabItem>
+
+<TabItem value="windows">
+
+```shell script
+minikube start --driver=virtualbox --memory="8gb" --cpus=4 --disk-size="40gb"^
+    --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key^
+    --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub^
+    --extra-config=apiserver.service-account-issuer=api^
+    --extra-config=apiserver.service-account-api-audiences=api,nats^
+    --extra-config=apiserver.authorization-mode=Node,RBAC
+```
+</TabItem>
+</Tabs>
 
 Your kubectl context will be automatically updated once minikube finishes starting.
 
