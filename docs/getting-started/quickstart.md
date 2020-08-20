@@ -152,10 +152,23 @@ Run the following `minikube` command to create a cluster:
   defaultValue="linux"
   values={[
       { label: 'Linux', value: 'linux', },
+      { label: 'macOS', value: 'macos', },
       { label: 'Windows', value: 'windows', },
       ]
       }>
 <TabItem value="linux">
+
+```shell script
+minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
+    --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
+    --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub \
+    --extra-config=apiserver.service-account-issuer=api \
+    --extra-config=apiserver.service-account-api-audiences=api,nats \
+    --extra-config=apiserver.authorization-mode=Node,RBAC
+```
+</TabItem>
+
+<TabItem value="macos">
 
 ```shell script
 minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
@@ -395,14 +408,11 @@ opctl init --provider gke
 <TabItem value="minikube">
 
 ```bash
-opctl init --provider minikube
+opctl init --provider minikube --enable-metallb
 ```
 
 :::note
-If you do not have a loadbalancer setup, you can use metallb
-```shell script
-opctl init --provider minikube --enable-metallb
-```
+metallb is used as a loadbalancer 
 :::
 
 :::note
@@ -414,14 +424,11 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 <TabItem value="microk8s">
 
 ```bash
-opctl init --provider microk8s
+opctl init --provider microk8s --enable-metallb
 ```
 
 :::note
-If you do not have a loadbalancer setup, you can use metallb
-```shell script
-opctl init --provider microk8s --enable-metallb
-```
+metallb is used as a loadbalancer 
 :::
 
 :::note
