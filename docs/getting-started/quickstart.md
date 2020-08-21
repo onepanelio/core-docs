@@ -393,8 +393,10 @@ opctl init --provider minikube
 :::note
 If you do not have a loadbalancer setup, you can use metallb
 ```shell script
-opctl init --provider minikube --enable-metallb
+opctl init --provider minikube --enable-metallb \
+           --artifact-repository-provider <provider>
 ```
+Valid values for providers are: s3, gcs
 :::
 
 </TabItem>
@@ -408,8 +410,10 @@ opctl init --provider microk8s
 :::note
 If you do not have a loadbalancer setup, you can use metallb
 ```shell script
-opctl init --provider microk8s --enable-metallb
+opctl init --provider microk8s --enable-metallb \
+           --artifact-repository-provider <provider>
 ```
+Valid values for providers are: s3, gcs
 :::
 
 </TabItem>
