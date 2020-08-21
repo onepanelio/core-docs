@@ -52,7 +52,8 @@ Since we will be mounting dataset at a fixed location (i.e `/mnt/data/datasets/`
 If you are familiar with officail COCO directory structure or even take a look at DETR code, you will find that this does not follow official COCO directory structure. Since this code supports officail COCO directory structure, we need to modify some lines to make it work. Also, the `file_path` attribute in JSON file points to frames on the machine where it was exported. So, this won't work on other machine (i.e workflows that we will be running).
 
 So, we will need to make two changes.
-1. Update directory structure in the code (`datasets/coco.py`).
+
+**1. Update directory structure in the code (`datasets/coco.py`).**
 This is very simple. We just need to update following lines from `datasets/coco.py`
 
 ```python3
@@ -72,7 +73,7 @@ to
 
 Please note that for simplicity we are using train set as a validation set. But that's not the right thing to do. You can split train set into train and val set. Or use other dataset present on cloud storage while executing the workflow.
 
-2. Write a function/script to update `file_path` in a JSON file.
+**2. Write a function/script to update `file_path` in a JSON file.**
 
 Since we will be mounting dataset at `/mnt/data/datasets/`, we can update paths in JSON accordingly. So, we will write a script that does this. And, we will execute this script before we call `main.py`.
 
@@ -90,6 +91,10 @@ def update_img_paths(args):
 ```
 
 Once this is done. We are good to go. We can now go ahead and create Onepanel Workflow. This can be used from CVAT or can be executed directly.
+
+### Output path
+
+If we want Onepanel Workflows to store outputs on cloud storage, we can just write output to `/mnt/output/` and it will automatically upload outputs onto cloud storage. For this to work, we just need to add output artifact in our template as discussed in the following section.
 
 ## 4. Create a workflow
 
@@ -147,7 +152,7 @@ arguments:
     
   - name: dump-format
     value: cvat_coco
-    visibility: private
+    visibility: public
       
   - name: tf-image
     value: tensorflow/tensorflow:1.13.1-py3
@@ -181,8 +186,8 @@ templates:
       && python samples/coco/cvat.py train --dataset=/mnt/data/datasets \
         --model=workflow_maskrcnn \
         --extras="{{workflow.parameters.extras}}"  \
-        --ref_model_path="{{workflow.parameters.sys-finetune-checkpoint}}"  \
-        --num_classes="{{workflow.parameters.sys-num-classes}}" \
+        --ref_model_path="{{workflow.parameters.cvat-finetune-checkpoint}}"  \
+        --num_classes="{{workflow.parameters.cvat-num-classes}}" \
       && cd /mnt/src/ \
       && python prepare_dataset.py /mnt/data/datasets/annotations/instances_default.json
     command:
@@ -196,13 +201,13 @@ templates:
       name: output
     workingDir: /mnt/src
   nodeSelector:
-    beta.kubernetes.io/instance-type: '{{workflow.parameters.sys-node-pool}}'
+    beta.kubernetes.io/instance-type: '{{workflow.parameters.cvat-node-pool}}'
   inputs:
     artifacts:
     - name: data
       path: /mnt/data/datasets/
       s3:
-        key: '{{workflow.namespace}}/{{workflow.parameters.sys-annotation-path}}'
+        key: '{{workflow.namespace}}/{{workflow.parameters.cvat-annotation-path}}'
     - git:
         repo: '{{workflow.parameters.source}}'
         revision: "no-boto"
@@ -215,7 +220,7 @@ templates:
       optional: true
       path: /mnt/output
       s3:
-        key: '{{workflow.namespace}}/{{workflow.parameters.sys-output-path}}'
+        key: '{{workflow.namespace}}/{{workflow.parameters.cvat-output-path}}/{{workflow.name}}'
 volumeClaimTemplates:
 - metadata:
     creationTimestamp: null
@@ -239,13 +244,13 @@ volumeClaimTemplates:
 
 Even though this looks cryptic, it isn't. Let us go through following three steps to create template for DETR.
 
-1. Add/remove workflow parameters
+### Update workflow parameters
 
 The first thing you should do is add/remove parameters from above template. Now, how do you figure out which parameters should we use in there? It's simple. Use arguments/parameters that we take from user plus some system related parameter (optional). Some examples of this is `epochs`, `batch_size`, etc. Again, this depends on your code as well. In this case, our `main.py` accepts all those hyperparameters as an argument. If your code didn't have such an argument parser, then you can pass all hyperparameters, as shown above for `hyperparameters` parameter, and parse it in your code.
 
 First, we will update `source` parameter to use code that we just clones. We will also have to update docker image to use PyTorch with cuda. Since I will be deploying this on azure, I will use `Standard_NC6` for `sys-node-pool`. This machine has K80 GPU.
 
-Next, we will remove `hyperparameters`, `sys-num-classes`, and `sys-finetune-checkpoint` as we don't need them.
+Next, we will remove `hyperparameters`, `cvat-num-classes`, and `cvat-finetune-checkpoint` as we don't need them.
 
 ```yaml
 arguments:
@@ -270,7 +275,7 @@ arguments:
     
   - name: dump-format
     value: cvat_coco
-    visibility: private
+    visibility: public
       
   - name: pytorch-image
     value: pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
@@ -315,7 +320,7 @@ arguments:
     
   - name: dump-format
     value: cvat_coco
-    visibility: private
+    visibility: public
       
   - name: pytorch-image
     value: pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
@@ -333,11 +338,11 @@ arguments:
     value: '1'
     visibility: public
 ```
+### Update container block
 
 Now, let's take a look at the second block of base template.
 
 ```yaml
-
 entrypoint: main
 templates:
 - dag:
@@ -362,8 +367,8 @@ templates:
       && python samples/coco/cvat.py train --dataset=/mnt/data/datasets \
         --model=workflow_maskrcnn \
         --extras="{{workflow.parameters.extras}}"  \
-        --ref_model_path="{{workflow.parameters.sys-finetune-checkpoint}}"  \
-        --num_classes="{{workflow.parameters.sys-num-classes}}" \
+        --ref_model_path="{{workflow.parameters.cvat-finetune-checkpoint}}"  \
+        --num_classes="{{workflow.parameters.cvat-num-classes}}" \
       && cd /mnt/src/ \
       && python prepare_dataset.py /mnt/data/datasets/annotations/instances_default.json
     command:
@@ -383,12 +388,12 @@ templates:
     - name: data
       path: /mnt/data/datasets/
       s3:
-        key: '{{workflow.namespace}}/{{workflow.parameters.sys-annotation-path}}'
+        key: '{{workflow.namespace}}/{{workflow.parameters.cvat-annotation-path}}'
     - git:
         repo: '{{workflow.parameters.source}}'
         revision: "no-boto"
       name: src
-      path: /mnt/src
+      path: /mnt/src/{{workflow.name}}
   name: tensorflow
   outputs:
     artifacts:
@@ -396,8 +401,124 @@ templates:
       optional: true
       path: /mnt/output
       s3:
-        key: '{{workflow.namespace}}/{{workflow.parameters.sys-output-path}}'
+        key: '{{workflow.namespace}}/{{workflow.parameters.cvat-output-path}}/{{workflow.name}}'
 ```
 
-First thing we are going to do is rename the template name, its not required though. 
+First thing we are going to do is rename the template name from `tensorflow` to `detr`, its not required though. Then, we will remove that `no-boto` branch from `git` section as we will be using default (`master`) branch for DETR.
+
+Lastly, we just need to update the command that we execute to start training. You can see ~20 lines of commands. But we won't need that many for this. Let's remove those lines and write our own.
+
+```shell
+    apt-get update \
+    && apt-get install -y build-essential \
+    && pip install cython pycocotools scipy \
+    && python /mnt/src/prepare_data.py \
+    && python /mnt/src/main.py --coco_path=/mnt/data/datasets/ --output_dir=/mnt/output/ --batch_size={{workflow.parameters.batch-size}} --epochs={{workflow.parameters.epochs}}
+```
+We know that we need to run `prepare_data.py` script to modify paths as we discussed in the last section and run `main.py` to start the training.
+
+Finally, our updated block looks like this:
+
+```yaml
+entrypoint: main
+templates:
+- dag:
+    tasks:
+    - name: train-model
+      template: detr
+  name: main
+- container:
+    args:
+    - |
+      apt-get update \
+      && apt-get install -y build-essential \
+      && pip install cython pycocotools scipy \
+      && python /mnt/src/prepare_data.py \
+      && python /mnt/src/main.py --coco_path=/mnt/data/datasets/ --output_dir=/mnt/output/ --batch_size={{workflow.parameters.batch-size}} --epochs={{workflow.parameters.epochs}}
+    command:
+    - sh
+    - -c
+    image: '{{workflow.parameters.pytorch-image}}'
+    volumeMounts:
+    - mountPath: /mnt/data
+      name: data
+    - mountPath: /mnt/output
+      name: output
+    workingDir: /mnt/src
+  nodeSelector:
+    beta.kubernetes.io/instance-type: '{{workflow.parameters.sys-node-pool}}'
+  inputs:
+    artifacts:
+    - name: data
+      path: /mnt/data/datasets/
+      s3:
+        key: '{{workflow.namespace}}/{{workflow.parameters.cvat-annotation-path}}'
+    - git:
+        repo: '{{workflow.parameters.source}}'
+      name: src
+      path: /mnt/src
+  name: detr
+  outputs:
+    artifacts:
+    - name: model
+      optional: true
+      path: /mnt/output
+      s3:
+        key: '{{workflow.namespace}}/{{workflow.parameters.cvat-output-path}}/{{workflow.name}}'
+```
+
+Note that we also updated docker image parameter name to `pytorch-image`.
+
+We also attached some input and output artifacts. For inputs, we had training data and source code. For output, we will be dumping data from `/mnt/output/` directory to `{{workflow.namespace}}/{{workflow.parameters.cvat-output-path}}/{{workflow.name}}`.
+
+Also notice that we selected a node with machine that user specified through parameter `sys-node-pool`. What we are essentially doing here is that we are using PyTorch container on this machine, attaching input artifacts (i.e training data), and running commands that perform required tasks (i.e training a model).
+
+### Update volume claims
+
+Now, let's take a look at the final block.
+
+```yaml
+volumeClaimTemplates:
+- metadata:
+    creationTimestamp: null
+    name: data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 200Gi
+- metadata:
+    creationTimestamp: null
+    name: output
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 200Gi
+```
+
+As we can see, this block defines volume claims. Based on your model and data, you can change this from 200 GB to whatever you need. But I will keep this as it is.
+
+One last thing we need to do in order to use this template from CVAT is to add a label as shown below. If you want to use a Workflow in CVAT, please add a label with `key`=`used-by` and `value`=`cvat`.
+
+![Workflow Label](/img/update_labels.png)
+
+With this, we have a final template for training DETR model.
+
 ## 5. Using it in CVAT 
+
+Now, we can use this model to train models from CVAT.
+
+Click on `Actions` menu under the CVAT task you want to train model on, select `Execute training Workflow`.
+
+Select the newly created template. In my case, it was `DETR Training`.
+
+![DETR Execute](/img/detr_execute.png)
+
+Modify parameters, if you want. But changes aren't required. Just hit `Submit` and it will start the training by executing this workflow. 
+
+![DETR Training](/img/detr_training.png)
+
+You can find your trained model (i.e output) in `cvat-output-path` directory on your cloud storage.
