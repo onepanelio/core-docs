@@ -83,7 +83,7 @@ By default, you can use either Tensorflow OD API for bounding boxes or Mask RCNN
 
 ![Create Annotation Model](/img/create_annotation_model_base.png)
 
-Here, you can set various parameters for model training. You can select previously trained model as a checkpoint by setting `Checkpoint path`. For more information on these parameters, please take a look at our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model) on training models.
+Here, you can set various parameters for model training. You can select previously trained model as a checkpoint by setting `Checkpoint path`. For more information on these parameters, please take a look at our [documentation](./cvat_annotation_model) on training models.
 
 ## 4. Using machine learning model for pre-annotation
 

@@ -1,5 +1,5 @@
 ---
-title: Adding custom models to use in CVAT or Adding custom models on Onepanel
+title: Adding custom deep learning model Workflow to CVAT
 sidebar_label: Adding custom model
 description: Onepanel use case - computer vision automatic annotation
 ---
@@ -42,7 +42,7 @@ The only major different between running this code localy and in a workflow is t
 
 Now, let's see if DETR has main script which takes user inputs and runs training. If you look at `main.py` in the root directory, you will find that this script accepts a myriad of arguments from user and runs training/inference. So, we don't have to create a new script. 
 
-If your code supports one of the dataset format that CVAT can export into, then we have to modify only two things: input and output paths.
+**If your code supports one of the dataset format that CVAT can export into, then we have to modify only two things: input and output paths.**
 
 ### Input paths
 Since we will be mounting dataset at a fixed location (i.e `/mnt/data/datasets/`), you can hard-code this path in your code. Moreover, we also need to look at directory structure inside this directory. Since our code accepts data in COCO format, let's export data from CVAT in MS COCO format and take a look at it's directory structure.
@@ -54,7 +54,7 @@ If you are familiar with officail COCO directory structure or even take a look a
 So, we will need to make two changes.
 
 **1. Update directory structure in the code (`datasets/coco.py`).**
-This is very simple. We just need to update following lines from `datasets/coco.py`
+This is very simple. We just need to update following lines from [`datasets/coco.py`](https://github.com/onepanelio/detr/blob/master/datasets/coco.py#L151)
 
 ```python3
 PATHS = {
@@ -71,11 +71,11 @@ to
     }
 ```
 
-Please note that for simplicity we are using train set as a validation set. But that's not the right thing to do. You can split train set into train and val set. Or use other dataset present on cloud storage while executing the workflow.
+Please note that for simplicity we are using train set as a validation set. But that's not the ideal thing to do. You can split train set into train and val set. Or use other dataset present on cloud storage while executing the workflow.
 
 **2. Write a function/script to update `file_path` in a JSON file.**
 
-Since we will be mounting dataset at `/mnt/data/datasets/`, we can update paths in JSON accordingly. So, we will write a script that does this. And, we will execute this script before we call `main.py`.
+Since we will be mounting dataset at `/mnt/data/datasets/`, we can update paths in JSON accordingly. So, we will write a script (`prepare_data.py`) that does this. And, we will execute this script before we call `main.py`.
 
 ```python3
 def update_img_paths(args):
@@ -248,7 +248,7 @@ Even though this looks cryptic, it isn't. Let us go through following three step
 
 The first thing you should do is add/remove parameters from above template. Now, how do you figure out which parameters should we use in there? It's simple. Use arguments/parameters that we take from user plus some system related parameter (optional). Some examples of this is `epochs`, `batch_size`, etc. Again, this depends on your code as well. In this case, our `main.py` accepts all those hyperparameters as an argument. If your code didn't have such an argument parser, then you can pass all hyperparameters, as shown above for `hyperparameters` parameter, and parse it in your code.
 
-First, we will update `source` parameter to use code that we just clones. We will also have to update docker image to use PyTorch with cuda. Since I will be deploying this on azure, I will use `Standard_NC6` for `sys-node-pool`. This machine has K80 GPU.
+First, we will update `source` parameter to use code that we just clones. If your code is in private mode, please [refer to our guide](http://localhost:3000/docs/reference/workflows/templates#git-integration-with-workflows) on git integration to know how you can use private repositories with Workflows. We will also have to update docker image to use PyTorch with cuda. Since I will be deploying this on azure, I will use `Standard_NC6` for `sys-node-pool`. This machine has K80 GPU.
 
 Next, we will remove `hyperparameters`, `cvat-num-classes`, and `cvat-finetune-checkpoint` as we don't need them.
 
@@ -338,9 +338,9 @@ arguments:
     value: '1'
     visibility: public
 ```
-### Update container block
+### 1 - Update container block
 
-Now, let's take a look at the second block of base template.
+Now, let's take a look at the second block of a base template.
 
 ```yaml
 entrypoint: main

@@ -198,6 +198,40 @@ Using GCS
           name: onepanel
           key: serviceAccountKey
 ```
+
+### Git integration with Workflows
+
+You can also attach git repository (i.e Github) as an input artifact as follows.
+
+```yaml
+inputs:
+    artifacts:
+    - git:
+        repo: https://github.com/onepanelio/Mask_RCNN.git
+        revision: "no-boto"
+      name: src
+      path: /mnt/src
+```
+Here, we specified Github repository along with branch (`no-boto`). `path` specifies where to mount this repository.
+
+You can also use private repository with Workflows. For that, you first need to [create personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) from Github. Then, go to `Settings` and add following two environment variables. `GITHUB_USERNAME` and `GITHUB_PASSWORD`. For `GITHUB_PASSWORD`, you should be using your personal access token. Once this is done, you can modify above yaml section as follows to use private repository.
+
+```yaml
+inputs:
+    artifacts:
+    - git:
+        repo: https://github.com/onepanelio/Mask_RCNN.git
+        revision: "no-boto"
+        usernameSecret:
+            name: onepanel-default-env
+            key: GITHUB_USERNAME
+        passwordSecret:
+            name: github-creds
+            key: GITHUB_PASSWORD
+      name: src
+      path: /mnt/src
+```
+
 ### Archive
 
 Artifacts can be packaged as Tarballs and gzipped by specifying an archive strategy, using the `archive` field:
