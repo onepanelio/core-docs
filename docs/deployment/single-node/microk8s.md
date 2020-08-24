@@ -134,7 +134,9 @@ If you see a "not running" error, run `microk8s inspect`.
 2. Run the following command to initialize a `params.yaml` template for microk8s:
 
 ```bash
-opctl init --provider microk8s
+opctl init --provider microk8s \
+    --enable-metallb \
+    --artifact-repository-provider s3
 ```
 
 :::note

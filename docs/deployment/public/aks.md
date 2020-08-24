@@ -132,6 +132,7 @@ Download the [attached executable](https://github.com/onepanelio/core/releases/l
 
 ```bash
 opctl init --provider aks \
+    --artifact-repository-provider s3 \
     --enable-https \
     --enable-cert-manager \
     --dns-provider <dns-provider>

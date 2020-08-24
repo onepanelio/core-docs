@@ -35,7 +35,9 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
 2. Run the following command to initialize a `params.yaml` template for minikube:
 
 ```bash
-opctl init --provider minikube
+opctl init --provider minikube \
+    --enable-metallb \
+    --artifact-repository-provider s3
 ```
 
 3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.

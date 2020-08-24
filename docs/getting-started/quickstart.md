@@ -403,7 +403,7 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 
 ```bash
 opctl init --provider gke \
-  --artifact-repository-provider s3
+    --artifact-repository-provider s3
 ```
 
 </TabItem>
@@ -412,8 +412,8 @@ opctl init --provider gke \
 
 ```bash
 opctl init --provider minikube \
-  --enable-metallb \
-  --artifact-repository-provider s3
+    --enable-metallb \
+    --artifact-repository-provider s3
 ```
 
 :::note
@@ -430,8 +430,8 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 
 ```bash
 opctl init --provider microk8s \
-  --enable-metallb \
-  --artifact-repository-provider s3
+    --enable-metallb \
+    --artifact-repository-provider s3
 ```
 
 :::note
