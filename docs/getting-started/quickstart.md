@@ -378,7 +378,8 @@ Download the [attached executable](https://github.com/onepanelio/core/releases/l
 <TabItem value="aks">
 
 ```bash
-opctl init --provider aks
+opctl init --provider aks \
+  --artifact-repository-provider s3
 ```
 
 :::note
@@ -389,7 +390,8 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 <TabItem value="eks">
 
 ```bash
-opctl init --provider eks
+opctl init --provider eks \
+  --artifact-repository-provider s3
 ```
 
 :::note
@@ -400,7 +402,8 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 <TabItem value="gke">
 
 ```bash
-opctl init --provider gke
+opctl init --provider gke \
+  --artifact-repository-provider s3
 ```
 
 </TabItem>
@@ -408,7 +411,9 @@ opctl init --provider gke
 <TabItem value="minikube">
 
 ```bash
-opctl init --provider minikube --enable-metallb
+opctl init --provider minikube \
+  --enable-metallb \
+  --artifact-repository-provider s3
 ```
 
 :::note
@@ -424,7 +429,9 @@ If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid va
 <TabItem value="microk8s">
 
 ```bash
-opctl init --provider microk8s --enable-metallb
+opctl init --provider microk8s \
+  --enable-metallb \
+  --artifact-repository-provider s3
 ```
 
 :::note
