@@ -44,7 +44,7 @@ Now, let's see if DETR has main script which takes user inputs and runs training
 
 **If your code supports one of the dataset format that CVAT can export into, then we have to modify only two things: input and output paths.**
 
-### Input paths
+### a. Input paths
 Since we will be mounting dataset at a fixed location (i.e `/mnt/data/datasets/`), you can hard-code this path in your code. Moreover, we also need to look at directory structure inside this directory. Since our code accepts data in COCO format, let's export data from CVAT in MS COCO format and take a look at it's directory structure.
 
 ![COCO Directory Structure](/img/coco_dir.png)
@@ -92,7 +92,7 @@ def update_img_paths(args):
 
 Once this is done. We are good to go. We can now go ahead and create Onepanel Workflow. This can be used from CVAT or can be executed directly.
 
-### Output path
+### b. Output path
 
 If we want Onepanel Workflows to store outputs on cloud storage, we can just write output to `/mnt/output/` and it will automatically upload outputs onto cloud storage. For this to work, we just need to add output artifact in our template as discussed in the following section.
 
@@ -244,7 +244,7 @@ volumeClaimTemplates:
 
 Even though this looks cryptic, it isn't. Let us go through following three steps to create template for DETR.
 
-### Update workflow parameters
+### a. Update workflow parameters
 
 The first thing you should do is add/remove parameters from above template. Now, how do you figure out which parameters should we use in there? It's simple. Use arguments/parameters that we take from user plus some system related parameter (optional). Some examples of this is `epochs`, `batch_size`, etc. Again, this depends on your code as well. In this case, our `main.py` accepts all those hyperparameters as an argument. If your code didn't have such an argument parser, then you can pass all hyperparameters, as shown above for `hyperparameters` parameter, and parse it in your code.
 
@@ -338,7 +338,7 @@ arguments:
     value: '1'
     visibility: public
 ```
-### 1 - Update container block
+### b. Update container block
 
 Now, let's take a look at the second block of a base template.
 
@@ -473,7 +473,7 @@ We also attached some input and output artifacts. For inputs, we had training da
 
 Also notice that we selected a node with machine that user specified through parameter `sys-node-pool`. What we are essentially doing here is that we are using PyTorch container on this machine, attaching input artifacts (i.e training data), and running commands that perform required tasks (i.e training a model).
 
-### Update volume claims
+### c. Update volume claims
 
 Now, let's take a look at the final block.
 
