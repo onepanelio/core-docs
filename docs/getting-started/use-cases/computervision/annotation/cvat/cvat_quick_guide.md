@@ -10,7 +10,7 @@ For this quick start, we'll setup CVAT on Onepanel, annotate some images, train 
 
 ## 1. Setting up CVAT
 
-### Creating CVAT workspace
+### a. Creating CVAT workspace
 
 To launch CVAT, click on Workspaces, and you will find Create Workspace button as shown below.
 
@@ -24,7 +24,7 @@ Now, select CVAT, machine type, you can also modify other parameters such as dis
 Please note that the default CVAT workspace comes with a filesyncer which syncs data with your cloud provider. If the directory you will be syncing is large, make sure you allocate appropriate disk size for `share` mount.
 :::
 
-### Using filesyncer with CVAT
+### b. Using filesyncer with CVAT (optional)
 
 The default CVAT workspace comes with a file syncer which syncs local directory (`/mnt/share`) with directory on your cloud provider. You should not change the directory on local machine since CVAT reads data from that directory. However, you can specify directory on your cloud provider (i.e S3). In other words, you can use data available in that directory on cloud storage directly in CVAT (i.e Connected file storage).
 
@@ -32,7 +32,7 @@ File syncer downloads all data from cloud storage to local directory from where 
 
 ![CVAT sync directory](/img/sync_dir.png)
 
-### CVAT super user and environment variables (optional)
+### c. CVAT super user and environment variables (optional)
 
 CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you execute CVAT workspace. Your username will be `admin` and password will be onepanel token. Please note that you generated auth token for Onepanel while setting up the Onepanel. [See step #9](/docs/getting-started/quickstart#step-1-install-onepanel) of installation guide.
 
@@ -50,7 +50,7 @@ Now, you can give this task a name you like. Then, labels that you are intereste
 If you want to use data from your cloud storage while creating a new task, you can select `Connected file share` while creating new task. It will show all the files from `workflow-data` (by default) directory on cloud storage.
 ![Create task from shared storage](/img/create_new_task_shared.PNG)
 
-### Manual annotation
+### a. Manual annotation
 
 Once you have created a new task, you can start annotating your data. CVAT supports points, box, polylines, polygons for annotation. So, the first thing you should do is go to left sidebar and select the type of annotation you want as shown below. 
 
