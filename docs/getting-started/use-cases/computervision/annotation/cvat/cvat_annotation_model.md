@@ -51,13 +51,13 @@ Please note that number of classes will be automatically populated if you have `
 
 - Note that num_clones is 4 because there are 4 GPUs available.
 
-## Choosing the right base model
+### Choosing the right base model
 
 - We currently support several faster-rcnn models. All of these models are similar except that of the backbone used for the feature extraction. The backbones used are, in increasing order of complexity (i.e more layers), ResNet50, ResNet101, InceptionResNetV2. As the model complexity increases the computation requirement will also increase. If you have very complicated data (i.e hundreds of annotations in one image), then it is recommended that you choose complex model (i.e InceptionResNetV2).
 
 - Faster-rcnn models are generally more accurate than ssd models. However, sometimes you are better off using ssd models if your data is easy to learn (i.e 1 or 2 bounding box per image).
 
-### frcnn-nas-coco:
+#### frcnn-nas-coco:
 
 - If you are using `frcnn-nas-coco`, then please choose a machine with at least 2 GPUs as this model requires more memory. A machine with 1 GPU will throw an error.
 
@@ -70,7 +70,7 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 
-### frcnn-res101-coco: 
+#### frcnn-res101-coco: 
 
 This is a type of faster-rcnn model with ResNet101 backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). 
 
@@ -81,7 +81,7 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
-### frcnn-res101-lowp
+#### frcnn-res101-lowp
 
 This is a type of faster-rcnn model with ResNet101 backbone with low number of proposals. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
 
@@ -92,7 +92,7 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 
-### frcnn-res50-coco
+#### frcnn-res50-coco
 
  This is a type of faster-rcnn model with ResNet50 backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
 
@@ -102,10 +102,7 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
-
-
-
-### ssd-mobilenet-v2-coco:
+#### ssd-mobilenet-v2-coco
 
 SSD-based networks such as `ssd-mobilenet-v2` are faster than faster-rcnn based models. However, they are not as accurate as faster-rcnn based models. This model is generally recommended since its accurate and fast enough. If you don't know much about your data or the complexity of your data, then we recommend you go with this model.
 
@@ -115,9 +112,9 @@ This model is a good place to start if you don't have any specific model in mind
 
 Depending upon your data, you can set epochs to train your model. There is no standard value which can work for all datasets. You generally have to try different number of epochs to get the best model. Ideally, you do so by monitoring loss of your model while training. But if you are looking for a recommendation. Then, we recommend you set epochs as follows: (number of images / batch_size (default: 24)) * 1000. For instance, if you have 100 images, then your epochs will be 4000 (rounded). Please note that the model will be trained using a pre-trained model, so you don't need to train as long as you would have to when not using the pre-trained model.
 
-***Defaults***: batch_size: 24, learning_rate: 0.004, epochs=15000
+***Defaults***: batch_size: 24, learning_rate: 0.004, epochs=10000
 
-
+Please note that same instructions apply for ssd-mobilenet-v1 and ssd-mobilenetlite. The only difference is the backbone model (i.e mobilenet v1) that they use.
 
 
 ## Training MaskRCNN model through CVAT
