@@ -81,7 +81,7 @@ There, you can select any training workflows you like. You can add your own trai
 
 By default, you can use either Tensorflow OD API for bounding boxes or Mask RCNN for segmentation.
 
-![Create Annotation Model](/img/create_annotation_model_base.png)
+![Create Annotation Model](/img/maskrcnn-training.png)
 
 Here, you can set various parameters for model training. You can select previously trained model as a checkpoint by setting `Checkpoint path`. For more information on these parameters, please take a look at our [documentation](./cvat_annotation_model) on training models.
 

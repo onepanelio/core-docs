@@ -126,7 +126,7 @@ MaskRCNN is a popular model for segmentation tasks. We use [this](https://github
 
 The process to train a Mask-RCNN model on CVAT is similar to the above process except that you need to select Mask-RCNN after clicking on Create Annotation Model.
 
-![MaskRCNN Workflow](/img/create_annotation_model_base.png)
+![MaskRCNN Workflow](/img/maskrcnn-training.png)
 
 ***Parameters***: Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
 We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
