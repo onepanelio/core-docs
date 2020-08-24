@@ -102,8 +102,7 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
-
-#### ssd-mobilenet-v2-coco:
+#### ssd-mobilenet-v2-coco
 
 SSD-based networks such as `ssd-mobilenet-v2` are faster than faster-rcnn based models. However, they are not as accurate as faster-rcnn based models. This model is generally recommended since its accurate and fast enough. If you don't know much about your data or the complexity of your data, then we recommend you go with this model.
 
