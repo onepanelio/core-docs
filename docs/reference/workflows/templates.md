@@ -226,7 +226,7 @@ inputs:
             name: onepanel-default-env
             key: GITHUB_USERNAME
         passwordSecret:
-            name: github-creds
+            name: onepanel-default-env
             key: GITHUB_PASSWORD
       name: src
       path: /mnt/src
