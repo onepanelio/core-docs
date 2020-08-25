@@ -66,15 +66,6 @@ Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksct
 :::
 
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
-<Tabs
-  groupId="operating-system"
-  defaultValue="linux"
-  values={[
-      { label: 'Linux', value: 'linux', },
-      { label: 'Windows', value: 'windows', },
-      ]
-      }>
-<TabItem value="linux">
 
 ```bash
 eksctl create cluster --name=<cluster-name> --region <region> \
@@ -87,23 +78,6 @@ eksctl create cluster --name=<cluster-name> --region <region> \
     --managed \
     --ssh-access
 ```
-</TabItem>
-
-<TabItem value="windows">
-
-```shell script
-eksctl create cluster --name=<cluster-name> --region <region>^
-    --nodes 2^
-    --node-type m5.xlarge^
-    --node-volume-size 100^
-    --nodes-min 2^
-    --nodes-max 2^
-    --asg-access^
-    --managed^
-    --ssh-access
-```
-</TabItem>
-</Tabs>
 
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
 
