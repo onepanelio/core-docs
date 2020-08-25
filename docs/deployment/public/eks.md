@@ -17,6 +17,16 @@ We recommend launching a cluster with 2 `m5.xlarge` nodes to start, with autosca
 
 Here are sample `eksctl` commands to create a bare minimum cluster:
 
+<Tabs
+  groupId="operating-system"
+  defaultValue="linux"
+  values={[
+      { label: 'Linux', value: 'linux', },
+      { label: 'Windows', value: 'windows', },
+      ]
+      }>
+<TabItem value="linux">
+
 ```bash
 eksctl create cluster --name=<cluster-name> --region <region> \
     --nodes 2  \
@@ -28,6 +38,23 @@ eksctl create cluster --name=<cluster-name> --region <region> \
     --managed \
     --ssh-access
 ```
+</TabItem>
+
+<TabItem value="windows">
+
+```shell script
+eksctl create cluster --name=<cluster-name> --region <region>^
+    --nodes 2^
+    --node-type m5.xlarge^
+    --node-volume-size 100^
+    --nodes-min 2^
+    --nodes-max 2^
+    --asg-access^
+    --managed^
+    --ssh-access
+```
+</TabItem>
+</Tabs>
 To enable auto scaling see [Enable Auto Scaling](https://eksctl.io/usage/autoscaling/)
 
 To enable network policy see [Installing Calico on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/calico.html)
