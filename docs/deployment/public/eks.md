@@ -8,8 +8,12 @@ import TabItem from '@theme/TabItem';
 
 This document outlines the installation steps for Amazon Elastic Kubernetes Service (EKS).
 
+:::tip
+This document outlines a production deployment of Onepanel. If you want to quickly try Onepanel, start with our [Quick start](/docs/getting-started/quickstart).
+:::
+
 ## Launch an EKS cluster
-:::important
+:::note
 Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) is installed before proceeding.
 :::
 

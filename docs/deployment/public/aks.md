@@ -8,8 +8,12 @@ import TabItem from '@theme/TabItem';
 
 This document outlines the installation steps for Azure Kubernetes Service (AKS).
 
+:::tip
+This document outlines a production deployment of Onepanel. If you want to quickly try Onepanel, start with our [Quick start](/docs/getting-started/quickstart).
+:::
+
 ## Launch an AKS cluster
-:::important
+:::note
 Make sure [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) (`az`) is installed before proceeding.
 :::
 

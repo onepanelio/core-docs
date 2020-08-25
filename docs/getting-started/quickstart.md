@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and then using `opctl`, you generate a `params.yaml` file and update it to configure your deployment. Once complete, you can access your deployment from any browser using your Kubernetes authentication token. Finally, you can run a Workflow or create a Workspace.
 
 :::important
-The steps in the Quick start allow you to quickly setup a Onepanel cluster for testing. To setup a production cluster with TLS and auto scaling enabled see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud).
+The steps in the quick start allow you to quickly create a Onepanel cluster for testing. To create a production cluster with TLS and auto scaling enabled see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud).
 
 You can also [add components](/docs/deployment/upgrade/overview) at later time to make this cluster production ready.
 :::

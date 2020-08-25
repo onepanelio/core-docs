@@ -8,8 +8,12 @@ import TabItem from '@theme/TabItem';
 
 This document outlines the installation steps for Google Kubernetes Engine (GKE).
 
+:::tip
+This document outlines a production deployment of Onepanel. If you want to quickly try Onepanel, start with our [Quick start](/docs/getting-started/quickstart).
+:::
+
 ## Launch a GKE cluster
-:::important
+:::note
 Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is installed before proceeding.
 :::
 
