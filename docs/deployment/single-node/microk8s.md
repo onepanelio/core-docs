@@ -147,7 +147,7 @@ opctl init --provider microk8s --enable-metallb
 :::
 
 
-3. Populate `params.yaml` before applying, follow the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
+3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
 :::note
 See [configuration metallb](/docs/deployment/configuration/files#metal-lb) for metallb specific details. 

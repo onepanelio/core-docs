@@ -40,7 +40,7 @@ opctl init --provider minikube \
     --artifact-repository-provider s3
 ```
 
-3. Populate `params.yaml` by following the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
+3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
 4. Finally, run the following command to deploy to your cluster:
 
