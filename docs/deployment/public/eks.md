@@ -55,6 +55,7 @@ eksctl create cluster --name=<cluster-name> --region <region>^
 ```
 </TabItem>
 </Tabs>
+
 To enable auto scaling see [Enable Auto Scaling](https://eksctl.io/usage/autoscaling/)
 
 To enable network policy see [Installing Calico on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/calico.html)
