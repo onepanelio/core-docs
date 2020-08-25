@@ -14,7 +14,16 @@ You can initialize configuration files by running the following command. See [co
 opctl init --provider <provider-name>
 ```
 
-Available provider options are: `aks`, `eks` and `gke` for public cloud installations.
+Available provider options are: `aks`, `eks` and `gke` for public cloud installations and `minikube`, `microk8s` for local installations.
+
+To use an artifact repository other than `s3` use the `--artifact-repository-provider` flag:
+
+```bash
+opctl init --provider <provider-name> \
+    --artifact-repository-provider <object-storage-provider>
+```
+
+Available options for `--artifact-repository-provider` are `s3` and `gcs`.
 
 HTTPS is not enabled by default, to enable HTTPS but manage the TLS certificate yourself:
 
@@ -34,6 +43,7 @@ opctl init --provider <provider-name> \
 :::tip
 Refer to [TLS certificates](/docs/deployment/configuration/tls) section for more information and a list of supported DNS providers.
 :::
+
 
 To add ElasticSearch, Fluentd, and Kibana (EFK) logging, add the `--enable-logging` flag.
 

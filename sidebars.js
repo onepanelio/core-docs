@@ -56,6 +56,10 @@ module.exports = {
                 {
                   type: 'doc',
                   id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model'
+                },
+                {
+                  type: 'doc',
+                  id: 'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model'
                 }
               ]
             }
@@ -123,6 +127,16 @@ module.exports = {
       label: 'Workflows',
       items: [
         'reference/workflows/templates',
+        'reference/workflows/create',
+        'reference/workflows/execute'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Services',
+      items: [
+        'reference/services/overview',
+        'reference/services/modeldb'
       ]
     },
   ]

@@ -5,12 +5,14 @@ description: Creating Workspace Templates for multiple environments like CVAT, V
 ---
 
 :::tip
-See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workspaces) for a list of ready to use Workspace Template.
+See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workspaces) for a list of ready to use Workspace Templates. You can also use these as reference for defining youur own Workspace Templates.
 :::
 
 ## Getting started with Workspace Templates
 
 You can define reusable templates for Workspaces. Workspace Templates are a combination of Docker images and a YAML definition. Each section in this template abstracts and simplifies Kubernetes YAML and at the same time provides maximum flexibility.
+
+Onepanel's Workspace Template YAML definitions are composed of subsets of Kubernetes and Istio YAML definitions.
 
 Here's a simple NGINX Workspace Template definition:
 
@@ -34,7 +36,7 @@ containers:
     name: http # a friendly name for the port.
   # Volumes to be mounted in this container
   # Onepanel will automatically create these volumes and mount them to the container.
-  # You choose the size when you start the workspace.
+  # You can choose the size of the volume when you start the workspace.
   volumeMounts:
   - name: data
     mountPath: /data
@@ -84,6 +86,20 @@ postExecutionWorkflow:
 ```
 
 ## Sections
+
+### Workspace Access on Minikube
+
+When running workspaces on Minikube, extra steps are necessary to properly access the workspace.
+DNS on a local machine needs extra updates.
+
+The following needs to be added to `/etc/hosts`
+```text
+<workspacename>--<namespace>.app.example.com  <minikube-ip>
+```
+So if you create a workspace with the name "cvat" under namespace "default".
+```text
+cvat--default.app.example.com  <minikube-ip>
+```
 
 ### arguments (optional)
 #### parameters
@@ -148,31 +164,95 @@ volumeClaimTemplates:
 
 ### containers
 
-Here you define all information related to what application(s) you want to run.
-You can customize the image used, configure any ports that are used by the image, and attach volume(s) for storing your data.
+This is where you define the container(s) that your Workspace needs to function.
+
+#### name
+
+The name of the container, should be unique in this template definition.
 
 #### image
 
 The image you want to use for your application. 
 
-Some examples
+Some examples include:
 
 * nodered/node-red
 * codercom/code-server:3.3.1 
 * jupyter/tensorflow-notebook
 
 
+#### command and args
+If you want to override the Docker image [ENTRYPOINT](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint), then you can use a combination of `command` and `args` fields to do that, for example:
+
+```yaml
+containers:
+- name: jupyterlab-tensorflow 
+  image: jupyter/tensorflow-notebook # use jupyterlab
+  command: [start.sh, jupyter] # use the start.sh script with jupyter
+  args: 
+    - lab
+    - --LabApp.token='' 
+    - --LabApp.allow_remote_access=True
+    - --LabApp.allow_origin="*"
+    - --LabApp.disable_check_xsrf=True
+    - --LabApp.trust_xheaders=True
+    - --LabApp.tornado_settings=$(tornado) 
+    - --LabApp.base_url=/jupyter # this makes jupyter be okay with serving at /jupyter
+    - --notebook-dir='/data' # use the mounted volume for storing data
+...
+```
+
+For more information, see [Define a Command and Arguments for a Container](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/) in Kubernetes docs.
+
+#### env
+These are environment variables that you want to define specifically for this Workspace.
+
+Example:
+```yaml
+containers:
+- name: jupyterlab-tensorflow 
+  image: jupyter/tensorflow-notebook # use jupyterlab
+...
+  env:
+    - name: tornado # These are the tornado settings
+      # This allows us to embed jupyter in an iframe
+      value: "{ 'headers': { 'Content-Security-Policy': \"frame-ancestors * 'self'\" }  }"
+...
+```
+
+:::note
+Onepanel automatically adds certain [Environment variables](http://localhost:3000/docs/getting-started/concepts/environment-variables) along with the ones you define in the **Settings** section before these environment variables. Though not recommended, you can override those by naming these environment variables the same.
+:::
+
 #### container ports
 
 These are the ports needed by the image you use. Make sure to add all of the ones you want to have access to.
+
 * For the `nginxdemos/hello` we need port *80*. 
 * For `jupyter/tensorflow-notebook` we need port *8888*.
 
+
+#### volumeMounts
+
+This is where you define volumes to be mounted in a container. Onepanel will automatically create these volumes and mount them to the container. You can choose the size of the volume when you start the workspace.
+
+For example, the following will mount a volume in your container at `/data` path:
+
+```yaml
+volumeMounts:
+- name: data
+  mountPath: /data
+```
+
+:::note
+You can mount an number of volumes allowed by the cloud provider's machine type. There is generally a limit on how many disks you can attach based on the size of the machine.
+:::
+
 ### ports
 
-These identify what ports your workspace exposes and the protocol used. These are *NOT* the same as container ports.
-Your workspace will have a url you can visit in your browser, and it is the ports defined under this section that are visible.
-Each port maps to a container port. So if you have port *8888* on your container, but you want to reach it via http (port *80*), use
+These identify what ports your workspace exposes and the protocol used. These are *NOT* the same as container ports. Your workspace will have a url you can visit in your browser, and it is the ports defined under this section that are visible.
+
+Each port can map to a container port. So if you have port *8888* on your container, but you want to reach it via http (port *80*), use:
 
 ```yaml
 ports:
@@ -185,7 +265,8 @@ ports:
 ### routes
 
 These are the urls that you can reach on your workspace. Each one must map to a port defined under `ports`.
-If you want the root of your workspace to take you to your only image, use this
+
+For example, if you want the root of your workspace to take you to your only container running under port `80`:
 
 ```yaml
 routes:
@@ -198,6 +279,31 @@ routes:
         number: 80 # this is the port number under ports.
 ```
 
+You can also do regex matching:
+
+```yaml
+- match:
+  - uri:
+      regex: /api/.*|/tensorflow/.*  # Route paths that match this regex to port 80
+  route:
+  - destination:
+      port:
+        number: 80
+```
+
+Or query parameter matching:
+
+```yaml
+- match:
+  - queryParams:
+      id:
+        regex: \d+.*  # Route query parameter id=<number> to port 80
+  route:
+  - destination:
+      port:
+        number: 80
+```
+
 ### volumeClaimTemplates (optional)
 By setting the `volumeClaimTemplates` field, you can override the volumes that Onepanel automatically generates. This is useful if you want to define your own `storageClass` or make the storage size to a static number.
 
@@ -205,7 +311,7 @@ Note that the automatically generated volume is overwritten only if the `name` i
 
 ### postExecutionWorkflow (optional)
 
-This is a DAG workflow that runs after your workspace is ready. Check out [Workflow templates](/docs/reference/workflows/templates) for more information.
+This is a DAG workflow that runs after your workspace is ready. For more information, see [Workflow Templates](/docs/reference/workflows/templates).
 
 ## More involved example
 
@@ -221,10 +327,6 @@ containers:
 - name: jupyterlab-tensorflow 
   image: jupyter/tensorflow-notebook # use jupyterlab
   command: [start.sh, jupyter] # use the start.sh script with jupyter
-  env: # we define an environment variable because the parser doesn't like JSON in the arguments
-    - name: tornado # These are the tornado settings
-      # This allows us to embed jupyter in an iframe
-      value: "{ 'headers': { 'Content-Security-Policy': \"frame-ancestors * 'self'\" }  }"
   args: 
     - lab
     - --LabApp.token='' 
@@ -235,6 +337,10 @@ containers:
     - --LabApp.tornado_settings=$(tornado) 
     - --LabApp.base_url=/jupyter # this makes jupyter be okay with serving at /jupyter
     - --notebook-dir='/data' # use the mounted volume for storing data
+  env:
+    - name: tornado # These are the tornado settings
+      # This allows us to embed jupyter in an iframe
+      value: "{ 'headers': { 'Content-Security-Policy': \"frame-ancestors * 'self'\" }  }"
   ports:
   - containerPort: 8888 # jupyter, by default, wants port 8888
     name: jupyterlab

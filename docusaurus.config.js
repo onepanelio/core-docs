@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Onepanel CE',
-  tagline: 'Build highly scalable, distributed and reproducible computer vision workflows on any cloud or on-premises.',
+  title: 'Full stack vision AI on Kubernetes',
+  tagline: 'Onepanel is a unified vision AI platform with fully integrated modules for model building, semi-automated labeling, training, pipelines and model serving.',
   url: 'https://docs.onepanel.ai',
   baseUrl: '/',
   favicon: 'img/favicon.png',
@@ -19,6 +19,8 @@ module.exports = {
         {to: 'docs/deployment/overview', label: 'Deploy and Manage', position: 'left'},
         {to: 'docs/reference/overview', label: 'Reference', position: 'left'},
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
+        {href: 'https://github.com/onepanelio/core/releases', label: 'Releases', position: 'left'},
+        {href: 'https://github.com/onepanelio/core/milestones?direction=asc&sort=due_date&state=open', label: 'Roadmap', position: 'left'},
         // {to: 'blog', label: 'Changelog', position: 'left'},
         {
           position: 'right',

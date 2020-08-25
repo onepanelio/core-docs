@@ -31,6 +31,10 @@ ol > li::marker {
   background-size: 1.25rem 1.25rem;
 }
 
+.features_src-pages- a {
+  text-decoration: underline;
+}
+
 .header-icon-link {
   padding: 8px;
   opacity: 0.8;
@@ -74,8 +78,14 @@ ol > li::marker {
   color: #ff9100;
 }
 
+.hero__name {
+  color: var(--ifm-font-base-color-inverse);
+  font-size: 3rem;
+}
+
 .hero__title {
   color: var(--ifm-font-base-color-inverse);
+  font-size: 2rem;
 }
 
 .hero__video {

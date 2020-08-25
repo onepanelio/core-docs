@@ -1,11 +1,11 @@
 ---
 title: Workflow Templates
 sidebar_label: Workflow Templates
-description: Creating Workflow Templates for training models, ETL tasks and more on Onepanel 
+description: Workflow Templates for training models, ETL tasks and more on Onepanel 
 ---
 
 :::tip
-See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workflows) for a list of ready to use Workflow Templates.
+See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workflows) for a list of ready to use Workflow Templates. You can also use these as reference for defining youur own Workflow Templates.
 :::
 
 ## Getting started with Workflow Templates
@@ -184,6 +184,52 @@ templates:
           name: my-s3-credentials
           key: secretKey
 
+```
+
+Using GCS
+```yaml
+...
+    - name: output-three
+      path: /tmp/output
+      gcs:
+        bucket: bucketofplenty
+        key: /your/path
+        serviceAccountKeySecret:
+          name: onepanel
+          key: serviceAccountKey
+```
+
+### Git integration with Workflows
+
+You can also attach git repository (i.e Github) as an input artifact as follows.
+
+```yaml
+inputs:
+    artifacts:
+    - git:
+        repo: https://github.com/onepanelio/Mask_RCNN.git
+        revision: "no-boto"
+      name: src
+      path: /mnt/src
+```
+Here, we specified Github repository along with branch (`no-boto`). `path` specifies where to mount this repository.
+
+You can also use private repository with Workflows. For that, you first need to [create personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) from Github. Then, go to `Settings` and add following two environment variables. `GITHUB_USERNAME` and `GITHUB_PASSWORD`. For `GITHUB_PASSWORD`, you should be using your personal access token. Once this is done, you can modify above yaml section as follows to use private repository.
+
+```yaml
+inputs:
+    artifacts:
+    - git:
+        repo: https://github.com/onepanelio/Mask_RCNN.git
+        revision: "no-boto"
+        usernameSecret:
+            name: onepanel-default-env
+            key: GITHUB_USERNAME
+        passwordSecret:
+            name: onepanel-default-env
+            key: GITHUB_PASSWORD
+      name: src
+      path: /mnt/src
 ```
 
 ### Archive
