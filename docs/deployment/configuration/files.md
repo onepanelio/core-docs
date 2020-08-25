@@ -287,13 +287,44 @@ If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and 
 See [TLS certificates](/docs/deployment/configuration/tls) for more information about configuring this section.
 
 ### database
-This is the database settings section. 
+This is the database settings section.
+
+#### Production database
+For a production deployment, use a managed PostgresSQL database like [Amazon RDS](https://aws.amazon.com/rds/), [Azure Database](https://azure.microsoft.com/en-us/services/postgresql/) or [Google Cloud SQL](https://cloud.google.com/sql).
+
+Note that you can update your settings as many times as you like and simply run `opctl apply` again to update your your database settings in the cluster.
+
+Example production database settings:
+
+
+```yaml
+database:
+  databaseName: onepanel
+  driverName: postgres
+  host: my-onepanel-db.postgres.database.azure.com
+  password: verystrongproductionpassword
+  port: 5432
+  username: onepanel
+```
+
+#### Test database
 
 For a test cluster, you can set the database `host` to `postgres` and use any `username` or `password`. This database will be automatically created in the cluster with the information you entered.
 
-Note that you cannot change the username/password for the test database once it's created.
+Note that you cannot change the username/password for the test database once it's created, so if you make a mistake, you will have to delete the test database and run `opctl apply` again:
 
-Example:
+```bash
+# delete test database and its related volume
+kubectl delete statefulset postgres -n onepanel
+kubectl delete pvc postgres-pv-claim-postgres-0 -n onepanel
+
+# Update your database settings
+
+# Run opctl apply again to recreate the test database
+opctl apply
+```
+
+Example test database settings:
 
 ```yaml
 database:
@@ -302,15 +333,8 @@ database:
   host: postgres
   password: mypassword
   port: 5432
-  # Database username
-  # If using an external production database, use the username for that database.
-  # For in-cluster test database, use any username you like.
   username: onepanel
 ```
-
-:::important
-For a production environment, use a managed database service and set the configuration accordingly.
-:::
 
 ### metalLB
 This is to configure a load balancer for local or bare-metal deployments.
