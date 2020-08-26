@@ -16,7 +16,6 @@ Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https
 You can also bring your own labeling tool as a reproducible template in Onepanel. See our [Workspace templates documentation](http://localhost:3000/docs/reference/workspaces/templates) for more information.
 :::
 
-
 1. Go to **Workspaces** and click **Create Workspace**.
 ![Create Workspace](/img/create_workspaces_button_in_workspaces_page.png)
 
@@ -62,11 +61,9 @@ Onepanel's FileSyncer automatically syncs files from your object storage locatio
 CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you create a new CVAT workspace. Your username will be `admin` and password will be onepanel token. Please note that you generated auth token for Onepanel while setting up the Onepanel. [See step #9](/docs/getting-started/quickstart#step-1-install-onepanel) of installation guide.
 :::
 
-
 ## 2. Annotating frames in CVAT
 
 Once you have created a new task, you can start annotating your data. CVAT supports points, box, polylines, polygons for annotation. 
-
 
 1. Click **Open** to open task details.
 ![](/img/cvat_open.png)
@@ -95,7 +92,6 @@ Please note that you can use pre-trained models for pre-annotation of your frame
 ## 3. Training new annotation model from CVAT
 
 Onepanel also allows you to train or further finetune your model for pre-annotation in CVAT or any other use cases. Once you are done with your annotation or adjustment to pre-annotation, you can train a new model on it. 
-
 
 1. Click on **Actions** for a task you want to train a model on. Then, click on **Execute training Workflow**.
 ![Select training workflow](/img/cvat_select_workflow_execution.png)
