@@ -21,7 +21,7 @@ If you are on Windows, you may need to use `^` instead of `\` for any multi-line
 :::
 
 ## Step 0: Create a Kubernetes cluster
-Next, create a Kubernetes cluster in one of the following cloud providers:
+Let's get started by creating a Kubernetes cluster in one of the following cloud providers:
 
 <Tabs
   groupId="cloud-provider"
@@ -666,18 +666,54 @@ You should see the website load up.
 opctl auth token
 ```
 
-## Step 2: Launch CVAT for annotation
-You can use the built-in CVAT to annotate visual data (images, videos). To launch CVAT, click on Workspaces, and you will find Create Workspace button as shown below.
+## Step 2: Annotate your data
 
+Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https://github.com/opencv/cvat), allowing you to annotate images and videos and then train models on the annotated data with a few clicks. You can then use these newly trained models to automatically pre-annotate additional data, iteratively improving your object detection or semantic segmentation models.
+
+:::tip
+You can also bring your own labeling tool as a reproducible template in Onepanel. See our [Workspace templates documentation](http://localhost:3000/docs/reference/workspaces/templates) for more information.
+:::
+
+1. Go to **Workspaces** and click **Create Workspace**.
 ![Create Workspace](/img/create_workspaces_button_in_workspaces_page.png)
 
-Now, select CVAT, machine type, you can also modify other parameters such as disk size. Once done, click on `CREATE AND RUN`. This will launch a new CVAT workspace. Please note that minimum RAM requirement for CVAT is 16GB.
+2. Select the CVAT template and enter a name for your Workspace.
+![](../../static/img/quickstart-115738.png)
 
-![Create CVAT](/img/launch_cvat.png)
+3. Select a node pool that Onepanel will use to provision a machine for running CVAT. CVAT requires at least 16GB of RAM.
+![](../../static/img/quickstart-133251.png)
+:::note
+Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 6 volumes, so make sure to pick a machine that can support at least that many volumes.
+:::
+:::tip
+You can switch to a different node pool (for example one that supports GPUs) in a running Workspace at any time by clicking the Onepanel icon in the bottom right corner of your Workspace.
+:::
 
-Once in CVAT, you can annotate imges with bounding boxes, polygons, polylines, points, etc.
+4. Next, add the directory you want Onepanel to pull raw input data and store training output (pickled models, classes, etc.). This directory should be in the default object storage you configured when you launched Onepanel and in a directory that matches your current namespace.
+![](../../static/img/quickstart-171037.png)
 
-![CVAT sample](/img/draw_shape.PNG)
+5. Click **Create and Run** to launch your CVAT Workspace.
+
+6. Once CVAT is running, click **View**.
+![](../../static/img/quickstart-173734.png)
+
+7. In CVAT, click **Create new task**.
+![](../../static/img/quickstart-173841.png)
+
+8. Enter a name for your task and then under **Constructor**, add your labels. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#creating-an-annotation-task) for additional information on more advanced label configuration.
+
+9. Under "Select files", click **Connected file share**. Files from your object storage location above should have already synced here. Pick the ones you want to annotate.
+![](../../static/img/quickstart-180004.png)
+:::important
+Onepanel's FileSyncer automatically syncs files from your object storage location to this CVAT instance every 5 minutes.
+:::
+
+10. Click **Submit** and then click the **Tasks** menu item to go to the tasks list.
+
+11. Click **Open** to open task details.
+![](../../static/img/quickstart-181152.png)
+
+12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
 
 ## Step 3: Train a model on annotated data
 
