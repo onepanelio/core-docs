@@ -678,10 +678,10 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
 ![Create Workspace](/img/create_workspaces_button_in_workspaces_page.png)
 
 2. Select the CVAT template and enter a name for your Workspace.
-![](../../static/img/quickstart-115738.png)
+![](/img/quickstart-115738.png)
 
 3. Select a node pool that Onepanel will use to provision a machine for running CVAT. CVAT requires at least 16GB of RAM.
-![](../../static/img/quickstart-133251.png)
+![](/img/quickstart-133251.png)
 :::note
 Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 6 volumes, so make sure to pick a machine that can support at least that many volumes.
 :::
@@ -690,20 +690,20 @@ You can switch to a different node pool (for example one that supports GPUs) in 
 :::
 
 4. Next, add the directory you want Onepanel to pull raw input data and store training output (pickled models, classes, etc.). This directory should be in the default object storage you configured when you launched Onepanel and in a directory that matches your current namespace.
-![](../../static/img/quickstart-171037.png)
+![](/img/quickstart-171037.png)
 
 5. Click **Create and Run** to launch your CVAT Workspace.
 
 6. Once CVAT is running, click **View**.
-![](../../static/img/quickstart-173734.png)
+![](/img/quickstart-173734.png)
 
 7. In CVAT, click **Create new task**.
-![](../../static/img/quickstart-173841.png)
+![](/img/quickstart-173841.png)
 
 8. Enter a name for your task and then under **Constructor**, add your labels. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#creating-an-annotation-task) for additional information on more advanced label configuration.
 
 9. Under "Select files", click **Connected file share**. Files from your object storage location above should have already synced here. Pick the ones you want to annotate.
-![](../../static/img/quickstart-180004.png)
+![](/img/quickstart-180004.png)
 :::important
 Onepanel's FileSyncer automatically syncs files from your object storage location to this CVAT instance every 5 minutes.
 :::
@@ -711,7 +711,7 @@ Onepanel's FileSyncer automatically syncs files from your object storage locatio
 10. Click **Submit** and then click the **Tasks** menu item to go to the tasks list.
 
 11. Click **Open** to open task details.
-![](../../static/img/quickstart-181152.png)
+![](/img/quickstart-181152.png)
 
 12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
 
