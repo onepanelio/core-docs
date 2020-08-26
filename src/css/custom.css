@@ -278,14 +278,14 @@ ol > li::marker {
   min-height: 120px;
 }
 
-.integrations .grid-item img {
-  width: 40px;
-  height: 40px;
-}
-
 p > img {
   border: 1px solid #eee;
   border-radius: 6px;
   margin: 10px 0 5px 0;
   padding: 1px;
+}
+
+.integrations .grid-item img {
+  width: 40px;
+  height: 40px;
 }

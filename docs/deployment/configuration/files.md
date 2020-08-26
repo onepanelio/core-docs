@@ -296,7 +296,6 @@ Note that you can update your settings as many times as you like and simply run 
 
 Example production database settings:
 
-
 ```yaml
 database:
   databaseName: onepanel
