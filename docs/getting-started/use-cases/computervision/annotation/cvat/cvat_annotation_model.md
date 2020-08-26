@@ -1,9 +1,8 @@
 ---
 title: Creating annotation models on CVAT
-sidebar_label: Create annotation model
+sidebar_label: Creating annotation model
 description: Onepanel use case - computer vision automatic annotation
 ---
-
 
 ## Why pre-annotate?
 Pre-annotation will cut the time to annotate large amounts of data by orders of magnitude. The idea is simple, annotate once then QC each successive dataset after.

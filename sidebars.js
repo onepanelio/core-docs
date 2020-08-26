@@ -34,40 +34,6 @@ module.exports = {
       ]
     },
     {
-      type: 'category',
-      label: 'Use cases',
-      items: [
-        {
-          type: 'category',
-          label: 'Computer vision',
-          items: [
-            {
-              type: 'category',
-              label: 'Auto annotation with CVAT',
-              items: [
-                {
-                  type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide'
-                },
-                {
-                  type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation'
-                },
-                {
-                  type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model'
-                },
-                {
-                  type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model'
-                }
-              ]
-            }
-          ]
-         }
-       ]
-    },
-    {
       type: 'doc',
       id: 'getting-started/contributing',
     },
@@ -129,6 +95,16 @@ module.exports = {
         'reference/workflows/templates',
         'reference/workflows/create',
         'reference/workflows/execute'
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'Auto annotation with CVAT',
+      items: [
+        'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide',
+        'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model',
+        'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation',
+        'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model',
       ]
     },
     {

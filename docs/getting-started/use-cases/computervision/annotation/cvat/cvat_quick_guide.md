@@ -1,6 +1,6 @@
 ---
-title: Quick start
-sidebar_label: Quick start
+title: Getting started
+sidebar_label: Getting started
 description: Onepanel use case - computer vision automatic annotation
 ---
 
