@@ -99,7 +99,7 @@ Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is
 Run this `gcloud` command to create a bare minimum cluster with 2 `n1-standard-4` nodes:
 
 ```bash
-gcloud container --project <project-name> clusters create <cluster-name> --zone <zone> \
+gcloud container --project <project-name> clusters create <cluster-name> --zone <zone> --node-locations <single-location> \
     --num-nodes 2 \
     --machine-type n1-standard-4 \
     --disk-size 100 \
