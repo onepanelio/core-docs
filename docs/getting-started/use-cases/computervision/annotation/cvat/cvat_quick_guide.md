@@ -106,11 +106,9 @@ Onepanel also allows you to train or further finetune your model for pre-annotat
 
 :::tip
 Please note you can easily add your own models as well. Please refer our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models. 
-:::
-:::note
+
 You can also use this trained model to run pre-annotation in CVAT. Please refer our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation) for more information on pre-annotation.
 :::
-
 
 ## 4. Using deep learning models for pre-annotation
 
