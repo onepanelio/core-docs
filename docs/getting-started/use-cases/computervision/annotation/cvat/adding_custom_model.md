@@ -248,7 +248,7 @@ Even though this looks cryptic, it isn't. Let us go through following three step
 
 The first thing you should do is add/remove parameters from above template. Now, how do you figure out which parameters should you use in there? Use arguments/parameters that you take from user plus some system related parameter (optional). Some examples of this is `epochs`, `batch_size`, etc. Again, this depends on your code as well. In this case, our `main.py` accepts all those hyperparameters as an argument. If your code didn't have such an argument parser, then you can pass all hyperparameters, as shown above for `hyperparameters` parameter, and parse it in your code.
 
-First, you need to update `source` parameter to use code that you just clones. If your code is in private mode, [refer to our guide](/docs/reference/workflows/templates#git-integration-with-workflows) on git integration to know how you can use private repositories with Workflows. We will also have to update docker image to use PyTorch with cuda. Since we will be deploying this on azure for this guide, we will use `Standard_NC6` for `sys-node-pool`. This machine has K80 GPU.
+First, you need to update `source` parameter to use code that you just clones. If your code is in private mode, [refer to our guide](/docs/reference/workflows/templates#git-integration-with-workflows) on git integration to know how you can use private repositories with Workflows. We will also have to update docker image to use PyTorch with cuda. Since we will be deploying this on Azure for this guide, we will use `Standard_NC6` for `sys-node-pool`. This machine has K80 GPU.
 
 Next, you can remove `hyperparameters`, `cvat-num-classes`, and `cvat-finetune-checkpoint` as you won't need them.
 
