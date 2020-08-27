@@ -16,15 +16,15 @@ const features = [
       </>
     ),
   },
-  {
-    title: <>Deploy complete aerial imaging pipelines with photogrammetry tools</>,
-    imageUrl: 'img/landing/odm.png',
-    description: (
-      <>
-        Leverage tools like <a href="https://github.com/OpenDroneMap/WebODM" target="_blank">WebODM</a> with GPUs to accelerate image processing and to perform pre-annotation for object detection.
-      </>
-    ),
-  },
+  // {
+  //   title: <>Deploy complete aerial imaging pipelines with photogrammetry tools</>,
+  //   imageUrl: 'img/landing/odm.png',
+  //   description: (
+  //     <>
+  //       Leverage tools like <a href="https://github.com/OpenDroneMap/WebODM" target="_blank">WebODM</a> with GPUs to accelerate image processing and to perform pre-annotation for object detection.
+  //     </>
+  //   ),
+  // },
   {
     title: <>Build your models with GPU optimized frameworks and IDEs</>,
     imageUrl: 'img/landing/env.png',
@@ -48,7 +48,7 @@ const features = [
     imageUrl: 'img/landing/met.png',
     description: (
       <>
-        Track and visualize model metrics and expriments with <a href="https://github.com/tensorflow/tensorboard" target="_blank">TensorBoard</a> and <a href="https://github.com/VertaAI/modeldb" target="_blank">ModelDB</a>, or bring your own experiment tracking tools.
+        Track and visualize model metrics and expriments with <a href="https://github.com/tensorflow/tensorboard" target="_blank">TensorBoard</a> or bring your own experiment tracking tools.
       </>
     ),
   },
