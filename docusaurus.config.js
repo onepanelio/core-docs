@@ -17,7 +17,7 @@ module.exports = {
       links: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
         {to: 'docs/deployment/overview', label: 'Deploy and Manage', position: 'left'},
-        {to: 'docs/reference/overview', label: 'Reference', position: 'left'},
+        {to: 'docs/reference/overview', label: 'User Guide', position: 'left'},
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
         {href: 'https://github.com/onepanelio/core/releases', label: 'Releases', position: 'left'},
         {href: 'https://github.com/onepanelio/core/milestones?direction=asc&sort=due_date&state=open', label: 'Roadmap', position: 'left'},
