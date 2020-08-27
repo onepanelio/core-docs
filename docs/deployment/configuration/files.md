@@ -455,7 +455,7 @@ The possible values are `docker` and `pns`:
 - `docker` is more reliable, however it mounts the `docker.sock` of the host makes it less secure.
 - `pns` is more secure, however in some versions of Kubernetes, it tends to fail on tasks that take less than 15 seconds.
 
-### services
+<!-- ### services
 
 Services are additional tools or applications you want to install alongside the main deployment.
 These are set up to allow distributed workloads and are always available, unlike Workspaces.
@@ -479,4 +479,4 @@ services:
       # This must be a database that already exists. It is used to establish a connection
       # so the system can create the databaseName.
       defaultDatabaseName: postgres
-```
+``` -->

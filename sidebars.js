@@ -107,13 +107,13 @@ module.exports = {
         'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model',
       ]
     },
-    {
-      type: 'category',
-      label: 'Services',
-      items: [
-        'reference/services/overview',
-        'reference/services/modeldb'
-      ]
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Services',
+    //   items: [
+    //     'reference/services/overview',
+    //     'reference/services/modeldb'
+    //   ]
+    // },
   ]
 };
