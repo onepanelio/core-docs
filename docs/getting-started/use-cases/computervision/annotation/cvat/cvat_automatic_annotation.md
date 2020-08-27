@@ -51,7 +51,7 @@ Since Onepanel automatically syncs data from cloud storage to local directory. Y
 
 For training a model(Execute training Workflow), you can choose any GPU machine from the list. All of our models will work on any of the GPU machine. But if you want to train it faster, then we suggest you select machines with multiple GPUs (i.e 8 V100).
 
-Please find the table bewlo which details machine type with the corresponding runtime to perform pre-annotations.
+See the table below which details machine type with the corresponding runtime to perform pre-annotations.
 For this test, we used a task with **3550 images (2GB)** to perform pre-annotations.
 
 Machine     | Time     
@@ -66,7 +66,7 @@ The above data was generated for ssd-mobilenet-v2 model which is the model we su
 
 The other factor is image compression. By default, CVAT compresses images by 50%. We did some testing to find out if we use original images (without compression) then how much time it will take.
 
-It turns out that if you use the original images without compression, your pre-annotation time will be increased by ~5-6% of that of 50% compressed images. So in the above table, if you use images without compression and use a V100, it will take 84 minutes instead of 80 minutes. Please note that this compression does not affect annotation in any way.
+It turns out that if you use the original images without compression, your pre-annotation time will be increased by ~5-6% of that of 50% compressed images. So in the above table, if you use images without compression and use a V100, it will take 84 minutes instead of 80 minutes. Note that this compression does not affect annotation in any way.
 
 Note that this data was calculated on 3550 images (1280 x 960)(total size=2GB), so if your data size is different you can easily extrapolate the data from the above table. For example, if you have 10gb of images then ideally it will take around 400 minutes on a V100 GPU. 
 

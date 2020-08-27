@@ -501,7 +501,7 @@ volumeClaimTemplates:
 
 As you can see, this block defines volume claims. Based on your model and data, you can change this from 200 GB to whatever you need. But you can keep this as it is.
 
-One last thing you need to do in order to use this template from CVAT is to add a label as shown below. If you want to use a Workflow in CVAT, please add a label with `key`=`used-by` and `value`=`cvat`.
+One last thing you need to do in order to use this template from CVAT is to add a label as shown below. If you want to use a Workflow in CVAT, add a label with `key`=`used-by` and `value`=`cvat`.
 
 ![Workflow Label](/img/update_labels.png)
 

@@ -58,7 +58,7 @@ Onepanel's FileSyncer automatically syncs files from your object storage locatio
 12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
 
 :::note
-CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you create a new CVAT workspace. Your username will be `admin` and password will be onepanel token. Please note that you generated auth token for Onepanel while setting up the Onepanel. [See step #9](/docs/getting-started/quickstart#step-1-install-onepanel) of installation guide.
+CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you create a new CVAT workspace. Your username will be `admin` and password will be onepanel token. Note that you generated auth token for Onepanel while setting up the Onepanel. [See step #9](/docs/getting-started/quickstart#step-1-install-onepanel) of installation guide.
 :::
 
 ## 2. Annotating frames in CVAT
@@ -71,7 +71,7 @@ Once you have created a new task, you can start annotating your data. CVAT suppo
 2. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
 
 - **Bounding box**:
-Select Box from the left sidebar and press N to start annotating once done, press N to finish annotation. Sometimes N will draw `rectangle shape` and sometimes it will draw `rectangle track`. In order to ensure you have the right one, please draw one box by manually selecting Shape or Track from the UI. Once you manually select type of box from the UI, it will draw what you selected for the box everytime you press N.
+Select Box from the left sidebar and press N to start annotating once done, press N to finish annotation. Sometimes N will draw `rectangle shape` and sometimes it will draw `rectangle track`. In order to ensure you have the right one, draw one box by manually selecting Shape or Track from the UI. Once you manually select type of box from the UI, it will draw what you selected for the box everytime you press N.
 
 ![Annotation](/img/cvat_draw_box.png)
 
@@ -86,7 +86,7 @@ Similarly, select polygons or polylines and follow same procedure for annotation
 It is highly recommended that you dump your annotation periodically. In case of any failure, this can be used to recover the tasks.
 :::
 :::note
-Please note that you can use pre-trained models for pre-annotation of your frames. This will drastically reduce time it takes for annotation. For more information on pre-annotation, please see section 4.
+Note that you can use pre-trained models for pre-annotation of your frames. This will drastically reduce time it takes for annotation. For more information on pre-annotation, see section 4.
 :::
 
 ## 3. Training new annotation model from CVAT
@@ -105,9 +105,9 @@ Onepanel also allows you to train or further finetune your model for pre-annotat
 ![Workflow URL](/img/execution_url.png)
 
 :::tip
-Please note you can easily add your own models as well. Please refer our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models. 
+Note that you can easily add your own models as well. See [adding custom models](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models.
 
-You can also use this trained model to run pre-annotation in CVAT. Please refer our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation) for more information on pre-annotation.
+You can also use this trained model to run pre-annotation in CVAT. See [automatic annotation](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation) for more information on pre-annotation.
 :::
 
 ## 4. Using deep learning models for pre-annotation
@@ -127,4 +127,4 @@ Onepanel’s CVAT supports a feature to pre-annotate images for common objects. 
 
 ![Inference Output](/img/cvat_inference_output.png)
 
-If you need help or have questions regarding CVAT, please feel free to ask them on our [Slack channel.](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg)
+If you need help or have questions regarding CVAT, feel free to reach out on our [Slack channel](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg).
