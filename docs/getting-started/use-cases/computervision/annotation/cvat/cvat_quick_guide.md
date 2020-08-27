@@ -1,7 +1,7 @@
 ---
 title: Getting started
 sidebar_label: Getting started
-description: Onepanel use case - computer vision automatic annotation
+description: Onepanel - vision AI automatic annotation
 ---
 
 For this quick start, we'll be using OpenCV's [Computer Vision Annotation Tool (CVAT)](https://github.com/opencv/cvat). You will be able to use an existing model to pre-annotate your images or videos and then continuously train and improve your model on new data.

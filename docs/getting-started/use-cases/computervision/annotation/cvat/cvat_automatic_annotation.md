@@ -1,7 +1,7 @@
 ---
 title: Semi-automatic annotation with CVAT
 sidebar_label: Automatic annotation
-description: Onepanel use case - computer vision automatic annotation
+description: Onepanel - vision AI automatic annotation
 ---
 
 You can use your TensorFlow models for Object Detection and Semantic Segmentation to pre-annotate your data. This can save you a lot of time since you don't have to annotate images from scratch. On Onepanel, you can leverage these features to pre-annotate your bounding boxes or polygon masks. You can also use Object Tracking to track objects in a sequence of frames.

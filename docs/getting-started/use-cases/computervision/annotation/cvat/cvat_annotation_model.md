@@ -1,13 +1,13 @@
 ---
 title: Creating annotation models on CVAT
 sidebar_label: Creating annotation model
-description: Onepanel use case - computer vision automatic annotation
+description: Onepanel - vision AI automatic annotation
 ---
 
 ## Why pre-annotate?
 Pre-annotation will cut the time to annotate large amounts of data by orders of magnitude. The idea is simple, annotate once then QC each successive dataset after.
 
-Once you have annotated enough data, you can train a model to pre-annotate the rest of your images with a few mouse clicks. This page provides information on the default models that we support. You can always add your custom models for pre-annotation. Please refer to our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for information on adding custom models.
+Once you have annotated enough data, you can train a model to pre-annotate the rest of your images with a few mouse clicks. This page provides information on the default models that we support. You can always add your custom models for pre-annotation. See our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for information on adding custom models.
 
 ## Training deep learning model through CVAT
 
@@ -25,7 +25,7 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 ![Train a model from CVAT](/img/tf-object-detection.png)
 
 :::tip
-Please note you can easily add your own models as well. Please refer our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models. 
+Note you can easily add your own models as well. See our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models. 
 :::
 
 5. Update hyper-parameters and settings as per your requirements. Most of the parameters visible above are related to the model (MaskRCNN) and system (i.e machine). For this guide, you can change `num-steps` from default 10000 to 1000. You can also select the checkpoint path from previously trained model. You can leave it empty if you don't have an appropriate, previously trained model.
@@ -36,7 +36,7 @@ Please note you can easily add your own models as well. Please refer our [docume
 Trained model and other outputs will be stored on cloud storage and will be synced with CVAT locally so that you can use this to pre-annotate other frames. 
 
 :::note
-You can also use this trained model to run pre-annotation in CVAT. Please refer our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation) for more information on pre-annotation.
+You can also use this trained model to run pre-annotation in CVAT. See our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation) for more information on pre-annotation.
 :::
 
 ## TensorFlow Object Detection API
@@ -63,7 +63,7 @@ Details:
 - schedule-step-1: step 1 for linear learning rate decay
 - schedule-step-2: step 2 for linear learning rate decay
 
-Please note that number of classes will be automatically populated if you have `sys-num-classes` parameter defined in a workflow. Also, if you select a Machine type with 4 GPUs (Tesla V100), the following command can be used:
+Note that number of classes will be automatically populated if you have `sys-num-classes` parameter defined in a workflow. Also, if you select a Machine type with 4 GPUs (Tesla V100), the following command can be used:
 `num_clones=4`
 
 - Note that num_clones is 4 because there are 4 GPUs available.
@@ -76,13 +76,13 @@ Please note that number of classes will be automatically populated if you have `
 
 #### frcnn-nas-coco:
 
-- If you are using `frcnn-nas-coco`, then please choose a machine with at least 2 GPUs as this model requires more memory. A machine with 1 GPU will throw an error.
+- If you are using `frcnn-nas-coco`, then choose a machine with at least 2 GPUs as this model requires more memory. A machine with 1 GPU will throw an error.
 
 This is a type of faster-rcnn model with NAS backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2).
 
 For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
 
-Please note that current implementation of faster-rcnn inTensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
+Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
@@ -93,7 +93,7 @@ This is a type of faster-rcnn model with ResNet101 backbone. If you are not sure
 
 For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
 
-Please note that current implementation of faster-rcnn inTensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
+Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
 
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
@@ -104,7 +104,7 @@ This is a type of faster-rcnn model with ResNet101 backbone with low number of p
 
 For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
 
-Please note that current implementation of faster-rcnn inTensorFlow Object Detection API does not support batch training. That is, you shonum_clones=4lts***: batch_size: 1, learning_rate: 0.0003, epochs=10000
+Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shonum_clones=4lts***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 
 #### frcnn-res50-coco
@@ -113,7 +113,7 @@ Please note that current implementation of faster-rcnn inTensorFlow Object Detec
 
 For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
 
-Please note that current implementation of faster-rcnn inTensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
+Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
@@ -125,11 +125,11 @@ You will find the pre-trained model and config file for ssd-mobilenetv2 model tr
 
 This model is a good place to start if you don't have any specific model in mind. If you are data is very complicated (i.e many annotations per image) then you should prefer faster-rcnn models over ssd.
 
-Depending upon your data, you can set epochs to train your model. There is no standard value which can work for all datasets. You generally have to try different number of epochs to get the best model. Ideally, you do so by monitoring loss of your model while training. But if you are looking for a recommendation. Then, we recommend you set epochs as follows: (number of images / batch_size (default: 24)) * 1000. For instance, if you have 100 images, then your epochs will be 4000 (rounded). Please note that the model will be trained using a pre-trained model, so you don't need to train as long as you would have to when not using the pre-trained model.
+Depending upon your data, you can set epochs to train your model. There is no standard value which can work for all datasets. You generally have to try different number of epochs to get the best model. Ideally, you do so by monitoring loss of your model while training. But if you are looking for a recommendation. Then, we recommend you set epochs as follows: (number of images / batch_size (default: 24)) * 1000. For instance, if you have 100 images, then your epochs will be 4000 (rounded). Note that the model will be trained using a pre-trained model, so you don't need to train as long as you would have to when not using the pre-trained model.
 
 ***Defaults***: batch_size: 24, learning_rate: 0.004, epochs=10000
 
-Please note that same instructions apply for **ssd-mobilenet-v1** and **ssd-mobilenet-lite**. The only difference is the backbone model (i.e mobilenet v1) that they use.
+Note that same instructions apply for **ssd-mobilenet-v1** and **ssd-mobilenet-lite**. The only difference is the backbone model (i.e mobilenet v1) that they use.
 
 
 ## Training MaskRCNN model through CVAT
@@ -159,12 +159,12 @@ Often you are required to make prediction on test data. Using CVAT on Onepanel, 
 
 Now, create a task with your test data.
 
-Click on Actions for that task and select Automatic annotation. Select the model you just uploaded and hit submit. It will run the inference using the model you selected. Below is a sample frame whose output was generated using the trained model. For more information on automatic annotation, please refer to our guide on [automatic annotation](./cvat_automatic_annotation).
+Click on Actions for that task and select Automatic annotation. Select the model you just uploaded and hit submit. It will run the inference using the model you selected. Below is a sample frame whose output was generated using the trained model. For more information on automatic annotation, See our guide on [automatic annotation](./cvat_automatic_annotation).
 
 ![Inference Output](/img/inference_output.PNG)
 
 ## Notes
 
 - There are certain parameters that are prefixed with `cvat` in TF Object Detection Training and MaskRCNN Training workflows. Those are special parameters and will be populated in whole or partly by the CVAT. For example, `cvat-output-path` is generated by the CVAT and it won't be shown to users. Another example is `cvat-finetune-checkpoint`. CVAT will automatically find all available checkpoints for a given workflow/model since they are available locally because of file syncer. 
-- Please note that these instructions are for default models that we provide. You can always edit these workflows or even add your own workflows/models and train them.
+- Note that these instructions are for default models that we provide. You can always edit these workflows or even add your own workflows/models and train them.
 - You  can find the code that connects  [here](https://github.com/onepanelio/cvat-training).

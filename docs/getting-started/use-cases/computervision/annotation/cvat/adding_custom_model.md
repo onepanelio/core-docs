@@ -1,7 +1,7 @@
 ---
-title: Adding custom deep learning model Workflow to CVAT
-sidebar_label: Adding custom model
-description: Onepanel use case - computer vision automatic annotation
+title: Adding a custom deep learning model Workflow to CVAT
+sidebar_label: Adding custom models
+description: Onepanel - vision AI model training pipelines
 ---
 
 The default CVAT workspace comes with two workflows (i.e models)- MaskRCNN Training and TF Object Detection Training. These two workflows are generally good for semantic segmentation  and object detection tasks respectively. But you can do more with your CVAT tasks. You can, for example, train a Generative Adversarial Network model to generate synthetic data for your task. You can add your own model, if default models don't satisfy your requirements.
