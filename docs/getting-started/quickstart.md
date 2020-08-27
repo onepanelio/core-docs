@@ -671,7 +671,7 @@ opctl auth token
 Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https://github.com/opencv/cvat), allowing you to annotate images and videos and then train models on the annotated data with a few clicks. You can then use these newly trained models to automatically pre-annotate additional data, iteratively improving your object detection or semantic segmentation models.
 
 :::tip
-You can also bring your own labeling tool as a reproducible template in Onepanel. See our [Workspace templates documentation](http://localhost:3000/docs/reference/workspaces/templates) for more information.
+You can also bring your own labeling tool as a reproducible template in Onepanel. See our [Workspace templates documentation](/docs/reference/workspaces/templates) for more information.
 :::
 
 1. Go to **Workspaces** and click **Create Workspace**.
