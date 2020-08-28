@@ -31,7 +31,7 @@ Let's get started by creating a Kubernetes cluster in one of the following cloud
     { label: 'Amazon EKS', value: 'eks', },
     { label: 'Google Cloud GKE', value: 'gke', },
     { label: 'Minikube', value: 'minikube', },
-    { label: 'Microk8s', value: 'microk8s', },
+    // { label: 'Microk8s', value: 'microk8s', },
   ]
 }>
 <TabItem value="aks">
@@ -132,8 +132,8 @@ Run the following `minikube` command to create a cluster:
       { label: 'Linux', value: 'linux', },
       { label: 'macOS', value: 'macos', },
       { label: 'Windows', value: 'windows', },
-      ]
-      }>
+    ]
+  }>
 <TabItem value="linux">
 
 ```shell script
@@ -287,384 +287,229 @@ Next, get the kubeconfig by running
 ## Step 1: Install Onepanel
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
+  <Tabs
+    groupId="operating-systems"
+    defaultValue="linux"
+    values={[
+      { label: 'Linux', value: 'linux', },
+      { label: 'macOS', value: 'macos', },
+      { label: 'Windows', value: 'windows', },
+    ]
+  }>
+  <TabItem value="linux">
 
-<Tabs
-  groupId="operating-systems"
-  defaultValue="linux"
-  values={[
-    { label: 'Linux', value: 'linux', },
-    { label: 'macOS', value: 'macos', },
-    { label: 'Windows', value: 'windows', },
-  ]
-}>
-<TabItem value="linux">
+  ```bash
+  # Download the binary
+  curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-linux-amd64
 
-```bash
-# Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-linux-amd64
+  # Make binary executable
+  chmod +x opctl-linux-amd64
 
-# Make binary executable
-chmod +x opctl-linux-amd64
+  # Move binary to path
+  mv ./opctl-linux-amd64 /usr/local/bin/opctl
 
-# Move binary to path
-mv ./opctl-linux-amd64 /usr/local/bin/opctl
+  # Test installation
+  opctl version
+  ```
 
-# Test installation
-opctl version
-```
+  </TabItem>
+  <TabItem value="macos">
 
-</TabItem>
-<TabItem value="macos">
+  ```bash
+  # Download the binary
+  curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-macos-amd64
 
-```bash
-# Download the binary
-curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-macos-amd64
+  # Make binary executable
+  chmod +x opctl-macos-amd64
 
-# Make binary executable
-chmod +x opctl-macos-amd64
+  # Move binary to path
+  mv ./opctl-macos-amd64 /usr/local/bin/opctl
 
-# Move binary to path
-mv ./opctl-macos-amd64 /usr/local/bin/opctl
+  # Test installation
+  opctl version
+  ```
 
-# Test installation
-opctl version
-```
+  </TabItem>
+  <TabItem value="windows">
 
-</TabItem>
-<TabItem value="windows">
+  :::info
+  Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+  :::
 
-:::info
-Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
-:::
-
-</TabItem>
-</Tabs>
+  </TabItem>
+  </Tabs>
 
 2. Run the following command to initialize a `params.yaml` template for your provider:
+  <Tabs
+    groupId="cloud-provider"
+    defaultValue="aks"
+    values={[
+      { label: 'Azure AKS', value: 'aks', },
+      { label: 'Amazon EKS', value: 'eks', },
+      { label: 'Google Cloud GKE', value: 'gke', },
+      { label: 'Minikube', value: 'minikube', },
+      // { label: 'Microk8s', value: 'microk8s', },
+    ]
+  }>
+  <TabItem value="aks">
 
-<Tabs
-  groupId="cloud-provider"
-  defaultValue="aks"
-  values={[
-    { label: 'Azure AKS', value: 'aks', },
-    { label: 'Amazon EKS', value: 'eks', },
-    { label: 'Google Cloud GKE', value: 'gke', },
-    { label: 'Minikube', value: 'minikube', },
-    { label: 'Microk8s', value: 'microk8s', },
-  ]
-}>
-<TabItem value="aks">
-
-```bash
-opctl init --provider aks \
-  --artifact-repository-provider s3
-```
-
-:::note
-If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-:::
-
-</TabItem>
-<TabItem value="eks">
-
-```bash
-opctl init --provider eks \
-  --artifact-repository-provider s3
-```
-
-:::note
-If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-:::
-
-</TabItem>
-<TabItem value="gke">
-
-```bash
-opctl init --provider gke \
+  ```bash
+  opctl init --provider aks \
     --artifact-repository-provider s3
-```
+  ```
 
-</TabItem>
+  :::note
+  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  :::
 
-<TabItem value="minikube">
+  </TabItem>
+  <TabItem value="eks">
 
-```bash
-opctl init --provider minikube \
-    --enable-metallb \
+  ```bash
+  opctl init --provider eks \
     --artifact-repository-provider s3
-```
+  ```
 
-:::note
-metallb is used as a loadbalancer 
-:::
+  :::note
+  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  :::
 
-:::note
-If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-:::
+  </TabItem>
+  <TabItem value="gke">
 
-</TabItem>
+  ```bash
+  opctl init --provider gke \
+      --artifact-repository-provider s3
+  ```
 
-<TabItem value="microk8s">
+  </TabItem>
 
-```bash
-opctl init --provider microk8s \
-    --enable-metallb \
-    --artifact-repository-provider s3
-```
+  <TabItem value="minikube">
 
-:::note
-metallb is used as a loadbalancer 
-:::
+  ```bash
+  opctl init --provider minikube \
+      --enable-metallb \
+      --artifact-repository-provider s3
+  ```
 
-:::note
-If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-:::
+  :::note
+  metallb is used as a loadbalancer 
+  :::
 
-</TabItem>
-</Tabs>
+  :::note
+  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  :::
 
-:::important
-You can use different object storage than S3 by setting the `--artifact-repository-provider` flag. 
+  </TabItem>
 
-See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
-:::
+  <TabItem value="microk8s">
+
+  ```bash
+  opctl init --provider microk8s \
+      --enable-metallb \
+      --artifact-repository-provider s3
+  ```
+
+  :::note
+  metallb is used as a loadbalancer 
+  :::
+
+  :::note
+  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  :::
+
+  </TabItem>
+  </Tabs>
+
+  :::important
+  You can use different object storage than S3 by setting the `--artifact-repository-provider` flag. 
+
+  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
 4. Finally, run the following command to deploy Onepanel to your cluster:
+  <Tabs
+    groupId="cloud-provider"
+    defaultValue="aks"
+    values={[
+      { label: 'Azure AKS', value: 'aks', },
+      { label: 'Amazon EKS', value: 'eks', },
+      { label: 'Google Cloud GKE', value: 'gke', },
+      { label: 'Minikube', value: 'minikube', },
+      // { label: 'Microk8s', value: 'microk8s', },
+    ]
+  }>
+  <TabItem value="aks">
 
-<Tabs
-  groupId="cloud-provider"
-  defaultValue="aks"
-  values={[
-    { label: 'Azure AKS', value: 'aks', },
-    { label: 'Amazon EKS', value: 'eks', },
-    { label: 'Google Cloud GKE', value: 'gke', },
-    { label: 'Minikube', value: 'minikube', },
-    { label: 'Microk8s', value: 'microk8s', },
-  ]
-}>
-<TabItem value="aks">
+  ```bash
+  opctl apply
+  ```
 
-```bash
-opctl apply
-```
+  </TabItem>
+  <TabItem value="eks">
 
-</TabItem>
-<TabItem value="eks">
+  ```bash
+  opctl apply
+  ```
 
-```bash
-opctl apply
-```
+  </TabItem>
+  <TabItem value="gke">
 
-</TabItem>
-<TabItem value="gke">
+  ```bash
+  opctl apply
+  ```
 
-```bash
-opctl apply
-```
+  </TabItem>
 
-</TabItem>
+  <TabItem value="minikube">
 
-<TabItem value="minikube">
+  ```bash
+  opctl apply
+  ```
 
-```bash
-opctl apply
-```
+  </TabItem>
 
-</TabItem>
+  <TabItem value="microk8s">
 
-<TabItem value="microk8s">
+  ```bash
+  KUBECONFIG=./kubeconfig opctl apply
+  ```
 
-```bash
-KUBECONFIG=./kubeconfig opctl apply
-```
+  :::note
+  If you do not have a loadbalancer setup, you can use metallb
+  ```shell script
+  opctl init --provider microk8s --enable-metallb
+  ```
+  :::
 
-:::note
-If you do not have a loadbalancer setup, you can use metallb
-```shell script
-opctl init --provider microk8s --enable-metallb
-```
-:::
+  </TabItem>
+  </Tabs>
 
-</TabItem>
-</Tabs>
-
-:::note
-If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page.
-:::
+  :::note
+  If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page.
+  :::
 
 5. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
-
-```bash
-opctl app status
-```
+  ```bash
+  opctl app status
+  ```
 
 6. Create the appropriate DNS record in your DNS provider based on the instructions above.
-
-:::tip
-If you don't have a domain name handy or you're waiting for your DNS record to propogate, you can set up a [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) to quickly test the deployment.
-:::
+  :::tip
+  If you don't have a domain name handy or you're waiting for your DNS record to propogate, you can set up a [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) to quickly test the deployment.
+  :::
 
 7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
+  :::note
+  If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
+  :::
 
-:::note
-If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
-:::
-
-8. Depending on your provider, you may need to take the following steps to access the application:
-
-<Tabs
-  groupId="cloud-provider"
-  defaultValue="aks"
-  values={[
-    { label: 'Azure AKS', value: 'aks', },
-    { label: 'Amazon EKS', value: 'eks', },
-    { label: 'Google Cloud GKE', value: 'gke', },
-    { label: 'Minikube', value: 'minikube', },
-    { label: 'Microk8s', value: 'microk8s', },
-  ]
-}>
-<TabItem value="aks">
-
-:::info
- No additional steps required.
-:::
-
-</TabItem>
-<TabItem value="eks">
-
-:::info
- No additional steps required.
-:::
-
-</TabItem>
-<TabItem value="gke">
-
-:::info
- No additional steps required.
-:::
-
-</TabItem>
-<TabItem value="minikube">
-
-:::info
- No additional steps required.
-:::
-
-</TabItem>
-<TabItem value="microk8s">
-To get access to this new cluster via browser, we need to carry out extra steps.
-
-Example request flow
-  
-<img src="/img/multipass_request_flow.png" alt="Request Flow with Multipass" width="800px"/>
-
-Execute these steps in the host machine.
-
-```shell script
-multipass list
-```
-
-you should see something like this
-
-```text
-Name                    State             IPv4             Image
-microk8s-vm             Running           10.174.163.50    Ubuntu 18.04 LTS
-```
-
-Grab the IP address, 10.174.163.50 in this case.
-  
-Add an entry to your hosts file to point to the fqdn you setup in `params.yaml`
-For example, if our fqdn was set up like this
-```yaml
-# The Fully Qualified Domain (FQDN) where Onepanel will be hosted.
-# If `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
-fqdn: app.alex.xyz
-```
-
-Then we add this to `/etc/hosts` 
-```text
-10.174.163.50 app.alex.xyz
-```
-  
-Adding this entry means the host browser will try to access the multipass vm we setup
-for microk8s.
-  
-Next, enter into the multipass VM
-```shell script
-multipass shell microk8s-vm
-```
-  
-:::note Execute inside the multipass VM
-```shell script
-microk8s.kubectl get services -n istio-system
-```
-:::
-
-```text
-NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                                                                      AGE
-istio-ingressgateway   LoadBalancer   10.152.183.166   10.1.31.0     15020:31979/TCP,80:31394/TCP,443:30038/TCP,15029:32204/TCP,15030:32688/TCP,15031:31420/TCP,15032:30575/TCP,15443:30386/TCP   3d3h
-```
-  
-Inside the multipass VM, add an entry to the `/etc/hosts` file using the EXTERNAL-IP from above.
-```shell script
-sudo nano /etc/hosts  
-```
-  
-```text
-10.1.31.0 app.alex.xyz
-```
-  
-Once you have entered and saved the host change, verify the onepanel website is running.
-  
-```shell script
-curl app.alex.xyz # This is the fqdn entry from params.yaml
-```
-
-Example output.
-```text
-  <!doctype html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Onepanel</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/icon/favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon.png">
-  <link rel="stylesheet" href="styles.9b8cd86ace5a9057a37e.css"></head>
-  <body>
-    <app-root></app-root>
-  <script src="runtime-es2015.edb2fcf2778e7bf1d426.js" type="module"></script><script src="runtime-es5.edb2fcf2778e7bf1d426.js" nomodule defer></script><script src="polyfills-es5.6696c533341b95a3d617.js" nomodule defer></script><script src="polyfills-es2015.2987770fde9daa1d8a2e.js" type="module"></script><script src="main-es2015.b17adb3826cd9f5e4a29.js" type="module"></script><script src="main-es5.b17adb3826cd9f5e4a29.js" nomodule defer></script></body>
-  </html>
-```
-
-You can debug the request with `curl -vvv app.alex.xyz`
-  
-We need a listener running on port 80. That listener should direct traffic
-to the istio gateway.
-
-```shell script
-sudo apt install socat
-sudo socat TCP-LISTEN:80,fork TCP:app.alex.xyz:80
-```
-
-This will run actively in the current terminal prompt.
-
-Now, go back to your host machine, open your internet browser and go to:
-`app.alex.xyz`.
-
-You should see the website load up.
-</TabItem>
-</Tabs>
-
-9. Use the following command to get your auth token to log into Onepanel:
-
-```bash
-opctl auth token
-```
+8. Use the following command to get your auth token to log into Onepanel:
+  ```bash
+  opctl auth token
+  ```
 
 ## Step 2: Annotate your data
 
