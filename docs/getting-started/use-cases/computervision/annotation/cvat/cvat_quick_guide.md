@@ -48,6 +48,8 @@ You can switch to a different node pool (for example one that supports GPUs) in 
 ![](/img/quickstart-180004.png)
 :::important
 Onepanel's FileSyncer automatically syncs files from your object storage location to this CVAT instance (`/mnt/share`) every 5 minutes. You should not change the directory on local machine since CVAT reads data from that directory. However, you can specify directory on your cloud storage (i.e S3). By default, this directory on cloud storage is `workflow-data`. We recommend you don't change this directory. But if required, you can change this directory by modifying default directory name while creating CVAT workspace.
+
+You can put raw input files inside `workflow-data/<sample-input-folder>` as Workflow outputs will be stored in `workflow-data/output`.
 :::
 
 10. Click **Submit** and then click the **Tasks** menu item to go to the tasks list.
