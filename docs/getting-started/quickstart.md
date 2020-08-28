@@ -287,6 +287,7 @@ Next, get the kubeconfig by running
 ## Step 1: Install Onepanel
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
+
   <Tabs
     groupId="operating-systems"
     defaultValue="linux"
@@ -340,6 +341,7 @@ Next, get the kubeconfig by running
   </Tabs>
 
 2. Run the following command to initialize a `params.yaml` template for your provider:
+
   <Tabs
     groupId="cloud-provider"
     defaultValue="aks"
@@ -430,6 +432,7 @@ Next, get the kubeconfig by running
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
 4. Finally, run the following command to deploy Onepanel to your cluster:
+
   <Tabs
     groupId="cloud-provider"
     defaultValue="aks"
@@ -492,21 +495,25 @@ Next, get the kubeconfig by running
   :::
 
 5. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+  
   ```bash
   opctl app status
   ```
 
 6. Create the appropriate DNS record in your DNS provider based on the instructions above.
+
   :::tip
   If you don't have a domain name handy or you're waiting for your DNS record to propogate, you can set up a [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) to quickly test the deployment.
   :::
 
 7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
+
   :::note
   If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
   :::
 
 8. Use the following command to get your auth token to log into Onepanel:
+
   ```bash
   opctl auth token
   ```
@@ -520,43 +527,53 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
 :::
 
 1. Go to **Workspaces** and click **Create Workspace**.
-![Create Workspace](/img/create_workspaces_button_in_workspaces_page.png)
+
+  ![Create Workspace](/img/create_workspaces_button_in_workspaces_page.png)
 
 2. Select the CVAT template and enter a name for your Workspace.
-![](/img/quickstart-115738.png)
+
+  ![](/img/quickstart-115738.png)
 
 3. Select a node pool that Onepanel will use to provision a machine for running CVAT. CVAT requires at least 16GB of RAM.
-![](/img/quickstart-133251.png)
-:::note
-Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 6 volumes, so make sure to pick a machine that can support at least that many volumes.
-:::
-:::tip
-You can switch to a different node pool (for example one that supports GPUs) in a running Workspace at any time by clicking the Onepanel icon in the bottom right corner of your Workspace.
-:::
+  
+  ![](/img/quickstart-133251.png)
+  
+  :::note
+  Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 6 volumes, so make sure to pick a machine that can support at least that many volumes.
+  :::
+
+  :::tip
+  You can switch to a different node pool (for example one that supports GPUs) in a running Workspace at any time by clicking the Onepanel icon in the bottom right corner of your Workspace.
+  :::
 
 4. Next, add the directory you want Onepanel to pull raw input data and store training output (pickled models, classes, etc.). This directory should be in the default object storage you configured when you launched Onepanel and in a directory that matches your current namespace.
-![](/img/quickstart-171037.png)
+
+  ![](/img/quickstart-171037.png)
 
 5. Click **Create and Run** to launch your CVAT Workspace.
 
 6. Once CVAT is running, click **View**.
-![](/img/quickstart-173734.png)
+
+  ![](/img/quickstart-173734.png)
 
 7. In CVAT, click **Create new task**.
-![](/img/quickstart-173841.png)
+
+  ![](/img/quickstart-173841.png)
 
 8. Enter a name for your task and then under **Constructor**, add your labels. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#creating-an-annotation-task) for additional information on more advanced label configuration.
 
 9. Under "Select files", click **Connected file share**. Files from your object storage location above should have already synced here. Pick the ones you want to annotate.
-![](/img/quickstart-180004.png)
-:::important
-Onepanel's FileSyncer automatically syncs files from your object storage location to this CVAT instance every 5 minutes.
-:::
+  
+  ![](/img/quickstart-180004.png)
+  :::important
+  Onepanel's FileSyncer automatically syncs files from your object storage location to this CVAT instance every 5 minutes.
+  :::
 
 10. Click **Submit** and then click the **Tasks** menu item to go to the tasks list.
 
 11. Click **Open** to open task details.
-![](/img/cvat_open.png)
+  
+  ![](/img/cvat_open.png)
 
 12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
 
@@ -567,20 +584,24 @@ Onepanel allows you to train deep learning models on annotated data in CVAT in a
 You can directly train object detection or segmentation model from CVAT which you can use later to pre-annotate new data. This dramatically reduces time it takes to train new models and use them to pre-annotate new data. Moreover, apart from default models that we provide, you easily add new models or even modify exising model workflows.
 
 1. Click on **Open** for a task you want to train a model on.
-![Open task](/img/cvat_open.png)
+
+  ![Open task](/img/cvat_open.png)
 
 2. Click on **Job #X**, where X could be any job number. Annotate few frames. For testing you can just annotate one frame. But ideally you want to have thousands of objects to train a deep learning model on. Alternatively, you can just run pre-annotation if your labels are common ones.
 
 3. Click on **Actions** for a task you want to train a model on. Then, click on **Execute training Workflow**.
-![Select training workflow](/img/cvat_select_workflow_execution.png)
+
+  ![Select training workflow](/img/cvat_select_workflow_execution.png)
 
 4. Select Workflow template (i.e model to train). By default, you can use TensorFlow Object Detection for object detection or MaskRCNN for semantic segmentation. Below image shows a case for Tensorflow Object Detection.
-![Train a model from CVAT](/img/tf-object-detection.png)
+  
+  ![Train a model from CVAT](/img/tf-object-detection.png)
 
 5. Update hyper-parameters and settings as per your requirements. Most of the parameters visible above are related to the model (MaskRCNN) and system (i.e machine). For this guide, you can change `num-steps` from default 10000 to 1000. You can also select the checkpoint path from previously trained model. You can leave it empty if you don't have an appropriate, previously trained model.
 
 6. Click **Submit**. This will execute the Onepanel Workflow for selected model. You can see Workflow logs by going to Workflow execution page. You can find the URL for the same in the notification card.
-![Workflow URL](/img/execution_url.png)
+  
+  ![Workflow URL](/img/execution_url.png)
 
 :::tip
 Note that you can easily add your own models as well. See [adding custom models](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models.
