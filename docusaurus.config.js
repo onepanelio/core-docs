@@ -7,14 +7,16 @@ module.exports = {
   organizationName: 'onepanelio', // Usually your GitHub org/user name.
   projectName: 'core-docs', // Usually your repo name.
   themeConfig: {
-    disableDarkMode: true,
+    colorMode: {
+      disableSwitch: true,
+    },
     navbar: {
       title: '',
       logo: {
         alt: 'Onepanel logo',
         src: 'img/onepanel-logo-blue-white.png',
       },
-      links: [
+      items: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
         {to: 'docs/deployment/overview', label: 'Deploy and Manage', position: 'left'},
         {to: 'docs/reference/overview', label: 'User Guide', position: 'left'},
