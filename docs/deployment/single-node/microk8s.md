@@ -2,15 +2,14 @@
 title: MicroK8s deployment guide
 sidebar_label: MicroK8s deployment
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This document outlines the installation steps for single node installation using [Multipass](https://multipass.run/) VM and [MicroK8s](https://microk8s.io/).
 
 ## Install MicroK8s with Multipass
 
 First, install Multipass for your operating system:
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs
   defaultValue="linux"
@@ -130,6 +129,56 @@ If you see a "not running" error, run `microk8s inspect`.
 ## Install Onepanel
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
+  <Tabs
+    defaultValue="linux"
+    values={[
+      { label: 'Linux', value: 'linux', },
+      { label: 'macOS', value: 'macos', },
+      { label: 'Windows', value: 'windows', },
+    ]
+  }>
+  <TabItem value="linux">
+
+  ```bash
+  # Download the binary
+  curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-linux-amd64
+
+  # Make binary executable
+  chmod +x opctl-linux-amd64
+
+  # Move binary to path
+  mv ./opctl-linux-amd64 /usr/local/bin/opctl
+
+  # Test installation
+  opctl version
+  ```
+
+  </TabItem>
+  <TabItem value="macos">
+
+  ```bash
+  # Download the binary
+  curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-macos-amd64
+
+  # Make binary executable
+  chmod +x opctl-macos-amd64
+
+  # Move binary to path
+  mv ./opctl-macos-amd64 /usr/local/bin/opctl
+
+  # Test installation
+  opctl version
+  ```
+
+  </TabItem>
+  <TabItem value="windows">
+
+  :::info
+  Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+  :::
+
+  </TabItem>
+  </Tabs>.
 
 2. Run the following command to initialize a `params.yaml` template for microk8s:
   ```bash
