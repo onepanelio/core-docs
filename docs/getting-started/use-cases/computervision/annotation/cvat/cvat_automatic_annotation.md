@@ -15,16 +15,17 @@ Before using any type of semi-automatic annotation, you will need to upload your
 1. To upload a model, click on **Models**, and then click on **Create new model**. 
 
 2. Click on select files and upload your model (`.pb` and `.csv` for TensorFlow Object Detection). Hit submit to upload the model. 
-:::note
-For TF Object Detection API and MaskRCNN, you will need two files- **model** and **classes.csv**. For TF Object Detection API, the model should be Tensorflow Frozen Graph (`.pb`). For MaskRCNN, it should be Keras model (`.h5`).
-:::
-![Model Manager](/img/upload_model.PNG)
-:::note
-Since Onepanel automatically syncs data from cloud storage to local directory. You can click on **Connected file share** to use models from S3. You will find trained models in `root -> output -> <cvat-task-name> -> <workflow-name> -> <workflow-execution-name>`. For TensorFlow Object Detection API, there will be one more folder before `workflow-execution-time` based on the model you trained (i.e `frcnn-res50-coco`).
-:::
+  :::note
+  For TF Object Detection API and MaskRCNN, you will need two files- **model** and **classes.csv**. For TF Object Detection API, the model should be Tensorflow Frozen Graph (`.pb`). For MaskRCNN, it should be Keras model (`.h5`).
+  :::
+  ![Model Manager](/img/upload_model.PNG)
+  :::note
+  Since Onepanel automatically syncs data from cloud storage to local directory. You can click on **Connected file share** to use models from S3. You will find trained models in `root -> output -> <cvat-task-name> -> <workflow-name> -> <workflow-execution-name>`. For TensorFlow Object Detection API, there will be one more folder before `workflow-execution-time` based on the model you trained (i.e `frcnn-res50-coco`).
+  :::
 
 3. Click on **Models** again and you will find your model in the list. You can also use files from `Connected file share` just like creating new tasks.
-![Uploaded Models](/img/upload_model_after.PNG)
+
+  ![Uploaded Models](/img/upload_model_after.PNG)
 
 ## Running pre-annotation in CVAT
 
@@ -32,20 +33,20 @@ Since Onepanel automatically syncs data from cloud storage to local directory. Y
 
 2. Click on **Automatic annotation** under Actions menu. 
 
-![Click Actions](/img/cvat_select_automatic_annotation.png)
+  ![Click Actions](/img/cvat_select_automatic_annotation.png)
 
 3. Select the model for pre-annotation. By default, you can use RCNN Object Detector (from Tensorflow Object Detection API) or  Mask RCNN Object Detector for semantic segmentation.
 
 4. If you selected any models other than default ones then you will asked to do class mapping. CVAT will automatically map class from task to model's class.
 
-![Class mapping](/img/class_mapping.png)
+  ![Class mapping](/img/class_mapping.png)
 
 4. Click on **Submit** to start pre-annotation. Once it's done, you can click on **Open** to access the annotation.
-![Automatic Annotation Running](/img/cvat_automatic_annotation_running.png)
+  ![Automatic Annotation Running](/img/cvat_automatic_annotation_running.png)
 
 5. Here is a output from default object detection model.
 
-![Inference Output](/img/cvat_inference_output.png)
+  ![Inference Output](/img/cvat_inference_output.png)
 
 ## Hardware requirements 
 

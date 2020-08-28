@@ -14,30 +14,34 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
 ![CVAT flowchart](/img/auto-annotation-v.2.0.png)
 
 1. Click on **Open** for a task you want to train a model on.
-![Open task](/img/cvat_open.png)
+  
+  ![Open task](/img/cvat_open.png)
 
 2. Click on **Job #X**, where X could be any job number. Annotate few frames. For testing you can just annotate one frame. But ideally you want to have thousands of objects to train a deep learning model on. Alternatively, you can just run pre-annotation if your labels are common ones.
 
 3. Click on **Actions** for a task you want to train a model on. Then, click on **Execute training Workflow**.
-![Select training workflow](/img/cvat_select_workflow_execution.png)
+
+  ![Select training workflow](/img/cvat_select_workflow_execution.png)
 
 4. Select Workflow template (i.e model to train). By default, you can use TensorFlow Object Detection for object detection or MaskRCNN for semantic segmentation. Below image shows a case for Tensorflow Object Detection.
-![Train a model from CVAT](/img/tf-object-detection.png)
 
-:::tip
-Note you can easily add your own models as well. See our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models. 
-:::
+  ![Train a model from CVAT](/img/tf-object-detection.png)
+
+  :::tip
+  Note you can easily add your own models as well. See our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models. 
+  :::
 
 5. Update hyper-parameters and settings as per your requirements. Most of the parameters visible above are related to the model (MaskRCNN) and system (i.e machine). For this guide, you can change `num-steps` from default 10000 to 1000. You can also select the checkpoint path from previously trained model. You can leave it empty if you don't have an appropriate, previously trained model.
 
 6. Click **Submit**. This will execute the Onepanel Workflow for selected model. You can see Workflow logs by going to Workflow execution page. You can find the URL for the same in the notification card.
-![Workflow URL](/img/execution_url.png)
+  
+  ![Workflow URL](/img/execution_url.png)
 
-Trained model and other outputs will be stored on cloud storage and will be synced with CVAT locally so that you can use this to pre-annotate other frames. 
+  Trained model and other outputs will be stored on cloud storage and will be synced with CVAT locally so that you can use this to pre-annotate other frames. 
 
-:::note
-You can also use this trained model to run pre-annotation in CVAT. See our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation) for more information on pre-annotation.
-:::
+  :::note
+  You can also use this trained model to run pre-annotation in CVAT. See our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation) for more information on pre-annotation.
+  :::
 
 ## TensorFlow Object Detection API
 
