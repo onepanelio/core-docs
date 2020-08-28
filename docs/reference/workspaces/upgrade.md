@@ -9,15 +9,15 @@ This can be used to upgrade to a more powerful CPU, or to a weaker one to conser
 
 To change the node pool,
 
-1. Open up the workspace
+1. Click **Open** to open a Workspace.
 
     ![Workspace list open workspace](/img/workspace_list_open_workspace.png)
 
-2. Click on the node pool dropdown, select a new node pool, and click *UPDATE*
+2. Click on the node pool dropdown, select a new node pool, and click **Update**.
 
     ![Workspace detail node pool](/img/workspace_detail_node_pool.png)
     ![Workspace detail change node pool](/img/workspace_detail_change_node_pool.png)
 
-3. The workspace will start updating and will resume once finished
+3. The workspace will start updating and will resume once finished.
 
     ![Workspace detail workspace upgrading](/img/workspace_detail_workspace_upgrading.png)
