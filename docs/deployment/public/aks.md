@@ -189,6 +189,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
   :::
 
 8. Use the following command to get your auth token to log into Onepanel:
+
   ```bash
   opctl auth token
   ```

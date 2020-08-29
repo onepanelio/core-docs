@@ -87,26 +87,26 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
 
 2. Run the following command to initialize a `params.yaml` template for minikube:
 
-    ```bash
-    opctl init --provider minikube \
-        --enable-metallb \
-        --artifact-repository-provider s3
-    ```
+  ```bash
+  opctl init --provider minikube \
+      --enable-metallb \
+      --artifact-repository-provider s3
+  ```
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
 4. Finally, run the following command to deploy to your cluster:
 
-    ```bash
-    opctl apply
-    ```
+  ```bash
+  opctl apply
+  ```
 
-    :::important
-    The CLI will display the URL for accessing Onepanel once the deployment completes.
-    :::
+  :::important
+  The CLI will display the URL for accessing Onepanel once the deployment completes.
+  :::
 
 5. Use the following command to get your auth token to log into Onepanel:
 
-    ```bash
-    opctl auth token
-    ```
+  ```bash
+  opctl auth token
+  ```
