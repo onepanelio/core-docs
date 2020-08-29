@@ -312,3 +312,8 @@ ol > li::before {
   font-size: 18px;
   font-weight: bold;
 }
+
+/* Remove version badge */
+article > div > span.badge--secondary {
+  display: none;
+}
