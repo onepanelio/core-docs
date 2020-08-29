@@ -33,6 +33,7 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
 ## Install Onepanel
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
+
   <Tabs
     defaultValue="linux"
     values={[
@@ -85,6 +86,7 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
   </Tabs>
 
 2. Run the following command to initialize a `params.yaml` template for minikube:
+
     ```bash
     opctl init --provider minikube \
         --enable-metallb \
@@ -94,6 +96,7 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
 4. Finally, run the following command to deploy to your cluster:
+
     ```bash
     opctl apply
     ```
@@ -103,6 +106,7 @@ Take a note of this IP as you will need to add it to your `params.yaml`.
     :::
 
 5. Use the following command to get your auth token to log into Onepanel:
+
     ```bash
     opctl auth token
     ```

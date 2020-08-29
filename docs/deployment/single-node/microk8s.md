@@ -129,6 +129,7 @@ If you see a "not running" error, run `microk8s inspect`.
 ## Install Onepanel
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
+
   <Tabs
     defaultValue="linux"
     values={[
@@ -181,6 +182,7 @@ If you see a "not running" error, run `microk8s inspect`.
   </Tabs>.
 
 2. Run the following command to initialize a `params.yaml` template for microk8s:
+
   ```bash
   opctl init --provider microk8s \
       --enable-metallb \
@@ -195,16 +197,19 @@ If you see a "not running" error, run `microk8s inspect`.
   :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
+
   :::note
   See [configuration metallb](/docs/deployment/configuration/files#metal-lb) for metallb specific details. 
   :::
 
 4. Get Kubernetes config from MicroK8s:
+
   ```bash
   multipass exec microk8s-vm -- /snap/bin/microk8s.config > kubeconfig
   ```
 
 5. Finally, run the following command to deploy to your cluster:
+
   ```bash
   KUBECONFIG=./kubeconfig opctl apply
   ```
@@ -313,6 +318,7 @@ If you see a "not running" error, run `microk8s inspect`.
   You should see the website load up.
 
 7. Use the following command to get your auth token to log into Onepanel:
+
   ```bash
   KUBECONFIG=./kubeconfig opctl auth token
   ```

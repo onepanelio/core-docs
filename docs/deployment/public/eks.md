@@ -54,6 +54,7 @@ If you are not the person that created the cluster, you will need to be [added t
 
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
+
   <Tabs
     defaultValue="linux"
     values={[
@@ -106,6 +107,7 @@ If you are not the person that created the cluster, you will need to be [added t
   </Tabs>
 
 2. Run the following command to initialize a `params.yaml` template for EKS:
+
   ```bash
   opctl init --provider eks \
       --artifact-repository-provider s3 \
@@ -123,11 +125,13 @@ If you are not the person that created the cluster, you will need to be [added t
   :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
+
   :::tip
   It is highly recommended that you commit `params.yaml` file into a private repository and encrypt it with [BlackBox](https://github.com/StackExchange/blackbox) or use a secret management service like [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/), [AWS Secret Manager](https://aws.amazon.com/secrets-manager/), [GCP Secret Manager](https://cloud.google.com/secret-manager) or [HashiCorp Vault](https://www.vaultproject.io/).
   :::
 
 4. Finally, run the following command to deploy to your cluster:
+
   ```bash
   opctl apply
   ```
@@ -137,11 +141,13 @@ If you are not the person that created the cluster, you will need to be [added t
   :::
 
 5. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+
   ```bash
   opctl app status
   ```
 
 6. Create a `CNAME` record in your DNS provider based on the instructions above.
+
   :::note
   You should use a wildcard `CNAME` record, for example: `*.example.com` or `*.subdomain.example.com`
   :::
@@ -151,11 +157,13 @@ If you are not the person that created the cluster, you will need to be [added t
   :::
 
 7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
+
   :::note
   If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
   :::
 
 8. Use the following command to get your auth token to log into Onepanel:
+
   ```bash
   opctl auth token
   ```
