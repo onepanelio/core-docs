@@ -16,10 +16,6 @@ The steps in the quick start allow you to quickly create a Onepanel cluster for 
 You can also [add components](/docs/deployment/upgrade/overview) at later time to make this cluster production ready.
 :::
 
-:::tip
-If you are on Windows, you may need to use `^` instead of `\` for any multi-line command described below.
-:::
-
 ## Step 0: Create a Kubernetes cluster
 Let's get started by creating a Kubernetes cluster in one of the following cloud providers:
 
@@ -362,6 +358,10 @@ Next, get the kubeconfig by running
 
   :::note
   If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+
+  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
+
+  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
   :::
 
   </TabItem>
@@ -374,6 +374,10 @@ Next, get the kubeconfig by running
 
   :::note
   If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+
+  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
+
+  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
   :::
 
   </TabItem>
@@ -384,6 +388,11 @@ Next, get the kubeconfig by running
       --artifact-repository-provider s3
   ```
 
+  :::note
+  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
+
+  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  :::
   </TabItem>
 
   <TabItem value="minikube">
@@ -395,11 +404,11 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  metallb is used as a loadbalancer 
-  :::
-
-  :::note
   If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+
+  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
+
+  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
   :::
 
   </TabItem>
@@ -413,21 +422,11 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  metallb is used as a loadbalancer 
-  :::
-
-  :::note
   If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
   :::
 
   </TabItem>
   </Tabs>
-
-  :::important
-  You can use different object storage than S3 by setting the `--artifact-repository-provider` flag. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
-  :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
