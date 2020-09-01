@@ -521,10 +521,6 @@ Next, get the kubeconfig by running
 
 Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https://github.com/opencv/cvat), allowing you to annotate images and videos and then train models on the annotated data with a few clicks. You can then use these newly trained models to automatically pre-annotate additional data, iteratively improving your object detection or semantic segmentation models.
 
-:::tip
-You can also bring your own labeling tool as a reproducible template in Onepanel. See our [Workspace templates documentation](/docs/reference/workspaces/templates) for more information.
-:::
-
 1. Go to **Workspaces** and click **Create Workspace**.
 
   ![Create Workspace](/img/create_workspaces_button_in_workspaces_page.png)
@@ -539,10 +535,6 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
   
   :::note
   Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 6 volumes, so make sure to pick a machine that can support at least that many volumes.
-  :::
-
-  :::tip
-  You can switch to a different node pool (for example one that supports GPUs) in a running Workspace at any time by clicking the Onepanel icon in the bottom right corner of your Workspace.
   :::
 
 4. Next, add the directory you want Onepanel to pull raw input data and store training output (pickled models, classes, etc.). This directory should be in the default object storage you configured when you launched Onepanel and in a directory that matches your current namespace.
