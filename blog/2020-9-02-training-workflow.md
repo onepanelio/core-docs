@@ -442,3 +442,8 @@ Modify parameters, if you want. But changes aren't required. Just hit `Submit` a
 You can find your trained model (i.e output) in `cvat-output-path` directory on your cloud storage.
 
 ## References
+
+- [End-to-End Object Detection with Transformers](https://arxiv.org/pdf/2005.12872.pdf)
+- [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
+- [Transformer Architecture: The Positional Encoding](Thttps://kazemnejad.com/blog/transformer_architecture_positional_encoding/)
+- [Onepanel's Documentation on Workflows](https://docs.onepanel.ai/docs/getting-started/concepts/workflows)
