@@ -58,7 +58,7 @@ In other words, you can upload your frames to CVAT, annotate or pre-annotate the
 
 <image-flow-chart>
 
-## 1. Requirements
+### 1. Requirements
 
 Before we dive into technical details of adding DETR support in CVAT Onepanel, it's important to know what types of models and data can be used with CVAT.
 
@@ -74,19 +74,17 @@ If your code supports one of the following formats, then you are good to go.
 5. LabelMe
 6. DatuMaro
 
-## 2. Upload code to Github
+### 2. Upload code to Github
 
-Now that we know your code will work with CVAT, let's go ahead and create a workflow for the same.The first step here is to upload your repository to Github. The workflow we are about to create will clone this repository and execute training command. 
+Now that we know our code will work with CVAT, let's go ahead and create a workflow for the same.The first step here is to upload your repository to Github. The workflow we are about to create will clone this repository and execute training command. 
 
-For this example, we are going to add a training workflow for DEtection TRansformer (DETR). [DETR](https://github.com/facebookresearch/detr) was recently published by Facebook Research. Unlike many state-of-the-art object detection models, this works end-to-end using Transformers. Currently, Faster RCNN is a popular model for object detection. But it works in two phases. These multiple phases not only create overhead in training, they also take more time to train. This new model addresses these issues by approaching object detection task as a set prediction task. This is not a completely new approach but previous approaches didn't report accuracy as good as Faster RCNN-based models.
+The first thing we need to do is clone DETR's Github [repository](https://github.com/facebookresearch/detr). We are cloning this because we may need to make some changes in code. If your code is stored locally, then you'll have to upload it to Github. Also note that this code supports MS COCO format, so we can use this directly from CVAT.
 
-The first thing we need to do is clone their Github [repository](https://github.com/facebookresearch/detr). We are cloning this because we may need to make some changes in code. If your code is stored locally, then you'll have to upload it to Github. Also note that this code supports MS COCO format, so we can use this directly from CVAT.
+### 3. Running code in JupyterLab
 
-## 3. Running code in JupyterLab
+Before we create a Workflow for this, we need to make sure it works without any issues and also understand how it works. We may also need to make some minor changes. You can do this locally or create a JupyterLab workspace on Onepanel. 
 
-Before we create a workflow for this, we need to make sure it works without any issues and also understand how it works. We may also need to make some minor changes. You can do this locally or create a JupyterLab workspace on Onepanel. 
-
-Here, our goal is to have one script in this repository that takes required inputs (i.e epochs and other hyperparameters) from user and starts training, inference, etc. For this example, our goal is to create a workflow for training. So, we will focus on training part only. You can have a flag in this script and run training or inference based on user input.
+Here, our goal is to have one script in this repository that takes required inputs (i.e epochs and other hyperparameters) from user and starts training, inference, etc. For this example, our goal is to create a Workflow for DETR training. So, we will focus on training part only. You can have a flag in this script and run training or inference based on user input.
 
 The only major different between running this code localy and in a workflow is that our annotated data will be dumped onto cloud storage, so we will map that directory with any local directory. Hence, you need to update directory structure and fix it to any directory (i.e `/mnt/data/dataset/`). This is where we will mount our dataset from cloud storage. 
 
@@ -94,12 +92,12 @@ Now, let's see if DETR has main script which takes user inputs and runs training
 
 **If your code supports one of the dataset format that CVAT can export into, then we have to modify only two things: input and output paths.**
 
-### a. Input paths
+#### a. Input paths
 Since we will be mounting dataset at a fixed location (i.e `/mnt/data/datasets/`), you can hard-code this path in your code. Moreover, we also need to look at directory structure inside this directory. Since our code accepts data in COCO format, let's export data from CVAT in MS COCO format and take a look at it's directory structure.
 
 ![COCO Directory Structure](/img/coco_dir.png)
 
-If you are familiar with officail COCO directory structure or even take a look at DETR code, you will find that this does not follow official COCO directory structure. Since this code supports officail COCO directory structure, we need to modify some lines to make it work. Also, the `file_path` attribute in JSON file points to frames on the machine where it was exported. So, this won't work on other machine (i.e workflows that we will be running).
+If you are familiar with official COCO directory structure or even take a look at DETR code, you will find that this does not follow official COCO directory structure. Since this code supports official COCO directory structure, we need to modify some lines to make it work. Also, the `file_path` attribute in JSON file points to frames on the machine where it was exported. So, this won't work on other machine (i.e workflows that we will be running).
 
 So, we will need to make two changes.
 
@@ -142,11 +140,11 @@ def update_img_paths(args):
 
 Once this is done. We are good to go. We can now go ahead and create Onepanel Workflow. This can be used from CVAT or can be executed directly.
 
-### b. Output path
+#### b. Output path
 
 If we want Onepanel Workflows to store outputs on cloud storage, we can just write output to `/mnt/output/` and it will automatically upload outputs onto cloud storage. For this to work, we just need to add output artifact in our template as discussed in the following section.
 
-## 4. Create a workflow
+### 4. Create a workflow
 
 Now, let's go ahead and actually create a workflow. Click on `WORKFLOWS` and then click on `CREATE TEMPLATE` button. 
 
@@ -294,7 +292,7 @@ volumeClaimTemplates:
 
 Even though this looks cryptic, it isn't. Let us go through following three steps to create template for DETR.
 
-### a. Update workflow parameters
+#### a. Update workflow parameters
 
 The first thing you should do is add/remove parameters from above template. Now, how do you figure out which parameters should we use in there? It's simple. Use arguments/parameters that we take from user plus some system related parameter (optional). Some examples of this is `epochs`, `batch_size`, etc. Again, this depends on your code as well. In this case, our `main.py` accepts all those hyperparameters as an argument. If your code didn't have such an argument parser, then you can pass all hyperparameters, as shown above for `hyperparameters` parameter, and parse it in your code.
 
@@ -388,7 +386,7 @@ arguments:
     value: '1'
     visibility: public
 ```
-### b. Update container block
+#### b. Update container block
 
 Now, let's take a look at the second block of a base template.
 
@@ -523,7 +521,7 @@ We also attached some input and output artifacts. For inputs, we had training da
 
 Also notice that we selected a node with machine that user specified through parameter `sys-node-pool`. What we are essentially doing here is that we are using PyTorch container on this machine, attaching input artifacts (i.e training data), and running commands that perform required tasks (i.e training a model).
 
-### c. Update volume claims
+#### c. Update volume claims
 
 Now, let's take a look at the final block.
 
@@ -557,7 +555,7 @@ One last thing we need to do in order to use this template from CVAT is to add a
 
 With this, we have a final template for training DETR model.
 
-## 5. Using it in CVAT 
+### 5. Using it in CVAT 
 
 Now, we can use this model to train models from CVAT.
 
