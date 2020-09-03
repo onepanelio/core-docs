@@ -365,15 +365,49 @@ Now, let's update `predict-ssd-model` and `ensemble`. All three are very similar
       command: [sh, -c]
       args:
        - |
-        ls /mnt/data/datasets/ \
-        && apt update \
+        apt update \
         && apt install libgl1-mesa-glx ffmpeg libsm6 libxext6 libglib2.0-0 libxext6 libxrender-dev wget unzip -y \
         && bash setup.sh \
         && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,ssd_resnet --option={{workflow.parameters.ensemble-option}} --combine=True \
       workingDir: /mnt/src
 ```
+Note that each of these containers can run on different machines. Below example runs the container on K80 (Standard_NC6) GPU.
 
-Here is what our final template looks like.
+```yaml
+       template: ensemble
+  - name: ensemble
+    inputs:
+      artifacts:
+      - name: src
+        path: /mnt/src
+        git:
+          repo:  "https://github.com/onepanelio/ensembleObjectDetection.git"
+      - name: data
+        path: /mnt/data/datasets/
+        s3:
+          key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
+    outputs:
+      artifacts:
+      - name: model
+        path: /mnt/output
+        optional: true
+        s3:
+          key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
+    container:
+      image: tensorflow/tensorflow:latest
+      command: [sh, -c]
+      args:
+       - |
+        apt update \
+        && apt install libgl1-mesa-glx ffmpeg libsm6 libxext6 libglib2.0-0 libxext6 libxrender-dev wget unzip -y \
+        && bash setup.sh \
+        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,ssd_resnet --option={{workflow.parameters.ensemble-option}} --combine=True \
+      workingDir: /mnt/src
+    nodeSelector:
+      beta.kubernetes.io/instance-type: Standard_NC6
+```
+
+Anyway, here is what our final template looks like.
 
 ```yaml
 arguments:
