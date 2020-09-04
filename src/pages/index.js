@@ -48,7 +48,7 @@ const features = [
     imageUrl: 'img/landing/met.png',
     description: (
       <>
-        Track and visualize model metrics and expriments with <a href="https://github.com/tensorflow/tensorboard" target="_blank">TensorBoard</a> or bring your own experiment tracking tools.
+        Track and visualize model metrics and experiments with <a href="https://github.com/tensorflow/tensorboard" target="_blank">TensorBoard</a> or bring your own experiment tracking tools.
       </>
     ),
   },
