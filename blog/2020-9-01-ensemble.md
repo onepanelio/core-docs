@@ -110,7 +110,7 @@ for sub_dir in list_dir:
         shutil.move(dir_to_move, os.path.join(dest, sub_dir, file))
 ```
 
-One last change we need to make is convert output XML file into CVAT compatible XML file. We already have a [script](https://github.com/onepanelio/ensembleObjectDetection/blob/master/TestTimeAugmentation/generate_xml_cvat.py) that does this. But that script requires a dictionary as an input. So we will add following functions to do that.
+One last change we need to do is convert output XML file into CVAT compatible XML file. We already have a [script](https://github.com/onepanelio/ensembleObjectDetection/blob/master/TestTimeAugmentation/generate_xml_cvat.py) that does this. But that script requires a dictionary as an input. So we will add following functions to do that.
 
 ```python3
 
