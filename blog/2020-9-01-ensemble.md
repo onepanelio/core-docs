@@ -578,3 +578,8 @@ volumeClaimTemplates:
         requests:
           storage: 2Gi
 ```
+
+Now that our template is ready, let's add a label `used-by` with a value `cvat` so that we can use from CVAT. 
+Click on **Execute training Workflow** for a specific task and select the newly created Workflow. An important thing here is to select `MS COCO` as a dump format since we used this format for our code changes above.
+
+<execute-ensemble-workflow>
