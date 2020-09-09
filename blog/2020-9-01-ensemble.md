@@ -110,6 +110,39 @@ for sub_dir in list_dir:
         shutil.move(dir_to_move, os.path.join(dest, sub_dir, file))
 ```
 
+One last change we need to make is convert output XML file into CVAT compatible XML file. We already have a [script](https://github.com/onepanelio/ensembleObjectDetection/blob/master/TestTimeAugmentation/generate_xml_cvat.py) that does this. But that script requires a dictionary as an input. So we will add following functions to do that.
+
+```python3
+
+def generate_xml(pathImg):
+    labels,data = get_labels_from_json("/mnt/data/dataorig/annotations/instances_default.json")
+    _images = glob.glob("/mnt/data/dataorig/images/*.jpg")
+    _images.extend(glob.glob("/mnt/data/dataorig/images/*.png"))
+    len_images = len(_images)
+    final_result = {'meta':{'task': OrderedDict([('id','0'),('name',"onepanel_workflow_default_name"),('size',str(len_images)),('mode','interpolation'),('start_frame', '0'),('stop_frame', str(len_images-1)),('z_order',"False"),('labels', labels)])}, 'frames':[]}
+    for image in data['images']:
+        tree = ET.parse(os.path.join(pathImg+"output", os.path.basename(image['file_name']))[:-4]+'.xml')
+        root = tree.getroot()
+        shapes = []
+        for obj in root.findall('object'):
+            shapes.append({'type':'rectangle','label':obj.find('name').text,'occluded':0,'points':[float(list(obj.iter('xmin'))[0].text),float(list(obj.iter('ymin'))[0].text),float(list(obj.iter('xmax'))[0].text),float(list(obj.iter('ymax'))[0].text)]})
+        final_result['frames'].append({'frame':int(image['id']), 'width':int(image['width']), 'height':int(image['height']), 'shapes':shapes})
+    dump_as_cvat_annotation(open(pathImg+"output/cvat_xml_output.xml", "w"), final_result)
+
+```
+
+Here, we take input path as an input and generate final XML which has output of all images. We also use exported data to get a list of labels. Following is a function to get a list of labels.
+
+```python3
+def get_labels_from_json(json_path):
+    with open(json_path, 'r') as json_file:
+        data = json.load(json_file)
+    labels = []
+    for label in data['categories']:
+        labels.append(('label', [('name', label['name'])]))
+    return labels,data
+```
+
 Now, our code is good to go for Workflows.
 
 ## Creating template

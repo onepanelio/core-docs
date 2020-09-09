@@ -29,12 +29,10 @@ Now, let's annotate macbooks in those 60 images. It took me less than 10 minutes
 Now that we have our data ready, we can go ahead and starting training our model. 
 
 1. Click on **Actions** for `train` task, and select **Execute training Workflow**. 
-2. Select **TF Object Detection Training** as a Workflow template.
-<image-workflow-popup>
+2. Select **TF Object Detection Training** as a Workflow template. <image-workflow-popup>
 3. Select the model you want to train. I will choose Faster RCNN-ResNet 101 COCO.
 4. Update any parameters if you want. I will update `num-steps` to 5000. There are no specific rules about how to choose number of steps. You can try with different numbers.
-5. Once done, hit **Submit**. It might take some time to upload data to cloud storage. You will see a notification card with a link to Workflow execution page where the model is being trained. You can check logs there as well.
-<image-workflow-execution>
+5. Once done, hit **Submit**. It might take some time to upload data to cloud storage. You will see a notification card with a link to Workflow execution page where the model is being trained. You can check logs there as well.<image-workflow-execution>
 
 ## Running inference using this newly trained model
 Now, we can use this model to run inference on 10 images that we set aside. Since we had only 60 images, ideally we should not expect a highly accurate model. Anyway, let's upload the model to CVAT and run inference using it.
