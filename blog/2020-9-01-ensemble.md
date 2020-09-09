@@ -297,11 +297,11 @@ Now, we will remove those unnecessary tasks such as post processing ones and ren
     - name: predict-yolo-model
     dependencies: [process-input-data]
     template: yolo
-    - name: predict-ssd-model
+    - name: predict-retinanet-model
     dependencies: [process-input-data]
-    template: ssd
+    template: retinanet
     - name: ensemble
-    dependencies: [predict-yolo-model, predict-ssd-model]
+    dependencies: [predict-yolo-model, predict-retinanet-model]
     template: ensemble
 ```
 
@@ -345,9 +345,9 @@ First of all, we will update `predict-yolo-model`.
 
 Here, we updated the command which executes the script, docker image, and artifacts.
 
-Now, let's update `predict-ssd-model` and `ensemble`. All three are very similar.
+Now, let's update `predict-retinanet-model` and `ensemble`. All three are very similar.
 ```yaml
-- name: ssd
+- name: retinanet
     inputs:
       artifacts:
       - name: src
@@ -373,7 +373,7 @@ Now, let's update `predict-ssd-model` and `ensemble`. All three are very similar
         apt update \
         && apt install libgl1-mesa-glx ffmpeg libsm6 libxext6 libglib2.0-0 libxext6 libxrender-dev wget unzip -y \
         && bash setup.sh \
-        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=ssd_resnet --option={{workflow.parameters.ensemble-option}} --combine=False \
+        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=retinanet --option={{workflow.parameters.ensemble-option}} --combine=False \
       workingDir: /mnt/src
 ```
 
@@ -405,7 +405,7 @@ Now, let's update `predict-ssd-model` and `ensemble`. All three are very similar
         apt update \
         && apt install libgl1-mesa-glx ffmpeg libsm6 libxext6 libglib2.0-0 libxext6 libxrender-dev wget unzip -y \
         && bash setup.sh \
-        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,ssd_resnet --option={{workflow.parameters.ensemble-option}} --combine=True \
+        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,retinanet --option={{workflow.parameters.ensemble-option}} --combine=True \
       workingDir: /mnt/src
 ```
 Note that each of these containers can run on different machines. Below example runs the container on K80 (Standard_NC6) GPU.
@@ -438,7 +438,7 @@ Note that each of these containers can run on different machines. Below example 
         apt update \
         && apt install libgl1-mesa-glx ffmpeg libsm6 libxext6 libglib2.0-0 libxext6 libxrender-dev wget unzip -y \
         && bash setup.sh \
-        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,ssd_resnet --option={{workflow.parameters.ensemble-option}} --combine=True \
+        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,retinanet --option={{workflow.parameters.ensemble-option}} --combine=True \
       workingDir: /mnt/src
     nodeSelector:
       beta.kubernetes.io/instance-type: Standard_NC6
@@ -467,11 +467,11 @@ templates:
       - name: predict-yolo-model
         dependencies: [process-input-data]
         template: yolo
-      - name: predict-ssd-model
+      - name: predict-retinanet-model
         dependencies: [process-input-data]
-        template: ssd
+        template: retinanet
       - name: ensemble
-        dependencies: [predict-yolo-model, predict-ssd-model]
+        dependencies: [predict-yolo-model, predict-retinanet-model]
         template: ensemble
   - name: ensemble
     inputs:
@@ -500,9 +500,9 @@ templates:
         && apt update \
         && apt install libgl1-mesa-glx ffmpeg libsm6 libxext6 libglib2.0-0 libxext6 libxrender-dev wget unzip -y \
         && bash setup.sh \
-        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,ssd_resnet --option={{workflow.parameters.ensemble-option}} --combine=True \
+        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,retinanet --option={{workflow.parameters.ensemble-option}} --combine=True \
       workingDir: /mnt/src
-  - name: ssd
+  - name: retinanet
     inputs:
       artifacts:
       - name: src
@@ -528,7 +528,7 @@ templates:
         apt update \
         && apt install libgl1-mesa-glx ffmpeg libsm6 libxext6 libglib2.0-0 libxext6 libxrender-dev wget unzip -y \
         && bash setup.sh \
-        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=ssd_resnet --option={{workflow.parameters.ensemble-option}} --combine=False \
+        && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=retinanet --option={{workflow.parameters.ensemble-option}} --combine=False \
       workingDir: /mnt/src
   - name: yolo
     inputs:
