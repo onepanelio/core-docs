@@ -273,14 +273,18 @@ We will start out by updating parameters. Those are the parameters that we will 
 ```yaml
 arguments:
   parameters:
-  - name: dataset-path
+  - name: cvat-annotation-path
     value: annotation-dump/sample-image
     displayName: Path to dataset
+    visibility: private
   - name: ensemble-option
     value: unanimous
-  - name: model-output-path
-    value: model-comparison14
+  - name: cvat-output-path
+    value: model-comparison
+    visibility: private
 ```
+
+Here, we have two special parameters (denoted with `cvat-` prefix) that are automatically populated by CVAT based on where it dumped the annotation data.
 
 ### Update tasks
 
