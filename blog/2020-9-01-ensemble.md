@@ -266,7 +266,7 @@ As you can see, two models are being trained following a post processing node. H
 
 ![Ensemble graph](/img/ensemble-graph.png)
 
-Now, let's see how to create this Workflow.
+Now, let's see how we can further update this template to create our Workflow.
 
 ### Update parameters
 We will start out by updating parameters. Those are the parameters that we will take from user. For this case, we will be taking ensemble option, dataset path, and output path from user. So, we will add following part.
