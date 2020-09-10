@@ -132,7 +132,7 @@ def generate_xml(pathImg):
 
 ```
 
-Here, we take input path as an input and generate final XML which has output of all images. We also use exported data to get a list of labels. Following is a function to get a list of labels.
+Here, we take input path as an input and generate a final XML which has output of all images. We also use exported data to get a list of labels. Following is a function to get a list of labels.
 
 ```python3
 def get_labels_from_json(json_path):
@@ -144,11 +144,11 @@ def get_labels_from_json(json_path):
     return labels,data
 ```
 
-Now, our code is good to go for Workflows.
+Now, our code is good to go for automation in Workflows.
 
-## Creating template
+## Creating a reusable Workflow template
 
-It is usually a good idea to start with a base template and then make required changes to achieve our goal. For this template, our goal is to run inference using two different models on two different nodes. For this task, we can use following template as our starting point.
+It is usually a good idea to start with a base template and then make required changes to achieve our goal. For this template, our goal is to run inference using two different models on two different nodes. For this task, we can use following template as our starting point:
 
 ```yaml
 entrypoint: main
@@ -258,15 +258,15 @@ volumeClaimTemplates:
           storage: 2Gi
 ```
 
-At first, it might look intimidating but a graph might be easier to look at. You can look at the graph by clicking on **SHOW GRAPH PREVIEW** while creating a Workflow. Here is how it looks like:
+At first, it might look intimidating but a graph might be easier to look at. You can look at the graph by clicking on **Show Graph Preview** while creating a Workflow. Here is what it looks like:
 
 ![Multi-model graph](/img/multi-model-graph.png)
 
-As we can see, two models are being trained following a post processing node. However, our pipeline is simpler than this. We just want to run inference on two different nodes and then use output from those two as an input for ensemble method. Here is how our pipeline would look like visually.
+As you can see, two models are being trained following a post processing node. However, our pipeline is simpler than this. We just want to run inference on two different nodes and then use output from those two as an input for the ensemble method. Here is what our pipeline would look like visually:
 
 ![Ensemble graph](/img/ensemble-graph.png)
 
-Now, let's see how to create this workflow.
+Now, let's see how to create this Workflow.
 
 ### Update parameters
 We will start out by updating parameters. Those are the parameters that we will take from user. For this case, we will be taking ensemble option, dataset path, and output path from user. So, we will add following part.
