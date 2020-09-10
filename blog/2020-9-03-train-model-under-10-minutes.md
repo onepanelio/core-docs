@@ -10,12 +10,12 @@ tags: []
 
 Let's say you are a farmer and found about these great object detection or segmentation models that you can potentially use to do some automated analysis of crops. Moreover, let's say you know a little about computers but you are not an expert nor you know anything about AI or deep learning models. How do you build these models for your use case? 
 
-Assuming you will not be writing your own model, you will probably use a popular repository like [TensorFlow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection) to train these models. This will require you to set up this repository and run some commands in a terminal. Even a computer expert might take from a few hours to a day to install all the dependencies and setup this repository on a local machine. I didn't even mention anything about annotation though. Since your objects are unique, you will probably not find an existing annotated dataset. You will need to use any annotation tool to annotate or have someone annotate these images for you. This whole process can take hours or even a few days to complete. 
+Assuming you will not be writing your own model, you will probably use a popular repository like [TensorFlow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection) to train these models. This will require you to set up this repository and run some commands in a terminal. Even a computer expert might take from a few hours to a day to install all the dependencies and setup this repository on a local machine. we didn't even include anything about annotation though. Since your objects are unique, you will probably not find an existing annotated dataset. You will need to use any annotation tool to annotate or have someone annotate these images for you. This whole process can take hours or even a few days to complete. 
 
 In this post, we will see how you can use Onepanel to train your models on custom objects starting from annotation to running inference using this newly trained model and visualizing its results. This can be easily done within 10 minutes on Onepanel excluding the actual training time and annotation time.
 
 ## Getting data ready
-The first thing we need to do is annotate some images to train our model on. For this blog, we are going to be training an object detection model that can detect macbooks in an image. For this, I have downloaded some 70 or so images. Of which, we will use 60 to train the model and 10 to run the inference on. Of course, you cannot get a highly accurate model by just training on 50 or so images. Ideally, you want to use a lot of images and also play with hyperparameters to come up with the best model. But for this demo, we will stick to 60 and hopefully our model will still be a good one.
+The first thing we need to do is annotate some images to train our model on. For this blog, we are going to be training an object detection model that can detect macbooks in an image. For this, We have downloaded some 70 or so images. Of which, we will use 60 to train the model and 10 to run the inference on. Of course, you cannot get a highly accurate model by just training on 50 or so images. Ideally, you want to use a lot of images and also play with hyperparameters to come up with the best model. But for this demo, we will stick to 60 and hopefully our model will still be a good one.
 
 <images-sample-macbook-images>
 
@@ -30,8 +30,8 @@ Now that we have our data ready, we can go ahead and starting training our model
 
 1. Click on **Actions** for `train` task, and select **Execute training Workflow**. 
 2. Select **TF Object Detection Training** as a Workflow template. <image-workflow-popup>
-3. Select the model you want to train. I will choose Faster RCNN-ResNet 101 COCO.
-4. Update any parameters if you want. I will update `num-steps` to 5000. There are no specific rules about how to choose number of steps. You can try with different numbers.
+3. Select the model you want to train. We will choose Faster RCNN-ResNet 101 COCO.
+4. Update any parameters if you want. We will update `num-steps` to 5000. There are no specific rules about how to choose number of steps. You can try with different numbers.
 5. Once done, hit **Submit**. It might take some time to upload data to cloud storage. You will see a notification card with a link to Workflow execution page where the model is being trained. You can check logs there as well.<image-workflow-execution>
 
 ## Running inference using this newly trained model
