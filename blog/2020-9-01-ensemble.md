@@ -269,7 +269,8 @@ As you can see, two models are being trained following a post processing node. H
 Now, let's see how we can further update this template to create our Workflow.
 
 ### Update parameters
-We will start out by updating parameters. Those are the parameters that we will take from user. For this case, we will be taking ensemble option, dataset path, and output path from user. So, we will add following part.
+
+We will start out by updating parameters; these are input parameters that we will take from the user. In this case, we will be taking ensemble option, dataset path, and output path as parameters. Let's add these to the top of the template:
 
 ```yaml
 arguments:
@@ -306,9 +307,9 @@ Now, we will remove those unnecessary tasks such as post processing ones and ren
     template: ensemble
 ```
 
-Next, we will update containers for each of the tasks except process-input-data. You can have `process-input-data` performce certain actions but I will leave it as it is for now.
+Next, we will update containers for each of the tasks except `process-input-data`. You can have `process-input-data` perform certain actions but we will leave it as it is for now.
 
-First of all, we will update `predict-yolo-model`.
+First, let's update `predict-yolo-model`:
 
 ```yaml
 - name: yolo
@@ -344,9 +345,10 @@ First of all, we will update `predict-yolo-model`.
         mountPath: /mnt/output
 ```
 
-Here, we updated the command which executes the script, docker image, and artifacts.
+Here, we updated the command which executes the script, Docker image, and artifacts.
 
-Now, let's update `predict-retinanet-model` and `ensemble`. All three are very similar.
+Now, let's update `predict-retinanet-model` and `ensemble`. All three are very similar:
+
 ```yaml
 - name: retinanet
     inputs:
@@ -409,7 +411,8 @@ Now, let's update `predict-retinanet-model` and `ensemble`. All three are very s
         && python TestTimeAugmentation/run.py --images_path=/mnt/data/datasets --models=yolo_darknet,retinanet --option={{workflow.parameters.ensemble-option}} --combine=True \
       workingDir: /mnt/src
 ```
-Note that each of these containers can run on different machines. Below example runs the container on K80 (Standard_NC6) GPU.
+
+Note that each of these containers can run on a different machines. Below example runs the container on K80 (`Standard_NC6` on Azure) GPU.
 
 ```yaml
        template: ensemble
@@ -445,7 +448,7 @@ Note that each of these containers can run on different machines. Below example 
       beta.kubernetes.io/instance-type: Standard_NC6
 ```
 
-Anyway, here is what our final template looks like.
+Here is what our final template looks like:
 
 ```yaml
 arguments:
@@ -580,7 +583,8 @@ volumeClaimTemplates:
           storage: 2Gi
 ```
 
-Now that our template is ready, let's add a label `used-by` with a value `cvat` so that we can use from CVAT. 
-Click on **Execute training Workflow** for a specific task and select the newly created Workflow. An important thing here is to select `MS COCO` as a dump format since we used this format for our code changes above.
+Now that our template is ready, let's add a label `used-by` with a value `cvat` so that we can use it from any CVAT Workspace.
+
+In CVAT, click on **Execute training Workflow** for a specific task and select the newly created Workflow. An important thing here is to select `MS COCO` as a dump format since we used this format for our code changes above.
 
 <execute-ensemble-workflow>
