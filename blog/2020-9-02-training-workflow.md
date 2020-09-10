@@ -154,7 +154,7 @@ You will see a YAML editor as shown below.
 
 ![Create workflow](/img/create_workflow_template.png)
 
-Give this template an appropriate name. For this example, I will be using `DETR Training`.
+Give this template an appropriate name. For this example, we will be using `DETR Training`.
 
 Now, we will use [MaskRCNN template](https://github.com/onepanelio/templates/blob/master/workflows/maskrcnn-training/template.yaml) as our starting point and we will modify it for our needs.
 
@@ -166,7 +166,7 @@ Even though this might look cryptic, it isn't. Let us go through following three
 
 The first thing you should do is add/remove parameters from above template. Now, how do you figure out which parameters should we use in there? It's simple. Use arguments/parameters that we take from user plus some system related parameter (optional). Some examples of this is `epochs`, `batch_size`, etc. Again, this depends on your code as well. In this case, our `main.py` accepts all those hyperparameters as an argument. If your code didn't have such an argument parser, then you can pass all hyperparameters, as shown above for `hyperparameters` parameter, and parse it in your code.
 
-First, we will update `source` parameter to use code that we just clones. If your code is in private mode, please [refer to our guide](http://localhost:3000/docs/reference/workflows/templates#git-integration-with-workflows) on git integration to know how you can use private repositories with Workflows. We will also have to update docker image to use PyTorch with cuda. Since I will be deploying this on azure, I will use `Standard_NC6` for `sys-node-pool`. This machine has K80 GPU.
+First, we will update `source` parameter to use code that we just clones. If your code is in private mode, please [refer to our guide](http://localhost:3000/docs/reference/workflows/templates#git-integration-with-workflows) on git integration to know how you can use private repositories with Workflows. We will also have to update docker image to use PyTorch with cuda. Since we will be deploying this on azure, we will use `Standard_NC6` for `sys-node-pool`. This machine has K80 GPU.
 
 Next, we will remove `hyperparameters`, `cvat-num-classes`, and `cvat-finetune-checkpoint` as we don't need them.
 
@@ -417,7 +417,7 @@ volumeClaimTemplates:
         storage: 200Gi
 ```
 
-As we can see, this block defines volume claims. Based on your model and data, you can change this from 200 GB to whatever you need. But I will keep this as it is.
+As we can see, this block defines volume claims. Based on your model and data, you can change this from 200 GB to whatever you need. But we will keep this as it is.
 
 One last thing we need to do in order to use this template from CVAT is to add a label as shown below. If you want to use a Workflow in CVAT, please add a label with `key`=`used-by` and `value`=`cvat`.
 
