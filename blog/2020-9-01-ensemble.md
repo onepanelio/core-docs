@@ -12,23 +12,24 @@ In the [previous blog](<link>), we saw how we can add new models to train direct
 
 
 ## Ensemble of Object Detectors
+
 Let's first briefly review how we can review output from multiple object detection models. We will be using a technique described in this [paper](https://drive.google.com/file/d/1ku8X8lHs6lethEa5Adhj7frzV44NTbl4/view). This method takes a list (`L`) of lists where each sublist is a list of bounding boxes detected in any given image. The first step in the ensembling process is to flatten `L` so it has a list of detections rather than a list of lists.
 
 Next, the overlapping boxes will be grouped together using intersection over union. Below is a formula for the calculation of IoU. 
 
 <image-iou>
 
-For a pair of bounding boxes, IoU indicates how much area is overlapping. With this operation, we now have a list of lists where each sublist is a list of detected objects surrounded around one particular area. The IoU algorithm uses the length of each of these sublists to determine if this region contains an object or not. The final decision can be made using one of these three methods:
+For a pair of bounding boxes, IoU indicates how much area is overlapping. With this operation, we now have a list of lists where each sublist is a list of detected objects surrounding a particular area. The IoU algorithm uses the length of each of these sublists to determine if this region contains an object or not. The final decision can be made using one of these three voting strategies:
 
-1. Affirmative: In this, all sublists are kept. In other words, all original detections are considered valid.
-2. Consensus: In this strategy, sublist with length greater than m/2 are kept. Here, m is the size of the initial list. As the author describes in the paper, this entails that the detectors must agree that given region contains an object. This method is analogus to the majority voting method widely used for classification tasks.
-3. Unanimous: In this, sublist that has length same as number of detectors as kept.
+1. Affirmative: Using this strategy, all sublists are kept. In other words, all original detections are considered valid.
+2. Consensus: In this strategy, sublists with length greater than `m/2` are kept. Here, `m` is the size of the initial list. As the author describes in the paper, this entails that the detectors must agree that a given region contains an object. This method is analogus to the majority voting method widely used for classification tasks.
+3. Unanimous: In this strategy, only sublists that have the same length as number of detectors are kept.
 
-The authors have also published their [code](https://github.com/ancasag/ensembleObjectDetection) for us to experiment with. It has scripts to run inference using models such as Yolo, SSD, Mask RCNN, Faster RCNN, and Retina Net.
+The authors have also published their [code](https://github.com/ancasag/ensembleObjectDetection) on GitHub. It has scripts to run inference using models such as YOLO, SSD, Mask RCNN, Faster RCNN, and Retina Net.
 
-## Using on Onepanel
+## Creating a repeatable ensemble detection workflow on Onepanel
 
-The first thing we need to do is make sure this code can be used from Onepanel Workflow. Normally, I would recommend to have a script in your repository which takes all the required inputs from user, usually using something like `argparse`, and performs certain actions based on those inputs. We are going to do something similar here. We are going to create a script `run.py` which takes inputs from user and performs appropriate actions.
+The first thing we need to do is make sure this code can be used in Onepanel Workflows. Normally, we recommend to have a script in your repository which takes all the required inputs from the user - usually using something like `argparse` - and performs certain actions based on those inputs. We are going to do something similar here by creating a script `run.py` which takes inputs from user and performs appropriate actions.
 
 This script will have one function which performs inference or ensembling based on user input. 
 
@@ -66,7 +67,7 @@ parser.add_argument("--combine", default=False)
 args = parser.parse_args()
 ```
 
-To further ensure we have all the dependencies installed, we will create a requirements.txt as follows. 
+To further ensure we have all the dependencies installed, we will create a `requirements.txt` file as follows. 
 
 ```python3
 scikit-learn==0.22.2.post1
@@ -82,10 +83,10 @@ future
 opencv-python
 ```
 :::tip
-The best way to get a list of dependencies with specific version would be to use virtual environment to run this code and then use `pip freeze` to get a list of dependencies.
+The best way to get a list of dependencies with specific version would be to use a virtual environment to run this code and then use `pip freeze` to get a list of dependencies.
 :::
 
-To make setup smoother, we will create a setup.sh files which installs other dependencies.
+To make setup smoother, we will create a `setup.sh` file which installs other dependencies.
 
 ```bash
 git clone https://github.com/fizyr/keras-retinanet
@@ -97,10 +98,10 @@ unzip weights.zip -d /mnt/src/
 pip install -r requirements.txt
 ```
 
-Finally, in order to integrate this workflow with Onepanel seamlesslly we should use input and output artifacts. In simpler terms, we will be attaching S3 directory to grad input data from and will be dumping output into a S3 directory as well. This can be done while creating a Workflow but we just need
+Finally, in order to seamlessly integrate this workflow into Onepanel, we should use input and output artifacts. In simpler terms, we will be attaching a S3 directory to pull input data from and will be dumping output into a S3 directory as well. This can be done while creating a Workflow but we just need
 to make sure our code reads and writes to correct location.
 
-We will be mounting input data to `/mnt/data/datasets` and output data from `/mnt/output` will be saved on S3 (or GCS). Therefore, we need to update our code to read data from `/mnt/data/datasets` and write data into `/mnt/output`. Thankfully, the script acceps input folder as an argument. So we can just pass `/mnt/data/datasets` as an input. For output, we will be moving all the files to `/mnt/output`. You can handle this case any way you like. We just need to ensure output files are in `/mnt/output`.
+We will be mounting input data to `/mnt/data/datasets` and output data from `/mnt/output` will be saved to S3 (or GCS). Therefore, we need to update our code to read data from `/mnt/data/datasets` and write data into `/mnt/output`. Thankfully, the script accepts an input folder as an argument. So we can just pass `/mnt/data/datasets` as an input. For output, we will be moving all the files to `/mnt/output`. You can handle this case any way you like; we just need to ensure output files are in `/mnt/output`.
 
 ```python
 for sub_dir in list_dir:
@@ -110,7 +111,7 @@ for sub_dir in list_dir:
         shutil.move(dir_to_move, os.path.join(dest, sub_dir, file))
 ```
 
-One last change we need to do is convert output XML file into CVAT compatible XML file. We already have a [script](https://github.com/onepanelio/ensembleObjectDetection/blob/master/TestTimeAugmentation/generate_xml_cvat.py) that does this. But that script requires a dictionary as an input. So we will add following functions to do that.
+One last change we need to make is to convert the output XML file into CVAT compatible XML file. We already have a [script](https://github.com/onepanelio/ensembleObjectDetection/blob/master/TestTimeAugmentation/generate_xml_cvat.py) that does this, but that script requires a dictionary as an input, so we will need to add the following function:
 
 ```python3
 
