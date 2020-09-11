@@ -9,7 +9,7 @@ You can currently integrate with Onepanel using either the APIs or the Python SD
 Refer to the documentation below to get started:
 
 - [API docs](https://onepanelio.github.io/core-api-docs)
-- [Python SDK and docs](https://github.com/onepanelio/python-sdk)
+- [Python SDK docs](https://github.com/onepanelio/python-sdk) and [examples](https://github.com/onepanelio/python-sdk/tree/master/examples)
 
 
 

@@ -221,7 +221,7 @@ containers:
 ```
 
 :::note
-Onepanel automatically adds certain [Environment variables](http://localhost:3000/docs/getting-started/concepts/environment-variables) along with the ones you define in the **Settings** section before these environment variables. Though not recommended, you can override those by naming these environment variables the same.
+Onepanel automatically adds certain [Environment variables](/docs/getting-started/concepts/environment-variables) along with the ones you define in the **Settings** section before these environment variables. Though not recommended, you can override those by naming these environment variables the same.
 :::
 
 #### container ports

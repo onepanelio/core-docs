@@ -1,37 +1,58 @@
 ---
 title: Semi-automatic annotation with CVAT
 sidebar_label: Automatic annotation
-description: Onepanel use case - computer vision automatic annotation
+description: Onepanel - vision AI automatic annotation
 ---
-
-
-## Semi-automatic annotation on CVAT
 
 You can use your TensorFlow models for Object Detection and Semantic Segmentation to pre-annotate your data. This can save you a lot of time since you don't have to annotate images from scratch. On Onepanel, you can leverage these features to pre-annotate your bounding boxes or polygon masks. You can also use Object Tracking to track objects in a sequence of frames.
 
+This page provides detailed information about pre-annotation in CVAT.
+
 ## Uploading your model on CVAT
 
-Before using any type of semi-automatic annotation, you will need to upload your model on CVAT Model Manager by clicking on Models. To upload your model, go to your CVAT dashboard and click on Models. A pop up window will appear where you can give a name to your model, select the source of your files (local or cloud), and select files as shown below.
+Before using any type of semi-automatic annotation, you will need to upload your model to CVAT Model Manager by clicking on **Models**. 
 
-![Upload Model](/img/upload_model.PNG)
+1. To upload a model, click on **Models**, and then click on **Create new model**. 
 
- For TF Object Detection API and MaskRCNN, you will need two files- model and classes.csv. For TF Object Detection API, the model should be Tensorflow Frozen Graph (`.pb`). For MaskRCNN, it should be Keras model (`.h5`).
+2. Click on select files and upload your model (`.pb` and `.csv` for TensorFlow Object Detection). Hit submit to upload the model. 
+  :::note
+  For TF Object Detection API and MaskRCNN, you will need two files- **model** and **classes.csv**. For TF Object Detection API, the model should be Tensorflow Frozen Graph (`.pb`). For MaskRCNN, it should be Keras model (`.h5`).
+  :::
+  ![Model Manager](/img/upload_model.PNG)
+  :::note
+  Since Onepanel automatically syncs data from cloud storage to local directory. You can click on **Connected file share** to use models from S3. You will find trained models in `root -> output -> <cvat-task-name> -> <workflow-name> -> <workflow-execution-name>`. For TensorFlow Object Detection API, there will be one more folder before `workflow-execution-time` based on the model you trained (i.e `frcnn-res50-coco`).
+  :::
 
-## Semi-automatic annotation of bounding boxes and polygon masks
+3. Click on **Models** again and you will find your model in the list. You can also use files from `Connected file share` just like creating new tasks.
+
+  ![Uploaded Models](/img/upload_model_after.PNG)
+
+## Running pre-annotation in CVAT
 
 1. The first step is to upload your model on CVAT or use our default models which are available on CVAT. 
-2. Find Actions button for the task on which you want to run pre-annotation. 
-![Click Actions](/img/select_automatic_annotation.png)
-3. Click on Automatic Annotation, a pop up will appear where you can select the model you want to use for pre-annotation. Once you select the model, an automatic class mapping will appear, you can modify it if you want. Please note that the class mapping will appear for custom models only, not for default models.
-![Class Mapping](/img/start_automatic_annotation.png)
-4. Once done, click on Start. You will see a progress bar as shown below. Once it is done, you can go into your task and check out the pre-annotation. Sometimes, these new annotations might not reflect in your task automatically, you may have to refresh your page.
-![Automatic Annotation Running](/img/automatic_annotation_running.png)
+
+2. Click on **Automatic annotation** under Actions menu. 
+
+  ![Click Actions](/img/cvat_select_automatic_annotation.png)
+
+3. Select the model for pre-annotation. By default, you can use RCNN Object Detector (from Tensorflow Object Detection API) or  Mask RCNN Object Detector for semantic segmentation.
+
+4. If you selected any models other than default ones then you will asked to do class mapping. CVAT will automatically map class from task to model's class.
+
+  ![Class mapping](/img/class_mapping.png)
+
+5. Click on **Submit** to start pre-annotation. Once it's done, you can click on **Open** to access the annotation.
+  ![Automatic Annotation Running](/img/cvat_automatic_annotation_running.png)
+
+6. Here is a output from default object detection model.
+
+  ![Inference Output](/img/cvat_inference_output.png)
 
 ## Hardware requirements 
 
 For training a model(Execute training Workflow), you can choose any GPU machine from the list. All of our models will work on any of the GPU machine. But if you want to train it faster, then we suggest you select machines with multiple GPUs (i.e 8 V100).
 
-Please find the table bewlo which details machine type with the corresponding runtime to perform pre-annotations.
+See the table below which details machine type with the corresponding runtime to perform pre-annotations.
 For this test, we used a task with **3550 images (2GB)** to perform pre-annotations.
 
 Machine     | Time     
@@ -46,7 +67,7 @@ The above data was generated for ssd-mobilenet-v2 model which is the model we su
 
 The other factor is image compression. By default, CVAT compresses images by 50%. We did some testing to find out if we use original images (without compression) then how much time it will take.
 
-It turns out that if you use the original images without compression, your pre-annotation time will be increased by ~5-6% of that of 50% compressed images. So in the above table, if you use images without compression and use a V100, it will take 84 minutes instead of 80 minutes. Please note that this compression does not affect annotation in any way.
+It turns out that if you use the original images without compression, your pre-annotation time will be increased by ~5-6% of that of 50% compressed images. So in the above table, if you use images without compression and use a V100, it will take 84 minutes instead of 80 minutes. Note that this compression does not affect annotation in any way.
 
 Note that this data was calculated on 3550 images (1280 x 960)(total size=2GB), so if your data size is different you can easily extrapolate the data from the above table. For example, if you have 10gb of images then ideally it will take around 400 minutes on a V100 GPU. 
 

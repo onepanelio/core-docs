@@ -2,15 +2,14 @@
 title: MicroK8s deployment guide
 sidebar_label: MicroK8s deployment
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This document outlines the installation steps for single node installation using [Multipass](https://multipass.run/) VM and [MicroK8s](https://microk8s.io/).
 
 ## Install MicroK8s with Multipass
 
 First, install Multipass for your operating system:
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs
   defaultValue="linux"
@@ -131,145 +130,195 @@ If you see a "not running" error, run `microk8s inspect`.
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
 
+  <Tabs
+    defaultValue="linux"
+    values={[
+      { label: 'Linux', value: 'linux', },
+      { label: 'macOS', value: 'macos', },
+      { label: 'Windows', value: 'windows', },
+    ]
+  }>
+  <TabItem value="linux">
+
+  ```bash
+  # Download the binary
+  curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-linux-amd64
+
+  # Make binary executable
+  chmod +x opctl-linux-amd64
+
+  # Move binary to path
+  mv ./opctl-linux-amd64 /usr/local/bin/opctl
+
+  # Test installation
+  opctl version
+  ```
+
+  </TabItem>
+  <TabItem value="macos">
+
+  ```bash
+  # Download the binary
+  curl -sLO https://github.com/onepanelio/core/releases/download/latest/opctl-macos-amd64
+
+  # Make binary executable
+  chmod +x opctl-macos-amd64
+
+  # Move binary to path
+  mv ./opctl-macos-amd64 /usr/local/bin/opctl
+
+  # Test installation
+  opctl version
+  ```
+
+  </TabItem>
+  <TabItem value="windows">
+
+  :::info
+  Download the [attached executable](https://github.com/onepanelio/core/releases/latest/download/opctl-windows-amd64.exe), rename it to `opctl` and move it to a folder that is in your PATH environment variable.
+  :::
+
+  </TabItem>
+  </Tabs>.
+
 2. Run the following command to initialize a `params.yaml` template for microk8s:
 
-```bash
-opctl init --provider microk8s
-```
+  ```bash
+  opctl init --provider microk8s \
+      --enable-metallb \
+      --artifact-repository-provider s3
+  ```
 
-:::note
-If you don't have a loadbalancer, and want to use a local one, you can use metallb.
-```shell script
-opctl init --provider microk8s --enable-metallb
-```
-:::
+  :::note
+  If you don't have a loadbalancer, and want to use a local one, you can use metallb.
+  ```shell script
+  opctl init --provider microk8s --enable-metallb
+  ```
+  :::
 
+3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
-3. Populate `params.yaml` before applying, follow the instructions in the template, you can also refer to the [configuration files](/docs/deployment/configuration/files) section.
-
-:::note
-See [configuration metallb](/docs/deployment/configuration/files#metal-lb) for metallb specific details. 
-:::
+  :::note
+  See [configuration metallb](/docs/deployment/configuration/files#metal-lb) for metallb specific details. 
+  :::
 
 4. Get Kubernetes config from MicroK8s:
 
-```bash
-multipass exec microk8s-vm -- /snap/bin/microk8s.config > kubeconfig
-```
+  ```bash
+  multipass exec microk8s-vm -- /snap/bin/microk8s.config > kubeconfig
+  ```
 
 5. Finally, run the following command to deploy to your cluster:
 
-```bash
-KUBECONFIG=./kubeconfig opctl apply
-```
+  ```bash
+  KUBECONFIG=./kubeconfig opctl apply
+  ```
 
-:::important
-The CLI will display the URL for accessing Onepanel once the deployment completes.
-:::
+  :::important
+  The CLI will display the URL for accessing Onepanel once the deployment completes.
+  :::
 
 6. To get access to this new cluster via browser, we need to carry out extra steps.
 
-Example request flow
+  <img src="/img/multipass_request_flow.png" alt="Request Flow with Multipass" width="800px"/>
 
-<img src="/img/multipass_request_flow.png" alt="Request Flow with Multipass" width="800px"/>
+  Execute these steps in the host machine.
 
-Execute these steps in the host machine.
+  ```shell script
+  multipass list
+  ```
 
-```shell script
-multipass list
-```
+  Grab the IP address for your microk8s.
+  Example:
+  ```text
+  Name                    State             IPv4             Image
+  microk8s-vm             Running           10.174.163.50    Ubuntu 18.04 LTS
+  ```
 
-Grab the IP address for your microk8s.
-Example:
-```text
-Name                    State             IPv4             Image
-microk8s-vm             Running           10.174.163.50    Ubuntu 18.04 LTS
-```
+  Add an entry to your hosts file to point to the fqdn you setup in `params.yaml`
+  Example entry:
+  ```yaml
+    # The Fully Qualified Domain (FQDN) where Onepanel will be hosted.
+    # If `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
+    fqdn: app.alex.xyz
+  ```
 
-Add an entry to your hosts file to point to the fqdn you setup in `params.yaml`
-Example entry:
-```yaml
-  # The Fully Qualified Domain (FQDN) where Onepanel will be hosted.
-  # If `domain` above is set to example.com or sub.example.com, then your FQDN could be: app.example.com or app.sub.example.com respectively
-  fqdn: app.alex.xyz
-```
+  Entry to `/etc/hosts`
+  ```text
+  10.174.163.50 app.alex.xyz
+  ```
 
-Entry to `/etc/hosts`
-```text
-10.174.163.50 app.alex.xyz
-```
+  Adding this entry means the host browser will try to access the multipass vm we setup
+  for microk8s.
 
-Adding this entry means the host browser will try to access the multipass vm we setup
-for microk8s.
+  Next, enter into multipass VM
+  ```shell script
+  multipass shell microk8s-vm
+  ```
 
-Next, enter into multipass VM
-```shell script
-multipass shell microk8s-vm
-```
+  :::note Execute inside the multipass VM
+  ```shell script
+  microk8s.kubectl get services -n istio-system
+  ```
 
-:::note Execute inside the multipass VM
-```shell script
-microk8s.kubectl get services -n istio-system
-```
+  ```text
+  NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                                                                      AGE
+  istio-ingressgateway   LoadBalancer   10.152.183.166   10.1.31.0     15020:31979/TCP,80:31394/TCP,443:30038/TCP,15029:32204/TCP,15030:32688/TCP,15031:31420/TCP,15032:30575/TCP,15443:30386/TCP   3d3h
+  ```
 
-```text
-NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                                                                      AGE
-istio-ingressgateway   LoadBalancer   10.152.183.166   10.1.31.0     15020:31979/TCP,80:31394/TCP,443:30038/TCP,15029:32204/TCP,15030:32688/TCP,15031:31420/TCP,15032:30575/TCP,15443:30386/TCP   3d3h
-```
+  Inside the multipass VM, add an entry to the `/etc/hosts` file.
+  ```shell script
+  sudo nano /etc/hosts
+  ```
+  ```text
+  10.1.31.0 app.alex.xyz
+  ```
 
-Inside the multipass VM, add an entry to the `/etc/hosts` file.
-```shell script
-sudo nano /etc/hosts
-```
-```text
-10.1.31.0 app.alex.xyz
-```
+  Once you have entered and saved the host change, verify you the onepanel website
+  is running.
 
-Once you have entered and saved the host change, verify you the onepanel website
-is running.
+  ```shell script
+  curl app.alex.xyz # Your params.yaml fqdn entry
+  ```
 
-```shell script
-curl app.alex.xyz # Your params.yaml fqdn entry
-```
+  Example output.
+  ```text
+  <!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Onepanel</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/icon/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon.png">
+  <link rel="stylesheet" href="styles.9b8cd86ace5a9057a37e.css"></head>
+  <body>
+    <app-root></app-root>
+  <script src="runtime-es2015.edb2fcf2778e7bf1d426.js" type="module"></script><script src="runtime-es5.edb2fcf2778e7bf1d426.js" nomodule defer></script><script src="polyfills-es5.6696c533341b95a3d617.js" nomodule defer></script><script src="polyfills-es2015.2987770fde9daa1d8a2e.js" type="module"></script><script src="main-es2015.b17adb3826cd9f5e4a29.js" type="module"></script><script src="main-es5.b17adb3826cd9f5e4a29.js" nomodule defer></script></body>
+  </html>
+  ```
 
-Example output.
-```text
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Onepanel</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="assets/icon/favicon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon.png">
-<link rel="stylesheet" href="styles.9b8cd86ace5a9057a37e.css"></head>
-<body>
-  <app-root></app-root>
-<script src="runtime-es2015.edb2fcf2778e7bf1d426.js" type="module"></script><script src="runtime-es5.edb2fcf2778e7bf1d426.js" nomodule defer></script><script src="polyfills-es5.6696c533341b95a3d617.js" nomodule defer></script><script src="polyfills-es2015.2987770fde9daa1d8a2e.js" type="module"></script><script src="main-es2015.b17adb3826cd9f5e4a29.js" type="module"></script><script src="main-es5.b17adb3826cd9f5e4a29.js" nomodule defer></script></body>
-</html>
-```
+  You can debug the request with `curl -vvv app.alex.xyz`
 
-You can debug the request with `curl -vvv app.alex.xyz`
+  We need a listener running on port 80. That listener should direct traffic
+  to the istio gateway.
 
-We need a listener running on port 80. That listener should direct traffic
-to the istio gateway.
+  ```shell script
+  sudo apt install socat
+  sudo socat TCP-LISTEN:80,fork TCP:app.alex.xyz:80
+  ```
+  This will run actively in the current terminal prompt.
+  :::
 
-```shell script
-sudo apt install socat
-sudo socat TCP-LISTEN:80,fork TCP:app.alex.xyz:80
-```
-This will run actively in the current terminal prompt.
-:::
+  Now, go back to your host machine, open your internet browser and go to:
+  `app.alex.xyz`.
 
-Now, go back to your host machine, open your internet browser and go to:
-`app.alex.xyz`.
-
-You should see the website load up.
+  You should see the website load up.
 
 7. Use the following command to get your auth token to log into Onepanel:
 
-```bash
-KUBECONFIG=./kubeconfig opctl auth token
-```
+  ```bash
+  KUBECONFIG=./kubeconfig opctl auth token
+  ```

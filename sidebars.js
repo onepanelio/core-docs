@@ -34,40 +34,6 @@ module.exports = {
       ]
     },
     {
-      type: 'category',
-      label: 'Use cases',
-      items: [
-        {
-          type: 'category',
-          label: 'Computer vision',
-          items: [
-            {
-              type: 'category',
-              label: 'Auto annotation with CVAT',
-              items: [
-                {
-                  type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide'
-                },
-                {
-                  type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation'
-                },
-                {
-                  type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model'
-                },
-                {
-                  type: 'doc',
-                  id: 'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model'
-                }
-              ]
-            }
-          ]
-         }
-       ]
-    },
-    {
       type: 'doc',
       id: 'getting-started/contributing',
     },
@@ -131,13 +97,23 @@ module.exports = {
         'reference/workflows/execute'
       ]
     },
-    {
+    { 
       type: 'category',
-      label: 'Services',
+      label: 'Auto annotation with CVAT',
       items: [
-        'reference/services/overview',
-        'reference/services/modeldb'
+        'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide',
+        'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model',
+        'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation',
+        'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model',
       ]
     },
+    // {
+    //   type: 'category',
+    //   label: 'Services',
+    //   items: [
+    //     'reference/services/overview',
+    //     'reference/services/modeldb'
+    //   ]
+    // },
   ]
 };

@@ -7,17 +7,26 @@ module.exports = {
   organizationName: 'onepanelio', // Usually your GitHub org/user name.
   projectName: 'core-docs', // Usually your repo name.
   themeConfig: {
-    disableDarkMode: true,
+    colorMode: {
+      disableSwitch: true,
+    },
+    announcementBar: {
+      id: 'supportus',
+      content:
+        'If you like Onepanel, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/onepanelio/core">GitHub</a>! ⭐️',
+      backgroundColor: '#013d6d',
+      textColor: '#fff',
+    },
     navbar: {
       title: '',
       logo: {
         alt: 'Onepanel logo',
         src: 'img/onepanel-logo-blue-white.png',
       },
-      links: [
+      items: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
         {to: 'docs/deployment/overview', label: 'Deploy and Manage', position: 'left'},
-        {to: 'docs/reference/overview', label: 'Reference', position: 'left'},
+        {to: 'docs/reference/overview', label: 'User Guide', position: 'left'},
         {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
         {href: 'https://github.com/onepanelio/core/releases', label: 'Releases', position: 'left'},
         {href: 'https://github.com/onepanelio/core/milestones?direction=asc&sort=due_date&state=open', label: 'Roadmap', position: 'left'},
