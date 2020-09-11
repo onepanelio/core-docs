@@ -278,7 +278,42 @@ ol > li::marker {
   min-height: 120px;
 }
 
+p > img {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  margin: 10px 0 5px 0;
+  padding: 1px;
+}
+
 .integrations .grid-item img {
   width: 40px;
   height: 40px;
+}
+
+ol {
+  list-style: none;
+  counter-reset: li;
+  padding-left: 1.75em;
+}
+
+ol > li {
+  position: relative;
+}
+
+ol > li::before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  line-height: 26px;
+  left: -26px;
+  height: 26px;
+  width: 26px;
+  color: var(--ifm-heading-color);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Remove version badge */
+article > div > span.badge--secondary {
+  display: none;
 }

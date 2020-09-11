@@ -230,6 +230,27 @@ nodePool:
       value: Standard_NC6
 ```
 
+You can also set resource limits for each node in the node pool. This let's Onepanel's scheduler know how much dedicated GPU/CPU/Memory can be allocated to each Workflow or Workspace when that node pool is selected:
+
+```yaml {10-14}
+nodePool:
+  label: beta.kubernetes.io/instance-type  # node label key
+  options:
+    - name: 'CPU: 2, RAM: 8GB'      # friendly name for instance
+      value: 'Standard_D2s_v3'      # node label value
+    - name: 'CPU: 4, RAM: 16GB'
+      value: Standard_D4s_v3
+    - name: 'GPU: 1xK80, CPU: 6, RAM: 56GB'
+      value: Standard_NC6
+      resources:                    # Optional but recommended, the limits 
+        limits:
+          nvidia.com/gpu: 1         # The max GPU limit a resource can request
+          cpu: 5000m                # The max CPU limit a resource can request, 1000m = 1 CPU
+          memory: 50000Mi           # The max RAM limit a resource can request
+```
+
+We highly recommend setting these values, especially for GPU nodes as you cannot share a single GPU across multiple processes simultaneously.
+
 ### artifactRepository
 This section allows you to setup the default object storage for your Workflow and Workspace artifacts, which includes Workflow log storage. Onepanel currently supports any S3 compatible artifact repository such as AWS, GCS and Minio. Support for additional object storages is coming soon.
 
@@ -287,13 +308,43 @@ If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and 
 See [TLS certificates](/docs/deployment/configuration/tls) for more information about configuring this section.
 
 ### database
-This is the database settings section. 
+This is the database settings section.
+
+#### Production database
+For a production deployment, use a managed PostgresSQL database like [Amazon RDS](https://aws.amazon.com/rds/), [Azure Database](https://azure.microsoft.com/en-us/services/postgresql/) or [Google Cloud SQL](https://cloud.google.com/sql).
+
+Note that you can update your settings as many times as you like and simply run `opctl apply` again to update your your database settings in the cluster.
+
+Example production database settings:
+
+```yaml
+database:
+  databaseName: onepanel
+  driverName: postgres
+  host: my-onepanel-db.postgres.database.azure.com
+  password: verystrongproductionpassword
+  port: 5432
+  username: onepanel
+```
+
+#### Test database
 
 For a test cluster, you can set the database `host` to `postgres` and use any `username` or `password`. This database will be automatically created in the cluster with the information you entered.
 
-Note that you cannot change the username/password for the test database once it's created.
+Note that you cannot change the username/password for the test database once it's created, so if you make a mistake, you will have to delete the test database and run `opctl apply` again:
 
-Example:
+```bash
+# delete test database and its related volume
+kubectl delete statefulset postgres -n onepanel
+kubectl delete pvc postgres-pv-claim-postgres-0 -n onepanel
+
+# Update your database settings
+
+# Run opctl apply again to recreate the test database
+opctl apply
+```
+
+Example test database settings:
 
 ```yaml
 database:
@@ -302,15 +353,8 @@ database:
   host: postgres
   password: mypassword
   port: 5432
-  # Database username
-  # If using an external production database, use the username for that database.
-  # For in-cluster test database, use any username you like.
   username: onepanel
 ```
-
-:::important
-For a production environment, use a managed database service and set the configuration accordingly.
-:::
 
 ### metalLB
 This is to configure a load balancer for local or bare-metal deployments.
@@ -411,7 +455,7 @@ The possible values are `docker` and `pns`:
 - `docker` is more reliable, however it mounts the `docker.sock` of the host makes it less secure.
 - `pns` is more secure, however in some versions of Kubernetes, it tends to fail on tasks that take less than 15 seconds.
 
-### services
+<!-- ### services
 
 Services are additional tools or applications you want to install alongside the main deployment.
 These are set up to allow distributed workloads and are always available, unlike Workspaces.
@@ -435,4 +479,4 @@ services:
       # This must be a database that already exists. It is used to establish a connection
       # so the system can create the databaseName.
       defaultDatabaseName: postgres
-```
+``` -->
