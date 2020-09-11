@@ -98,13 +98,13 @@ If you want Onepanel Workflows to store outputs on cloud storage, you can just w
 
 ## 4. Create a workflow
 
-Now, let's go ahead and actually create a workflow. Click on `WORKFLOWS` and then click on `CREATE TEMPLATE` button. 
+Now, let's go ahead and actually create a workflow. You can create a new workflow but we recommend you just clone MaskRCNN Training Workflow which is included by default and make changes there.
 
-![Create Template](/img/create_template.png)
+![Clone Workflow](/img/maskrcnn_clone.png)
 
 You will see a YAML editor as shown below.
 
-![Create workflow](/img/create_workflow_template.png)
+![Create workflow](/img/maskrcnn_clone_editor.png)
 
 Give this template an appropriate name. For this example, we will be using `DETR Training`.
 
