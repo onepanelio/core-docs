@@ -41,10 +41,10 @@ Before using any type of semi-automatic annotation, you will need to upload your
 
   ![Class mapping](/img/class_mapping.png)
 
-4. Click on **Submit** to start pre-annotation. Once it's done, you can click on **Open** to access the annotation.
+5. Click on **Submit** to start pre-annotation. Once it's done, you can click on **Open** to access the annotation.
   ![Automatic Annotation Running](/img/cvat_automatic_annotation_running.png)
 
-5. Here is a output from default object detection model.
+6. Here is a output from default object detection model.
 
   ![Inference Output](/img/cvat_inference_output.png)
 
