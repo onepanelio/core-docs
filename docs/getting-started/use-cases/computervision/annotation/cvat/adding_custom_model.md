@@ -98,7 +98,7 @@ If we want Onepanel Workflows to store outputs on cloud storage, we can just wri
 
 ## 4. Create a workflow
 
-Now, let's go ahead and actually create a workflow. Click on `WORKFLOWS` and then click on `CREATE TEMPLATE` button. Alternatively, you can just clone MaskRCNN Training Workflow which is included by default and make changes there.
+Now, let's go ahead and actually create a workflow. You can create a new workflow but we recommend you just clone MaskRCNN Training Workflow which is included by default and make changes there.
 
 ![Clone Workflow](/img/maskrcnn_clone.png)
 
