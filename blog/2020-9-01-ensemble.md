@@ -331,7 +331,7 @@ First, let's update `predict-yolo-model`:
         s3:
           key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
     container:
-      image: tensorflow/tensorflow:latest
+      image: onepanel/jupyterlab:1.0.1
       command: [sh,-c]
       args:
        - |
@@ -369,7 +369,7 @@ Now, let's update `predict-retinanet-model` and `ensemble`. All three are very s
         s3:
           key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
     container:
-      image: tensorflow/tensorflow:latest
+      image: onepanel/jupyterlab:1.0.1
       command: [sh,-c]
       args:
       - |
@@ -401,7 +401,7 @@ Now, let's update `predict-retinanet-model` and `ensemble`. All three are very s
         s3:
           key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
     container:
-      image: tensorflow/tensorflow:latest
+      image: onepanel/jupyterlab:1.0.1
       command: [sh, -c]
       args:
        - |
@@ -435,7 +435,7 @@ Note that each of these containers can run on a different machines. Below exampl
         s3:
           key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
     container:
-      image: tensorflow/tensorflow:latest
+      image: onepanel/jupyterlab:1.0.1
       command: [sh, -c]
       args:
        - |
@@ -496,7 +496,7 @@ templates:
         s3:
           key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
     container:
-      image: tensorflow/tensorflow:latest
+      image: onepanel/jupyterlab:1.0.1
       command: [sh, -c]
       args:
        - |
@@ -525,7 +525,7 @@ templates:
         s3:
           key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
     container:
-      image: tensorflow/tensorflow:latest
+      image: onepanel/jupyterlab:1.0.1
       command: [sh,-c]
       args:
       - |
@@ -553,7 +553,7 @@ templates:
         s3:
           key: '{{workflow.namespace}}/{{workflow.parameters.model-output-path}}/{{workflow.name}}'
     container:
-      image: tensorflow/tensorflow:latest
+      image: onepanel/jupyterlab:1.0.1
       command: [sh,-c]
       args:
        - |
