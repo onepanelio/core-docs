@@ -89,6 +89,11 @@ If a parameter is defined, `name` and `value` are required.
     - `select.select` renders a dropdown
     - `textarea.textarea` renders a textarea
 - `options` define options if `type` is `select.select` or `input.radio`
+- `visibility` defines whether the parameter should be visible in Workflow execution form. Possible values are:
+    - `public` parameters are visible to every where.
+    - `protected` parameters are visible in Onepanel UI and components like CVAT.
+    - `internal` parameters are visible in Onepanel UI only.
+    - `private` parameters are not visible any where. For system use only.
 
 Example:
 
