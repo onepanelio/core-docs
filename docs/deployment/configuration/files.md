@@ -230,27 +230,6 @@ nodePool:
       value: Standard_NC6
 ```
 
-You can also set resource limits for each node in the node pool. This let's Onepanel's scheduler know how much dedicated GPU/CPU/Memory can be allocated to each Workflow or Workspace when that node pool is selected:
-
-```yaml {10-14}
-nodePool:
-  label: beta.kubernetes.io/instance-type  # node label key
-  options:
-    - name: 'CPU: 2, RAM: 8GB'      # friendly name for instance
-      value: 'Standard_D2s_v3'      # node label value
-    - name: 'CPU: 4, RAM: 16GB'
-      value: Standard_D4s_v3
-    - name: 'GPU: 1xK80, CPU: 6, RAM: 56GB'
-      value: Standard_NC6
-      resources:                    # Optional but recommended, the limits 
-        limits:
-          nvidia.com/gpu: 1         # The max GPU limit a resource can request
-          cpu: 5000m                # The max CPU limit a resource can request, 1000m = 1 CPU
-          memory: 50000Mi           # The max RAM limit a resource can request
-```
-
-We highly recommend setting these values, especially for GPU nodes as you cannot share a single GPU across multiple processes simultaneously.
-
 ### artifactRepository
 This section allows you to setup the default object storage for your Workflow and Workspace artifacts, which includes Workflow log storage. Onepanel currently supports any S3 compatible artifact repository such as AWS, GCS and Minio. Support for additional object storages is coming soon.
 
