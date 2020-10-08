@@ -27,7 +27,7 @@ az aks create --resource-group <resource-group> --name <cluster-name> --location
     --node-vm-size Standard_D4s_v3 \
     --node-osdisk-size 100 \
     --min-count 2 \
-    --max-count 2 \
+    --max-count 5 \
     --enable-cluster-autoscaler \
     --network-plugin azure \
     --network-policy azure \

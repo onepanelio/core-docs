@@ -26,7 +26,7 @@ Let's get started by creating a Kubernetes cluster in one of the following cloud
     { label: 'Azure AKS', value: 'aks', },
     { label: 'Amazon EKS', value: 'eks', },
     { label: 'Google Cloud GKE', value: 'gke', },
-    { label: 'Minikube', value: 'minikube', },
+    // { label: 'Minikube', value: 'minikube', },
     // { label: 'Microk8s', value: 'microk8s', },
   ]
 }>
@@ -44,7 +44,7 @@ az aks create --resource-group <resource-group> --name <cluster-name> --location
     --node-vm-size Standard_D4s_v3 \
     --node-osdisk-size 100 \
     --min-count 2 \
-    --max-count 2 \
+    --max-count 5 \
     --enable-cluster-autoscaler \
     --network-plugin azure \
     --network-policy azure \
@@ -73,7 +73,7 @@ eksctl create cluster --name=<cluster-name> --region <region> \
     --node-type m5.xlarge \
     --node-volume-size 100 \
     --nodes-min 2 \
-    --nodes-max 2 \
+    --nodes-max 5 \
     --asg-access \
     --managed \
     --ssh-access
@@ -95,12 +95,12 @@ Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is
 Run this `gcloud` command to create a bare minimum cluster with 2 `n1-standard-4` nodes:
 
 ```bash
-gcloud container --project <project-name> clusters create <cluster-name> --zone <zone> --node-locations <single-location> \
+gcloud container --project <project-name> clusters create <cluster-name> --zone <zone> --node-locations <zone> \
     --num-nodes 2 \
     --machine-type n1-standard-4 \
     --disk-size 100 \
-    --min-nodes 0 \
-    --max-nodes 2 \
+    --min-nodes 2 \
+    --max-nodes 5 \
     --enable-autoscaling \
     --enable-network-policy \
     --enable-stackdriver-kubernetes \
@@ -345,7 +345,7 @@ Next, get the kubeconfig by running
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      { label: 'Minikube', value: 'minikube', },
+      // { label: 'Minikube', value: 'minikube', },
       // { label: 'Microk8s', value: 'microk8s', },
     ]
   }>
@@ -439,7 +439,7 @@ Next, get the kubeconfig by running
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      { label: 'Minikube', value: 'minikube', },
+      // { label: 'Minikube', value: 'minikube', },
       // { label: 'Microk8s', value: 'microk8s', },
     ]
   }>

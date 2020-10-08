@@ -27,7 +27,7 @@ eksctl create cluster --name=<cluster-name> --region <region> \
     --node-type m5.xlarge \
     --node-volume-size 100 \
     --nodes-min 2 \
-    --nodes-max 2 \
+    --nodes-max 5 \
     --asg-access \
     --managed \
     --ssh-access
