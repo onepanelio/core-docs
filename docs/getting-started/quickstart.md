@@ -54,9 +54,23 @@ az aks create --resource-group <resource-group> --name <cluster-name> --location
 
 You can then get access credentials by running:
 
-```
+```bash
 az aks get-credentials --resource-group <resource-group> --name <cluster-name> --admin
 ```
+
+Optionally, you can add additional auto-scaling node pools to the cluster follows.
+
+```bash
+az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-name> \
+  --name <nodepool-name> \
+  --node-vm-size <node-vm-size> \
+  --enable-cluster-autoscaler \
+  --node-count 1 \
+  --min-count 0 \
+  --max-count 5
+```
+
+In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed. 
 
 </TabItem>
 <TabItem value="eks">
