@@ -137,6 +137,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
   ```bash
   opctl init --provider aks \
       --artifact-repository-provider s3 \
+      --gpu-device-plugins nvidia \
       --enable-https \
       --enable-cert-manager \
       --dns-provider <dns-provider>
@@ -147,7 +148,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
   :::
 
   :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  Valid options for `--gpu-device-plugins` are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
   :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
