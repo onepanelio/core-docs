@@ -353,11 +353,12 @@ Next, get the kubeconfig by running
 
   ```bash
   opctl init --provider aks \
-    --artifact-repository-provider s3
+    --artifact-repository-provider s3 \
+    --gpu-device-plugins nvidia
   ```
 
   :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  Valid options for `--gpu-device-plugins` are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
 
   Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
 
@@ -369,11 +370,12 @@ Next, get the kubeconfig by running
 
   ```bash
   opctl init --provider eks \
-    --artifact-repository-provider s3
+    --artifact-repository-provider s3 \
+    --gpu-device-plugins nvidia
   ```
 
   :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  Valid options for `--gpu-device-plugins` are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
 
   Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
 
@@ -385,7 +387,7 @@ Next, get the kubeconfig by running
 
   ```bash
   opctl init --provider gke \
-      --artifact-repository-provider s3
+    --artifact-repository-provider s3
   ```
 
   :::note
@@ -404,7 +406,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  Valid options for `--gpu-device-plugins` are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
 
   Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
 
