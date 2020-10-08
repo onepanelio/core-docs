@@ -358,11 +358,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  Valid options for `--gpu-device-plugins` are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-
-  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
@@ -375,11 +371,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  Valid options for `--gpu-device-plugins` are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-
-  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
@@ -391,9 +383,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
   </TabItem>
 
@@ -406,11 +396,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  Valid options for `--gpu-device-plugins` are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-
-  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
