@@ -231,7 +231,7 @@ nodePool:
 ```
 
 ### artifactRepository
-This section allows you to setup the default object storage for your Workflow and Workspace artifacts, which includes Workflow log storage. Onepanel currently supports any S3 compatible artifact repository such as AWS, GCS and Minio. Support for additional object storages is coming soon.
+This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which includes Workflow log storage. Onepanel currently supports any S3 compatible artifact repository such as AWS, GCS and Minio.
 
 Here's an example AWS S3 configuration:
 
@@ -245,9 +245,33 @@ artifactRepository:
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
 ```
 
-Here's an example Google Cloud GCS configuration:
+GCS and Minio configurations would also be similar except that the endpoint will be different. For GCS, you would need to [create an HMAC key](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create) and use the **Access key** and **Secret** accordingly.
+
+Here's an example GCS configuration:
 
 ```yaml
+artifactRepository:
+  s3:
+    accessKey: GOOG1EQPAXHU77377T6TGRYGD7NDV6AA3TFYIIKXP2RZLHI3DZB76FIFGDNLQ
+    bucket: pipelines.example.com
+    endpoint: storage.googleapis.com
+    region: us-west-2
+    secretKey: S3hdxSL6HlPGTAAFZYxG/iaKhtlDHVCbyiIBRPxq
+```
+
+And example Minio configuration:
+
+```yaml
+artifactRepository:
+  s3:
+    accessKey: AKIAJSIE27KKMHXI3BJQ
+    bucket: my-bucket
+    endpoint: my-minio-endpoint.default:9000
+    region: us-west-2
+    secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
+```
+
+<!-- ```yaml
 artifactRepository:
  gcs:
     bucket: mygreatbucket
@@ -275,7 +299,7 @@ You can get the serviceAccount JSON via gcloud.
 gcloud iam service-accounts keys create key.json \
    --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
 ```
-:::
+::: -->
 
 :::important
 Onepanel Workflows will automatically upload or download artifacts from `artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}`. See [Workflow artifacts](/docs/reference/workflows/templates#artifacts) for more information.
