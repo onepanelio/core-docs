@@ -41,7 +41,7 @@ You can then get access credentials by running:
 az aks get-credentials --resource-group <resource-group> --name <cluster-name> --admin
 ```
 
-Optionally, you can add additional auto-scaling node pools to the cluster follows:
+Optionally, you can add additional auto-scaling node pools to the cluster as follows:
 
 ```bash
 az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-name> \

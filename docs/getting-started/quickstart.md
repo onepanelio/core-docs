@@ -58,7 +58,7 @@ You can then get access credentials by running:
 az aks get-credentials --resource-group <resource-group> --name <cluster-name> --admin
 ```
 
-Optionally, you can add additional auto-scaling node pools to the cluster follows:
+Optionally, you can add additional auto-scaling node pools to the cluster as follows:
 
 ```bash
 az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-name> \
@@ -126,6 +126,21 @@ The command above will automatically retrieve your cluster's access credentials 
 ```
 gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
+
+Optionally, you can add additional auto-scaling node pools to the cluster as follows:
+
+```bash
+gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --zone <zone> \
+  --machine-type <machine-type> \
+  --disk-size 100 \
+  --num-nodes 0 \
+  --min-nodes 0 \
+  --max-nodes 5 \
+  --enable-autoscaling \
+  --accelerator 'type=<type>,count=<count>'  # optional, example: 'type=nvidia-tesla-v100,count=1'
+```
+
+In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 </TabItem>
 <TabItem value="minikube">
