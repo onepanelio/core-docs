@@ -387,7 +387,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
@@ -400,7 +400,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
@@ -412,7 +412,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
   </TabItem>
 
@@ -425,7 +425,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
