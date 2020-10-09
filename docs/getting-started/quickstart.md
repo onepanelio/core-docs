@@ -67,7 +67,7 @@ az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-na
   --enable-cluster-autoscaler \
   --node-count 1 \
   --min-count 0 \
-  --max-count 5
+  --max-count <max-count>
 ```
 
 In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
