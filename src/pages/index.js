@@ -30,7 +30,7 @@ const features = [
     imageUrl: 'img/landing/env.png',
     description: (
       <>
-        Workspaces that upgrade or downgrade to and from GPUs machines, preloaded with PyTorch, TensorFlow, JupyterLab, VSCode and <a href="https://github.com/onepanelio/templates/tree/master/workspaces" target="_blank">more</a>. 
+        Seamlessly switch environments between CPU and GPU machines, preloaded with PyTorch, TensorFlow, JupyterLab, VSCode and <a href="https://github.com/onepanelio/templates/tree/master/workspaces" target="_blank">more</a>. 
       </>
     ),
   },
@@ -52,15 +52,15 @@ const features = [
       </>
     ),
   },
-  {
-    title: <>Web-based VNC environments that you can access with your browser</>,
-    imageUrl: 'img/landing/vnc.png',
-    description: (
-      <>
-        Access and share tools like AirSim, Carla, Gazebo or OpenAI Gym through your browser with VNC enabled workspaces. 
-      </>
-    ),
-  },
+  // {
+  //   title: <>Web-based VNC environments that you can access with your browser</>,
+  //   imageUrl: 'img/landing/vnc.png',
+  //   description: (
+  //     <>
+  //       Access and share tools like AirSim, Carla, Gazebo or OpenAI Gym through your browser with VNC enabled workspaces. 
+  //     </>
+  //   ),
+  // },
   {
     title: <>Bring your own tools as reproducible templates</>,
     imageUrl: 'img/landing/mod.png',
@@ -71,7 +71,7 @@ const features = [
     ),
   },
   {
-    title: <>Integrate additional environments and pipelines using APIs and SDKs</>,
+    title: <>Integrate with existing systems using APIs and SDKs</>,
     imageUrl: 'img/landing/sdk.png',
     description: (
       <>
@@ -79,24 +79,24 @@ const features = [
       </>
     ),
   },
-  {
-    title: <>Infrastructure and workflows as code</>,
-    imageUrl: 'img/landing/iac.png',
-    description: (
-      <>
-        Workflows, environments and infrastructure are all defined as code and version controlled, making them reproducible and portable.
-      </>
-    ),
-  },
-  {
-    title: <>Powered by Kubernetes so you can deploy anywhere</>,
-    imageUrl: 'img/landing/k8s.png',
-    description: (
-      <>
-        Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
-      </>
-    ),
-  }
+  // {
+  //   title: <>Infrastructure and workflows as code</>,
+  //   imageUrl: 'img/landing/iac.png',
+  //   description: (
+  //     <>
+  //       Workflows, environments and infrastructure are all defined as code and version controlled, making them reproducible and portable.
+  //     </>
+  //   ),
+  // },
+  // {
+  //   title: <>Powered by Kubernetes so you can deploy anywhere</>,
+  //   imageUrl: 'img/landing/k8s.png',
+  //   description: (
+  //     <>
+  //       Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
+  //     </>
+  //   ),
+  // }
 ];
 
 function Feature({imageUrl, title, description}) {
@@ -120,11 +120,11 @@ function Home() {
   return (
     <Layout
       title="Onepanel"
-      description="Onepanel is a unified vision AI platform with fully integrated modules for model building, semi-automated labeling, training, pipelines and model serving.">
+      description="Production scale vision AI platform, with fully integrated components for model building, automated labeling, data processing and model training pipelines.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__name">Onepanel</h1>
-          <h2 className="hero__title">{siteConfig.title}</h2>
+          {/* <h2 className="hero__title">{siteConfig.title}</h2> */}
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
@@ -145,7 +145,10 @@ function Home() {
             </Link>
           </div>
           <div className="hero__video">
-            <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {/* <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+            <video autoPlay loop muted playsInline>
+              <source type="video/mp4" src="img/landing/onepanel.mp4" /> 
+            </video>
           </div>
         </div>
       </header>
