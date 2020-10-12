@@ -1,19 +1,10 @@
 from diagrams import Cluster, Diagram
 
 # K8s
-from diagrams.k8s.group import Namespace
-from diagrams.k8s.compute import Deployment, Pod, ReplicaSet
+from diagrams.k8s.compute import Pod, Deployment, StatefulSet
 from diagrams.k8s.network import Ingress, Service
 from diagrams.k8s.storage import PV
 from diagrams.k8s.infra import Node
-
-# Generic
-from diagrams.onprem.compute import Server
-from diagrams.onprem.database import PostgreSQL
-from diagrams.generic.storage import Storage
-from diagrams.oci.storage import ObjectStorage
-from diagrams.oci.network import LoadBalancer
-from diagrams.oci.connectivity import DNS as OCIDNS
 
 # AWS
 from diagrams.aws.network import ELB, Route53
@@ -39,43 +30,69 @@ from diagrams.gcp.database import SQL
 from diagrams.gcp.management import Logging
 
 def k8s(name):
-    with Cluster(name):            
-        svc_core = Service('core')
-        pd_core = Pod('core')
-        svc_core >> pd_core
+    with Cluster(name):
+        with Cluster('namespace: onepanel'):
+            svc_core = Service('core')
+            pd_core = Pod('core-*')
+            dep_core = Deployment('core')
+            dep_core >> pd_core
+            svc_core >> pd_core
 
-        svc_core_ui = Service('core-ui')
-        pd_core_ui = Pod('core-ui')
-        svc_core_ui >> pd_core_ui
+            svc_core_ui = Service('core-ui')
+            pd_core_ui = Pod('core-ui-*')
+            dep_core_ui = Deployment('core-ui')
+            dep_core_ui >> pd_core_ui
+            svc_core_ui >> pd_core_ui
         
-        ing = Ingress('istio')
-        ing >> [svc_core, svc_core_ui]
+        with Cluster('namespace: istio-system'):
+            ing = Ingress('istio-ingressgateway')
+        
+        with Cluster('namespace: my-project'):
+            with Cluster('Workspace'):
+                svc_workspace = Service('jupyterlab')
+                pd_workspace = Pod('jupyterlab-*')
+                pv_workspace = PV('jupyterlab-data-0')
+                sts_workspace  = StatefulSet('jupyterlab')
+                sts_workspace  >> pd_workspace 
+                pd_workspace - pv_workspace
+                svc_workspace >> pd_workspace
+
+        ing >> [svc_core, svc_core_ui, svc_workspace]
 
         node_1 = Node('node-1')
         node_2 = Node('node-2')
-        pd_core >> node_1
-        pd_core >> node_2
-        pd_core_ui >> node_1
-        pd_core_ui >> node_2
+        node_3 = Node('node-2')
+        pd_core - node_1
+        pd_core - node_2
+        pd_core_ui - node_1
+        pd_core_ui - node_2
+        pd_workspace - node_3
     
-    return node_1, node_2, ing, pd_core
+    return node_1, node_2, node_3, ing, pd_core, pv_workspace
 
-with Diagram('System Diagram', show=False, filename='sys', outformat='png'):
+with Diagram('Onepanel', show=False, filename='onepanel', outformat='png'):
     with Cluster(''):
-        node_1, node_2, ing, core = k8s('Kubernetes Cluster')
-        instance_1 = Server('Server 1')
-        disk_1 = Storage('Disk 1') 
-        instance_2 = Server('Server 2')
-        disk_2 = Storage('Disk 2')
+        node_1, node_2, node_3, ing, core, pv_workspace = k8s('Kubernetes Cluster')
+        instance_1 = ComputeEngine('Server 1')
+        disk_1 = PersistentDisk('OS Disk 1')
+        instance_2 = ComputeEngine('Server 2')
+        disk_2 = PersistentDisk('OS Disk 2')
+        instance_3 = ComputeEngine('Server 3')
+        disk_3 = PersistentDisk('OS Disk 3')
 
-        instance_1 - disk_1
-        instance_2 - disk_2
+        pv_disk = PersistentDisk('SSD Disk 1') 
         node_1 - instance_1
         node_2 - instance_2
-        core - PostgreSQL('PostgresSQL')
+        node_3 - instance_3
+        instance_1 - disk_1
+        instance_2 - disk_2
+        instance_3 - disk_3
+        instance_3 - pv_disk
+        pv_workspace - pv_disk
+        core - SQL('PostgresSQL')
 
-        core - ObjectStorage('Object Storage')
-        OCIDNS('DNS') >> LoadBalancer('Load Balancer') >> ing
+        core - GCS('Object Storage')
+        DNS('DNS') >> LoadBalancing('Load Balancer') >> ing
 
 with Diagram('Amazon Web Services', show=False, filename='aws', outformat='png'):
     with Cluster(''):
