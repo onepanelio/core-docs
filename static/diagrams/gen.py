@@ -1,10 +1,15 @@
-from diagrams import Cluster, Diagram
+from diagrams import Cluster, Diagram, Edge
+
+
+# General
+from diagrams.onprem.client import Users, Client
 
 # K8s
 from diagrams.k8s.compute import Pod, Deployment, StatefulSet
 from diagrams.k8s.network import Ingress, Service
 from diagrams.k8s.storage import PV
 from diagrams.k8s.infra import Node
+from diagrams.k8s.podconfig import Secret
 
 # AWS
 from diagrams.aws.network import ELB, Route53
@@ -31,7 +36,7 @@ from diagrams.gcp.management import Logging
 
 def k8s(name):
     with Cluster(name):
-        with Cluster('namespace: onepanel'):
+        with Cluster('ns: onepanel'):
             svc_core = Service('core')
             pd_core = Pod('core-*')
             dep_core = Deployment('core')
@@ -44,10 +49,11 @@ def k8s(name):
             dep_core_ui >> pd_core_ui
             svc_core_ui >> pd_core_ui
         
-        with Cluster('namespace: istio-system'):
+        with Cluster('ns: istio-system'):
             ing = Ingress('istio-ingressgateway')
+            # cert = Secret('TLS')
         
-        with Cluster('namespace: my-project'):
+        with Cluster('ns: my-project'):
             with Cluster('Workspace'):
                 svc_workspace = Service('jupyterlab')
                 pd_workspace = Pod('jupyterlab-*')
@@ -57,6 +63,10 @@ def k8s(name):
                 pd_workspace - pv_workspace
                 svc_workspace >> pd_workspace
 
+        # with Cluster('ns: cert-manager'):
+        #     certmanager = Pod('cert-manager')
+
+        # certmanager >> cert
         ing >> [svc_core, svc_core_ui, svc_workspace]
 
         node_1 = Node('node-1')
@@ -70,8 +80,8 @@ def k8s(name):
     
     return node_1, node_2, node_3, ing, pd_core, pv_workspace
 
-with Diagram('Onepanel', show=False, filename='onepanel', outformat='png'):
-    with Cluster(''):
+with Diagram('Onepanel architecture diagram', show=False, filename='onepanel', outformat='png'):
+    with Cluster('Cloud Provider'):
         node_1, node_2, node_3, ing, core, pv_workspace = k8s('Kubernetes Cluster')
         instance_1 = ComputeEngine('Server 1')
         disk_1 = PersistentDisk('OS Disk 1')
@@ -92,7 +102,12 @@ with Diagram('Onepanel', show=False, filename='onepanel', outformat='png'):
         core - SQL('PostgresSQL')
 
         core - GCS('Object Storage')
-        DNS('DNS') >> LoadBalancing('Load Balancer') >> ing
+        lb = LoadBalancing('Load Balancer')
+        dns = DNS('DNS') 
+        lb >> ing
+        dns >> lb
+    
+    [Client('SDK'), Users('Users')] >> dns
 
 with Diagram('Amazon Web Services', show=False, filename='aws', outformat='png'):
     with Cluster(''):
