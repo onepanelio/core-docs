@@ -20,6 +20,7 @@ from diagrams.aws.network import ELB, Route53
 from diagrams.aws.storage import EBS, S3
 from diagrams.aws.compute import EC2, EKS
 from diagrams.aws.database import RDS
+from diagrams.aws.management import Cloudwatch
 
 # Azure
 from diagrams.azure.network import LoadBalancers
@@ -27,6 +28,7 @@ from diagrams.azure.network import DNSZones
 from diagrams.azure.compute import VM, Disks, AKS
 from diagrams.azure.database import DatabaseForPostgresqlServers
 from diagrams.azure.storage import BlobStorage
+from diagrams.azure.analytics import LogAnalyticsWorkspaces
 
 # GCP
 from diagrams.gcp.network import LoadBalancing
@@ -34,6 +36,7 @@ from diagrams.gcp.storage import PersistentDisk, GCS
 from diagrams.gcp.network import DNS
 from diagrams.gcp.compute import ComputeEngine, GKE
 from diagrams.gcp.database import SQL
+from diagrams.gcp.management import Logging
 
 def k8s(name):
     with Cluster(name):            
@@ -77,7 +80,7 @@ with Diagram('System Diagram', show=False, filename='sys', outformat='png'):
 with Diagram('Amazon Web Services', show=False, filename='aws', outformat='png'):
     with Cluster(''):
         with Cluster('Virtual Private Cloud'):
-            kube = EKS('Elastic Kubernetes Service')
+            kube = EKS('Elastic Kubernetes\nService')
             instance_1 = EC2('EC2 Instance 1\n(m5.xlarge)')
             disk_1 = EBS('EBS Disk 1\n(gp2)') 
             instance_2 = EC2('EC2 Instance 2\n(m5.xlarge)')
@@ -87,15 +90,16 @@ with Diagram('Amazon Web Services', show=False, filename='aws', outformat='png')
             instance_2 - disk_2
             kube - instance_1
             kube - instance_2
-            kube - RDS('Amazon RDS for PostgresSQL')
+            kube - RDS('Amazon RDS\nfor PostgresSQL')
         
         kube - S3('S3')
+        kube - Cloudwatch('Amazon CloudWatch')
         Route53('Route53') >> ELB('Elastic Load Balancer') >> kube
 
 with Diagram('Microsoft Azure', show=False, filename='aks', outformat='png'):
     with Cluster(''):
         with Cluster('Virtual Network'):
-            kube = AKS('Azure Kubernetes Service')
+            kube = AKS('Azure Kubernetes\nService')
             instance_1 = VM('Virtual Machine 1\n(Standard_D4s_v3)')
             disk_1 = Disks('Azure Disk 1\n(Standard_LRS)') 
             instance_2 = VM('Virtual Machine 2\n(Standard_D4s_v3)')
@@ -105,15 +109,16 @@ with Diagram('Microsoft Azure', show=False, filename='aks', outformat='png'):
             instance_2 - disk_2
             kube - instance_1
             kube - instance_2
-            kube - DatabaseForPostgresqlServers('Azure Database for PostgresSQL')
+            kube - DatabaseForPostgresqlServers('Azure Database\nfor PostgresSQL')
         
         kube - BlobStorage('Azure Blob Storage')
+        kube - LogAnalyticsWorkspaces('Azure Platform Logs')
         DNSZones('AzureDNS') >> LoadBalancers('Azure Load Balancer') >> kube
 
 with Diagram('Google Cloud Platform', show=False, filename='gke', outformat='png'):
     with Cluster(''):
         with Cluster('Virtual Private Cloud'):
-            kube = GKE('Google Kubernetes Engine')
+            kube = GKE('Google Kubernetes\nEngine')
             instance_1 = ComputeEngine('VM Instance 1\n(n1-standard-4)')
             disk_1 = PersistentDisk('Persistent Disk 1\n(pd-standard)') 
             instance_2 = ComputeEngine('VM Instance 2\n(n1-standard-4)')
@@ -123,9 +128,10 @@ with Diagram('Google Cloud Platform', show=False, filename='gke', outformat='png
             instance_2 - disk_2
             kube - instance_1
             kube - instance_2
-            kube - SQL('Cloud SQL for PostgresSQL')
+            kube - SQL('Cloud SQL\nfor PostgresSQL')
 
         kube - GCS('Google Cloud Storage')
+        kube - Logging('Logging')
         DNS('CloudDNS') >> LoadBalancing('TCP Load Balancer') >> kube
 
 
