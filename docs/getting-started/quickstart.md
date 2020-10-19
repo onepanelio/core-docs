@@ -11,7 +11,7 @@ It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and
 Before getting started, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
 
 :::important
-The steps in the quick start allow you to quickly create a Onepanel cluster for testing. To create a production cluster with TLS and auto scaling enabled see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud).
+The steps in the quick start allow you to quickly create a Onepanel cluster for evaluation. To create a production cluster with TLS and a managed database see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud).
 
 You can also [add components](/docs/deployment/upgrade/overview) at later time to make this cluster production ready.
 :::
@@ -26,7 +26,7 @@ Let's get started by creating a Kubernetes cluster in one of the following cloud
     { label: 'Azure AKS', value: 'aks', },
     { label: 'Amazon EKS', value: 'eks', },
     { label: 'Google Cloud GKE', value: 'gke', },
-    { label: 'Minikube', value: 'minikube', },
+    // { label: 'Minikube', value: 'minikube', },
     // { label: 'Microk8s', value: 'microk8s', },
   ]
 }>
@@ -44,7 +44,7 @@ az aks create --resource-group <resource-group> --name <cluster-name> --location
     --node-vm-size Standard_D4s_v3 \
     --node-osdisk-size 100 \
     --min-count 2 \
-    --max-count 2 \
+    --max-count 5 \
     --enable-cluster-autoscaler \
     --network-plugin azure \
     --network-policy azure \
@@ -54,9 +54,23 @@ az aks create --resource-group <resource-group> --name <cluster-name> --location
 
 You can then get access credentials by running:
 
-```
+```bash
 az aks get-credentials --resource-group <resource-group> --name <cluster-name> --admin
 ```
+
+Optionally, you can add additional auto-scaling node pools to the cluster as follows:
+
+```bash
+az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-name> \
+  --name <nodepool-name> \
+  --node-vm-size <node-vm-size> \
+  --enable-cluster-autoscaler \
+  --node-count 1 \
+  --min-count 0 \
+  --max-count <max-count>
+```
+
+In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 </TabItem>
 <TabItem value="eks">
@@ -73,7 +87,7 @@ eksctl create cluster --name=<cluster-name> --region <region> \
     --node-type m5.xlarge \
     --node-volume-size 100 \
     --nodes-min 2 \
-    --nodes-max 2 \
+    --nodes-max 5 \
     --asg-access \
     --managed \
     --ssh-access
@@ -95,12 +109,12 @@ Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is
 Run this `gcloud` command to create a bare minimum cluster with 2 `n1-standard-4` nodes:
 
 ```bash
-gcloud container --project <project-name> clusters create <cluster-name> --zone <zone> --node-locations <single-location> \
+gcloud container --project <project-name> clusters create <cluster-name> --zone <zone> --node-locations <zone> \
     --num-nodes 2 \
     --machine-type n1-standard-4 \
     --disk-size 100 \
-    --min-nodes 0 \
-    --max-nodes 2 \
+    --min-nodes 2 \
+    --max-nodes 5 \
     --enable-autoscaling \
     --enable-network-policy \
     --enable-stackdriver-kubernetes \
@@ -112,6 +126,21 @@ The command above will automatically retrieve your cluster's access credentials 
 ```
 gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
+
+Optionally, you can add additional auto-scaling node pools to the cluster as follows:
+
+```bash
+gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --zone <zone> \
+  --machine-type <machine-type> \
+  --disk-size 100 \
+  --num-nodes 0 \
+  --min-nodes 0 \
+  --max-nodes 5 \
+  --enable-autoscaling \
+  --accelerator 'type=<type>,count=<count>'  # optional, example: 'type=nvidia-tesla-v100,count=1'
+```
+
+In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 </TabItem>
 <TabItem value="minikube">
@@ -345,7 +374,7 @@ Next, get the kubeconfig by running
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      { label: 'Minikube', value: 'minikube', },
+      // { label: 'Minikube', value: 'minikube', },
       // { label: 'Microk8s', value: 'microk8s', },
     ]
   }>
@@ -353,15 +382,12 @@ Next, get the kubeconfig by running
 
   ```bash
   opctl init --provider aks \
-    --artifact-repository-provider s3
+    --artifact-repository-provider s3 \
+    --gpu-device-plugins nvidia
   ```
 
   :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-
-  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
@@ -369,15 +395,12 @@ Next, get the kubeconfig by running
 
   ```bash
   opctl init --provider eks \
-    --artifact-repository-provider s3
+    --artifact-repository-provider s3 \
+    --gpu-device-plugins nvidia
   ```
 
   :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-
-  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
@@ -385,13 +408,11 @@ Next, get the kubeconfig by running
 
   ```bash
   opctl init --provider gke \
-      --artifact-repository-provider s3
+    --artifact-repository-provider s3
   ```
 
   :::note
-  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
   </TabItem>
 
@@ -404,11 +425,7 @@ Next, get the kubeconfig by running
   ```
 
   :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-
-  Valid options for `--artifact-repository-provider` flag are `s3` or `gcs`. Use `s3` for any S3 compatible object storage like Minio. 
-
-  See [CLI overview](/docs/deployment/configuration/cli) for additional flags that that may apply.
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
   :::
 
   </TabItem>
@@ -439,7 +456,7 @@ Next, get the kubeconfig by running
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      { label: 'Minikube', value: 'minikube', },
+      // { label: 'Minikube', value: 'minikube', },
       // { label: 'Microk8s', value: 'microk8s', },
     ]
   }>

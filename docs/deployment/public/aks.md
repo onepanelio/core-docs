@@ -27,7 +27,7 @@ az aks create --resource-group <resource-group> --name <cluster-name> --location
     --node-vm-size Standard_D4s_v3 \
     --node-osdisk-size 100 \
     --min-count 2 \
-    --max-count 2 \
+    --max-count 5 \
     --enable-cluster-autoscaler \
     --network-plugin azure \
     --network-policy azure \
@@ -35,47 +35,25 @@ az aks create --resource-group <resource-group> --name <cluster-name> --location
     --generate-ssh-keys
 ```
 
-:::note
-The `--enable-addons monitoring` flag in the command above enables Azure Monitor for log aggregation which can incur additional charges. You can optionally remove this flag and add `--enable-efk-logging` to `opctl` command below.
-:::
-
-:::note
-You can specify the version of the cluster.
-Get a list of versions by running:
-```shell script
-az aks get-versions --location eastus --output table
-```
-Example output
-```text
-KubernetesVersion    Upgrades
--------------------  -------------------------------------------------
-1.18.2(preview)      None available
-1.18.1(preview)      1.18.2(preview)
-1.17.5(preview)      1.18.1(preview), 1.18.2(preview)
-1.17.4(preview)      1.17.5(preview), 1.18.1(preview), 1.18.2(preview)
-1.16.9               1.17.4(preview), 1.17.5(preview)
-1.16.8               1.16.9, 1.17.4(preview), 1.17.5(preview)
-1.15.11              1.16.8, 1.16.9
-1.15.10              1.15.11, 1.16.8, 1.16.9
-1.14.8               1.15.10, 1.15.11
-1.14.7               1.14.8, 1.15.10, 1.15.11
-```
-
-Add the flag to the above command:
-```shell script
-az aks create --resource-group <resource-group> --name <cluster-name> \
-    --node-count 2 \
-    --kubernetes-version 1.16.9 \
-    ...
-```
-
-:::
-
 You can then get access credentials by running:
 
-```
+```bash
 az aks get-credentials --resource-group <resource-group> --name <cluster-name> --admin
 ```
+
+Optionally, you can add additional auto-scaling node pools to the cluster as follows:
+
+```bash
+az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-name> \
+  --name <nodepool-name> \
+  --node-vm-size <node-vm-size> \
+  --enable-cluster-autoscaler \
+  --node-count 1 \
+  --min-count 0 \
+  --max-count <max-count>
+```
+
+In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
@@ -137,6 +115,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
   ```bash
   opctl init --provider aks \
       --artifact-repository-provider s3 \
+      --gpu-device-plugins nvidia \
       --enable-https \
       --enable-cert-manager \
       --dns-provider <dns-provider>
@@ -147,7 +126,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
   :::
 
   :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
+  Valid options for `--gpu-device-plugins` are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
   :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.

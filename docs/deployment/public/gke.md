@@ -22,12 +22,12 @@ We recommend launching a cluster with 2 `n1-standard-4` nodes to start, with aut
 Here is sample `gcloud` command to create a bare minimum cluster:
 
 ```bash
-gcloud container --project <project-name> clusters create <cluster-name> --zone <zone> --node-locations <single-location> \
+gcloud container --project <project-name> clusters create <cluster-name> --zone <zone> --node-locations <zone> \
     --num-nodes 2 \
     --machine-type n1-standard-4 \
     --disk-size 100 \
-    --min-nodes 0 \
-    --max-nodes 2 \
+    --min-nodes 2 \
+    --max-nodes 5 \
     --enable-autoscaling \
     --enable-network-policy \
     --enable-stackdriver-kubernetes \
@@ -47,6 +47,21 @@ The command above will automatically retrieve your cluster's access credentials 
 ```
 gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
+
+Optionally, you can add additional auto-scaling node pools to the cluster as follows:
+
+```bash
+gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --zone <zone> \
+  --machine-type <machine-type> \
+  --disk-size 100 \
+  --num-nodes 0 \
+  --min-nodes 0 \
+  --max-nodes 5 \
+  --enable-autoscaling \
+  --accelerator 'type=<type>,count=<count>'  # optional, example: 'type=nvidia-tesla-v100,count=1'
+```
+
+In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
