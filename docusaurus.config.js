@@ -21,7 +21,7 @@ module.exports = {
       title: '',
       logo: {
         alt: 'Onepanel logo',
-        src: 'img/onepanel-logo-blue-white.png',
+        src: 'img/icon.png',
       },
       items: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
