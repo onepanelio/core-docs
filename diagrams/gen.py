@@ -109,7 +109,7 @@ with Diagram('Onepanel architecture', show=False, filename='onepanel', outformat
     
     [Client('SDKs'), Users('Users')] >> dns
 
-with Diagram('Amazon Web Services resources', show=False, filename='aws', outformat='png'):
+with Diagram('Amazon Web Services resources', show=False, filename='eks', outformat='png'):
     with Cluster('Amazon Web Services'):
         with Cluster('Virtual Private Cloud'):
             kube = EKS('Elastic Kubernetes\nService')
