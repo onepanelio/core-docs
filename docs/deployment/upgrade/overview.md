@@ -42,7 +42,7 @@ To add additional features to Onepanel:
   ```
 
   :::note
-  If the application is not loading after these updates, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
+  If the application is not loading after these updates, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, reach out in [GitHub discussions](https://github.com/onepanelio/core/discussions).
   :::
 
 
@@ -81,5 +81,5 @@ To upgrade Onepanel:
   ```
 
   :::note
-  If the application is not loading after these updates, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
+  If the application is not loading after these updates, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, reach out in [GitHub discussions](https://github.com/onepanelio/core/discussions).
   :::
