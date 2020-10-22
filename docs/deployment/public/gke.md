@@ -54,7 +54,7 @@ gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --z
   --min-nodes 0 \
   --max-nodes 5 \
   --enable-autoscaling \
-  --accelerator 'type=<type>,count=<count>'  # optional, example: 'type=nvidia-tesla-v100,count=1'
+  --accelerator "type=<type>,count=<count>"  # optional, example: "type=nvidia-tesla-v100,count=1"
 ```
 
 In step <strong>3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.

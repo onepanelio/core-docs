@@ -118,7 +118,7 @@ eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --regio
     --nodes-max 5 \
     --asg-access \
     --ssh-access \
-    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>'
+    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>"
 ```
 
 In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
@@ -161,7 +161,7 @@ gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --z
   --min-nodes 0 \
   --max-nodes 5 \
   --enable-autoscaling \
-  --accelerator 'type=<type>,count=<count>'  # optional, example: 'type=nvidia-tesla-v100,count=1'
+  --accelerator "type=<type>,count=<count>"  # optional, example: "type=nvidia-tesla-v100,count=1"
 ```
 
 In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.

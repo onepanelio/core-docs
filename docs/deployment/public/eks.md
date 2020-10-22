@@ -62,7 +62,7 @@ eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --regio
     --nodes-max 5 \
     --asg-access \
     --ssh-access \
-    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>'
+    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>"
 ```
 
 In step <strong>3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
