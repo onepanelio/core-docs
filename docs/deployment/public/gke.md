@@ -35,10 +35,6 @@ gcloud container --project <project-name> clusters create <cluster-name> --zone 
 ```
 
 :::note
-The `--enable-stackdriver-kubernetes` flag in above command enables Google Stackdriver for log aggregation which can incur additional charges. You can optionally remove this flag and add `--enable-efk-logging` to `opctl` command below.
-:::
-
-:::note
 You can optionally add the `--enable-tpu` flag to enable TPUs in GKE.
 :::
 
@@ -61,7 +57,7 @@ gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --z
   --accelerator 'type=<type>,count=<count>'  # optional, example: 'type=nvidia-tesla-v100,count=1'
 ```
 
-In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
+In step <strong>3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
@@ -170,7 +166,7 @@ In step <strong>1.3</strong> below, you can configure Onepanel to automatically 
 7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
   :::note
-  If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
+  If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, reach out in [GitHub discussions](https://github.com/onepanelio/core/discussions).
   :::
 
 8. Use the following command to get your auth token to log into Onepanel:

@@ -58,7 +58,7 @@ You can then get access credentials by running:
 az aks get-credentials --resource-group <resource-group> --name <cluster-name> --admin
 ```
 
-Optionally, you can add additional auto-scaling node pools to the cluster as follows:
+You can also add additional auto-scaling node pools to the cluster as follows:
 
 ```bash
 az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-name> \
@@ -82,22 +82,44 @@ Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksct
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
 
 ```bash
-eksctl create cluster --name=<cluster-name> --region <region> \
+eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a>,<<region>b> --node-zones <<region>a> \
     --nodes 2  \
     --node-type m5.xlarge \
     --node-volume-size 100 \
     --nodes-min 2 \
     --nodes-max 5 \
     --asg-access \
-    --managed \
     --ssh-access
+    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
 ```
 
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
 
-```
+```bash
 eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
 ```
+
+We also recommend enabling CloudWatch monitoring as follows:
+
+```bash
+eksctl utils update-cluster-logging --enable-types all
+```
+
+You can also add additional auto-scaling node groups to the cluster as follows:
+
+```bash
+eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --region <region> --node-zones <<region>a> \
+    --nodes 0  \
+    --node-type <node-type> \
+    --node-volume-size 100 \
+    --nodes-min 0 \
+    --nodes-max 5 \
+    --asg-access \
+    --ssh-access \
+    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>'
+```
+
+In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 </TabItem>
 <TabItem value="gke">
@@ -127,7 +149,7 @@ The command above will automatically retrieve your cluster's access credentials 
 gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
 
-Optionally, you can add additional auto-scaling node pools to the cluster as follows:
+You can also add additional auto-scaling node pools to the cluster as follows:
 
 ```bash
 gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --zone <zone> \
@@ -525,7 +547,7 @@ Next, get the kubeconfig by running
 7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
   :::note
-  If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, join our [Slack community](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or open an issue in [GitHub](https://github.com/onepanelio/core/issues).
+  If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, reach out in [GitHub discussions](https://github.com/onepanelio/core/discussions).
   :::
 
 8. Use the following command to get your auth token to log into Onepanel:

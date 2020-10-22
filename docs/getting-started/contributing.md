@@ -51,17 +51,17 @@ fix: issue where workspace page crashed upon three refreshes
 Onepanel consists of the following repositories. For more information on making contributions, see `CONTRIBUTING.md` in each repository.
 
 ### Platform
-- [Core API](https://github.com/onepanelio/core/) - Code base for backend (Go)
-- [Core UI](https://github.com/onepanelio/core-ui/) - Code base for UI (Angular + TypeScript)
-- [CLI](https://github.com/onepanelio/cli/) - Code base for Go CLI for installation and management (Go)
-- [Manifests](https://github.com/onepanelio/core-ui/) - Kustomize manifests used by CLI for installation and management (YAML)
+- [Backend](https://github.com/onepanelio/core/) (this repository) - Code base for backend (Go)
+- [Frontend](https://github.com/onepanelio/core-ui/) - Code base for frontend (Angular + TypeScript)
+- [CLI](https://github.com/onepanelio/cli/) - Code base for installation and management CLI (Go)
+- [Manifests](https://github.com/onepanelio/core-ui/) - Kustomize manifests used by installation and management CLI (YAML)
 
 ### SDKs
-- [Python SDK](https://github.com/onepanelio/python-sdk/) - Python SDK for automation
+- [Python SDK](https://github.com/onepanelio/python-sdk/) - Python SDK code and documentation (Python)
 
 ### Templates
-- [Templates](https://github.com/onepanelio/templates) - Various Workspace and Workflow Templates
+- [Templates](https://github.com/onepanelio/templates) - Various Workspace, Workflow, Task and Sidecar Templates
 
 ### Documentation
-- [Documentation](https://github.com/onepanelio/core-docs/) - The repository for this site
-- [API Documentation](https://github.com/onepanelio/core-api-docs/) - Documentation if you choose to use the API directly
+- [Documentation](https://github.com/onepanelio/core-docs/) - The repository for documentation site
+- [API Documentation](https://github.com/onepanelio/core-api-docs/) - API documentation if you choose to use the API directly

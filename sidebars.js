@@ -69,6 +69,10 @@ module.exports = {
     },
     { 
       type: 'doc',
+      id: 'deployment/cluster/cluster',
+    },
+    { 
+      type: 'doc',
       id: 'deployment/troubleshooting/overview'
     }
   ],
