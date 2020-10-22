@@ -10,10 +10,12 @@ It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and
 
 Before getting started, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
 
-:::important
-The steps in the quick start allow you to quickly create a Onepanel cluster for evaluation. To create a production cluster with TLS and a managed database see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud).
+:::tip
+You can also follow along with our getting started videos, but be sure to use the commands from the docs:
 
-You can also [add components](/docs/deployment/upgrade/overview) at later time to make this cluster production ready.
+- [Getting started with Microsoft Azure](https://youtu.be/CQBIYfBk3Zk)
+- [Getting started with Amazon EKS](https://youtu.be/Ipdd8f6D6IM)
+- [Getting started with Google Cloud GKE](https://youtu.be/pZRO63SnQ8A)
 :::
 
 ## Step 0: Create a Kubernetes cluster
