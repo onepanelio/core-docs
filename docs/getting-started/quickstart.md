@@ -89,7 +89,7 @@ eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a
     --nodes-min 2 \
     --nodes-max 5 \
     --asg-access \
-    --ssh-access
+    --ssh-access \
     --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
 ```
 
