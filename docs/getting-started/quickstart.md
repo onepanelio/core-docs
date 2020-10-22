@@ -92,7 +92,7 @@ eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a
     --nodes-max 5 \
     --asg-access \
     --ssh-access \
-    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
+    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge"
 ```
 
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:

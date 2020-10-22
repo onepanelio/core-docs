@@ -30,7 +30,7 @@ eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a
     --nodes-max 5 \
     --asg-access \
     --ssh-access \
-    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
+    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge"
 ```
 
 To enable network policy see [Installing Calico on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/calico.html)
