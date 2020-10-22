@@ -14,7 +14,7 @@ This document outlines a production deployment of Onepanel. If you want to quick
 
 ## Launch an EKS cluster
 :::note
-Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) is installed before proceeding.
+Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) (version 0.30.0 or higher) is installed before proceeding.
 :::
 
 We recommend launching a cluster with 2 `m5.xlarge` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
