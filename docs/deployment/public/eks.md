@@ -22,25 +22,18 @@ We recommend launching a cluster with 2 `m5.xlarge` nodes to start, with autosca
 Here are sample `eksctl` commands to create a bare minimum cluster:
 
 ```bash
-eksctl create cluster --name=<cluster-name> --region <region> \
+eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a>,<<region>b> --node-zones <<region>a> \
     --nodes 2  \
     --node-type m5.xlarge \
     --node-volume-size 100 \
     --nodes-min 2 \
     --nodes-max 5 \
     --asg-access \
-    --managed \
     --ssh-access
+    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
 ```
-To enable auto scaling see [Enable Auto Scaling](https://eksctl.io/usage/autoscaling/)
 
 To enable network policy see [Installing Calico on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/calico.html)
-
-To enable logging see [Enabling CloudWatch logging](https://eksctl.io/usage/cloudwatch-cluster-logging/)
-
-:::note
-You can optionally skip the logging configuration above and add `--enable-efk-logging` to `opctl` command below.
-:::
 
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
 
@@ -51,6 +44,28 @@ eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
 :::note
 If you are not the person that created the cluster, you will need to be [added to the cluster](https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html) before you can use `kubectl` with these credentials.
 :::
+
+We also recommend enabling CloudWatch monitoring as follows:
+
+```bash
+eksctl utils update-cluster-logging --enable-types all
+```
+
+You can also add additional auto-scaling node groups to the cluster as follows:
+
+```bash
+eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --region <region> --node-zones <<region>a> \
+    --nodes 0  \
+    --node-type <node-type> \
+    --node-volume-size 100 \
+    --nodes-min 0 \
+    --nodes-max 5 \
+    --asg-access \
+    --ssh-access \
+    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>'
+```
+
+In step <strong>3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).

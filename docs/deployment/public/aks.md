@@ -53,7 +53,7 @@ az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-na
   --max-count <max-count>
 ```
 
-In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
+In step <strong>3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).

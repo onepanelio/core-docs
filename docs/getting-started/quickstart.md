@@ -90,7 +90,7 @@ eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a
     --nodes-max 5 \
     --asg-access \
     --ssh-access
-    --tags 'k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
+    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
 ```
 
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
@@ -105,7 +105,6 @@ We also recommend enabling CloudWatch monitoring as follows:
 eksctl utils update-cluster-logging --enable-types all
 ```
 
-
 You can also add additional auto-scaling node groups to the cluster as follows:
 
 ```bash
@@ -117,7 +116,7 @@ eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --regio
     --nodes-max 5 \
     --asg-access \
     --ssh-access \
-    --tags 'k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>'
+    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>'
 ```
 
 In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.

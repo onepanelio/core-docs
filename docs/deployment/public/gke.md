@@ -35,10 +35,6 @@ gcloud container --project <project-name> clusters create <cluster-name> --zone 
 ```
 
 :::note
-The `--enable-stackdriver-kubernetes` flag in above command enables Google Stackdriver for log aggregation which can incur additional charges. You can optionally remove this flag and add `--enable-efk-logging` to `opctl` command below.
-:::
-
-:::note
 You can optionally add the `--enable-tpu` flag to enable TPUs in GKE.
 :::
 
@@ -61,7 +57,7 @@ gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --z
   --accelerator 'type=<type>,count=<count>'  # optional, example: 'type=nvidia-tesla-v100,count=1'
 ```
 
-In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
+In step <strong>3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 ## Install Onepanel
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
