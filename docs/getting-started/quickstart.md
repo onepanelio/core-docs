@@ -10,10 +10,12 @@ It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and
 
 Before getting started, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
 
-:::important
-The steps in the quick start allow you to quickly create a Onepanel cluster for evaluation. To create a production cluster with TLS and a managed database see [instructions for your cloud provider](/docs/deployment/overview#installing-on-public-cloud).
+:::tip
+You can also follow along with our getting started videos, but be sure to use the commands from the docs:
 
-You can also [add components](/docs/deployment/upgrade/overview) at later time to make this cluster production ready.
+- [Getting started with Microsoft Azure](https://youtu.be/CQBIYfBk3Zk)
+- [Getting started with Amazon EKS](https://youtu.be/Ipdd8f6D6IM)
+- [Getting started with Google Cloud GKE](https://youtu.be/pZRO63SnQ8A)
 :::
 
 ## Step 0: Create a Kubernetes cluster
@@ -76,7 +78,7 @@ In step <strong>1.3</strong> below, you can configure Onepanel to automatically 
 <TabItem value="eks">
 
 :::note
-Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) is installed before proceeding.
+Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) (version 0.30.0 or higher) is installed before proceeding.
 :::
 
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
@@ -89,8 +91,8 @@ eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a
     --nodes-min 2 \
     --nodes-max 5 \
     --asg-access \
-    --ssh-access
-    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
+    --ssh-access \
+    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge"
 ```
 
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
@@ -116,8 +118,12 @@ eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --regio
     --nodes-max 5 \
     --asg-access \
     --ssh-access \
-    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>'
+    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>"
 ```
+
+:::note 
+In order to support scale to and from zero, we need to use EKS unmanaged nodes. These do not show up in EKS console but you can view them by going to **EC2** > **Auto Scaling groups**.
+:::
 
 In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
@@ -159,7 +165,7 @@ gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --z
   --min-nodes 0 \
   --max-nodes 5 \
   --enable-autoscaling \
-  --accelerator 'type=<type>,count=<count>'  # optional, example: 'type=nvidia-tesla-v100,count=1'
+  --accelerator "type=<type>,count=<count>"  # optional, example: "type=nvidia-tesla-v100,count=1"
 ```
 
 In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.

@@ -14,7 +14,7 @@ This document outlines a production deployment of Onepanel. If you want to quick
 
 ## Launch an EKS cluster
 :::note
-Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) is installed before proceeding.
+Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) (version 0.30.0 or higher) is installed before proceeding.
 :::
 
 We recommend launching a cluster with 2 `m5.xlarge` nodes to start, with autoscaling and network policy enabled. You can add additional CPU/GPU node pools as needed later.
@@ -29,8 +29,8 @@ eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a
     --nodes-min 2 \
     --nodes-max 5 \
     --asg-access \
-    --ssh-access
-    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge'
+    --ssh-access \
+    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge"
 ```
 
 To enable network policy see [Installing Calico on Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/calico.html)
@@ -62,8 +62,12 @@ eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --regio
     --nodes-max 5 \
     --asg-access \
     --ssh-access \
-    --tags 'onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>'
+    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>"
 ```
+
+:::note 
+In order to support scale to and from zero, we need to use EKS unmanaged nodes. These do not show up in EKS console but you can view them by going to **EC2** > **Auto Scaling groups**.
+:::
 
 In step <strong>3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
