@@ -31,6 +31,10 @@ module.exports = {
         {
           type: 'doc',
           id: 'getting-started/concepts/environment-variables'
+        },
+        {
+          type: 'doc',
+          id: 'getting-started/concepts/environment-variables-cvat'
         }
       ]
     },
