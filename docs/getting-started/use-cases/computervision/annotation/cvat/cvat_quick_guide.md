@@ -28,7 +28,7 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
 
   ![](/img/quickstart-133251.png)
   :::note
-  Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 6 volumes, so make sure to pick a machine that can support at least that many volumes.
+  Some providers have limits on how many volumes you can attach to a node.
   :::
   :::tip
   You can switch to a different node pool (for example one that supports GPUs) in a running Workspace at any time by clicking the Onepanel icon in the bottom right corner of your Workspace.
@@ -67,7 +67,11 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
 
 12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
   :::note
-  CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you create a new CVAT workspace. Your username will be `admin` and password will be onepanel token. Note that you generated auth token for Onepanel while setting up the Onepanel. [See step #9](/docs/getting-started/quickstart#step-1-install-onepanel) of installation guide.
+  CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser 
+  when you create a new CVAT workspace. If you are using your `admin` username in onepanel, the same will be
+  created in CVAT, your password will be the onepanel password. Note that you generated the auth token for Onepanel while setting up the Onepanel. [See step #9](/docs/getting-started/quickstart#step-1-install-onepanel) of installation guide.
+  
+  If you login to the CVAT workspace as someone other than admin, the user will not have superuser privileges.
   :::
 
 ## 2. Annotating frames in CVAT
