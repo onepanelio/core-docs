@@ -123,6 +123,7 @@ module.exports = {
       collapsed: false,
       items: [
         'reference/jupyterlab/overview',
+        'reference/jupyterlab/git',
         'reference/jupyterlab/tensorboard',
       ]
     },
