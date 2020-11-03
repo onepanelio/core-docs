@@ -66,13 +66,6 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
   ![](/img/cvat_open.png)
 
 12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
-  :::note
-  CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser 
-  when you create a new CVAT workspace. If you are using your `admin` username in onepanel, the same will be
-  created in CVAT, your password will be the onepanel password. Note that you generated the auth token for Onepanel while setting up the Onepanel. [See step #9](/docs/getting-started/quickstart#step-1-install-onepanel) of installation guide.
-  
-  If you login to the CVAT workspace as someone other than admin, the user will not have superuser privileges.
-  :::
 
 ## 2. Annotating frames in CVAT
 
