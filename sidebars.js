@@ -108,13 +108,22 @@ module.exports = {
     },
     { 
       type: 'category',
-      label: 'Annotation (CVAT) Workspace',
+      label: 'CVAT Workspace',
       collapsed: false,
       items: [
         'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide',
         'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model',
         'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation',
         'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'JupyterLab Workspace',
+      collapsed: false,
+      items: [
+        'reference/jupyterlab/overview',
+        'reference/jupyterlab/tensorboard',
       ]
     },
     // {
