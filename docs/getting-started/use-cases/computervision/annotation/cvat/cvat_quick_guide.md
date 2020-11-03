@@ -1,6 +1,6 @@
 ---
-title: Getting started
-sidebar_label: Getting started
+title: Getting started with annotation in CVAT
+sidebar_label: Getting started with annotation
 description: Onepanel - vision AI automatic annotation
 ---
 
