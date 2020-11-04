@@ -1,6 +1,6 @@
 ---
 title: Customizing CVAT Workspace Template
-sidebar_label: Environment variables - CVAT Workspace
+sidebar_label: Customizing CVAT Workspace Template
 description: List of CVAT Workspace environment variables.
 ---
 
