@@ -125,6 +125,7 @@ module.exports = {
         'reference/jupyterlab/overview',
         'reference/jupyterlab/git',
         'reference/jupyterlab/tensorboard',
+        'reference/jupyterlab/debugging',
       ]
     },
     // {
