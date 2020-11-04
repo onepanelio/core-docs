@@ -1,7 +1,7 @@
 ---
-title: Getting started with JupyterLab
-sidebar_label: Getting started
-description: Onepanel - Getting started with JupyterLab
+title: JupyterLab overview
+sidebar_label: JupyterLab overview
+description: Onepanel - JupyterLab overview
 ---
 
 The JupyterLab Workspace in Onepanel is configured with all the tools and libraries you already use out of the box.
