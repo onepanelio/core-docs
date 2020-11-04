@@ -136,4 +136,4 @@ Onepanel’s CVAT supports a feature to pre-annotate images for common objects. 
 
   ![Inference Output](/img/cvat_inference_output.png)
 
-If you need help or have questions regarding CVAT, feel free to reach out on our [Slack channel](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg).
+If you need help or have questions regarding CVAT, feel free to reach out in [GitHub discussions](https://github.com/onepanelio/core/discussions).
