@@ -1,6 +1,6 @@
 ---
 title: Semi-automatic annotation with CVAT
-sidebar_label: Automatic annotation
+sidebar_label: Using trained models for automatic annotation
 description: Onepanel - vision AI automatic annotation
 ---
 

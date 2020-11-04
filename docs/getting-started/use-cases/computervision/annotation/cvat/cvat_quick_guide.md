@@ -1,6 +1,6 @@
 ---
-title: Getting started
-sidebar_label: Getting started
+title: Getting started with image and video annotation in CVAT
+sidebar_label: Image and video annotation with CVAT
 description: Onepanel - vision AI automatic annotation
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Adding a custom deep learning model Workflow to CVAT
-sidebar_label: Adding custom models
+title: Adding a custom deep learning model and training Workflow to CVAT
+sidebar_label: Adding custom deep learning models
 description: Onepanel - vision AI model training pipelines
 ---
 

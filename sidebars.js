@@ -14,6 +14,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Concepts',
+      collapsed: false,
       items: [
         {
           type: 'doc',
@@ -46,6 +47,7 @@ module.exports = {
     { 
       type: 'category',
       label: 'Deployment',
+      collapsed: false,
       items: [
         'deployment/public/aks',
         'deployment/public/eks',
@@ -57,6 +59,7 @@ module.exports = {
     { 
       type: 'category',
       label: 'Configuration',
+      collapsed: false,
       items: [
         'deployment/configuration/cli',
         'deployment/configuration/files',
@@ -84,31 +87,46 @@ module.exports = {
     { 
       type: 'category',
       label: 'Workspaces',
+      collapsed: false,
       items: [
-        'reference/workspaces/templates',
         'reference/workspaces/launching',
         'reference/workspaces/pause-and-resume',
         'reference/workspaces/upgrade',
         'reference/workspaces/delete',
+        'reference/workspaces/templates',
       ]
     },
     { 
       type: 'category',
       label: 'Workflows',
+      collapsed: false,
       items: [
+        'reference/workflows/execute',
         'reference/workflows/templates',
         'reference/workflows/create',
-        'reference/workflows/execute'
       ]
     },
     { 
       type: 'category',
-      label: 'Auto annotation with CVAT',
+      label: 'CVAT Workspace',
+      collapsed: false,
       items: [
         'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide',
         'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model',
         'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation',
         'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'JupyterLab Workspace',
+      collapsed: false,
+      items: [
+        'reference/jupyterlab/overview',
+        'reference/jupyterlab/git',
+        'reference/jupyterlab/tensorboard',
+        'reference/jupyterlab/debugging',
+        'reference/jupyterlab/language-server',
       ]
     },
     // {

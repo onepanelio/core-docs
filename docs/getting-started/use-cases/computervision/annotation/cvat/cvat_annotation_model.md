@@ -1,6 +1,6 @@
 ---
-title: Creating annotation models on CVAT
-sidebar_label: Creating annotation model
+title: Training built-in annotation models on CVAT
+sidebar_label: Training with built-in models
 description: Onepanel - vision AI automatic annotation
 ---
 
