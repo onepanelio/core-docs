@@ -28,7 +28,7 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
 
   ![](/img/quickstart-133251.png)
   :::note
-  Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 6 volumes, so make sure to pick a machine that can support at least that many volumes.
+  Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 3 volumes, so make sure to pick a machine that can support at least that many volumes.
   :::
   :::tip
   You can switch to a different node pool (for example one that supports GPUs) in a running Workspace at any time by clicking the Onepanel icon in the bottom right corner of your Workspace.
@@ -66,9 +66,6 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
   ![](/img/cvat_open.png)
 
 12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
-  :::note
-  CVAT requires super user permission to perform certain tasks. Onepanel automatically creates a superuser when you create a new CVAT workspace. Your username will be `admin` and password will be onepanel token. Note that you generated auth token for Onepanel while setting up the Onepanel. [See step #9](/docs/getting-started/quickstart#step-1-install-onepanel) of installation guide.
-  :::
 
 ## 2. Annotating frames in CVAT
 
@@ -139,4 +136,4 @@ Onepanel’s CVAT supports a feature to pre-annotate images for common objects. 
 
   ![Inference Output](/img/cvat_inference_output.png)
 
-If you need help or have questions regarding CVAT, feel free to reach out on our [Slack channel](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg).
+If you need help or have questions regarding CVAT, feel free to reach out in [GitHub discussions](https://github.com/onepanelio/core/discussions).

@@ -579,7 +579,7 @@ Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https
   ![](/img/quickstart-133251.png)
   
   :::note
-  Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 6 volumes, so make sure to pick a machine that can support at least that many volumes.
+  Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 3 volumes, so make sure to pick a machine that can support at least that many volumes.
   :::
 
 4. Next, add the directory you want Onepanel to pull raw input data and store training output (pickled models, classes, etc.). This directory should be in the default object storage you configured when you launched Onepanel and in a directory that matches your current namespace.
