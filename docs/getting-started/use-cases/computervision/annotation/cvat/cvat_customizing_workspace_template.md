@@ -1,7 +1,7 @@
 ---
 title: Customizing CVAT Workspace Template
 sidebar_label: Customizing CVAT Workspace Template
-description: List of CVAT Workspace environment variables.
+description: Onepanel - Customizing CVAT Workspace Template
 ---
 
 These environment variables were added to our CVAT image.
