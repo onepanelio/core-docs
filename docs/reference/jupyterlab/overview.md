@@ -7,7 +7,7 @@ description: Onepanel - Getting started with JupyterLab
 The JupyterLab Workspace in Onepanel is configured with all the tools and libraries you already use out of the box.
 
 ## Storage
-By default, Onepanel mounts a volume to `/data` directory and sets this a JupyterLab's working directory. You can set the size for this volume when launching a JupyterLab workspace.
+By default, Onepanel mounts a volume to `/data` directory and sets this as JupyterLab's working directory. You can set the size for this volume when launching a JupyterLab workspace.
 
 ## Environment
 
