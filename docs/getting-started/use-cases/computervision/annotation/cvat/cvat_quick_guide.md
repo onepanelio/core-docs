@@ -28,7 +28,7 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
 
   ![](/img/quickstart-133251.png)
   :::note
-  Some providers have limits on how many volumes you can attach to a node.
+  Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 3 volumes, so make sure to pick a machine that can support at least that many volumes.
   :::
   :::tip
   You can switch to a different node pool (for example one that supports GPUs) in a running Workspace at any time by clicking the Onepanel icon in the bottom right corner of your Workspace.
