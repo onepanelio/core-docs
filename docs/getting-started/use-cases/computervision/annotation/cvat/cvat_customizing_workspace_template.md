@@ -4,8 +4,8 @@ sidebar_label: Customizing CVAT Workspace Template
 description: Onepanel - Customizing CVAT Workspace Template
 ---
 
-These environment variables were added to our CVAT image.
-You can add them to the template and adjust as needed.
+You can update the default CVAT template and adjust the following environment variables to change 
+where CVAT data is stored.
 
 - `CVAT_KEYS_DIR` - Where the SSH keys will be installed
 - `CVAT_STATIC_DIR` - Where the CSS, JS, Images are stored.
