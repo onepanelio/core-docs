@@ -20,4 +20,3 @@ Follow these guides to install Onepanel in the following major cloud providers:
 ## On-premises deployment
 
 Coming soon
-
