@@ -31,7 +31,7 @@ with open('/tmp/sys-metrics.json', 'w') as f:
     json.dump(metrics, f)
 ```
 
-Once the Workflow task completes, you can view these metrics under **Artifacts** in the task info panel.
+Once the Workflow task completes, you can view these metrics under **Artifacts** in the task info panel:
 
 ![](../../../static/img/metrics-230759.png)
 

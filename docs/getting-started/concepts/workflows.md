@@ -19,7 +19,7 @@ Onepanel's Workflows are based on the excellent [Argo Workflows](https://github.
 ##  Workflow Templates
 
 :::tip
-See Reference section for more information on defining [Workflow Templates](/docs/reference/workflows/templates)
+See [Workflow Templates](/docs/reference/workflows/templates) in **User Guide** for more detailed information.
 :::
 
 You can define reusable templates for Workflows. All Workflow Templates are defined as Directed Acyclic Graphs (DAG), here's an example of how a DAG template is defined:
