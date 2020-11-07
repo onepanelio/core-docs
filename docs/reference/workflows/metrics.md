@@ -22,8 +22,8 @@ import json
 
 # JSON format for metrics
 metrics = [
-    {'name': 'accuracy', 'value': 0.98},
-    {'name': 'loss', 'value': 0.02},
+    {'name': 'accuracy', 'value': 0.981},
+    {'name': 'loss', 'value': 0.018},
 ]
 
 # Write metrics to `/tmp/sys-metrics.json`
@@ -64,8 +64,8 @@ templates:
         
         # JSON format for metrics
         metrics = [
-          {'name': 'accuracy', 'value': 0.98},
-          {'name': 'loss', 'value': 0.02},
+          {'name': 'accuracy', 'value': 0.981},
+          {'name': 'loss', 'value': 0.018},
         ]
         
         # Write metrics to `/tmp/sys-metrics.json`
@@ -135,8 +135,8 @@ templates:
         
         # JSON format for metrics
         metrics = [
-          {'name': 'accuracy', 'value': 0.98},
-          {'name': 'loss', 'value': 0.02},
+          {'name': 'accuracy', 'value': 0.981},
+          {'name': 'loss', 'value': 0.018},
         ]
         
         # Write metrics to `/tmp/sys-metrics.json`
@@ -157,8 +157,8 @@ templates:
         
         # JSON format for metrics
         metrics = [
-          {'name': 'accuracy', 'value': 0.95},
-          {'name': 'loss', 'value': 0.05},
+          {'name': 'accuracy', 'value': 0.972},
+          {'name': 'loss', 'value': 0.027},
         ]
         
         # Write metrics to `/tmp/sys-metrics.json`
@@ -192,7 +192,7 @@ templates:
         # Pick the metrics with best accuracy
         task_a_accuracy = [m['value'] for m in task_a_metrics if m['name'] == 'accuracy'][0]
         task_b_accuracy = [m['value'] for m in task_b_metrics if m['name'] == 'accuracy'][0]
-        
+
         if task_a_accuracy > task_b_accuracy:
           metrics = task_a_metrics
         else:
