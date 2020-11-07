@@ -103,6 +103,7 @@ module.exports = {
       items: [
         'reference/workflows/execute',
         'reference/workflows/templates',
+        'reference/workflows/metrics',
         'reference/workflows/create',
       ]
     },
