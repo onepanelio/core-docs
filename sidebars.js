@@ -52,8 +52,8 @@ module.exports = {
         'deployment/public/aks',
         'deployment/public/eks',
         'deployment/public/gke',
-        'deployment/single-node/microk8s',
-        'deployment/single-node/minikube',
+        // 'deployment/single-node/microk8s',
+        // 'deployment/single-node/minikube',
       ]
     },
     { 
