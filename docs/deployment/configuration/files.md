@@ -170,7 +170,7 @@ The `insecure` field is set to `true` by default and will be set to `false` if y
 #### nodePool
 Depending on your provider, these are either called node pools or node groups. They are labels on Kubernetes nodes that Onepanel uses for auto scaling nodes on demand.
 
-A common `label` to identify these is `beta.kubernetes.io/instance-type` which most cloud providers automatically set. The value of this label is usually set to the instance type of the cloud provider.
+A common `label` to identify these is nodea.kubernetes.io/instance-type` which most cloud providers automatically set. The value of this label is usually set to the instance type of the cloud provider.
 
 You can see all labels on your nodes by running:
 
@@ -178,7 +178,7 @@ You can see all labels on your nodes by running:
 kubectl get nodes --show-labels
 ```
 
-:::note
+<!-- :::note
 For minikube, you can use this configuration.
 ```yaml
 nodePool:
@@ -194,7 +194,7 @@ kubectl get nodes --show-labels
 ```
 
 The label has to exist for workspaces to run.
-:::
+::: -->
 
 Note that this lists many different labels, so you can pick and choose any label key/value that is unique to that node.
 
@@ -203,7 +203,7 @@ For example after running the `kubectl` command above, you may get the following
 ```bash {3}
 agentpool=nodepool1,
 beta.kubernetes.io/arch=amd64,
-beta.kubernetes.io/instance-type=Standard_D2s_v3,
+node.kubernetes.io/instance-type=Standard_D2s_v3,
 beta.kubernetes.io/os=linux,
 failure-domain.beta.kubernetes.io/region=eastus,
 ```
@@ -212,7 +212,7 @@ You can then use the label key/value pairs as follows:
 
 ```yaml {2,4-5}
 nodePool:
-  label: beta.kubernetes.io/instance-type  # node label key
+  label: node.kubernetes.io/instance-type  # node label key
   options:
     - name: 'CPU: 2, RAM: 8GB'      # friendly name for instance
       value: 'Standard_D2s_v3'      # node label value
@@ -351,7 +351,7 @@ database:
   username: onepanel
 ```
 
-### metalLB
+<!-- ### metalLB
 This is to configure a load balancer for local or bare-metal deployments.
 
 Example:
@@ -439,7 +439,7 @@ metalLb:
 ```
 
 </TabItem>
-</Tabs>
+</Tabs> -->
 
 ### workflowEngine
 #### containerRuntimeExecutor
