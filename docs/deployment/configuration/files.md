@@ -126,7 +126,7 @@ database:
   # For in-cluster test database, use any username you like.
   username: <username>
 ```
-
+<!-- 
 If you use `--artifact-repository-provider gcs`, that changes the `artifactRepository`:
 ```yaml
 artifactRepository:
@@ -145,7 +145,7 @@ artifactRepository:
     keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
     serviceAccountKey: |
       <key.json-file-data>
-```
+``` -->
 
 ## Sections
 What follows is a more detailed description of each section of the `params.yaml` file.
