@@ -161,16 +161,8 @@ This is the first [Namespace](/docs/getting-started/concepts/namespaces) you wan
 #### domain
 This is the domain for your Onepanel resources. Some resources like Workspaces create subdomains of this domain so they can be accessed by a browser. This can be a top level domain like `example.com` or a subdomain `sub.example.com`.
 
-:::important
-Domains, not ip addresses, are required with Istio.
-:::
-
 #### fqdn
 This is where Onepanel UI and API will be deployed. This should be a subdomain of the `domain` field mentioned above. For example: `app.example.com` or `app.sub.example.com`.
-
-:::important
-Domains, not ip addresses, are required with Istio.
-:::
 
 #### insecure
 The `insecure` field is set to `true` by default and will be set to `false` if you add the `--enable-https` when running `opctl init`.
