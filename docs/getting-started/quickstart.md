@@ -6,7 +6,13 @@ description: Get started with Onepanel on AKS, EKS or GKE
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and then using `opctl`, you generate a `params.yaml` file and update it to configure your deployment. Once complete, you can access your deployment from any browser using your Kubernetes authentication token. Finally, you can run a Workflow or create a Workspace.
+It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and then using `opctl`, you generate a `params.yaml` file and update it to configure your deployment. Once complete, you can access your deployment from any browser.
+
+In this quick start, we will walk you through:
+
+1. Deploying Onepanel to one of the major cloud providers.
+2. Labelling your images or video using the integrated annotation Workspace.
+3. Training your model with the newly lablled data using the integrated training Workflows.
 
 Before getting started, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
 
