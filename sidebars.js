@@ -66,9 +66,14 @@ module.exports = {
         'deployment/configuration/tls',
       ]
     },
-    { 
-      type: 'doc',
-      id: 'deployment/upgrade/overview'
+    {
+      type: 'category',
+      label: 'Managing components',
+      collapsed: false,
+      items: [
+        'deployment/components/add',
+        'deployment/components/upgrade',
+      ]    
     },
     { 
       type: 'doc',
