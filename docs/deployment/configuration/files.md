@@ -176,7 +176,7 @@ Depending on your provider, these are either called node pools or node groups. T
 A common `label` to identify these is `node.kubernetes.io/instance-type` which most cloud providers automatically set. The value of this label is usually set to the instance type of the cloud provider.
 
 :::important
-In Kubernetes version 1.16.x, you may need to use `beta.kubernetes.io/instance-type` instead.
+In Kubernetes version 1.16.x, you may need to use `beta.kubernetes.io/instance-type` instead. If you are using EKS 1.16.x, make sure to use this label there as well when adding node groups.
 :::
 
 You can see all labels on your nodes by running:
