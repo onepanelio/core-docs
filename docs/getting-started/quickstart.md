@@ -12,7 +12,7 @@ In this quick start, we will walk you through:
 
 1. Deploying Onepanel to one of the major cloud providers.
 2. Labelling your images or video using the integrated annotation Workspace.
-3. Training your model with the newly lablled data using the integrated training Workflows.
+3. Training your model with the newly labelled data using the integrated training Workflows.
 
 Before getting started, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
 
