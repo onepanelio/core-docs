@@ -173,7 +173,11 @@ The `insecure` field is automatically set to `true` by default and will be set t
 #### nodePool
 Depending on your provider, these are either called node pools or node groups. They are labels on Kubernetes nodes that Onepanel uses for auto scaling nodes on demand.
 
-A common `label` to identify these is nodea.kubernetes.io/instance-type` which most cloud providers automatically set. The value of this label is usually set to the instance type of the cloud provider.
+A common `label` to identify these is `node.kubernetes.io/instance-type` which most cloud providers automatically set. The value of this label is usually set to the instance type of the cloud provider.
+
+:::important
+In Kubernetes version 1.16.x, you may need to use `beta.kubernetes.io/instance-type` instead.
+:::
 
 You can see all labels on your nodes by running:
 
