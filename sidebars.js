@@ -16,22 +16,11 @@ module.exports = {
       label: 'Concepts',
       collapsed: false,
       items: [
-        {
-          type: 'doc',
-          id: 'getting-started/concepts/namespaces'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/concepts/workspaces'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/concepts/workflows'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/concepts/environment-variables'
-        }
+        // 'getting-started/concepts/overview',
+        'getting-started/concepts/namespaces',
+        'getting-started/concepts/workspaces',
+        'getting-started/concepts/workflows',
+        'getting-started/concepts/environment-variables',
       ]
     },
     {
