@@ -128,7 +128,7 @@ eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --regio
 ```
 
 :::note 
-In order to support scale to and from zero, we need to use EKS unmanaged nodes. These do not show up in EKS console but you can view them by going to **EC2** > **Auto Scaling groups**.
+In order to [support scale to and from zero](https://github.com/aws/containers-roadmap/issues/724), we need to use EKS unmanaged nodes. These do not show up in EKS console but you can view them by going to **EC2** > **Auto Scaling groups**.
 :::
 
 In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
