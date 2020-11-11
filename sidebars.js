@@ -110,6 +110,7 @@ module.exports = {
         'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model',
         'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation',
         'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model',
+        'getting-started/use-cases/computervision/annotation/cvat/using_cloud_storage',
         'getting-started/use-cases/computervision/annotation/cvat/cvat_customizing_workspace_template',
       ]
     },
