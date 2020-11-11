@@ -19,5 +19,6 @@ If your new file syncer directory (**workflow-data** by default) is inside the *
 - ONEPANEL_SYNC_DIRECTORY (default: **workflow-data**)
 - ONEPANEL_WORKFLOW_MODEL_DIR (default: **output**)
 
+If the directory that you specified for the file syncer does not start with the current namespace name (i.e it's not inside the **namespace**), then you will have to manually upload models to CVAT.
 
 If you have any questions or feedback, please reach out to on our [Slack channel](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg).
