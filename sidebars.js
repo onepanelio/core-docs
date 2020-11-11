@@ -16,22 +16,11 @@ module.exports = {
       label: 'Concepts',
       collapsed: false,
       items: [
-        {
-          type: 'doc',
-          id: 'getting-started/concepts/namespaces'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/concepts/workspaces'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/concepts/workflows'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/concepts/environment-variables'
-        }
+        // 'getting-started/concepts/overview',
+        'getting-started/concepts/namespaces',
+        'getting-started/concepts/workspaces',
+        'getting-started/concepts/workflows',
+        'getting-started/concepts/environment-variables',
       ]
     },
     {
@@ -44,18 +33,18 @@ module.exports = {
       type: 'doc',
       id: 'deployment/overview',
     },
-    { 
-      type: 'category',
-      label: 'Deployment',
-      collapsed: false,
-      items: [
-        'deployment/public/aks',
-        'deployment/public/eks',
-        'deployment/public/gke',
-        'deployment/single-node/microk8s',
-        'deployment/single-node/minikube',
-      ]
-    },
+    // { 
+    //   type: 'category',
+    //   label: 'Deployment',
+    //   collapsed: false,
+    //   items: [
+    //     'deployment/public/aks',
+    //     'deployment/public/eks',
+    //     'deployment/public/gke',
+    //     // 'deployment/single-node/microk8s',
+    //     // 'deployment/single-node/minikube',
+    //   ]
+    // },
     { 
       type: 'category',
       label: 'Configuration',
@@ -66,9 +55,14 @@ module.exports = {
         'deployment/configuration/tls',
       ]
     },
-    { 
-      type: 'doc',
-      id: 'deployment/upgrade/overview'
+    {
+      type: 'category',
+      label: 'Managing components',
+      collapsed: false,
+      items: [
+        'deployment/components/add',
+        'deployment/components/upgrade',
+      ]    
     },
     { 
       type: 'doc',
@@ -103,6 +97,7 @@ module.exports = {
       items: [
         'reference/workflows/execute',
         'reference/workflows/templates',
+        'reference/workflows/metrics',
         'reference/workflows/create',
       ]
     },

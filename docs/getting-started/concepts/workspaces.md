@@ -15,7 +15,7 @@ See [Environment variables](/docs/getting-started/concepts/environment-variables
 ## Workspace Templates
 
 :::tip
-See Reference section for more information on defining [Workspace Templates](/docs/reference/workspaces/templates)
+See  [Workspace Templates](/docs/reference/workspaces/templates) in **User Guide** for more detailed information.
 :::
 
 You can define reusable templates for Workspaces. Workspace Templates are a combination of Docker images and a YAML definition. Here's a simple NGINX Workspace Template definition:

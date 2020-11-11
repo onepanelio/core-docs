@@ -6,7 +6,13 @@ description: Get started with Onepanel on AKS, EKS or GKE
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and then using `opctl`, you generate a `params.yaml` file and update it to configure your deployment. Once complete, you can access your deployment from any browser using your Kubernetes authentication token. Finally, you can run a Workflow or create a Workspace.
+It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and then using `opctl`, you generate a `params.yaml` file and update it to configure your deployment. Once complete, you can access your deployment from any browser.
+
+In this quick start, we will walk you through:
+
+1. Deploying Onepanel to one of the major cloud providers.
+2. Labelling your images or video using the integrated annotation Workspace.
+3. Training your model with the newly labelled data using the integrated training Workflows.
 
 Before getting started, take a look at [concepts](/docs/getting-started/concepts/namespaces) to understand the different components in Onepanel.
 
@@ -122,7 +128,7 @@ eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --regio
 ```
 
 :::note 
-In order to support scale to and from zero, we need to use EKS unmanaged nodes. These do not show up in EKS console but you can view them by going to **EC2** > **Auto Scaling groups**.
+In order to [support scale to and from zero](https://github.com/aws/containers-roadmap/issues/724), we need to use EKS unmanaged nodes. These do not show up in EKS console but you can view them by going to **EC2** > **Auto Scaling groups**.
 :::
 
 In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
@@ -545,10 +551,6 @@ Next, get the kubeconfig by running
   ```
 
 6. Create the appropriate DNS record in your DNS provider based on the instructions above.
-
-  :::tip
-  If you don't have a domain name handy or you're waiting for your DNS record to propogate, you can set up a [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) to quickly test the deployment.
-  :::
 
 7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 

@@ -10,6 +10,6 @@ You can use the built-in JupyterLab debugger in Onepanel as follows:
 
     ![](../../../static/img/debugging-160603.png)
 
-2. Breakpoint and run a cell.
+2. Set a breakpoint and run a cell.
 
     ![](../../../static/img/debugging-160051.png)
