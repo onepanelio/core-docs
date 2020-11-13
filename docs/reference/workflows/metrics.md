@@ -9,8 +9,11 @@ You can persist metrics into as JSON in a special file `/tmp/sys-metrics.json`. 
 
 ```json
 [
-    {"name": "<metric-1-name>", "value": "metric-1-value"},
-    {"name": "<metric-2-name>", "value": "metric-2-value"},
+    {
+      "name": "accuracy", // Name of metric, should be string
+      "value": 0.98,      // Value of metric, should be a `number`
+      "format": ""        // Optional, valid values: "" or "%"
+    },
     ...
 ]
 ```
