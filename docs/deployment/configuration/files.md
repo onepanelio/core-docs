@@ -49,20 +49,18 @@ application:
   # HTTP or HTTPS - Do not change, determined by `opctl init --enable-https`
   # CLI flag: --enable-https
   insecure: false
-  # Node pool or group label keys and values used for AutoScaling and for NodeSelectors
-  # The provider will set these label key and values on your nodes automatically
-  # These can also be customized depending on your provider
+  # Node pool key and values used for AutoScaling
+  # The cluster provider will automatically set these label key and values on your nodes
   nodePool:
-    label: <node-pool-label>
-    # Add more by following the format:
-    # - name: <name>
-    #   value: <value>
+    # Cloud providers will automatically set label key as "node.kubernetes.io/instance-type" on all nodes
+    # Kubernetes 1.16.x: use "beta.kubernetes.io/instance-type"
+    label: node.kubernetes.io/instance-type
     # The first option will be used as default.
     options:
-    - name: 'Use friendly name 1'
-      value: <value-1>
-    - name: 'Use friendly name 2'
-      value: <value-2>
+      - name: 'User friendly name 1'
+        value: <value-1>
+      - name: 'User friendly name 2'
+        value: <value-2>
   # The kubernetes cluster where Onepanel will be deployed.
   # Valid values: minikube, microk8s, aks, eks, gke
   provider: aks
@@ -113,22 +111,24 @@ certManager:
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 database:
   # Name of database
-  # If using an external production database, use the name of that database.
-  # For in-cluster test database, use any name you like.
+  # If using a managed database, use the name of that database.
+  # For in-cluster database, leave as "onepanel".
   databaseName: onepanel
   # Do not change, only `postgres` driver is supported at this time.
   driverName: postgres
-  # Database host - use `postgres` for in-cluster test database
-  host: <database-ip-or-hostname>
+  # Database host
+  # If using a managed databases, use the database host name.
+  # Leave as `postgres` for in-cluster database.
+  host: postgres
   # Database password
-  # If using an external production database, use the password for that database.
-  # For in-cluster test database, use any password you like.
+  # If using a managed database, use the password for that database.
+  # For in-cluster database, pick any password.
   password: <password>
   # Database port
   port: 5432
   # Database username
-  # If using an external production database, use the username for that database.
-  # For in-cluster test database, use any username you like.
+  # If using a managed database, use the username for that database.
+  # For in-cluster database, pick any username.
   username: <username>
 ```
 <!-- 
@@ -213,10 +213,9 @@ For example after running the `kubectl` command above, you may get the following
 
 ```bash {3}
 agentpool=nodepool1,
-beta.kubernetes.io/arch=amd64,
+kubernetes.io/arch=amd64,
 node.kubernetes.io/instance-type=Standard_D2s_v3,
-beta.kubernetes.io/os=linux,
-failure-domain.beta.kubernetes.io/region=eastus,
+kubernetes.io/os=linux,
 ```
 
 You can then use the label key/value pairs as follows:
