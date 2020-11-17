@@ -50,17 +50,18 @@ application:
   # CLI flag: --enable-https
   insecure: false
   # Node pool key and values used for AutoScaling
-  # The cluster provider will automatically set these label key and values on your nodes
   nodePool:
     # Cloud providers will automatically set label key as "node.kubernetes.io/instance-type" on all nodes
-    # Kubernetes 1.16.x: use "beta.kubernetes.io/instance-type"
+    # For Kubernetes 1.16.x, use "beta.kubernetes.io/instance-type"
     label: node.kubernetes.io/instance-type
+    # These are the machine type options that will be available in Onepanel
+    # `name` can be any user friendly name, `value` should be the instance type in your cloud provider
     # The first option will be used as default.
     options:
-      - name: 'User friendly name 1'
-        value: <value-1>
-      - name: 'User friendly name 2'
-        value: <value-2>
+      - name: 'CPU: X, RAM: Z GB'
+        value: <instance-type-name-1>
+      - name: 'CPU: X, GPU: Y, RAM: Z GB'
+        value: <instance-type-name-2>
   # The kubernetes cluster where Onepanel will be deployed.
   # Valid values: minikube, microk8s, aks, eks, gke
   provider: aks
