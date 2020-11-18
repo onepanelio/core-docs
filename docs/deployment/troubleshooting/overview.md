@@ -66,4 +66,4 @@ kubectl describe certificate cert-manager-wildcard-certificate -n istio-system
 ```
 
 ## Still having issues?
-Reach out in [GitHub discussions](https://github.com/onepanelio/core/discussions).
+Reach out in [Slack](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or [GitHub discussions](https://github.com/onepanelio/core/discussions).
