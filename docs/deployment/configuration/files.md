@@ -242,7 +242,7 @@ Here's an example AWS S3 configuration:
 artifactRepository:
   s3:
     accessKey: AKIAJSIE27KKMHXI3BJQ
-    bucket: pipelines.example.com
+    bucket: my-data-bucket
     endpoint: s3.amazonaws.com
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
@@ -256,7 +256,7 @@ Here's an example GCS configuration:
 artifactRepository:
   s3:
     accessKey: GOOG1EQPAXHU77377T6TGRYGD7NDV6AA3TFYIIKXP2RZLHI3DZB76FIFGDNLQ
-    bucket: pipelines.example.com
+    bucket: my-data-bucket
     endpoint: storage.googleapis.com
     region: us-west-2
     secretKey: S3hdxSL6HlPGTAAFZYxG/iaKhtlDHVCbyiIBRPxq
@@ -268,7 +268,7 @@ And example Minio configuration:
 artifactRepository:
   s3:
     accessKey: AKIAJSIE27KKMHXI3BJQ
-    bucket: my-bucket
+    bucket: my-data-bucket
     endpoint: my-minio-endpoint.default:9000
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
@@ -277,7 +277,7 @@ artifactRepository:
 <!-- ```yaml
 artifactRepository:
  gcs:
-    bucket: mygreatbucket
+    bucket: my-data-bucket
     endpoint: storage.googleapis.com
     insecure: false
     keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}

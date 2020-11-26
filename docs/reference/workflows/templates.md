@@ -181,7 +181,7 @@ templates:
       s3:
         key: '{{workflow.parameters.model-path}}'
         endpoint: storage.googleapis.com
-        bucket: my-bucket-name
+        bucket: my-data-bucket
         accessKeySecret:
           name: my-s3-credentials
           key: accessKey
@@ -197,7 +197,7 @@ Using GCS
     - name: output-three
       path: /tmp/output
       gcs:
-        bucket: bucketofplenty
+        bucket: my-data-bucket
         key: /your/path
         serviceAccountKeySecret:
           name: onepanel
