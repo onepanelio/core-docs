@@ -89,3 +89,9 @@ templates:
           - containerPort: 6006
             name: tensorboard
 ```
+
+## Accessing TensorBoard
+
+Once a Workflow task is running, you can access its TensorBoard sidecar by clicking on the task and then clicking **Outputs** in the task panel:
+
+![](../../../static/img/tensorboard-202758.png)
