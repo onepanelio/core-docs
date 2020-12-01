@@ -1,10 +1,10 @@
 ---
-title: Enable TensorBoard
-sidebar_label: Enable TensorBoard
-description: Onepanel - Enable TensorBoard in Workflows
+title: Accessing TensorBoard
+sidebar_label: Accessing TensorBoard
+description: Onepanel - Accessing TensorBoard in Workflows
 ---
 
-## Enable TensorBoard
+## Enabling TensorBoard
 
 You can add TensorBoard as a `sidecar` to any Workflow template as follows:
 
@@ -90,7 +90,7 @@ templates:
             name: tensorboard
 ```
 
-## Accessing TensorBoard
+## Launching TensorBoard
 
 Once a Workflow task is running, you can access its TensorBoard sidecar by clicking on the task and then clicking **Outputs** in the task panel:
 
