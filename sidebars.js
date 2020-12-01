@@ -97,8 +97,10 @@ module.exports = {
       items: [
         'reference/workflows/execute',
         'reference/workflows/templates',
-        'reference/workflows/metrics',
         'reference/workflows/create',
+        'reference/workflows/metrics',
+        'reference/workflows/tensorboard',
+        'reference/workflows/troubleshooting',
       ]
     },
     { 
