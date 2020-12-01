@@ -122,17 +122,33 @@ inputs:
 
 ## HTTP
 
-You can download artifacts from different HTTP locations by using the `http` artifact:
+You can download artifacts from different HTTP locations by using the `http` artifact. 
+
+Example executable binary:
 
 ```yaml
 inputs:
   artifacts:
   # Download latest opctl and place it at /bin/opctl
   - name: opctl
+    # path to write the file
     path: /bin/opctl
     mode: 0755
     http:
       url: https://github.com/onepanelio/core/releases/latest/download/opctl-linux-amd64
+```
+
+Example zip file:
+
+```yaml
+inputs:
+  artifacts:
+  # Download zip file and place it in /mnt/data/datasets
+  - name: processed_data
+    # path to write the file
+    path: /mnt/data/datasets
+    http:
+      url: https://github.com/onepanelio/templates/releases/download/v0.2.0/processed_data.zip
 ```
 
 ## Options
