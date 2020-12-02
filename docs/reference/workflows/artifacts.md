@@ -120,6 +120,10 @@ inputs:
       path: /mnt/src
 ```
 
+:::note
+The directories in `path` should exist before you can clone into them. For example, if you mount a volume at `/mnt/src` you cannot clone into `/mnt/src/source`.
+:::
+
 ## HTTP
 
 You can download artifacts from different HTTP locations by using the `http` artifact. 
@@ -131,7 +135,6 @@ inputs:
   artifacts:
   # Download latest opctl and place it at /bin/opctl
   - name: opctl
-    # path to write the file
     path: /bin/opctl
     mode: 0755
     http:
@@ -143,13 +146,18 @@ Example zip file:
 ```yaml
 inputs:
   artifacts:
-  # Download zip file and place it in /mnt/data/datasets
-  - name: processed_data
-    # path to write the file
-    path: /mnt/data/datasets
+  # Download zip file and place it at /mnt/data/datasets/patch_medical_valid.zip
+  - name: data
+    # path to download the file - note the directories must exist
+    path: /mnt/data/patch_medical_valid.zip
+    mode: 0755
     http:
-      url: https://github.com/onepanelio/templates/releases/download/v0.2.0/processed_data.zip
+      url: https://github.com/onepanelio/templates/releases/download/v0.2.0/patch_medical_valid.zip
 ```
+
+:::note
+The directories in `path` should exist before you can download into them. For example, if you mount a volume at `/mnt/data` you cannot download the file into `/mnt/data/dataset`.
+:::
 
 ## Options
 
