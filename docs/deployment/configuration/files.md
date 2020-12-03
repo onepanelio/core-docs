@@ -263,10 +263,10 @@ And example Minio configuration:
 ```yaml
 artifactRepository:
   s3:
-    accessKey: AKIAJSIE27KKMHXI3BJQ
+    accessKey: <azure-storage-name>
     bucket: my-bucket
-    endpoint: my-minio-endpoint.default:9000
-    region: us-west-2
+    endpoint: gitlab-minio-app.azurewebsites.net
+    region: WestUS
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
 ```
 
