@@ -21,6 +21,7 @@ module.exports = {
         'getting-started/concepts/workspaces',
         'getting-started/concepts/workflows',
         'getting-started/concepts/environment-variables',
+        'getting-started/concepts/minio'
       ]
     },
     {
