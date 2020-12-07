@@ -260,6 +260,7 @@ artifactRepository:
 
 And example Minio configuration:
 
+#### Azure Minio Webapp
 ```yaml
 artifactRepository:
   s3:
@@ -268,6 +269,17 @@ artifactRepository:
     endpoint: my-minio-endpoint.default:9000
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
+```
+
+#### Local Minio Server
+```yaml
+artifactRepository:
+  s3:
+    accessKey: AKIAIOSFODNN7EXAMPLE
+    bucket: my-bucket
+    endpoint: f67f39e6b94d.ngrok.io
+    region: us-west-2
+    secretKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
 
 <!-- ```yaml
