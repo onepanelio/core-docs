@@ -20,7 +20,9 @@ module.exports = {
         'getting-started/concepts/namespaces',
         'getting-started/concepts/workspaces',
         'getting-started/concepts/workflows',
+        'getting-started/concepts/labels',
         'getting-started/concepts/environment-variables',
+        'getting-started/concepts/sdk',
       ]
     },
     {
@@ -101,6 +103,7 @@ module.exports = {
         'reference/workflows/create',
         'reference/workflows/metrics',
         'reference/workflows/tensorboard',
+        // 'reference/workflows/hyperparamtuning',
         'reference/workflows/troubleshooting',
       ]
     },
