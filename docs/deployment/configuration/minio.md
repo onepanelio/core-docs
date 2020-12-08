@@ -94,15 +94,14 @@ In this guide, we'll deploy Onepanel using a local Minio server.
 
 ## Installation
  
-First install Minio using Docker, or visit [Minio](https://docs.min.io/docs/minio-quickstart-guide.html) for your preferred installation process
+First install [Minio](https://min.io/download)
 
 ```shell
-docker run -p 9000:9000 \
-  -e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE" \
-  -e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
-  -e "MINIO_REGION_NAME=us-west-2"
-  minio/minio server /mnt/data
-```
+docker run -p 9000:9000 -e MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE \
+                        -e MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY \
+                        -e MINIO_REGION_NAME=us-west-2 \
+                        -v /mnt/data:/data minio/minio server /data
+                        ```
 ```shell
 Attempting encryption of all config, IAM users and policies on MinIO backend
 Endpoint:  http://172.17.0.2:9000  http://127.0.0.1:9000
@@ -116,7 +115,7 @@ Object API (Amazon S3 compatible):
    .NET:       https://docs.min.io/docs/dotnet-client-quickstart-guide
 ```
 
-Once your server's running, you'll need to set port for Minio server to public so kubectl can sync all FTPs into your local Minio server.
+Once your server's running, you'll need to set the port for Minio server into public so kubectl can sync all FTPs into your local Minio server.
 To do this we'll use [Ngrok](https://ngrok.com/), this tool exposes local servers behind NATs and firewalls to the public internet over secured tunnels.
 
 Open a separate terminal and install
@@ -150,4 +149,4 @@ copy forwarding tunnel to use for onepanel configurations, in this example it's 
 Ngrok exposes your Minio server in public! make sure to keep the tunnel information secured or add authentication by visiting their [website](https://ngrok.com/)
 :::
 
-Once everything is set up go to [configurations](./files.md#local-server) guide for `params.yaml`, once completed run `opctl apply` and deploy with local Minio server
+Once everything is set up go to [configurations](./files.md#local-server) guide for `params.yaml`, once completed run `opctl apply` to deploy with local Minio server
