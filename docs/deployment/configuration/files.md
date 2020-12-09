@@ -226,16 +226,14 @@ kubernetes.io/os=linux,
 
 You can then use the label key/value pairs as follows. Note that setting `resources.limits` field is required for GPUs.
 
-```yaml {2,4-5}
+```yaml {2,4-5,8-13}
 nodePool:
-  label: node.kubernetes.io/instance-type  # node label key
+  label: node.kubernetes.io/instance-type     # node label key
   options:
-    - name: 'CPU: 2, RAM: 8GB'      # friendly name for instance
-      value: 'Standard_D2s_v3'      # node label value
-    - name: 'CPU: 4, RAM: 16GB'
-      value: Standard_D4s_v3
-    - name: 'GPU: 1xK80, CPU: 6, RAM: 56GB'
-      value: Standard_NC6_v3
+    - name: 'CPU: 4, RAM: 16GB'               # friendly name for instance
+      value: m5.xlarge                        # node label value
+    - name: 'GPU: 1xV100, CPU: 8, RAM: 61GB'
+      value: p3.2xlarge
       resources:
         limits:
           # Type and number of GPUs, possible values are:
