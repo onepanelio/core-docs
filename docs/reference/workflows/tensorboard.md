@@ -32,13 +32,17 @@ templates:
             name: tensorboard
 ```
 
-### Complete Workflow example
+### Complete example
 
 :::note
 This example is also available in the application in **Workflows** under **TensorFlow Training**.
 :::
 
 ```yaml {38,44,46-48,50-64,66-74}
+arguments:
+  parameters:
+  - name: epochs
+    value: '10'
 entrypoint: main
 templates:
   - name: main
@@ -80,7 +84,7 @@ templates:
 
         history = model.fit(x=x_train, 
                   y=y_train, 
-                  epochs=10, 
+                  epochs={{workflow.parameters.epochs}}, 
                   validation_data=(x_test, y_test), 
                   callbacks=[tensorboard_callback])
       volumeMounts:
