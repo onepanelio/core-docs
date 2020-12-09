@@ -21,7 +21,9 @@ templates:
           - sh
           - '-c'
         # Indicates that this is a visualization sidecar
-        tty: true
+        env:
+          - name: ONEPANEL_INTERACTIVE_SIDECAR
+            value: 'true'
         args:
           # Set <path> to where your main container is writing TensorBoard logs
           - tensorboard --logdir <path>     
@@ -81,7 +83,9 @@ templates:
         command:
           - sh
           - '-c'
-        tty: true
+        env:
+          - name: ONEPANEL_INTERACTIVE_SIDECAR
+            value: 'true'
         args:
           # Read logs from /mnt/output - this directory is auto-mounted from volumeMounts
           - tensorboard --logdir /mnt/output/
