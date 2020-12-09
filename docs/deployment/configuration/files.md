@@ -224,7 +224,7 @@ node.kubernetes.io/instance-type=Standard_D2s_v3,
 kubernetes.io/os=linux,
 ```
 
-You can then use the label key/value pairs as follows:
+You can then use the label key/value pairs as follows. Note that setting `resources.limits` field is required for GPUs.
 
 ```yaml {2,4-5}
 nodePool:
@@ -235,8 +235,16 @@ nodePool:
     - name: 'CPU: 4, RAM: 16GB'
       value: Standard_D4s_v3
     - name: 'GPU: 1xK80, CPU: 6, RAM: 56GB'
-      value: Standard_NC6
+      value: Standard_NC6_v3
+      resources:
+        limits:
+          # Type and number of GPUs, possible values are:
+          #   amd.com/gpu: <number-of-gpus>
+          #   nvidia.com/gpu: <number-of-gpus>
+          nvidia.com/gpu: 1
 ```
+
+See [adding more nodes](/docs/deployment/components/nodes) for more information on adding additional CPU or GPU nodes to your cluster.
 
 ### artifactRepository
 This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which includes Workflow log storage. Onepanel currently supports any S3 compatible artifact repository such as AWS, GCS and Minio.
