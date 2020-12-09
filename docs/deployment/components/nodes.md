@@ -54,14 +54,14 @@ az aks nodepool add --resource-group my-resource-group --cluster-name my-cluster
 
 ```bash
 eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --region <region> --node-zones <<region>a> \
-    --nodes 0  \
-    --node-type <node-type> \
-    --node-volume-size 100 \
-    --nodes-min 0 \
-    --nodes-max <nodes-max> \
-    --asg-access \
-    --ssh-access \
-    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>"
+  --nodes 0  \
+  --node-type <node-type> \
+  --node-volume-size 100 \
+  --nodes-min 0 \
+  --nodes-max <nodes-max> \
+  --asg-access \
+  --ssh-access \
+  --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>"
 ```
 
 :::note 
@@ -72,14 +72,14 @@ For example, to add a node group with 1 Tesla V100 GPU that scales from 0 to 5 n
 
 ```bash {3,6,9}
 eksctl create nodegroup --name mygpunodegroup --cluster my-cluster-name --region us-west-1 --node-zones us-west-1a \
-    --nodes 0  \
-    --node-type p3.2xlarge \
-    --node-volume-size 100 \
-    --nodes-min 0 \
-    --nodes-max 5 \
-    --asg-access \
-    --ssh-access \
-    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=p3.2xlarge"
+  --nodes 0  \
+  --node-type p3.2xlarge \
+  --node-volume-size 100 \
+  --nodes-min 0 \
+  --nodes-max 5 \
+  --asg-access \
+  --ssh-access \
+  --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=p3.2xlarge"
 ```
 
 </TabItem>
