@@ -420,10 +420,6 @@ Next, get the kubeconfig by running
     --gpu-device-plugins nvidia
   ```
 
-  :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
-  :::
-
   </TabItem>
   <TabItem value="eks">
 
@@ -433,21 +429,15 @@ Next, get the kubeconfig by running
     --gpu-device-plugins nvidia
   ```
 
-  :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
-  :::
-
   </TabItem>
   <TabItem value="gke">
 
   ```bash
   opctl init --provider gke \
-    --artifact-repository-provider s3
+    --artifact-repository-provider s3 \
+    --gpu-device-plugins nvidia
   ```
 
-  :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
-  :::
   </TabItem>
 
   <TabItem value="minikube">
@@ -457,10 +447,6 @@ Next, get the kubeconfig by running
       --enable-metallb \
       --artifact-repository-provider s3
   ```
-
-  :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
-  :::
 
   </TabItem>
 
@@ -478,6 +464,10 @@ Next, get the kubeconfig by running
 
   </TabItem>
   </Tabs>
+
+  :::note
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create).
+  :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
