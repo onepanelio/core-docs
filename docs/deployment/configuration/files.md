@@ -55,13 +55,18 @@ application:
     # For Kubernetes 1.16.x, use "beta.kubernetes.io/instance-type"
     label: node.kubernetes.io/instance-type
     # These are the machine type options that will be available in Onepanel
-    # `name` can be any user friendly name, `value` should be the instance type in your cloud provider
+    #   `name` can be any user friendly name
+    #   `value` should be the instance type in your cloud provider
+    #   `resources.limits` should only be set if the node pool has GPUs
     # The first option will be used as default.
     options:
       - name: 'CPU: X, RAM: Z GB'
         value: <instance-type-name-1>
       - name: 'CPU: X, GPU: Y, RAM: Z GB'
         value: <instance-type-name-2>
+        resources:
+          limits:
+            nvidia.com/gpu: 1
   # The kubernetes cluster where Onepanel will be deployed.
   # Valid values: minikube, microk8s, aks, eks, gke
   provider: aks
