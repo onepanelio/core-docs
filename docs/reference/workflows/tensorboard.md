@@ -32,7 +32,7 @@ templates:
             name: tensorboard
 ```
 
-Full TensorFlow and TensorBoard example:
+### Complete Workflow example
 
 :::note
 This example is also available in the application in **Workflows** under **TensorFlow Training**.
