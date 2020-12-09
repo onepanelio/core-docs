@@ -34,11 +34,21 @@ templates:
 
 Full TensorFlow and TensorBoard example:
 
-```yaml {30-32,38,40-42,44-55}
+:::note
+This example is also available in the application in **Workflows** under **TensorFlow Training**.
+:::
+
+```yaml {38,44,46-48,50-64,66-74}
+entrypoint: main
 templates:
+  - name: main
+    dag:
+      tasks:
+      - name: train-model
+        template: tf-dense
   - name: tf-dense
     script:
-      image: 'tensorflow/tensorflow:2.3.0'
+      image: tensorflow/tensorflow:2.3.0
       command:
         - python
         - '-u'
@@ -75,8 +85,9 @@ templates:
                   callbacks=[tensorboard_callback])
       volumeMounts:
         # TensorBoard sidecar will automatically mount this volume
-        - name: tf-dense-output
+        - name: output
           mountPath: /mnt/output
+
     sidecars:
       - name: tensorboard
         image: 'tensorflow/tensorflow:2.3.0'
@@ -92,6 +103,16 @@ templates:
         ports:
           - containerPort: 6006
             name: tensorboard
+
+volumeClaimTemplates:
+  # Provision a volume that can be shared between main container and TensorBoard side car
+  - metadata:
+      name: output
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 2Gi
 ```
 
 ## Launching TensorBoard
