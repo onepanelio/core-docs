@@ -59,11 +59,12 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Managing components',
+      label: 'Management',
       collapsed: false,
       items: [
         'deployment/components/add',
         'deployment/components/upgrade',
+        'deployment/components/nodes',
       ]    
     },
     { 
