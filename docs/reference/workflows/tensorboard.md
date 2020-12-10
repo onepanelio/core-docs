@@ -16,11 +16,11 @@ templates:
     sidecars:
       - name: tensorboard                   
         # Use Tensorflow docker image    
-        image: 'tensorflow/tensorflow:2.3.0'
+        image: tensorflow/tensorflow:2.3.0
         command:
           - sh
           - '-c'
-        # Indicates that this is a visualization sidecar
+        # Indicates that this is a interactive/visualization sidecar
         env:
           - name: ONEPANEL_INTERACTIVE_SIDECAR
             value: 'true'
@@ -38,7 +38,7 @@ templates:
 This example is also available in the application in **Workflows** under **TensorFlow Training**.
 :::
 
-```yaml {38,44,46-48,50-64,66-74}
+```yaml {42,48,50-52,54-68,70-78}
 arguments:
   parameters:
   - name: epochs
@@ -94,7 +94,7 @@ templates:
 
     sidecars:
       - name: tensorboard
-        image: 'tensorflow/tensorflow:2.3.0'
+        image: tensorflow/tensorflow:2.3.0
         command:
           - sh
           - '-c'
