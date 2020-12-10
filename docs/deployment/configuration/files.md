@@ -184,9 +184,9 @@ A common `label` to identify these is `node.kubernetes.io/instance-type` which m
 :::important
 **Kubernetes 1.16.x** you will need to use `beta.kubernetes.io/instance-type` instead.
 
-**EKS 1.16.x:** make sure to use `beta.kubernetes.io/instance-type` label in tags when adding node groups.
+**AKS and GKE 1.17.x:** you may need to use `beta.kubernetes.io/instance-type` as well.
 
-**AKS 1.17.x:** there seems to be a bug with this auto scaler, so you need to use `beta.kubernetes.io/instance-type`.
+**EKS 1.16.x:** make sure to use `beta.kubernetes.io/instance-type` label in tags when adding node groups.
 :::
 
 You can see all labels on your nodes by running:
