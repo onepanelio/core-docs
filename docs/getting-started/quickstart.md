@@ -41,7 +41,7 @@ Let's get started by creating a Kubernetes cluster in one of the following cloud
 <TabItem value="aks">
 
 :::important
-Make sure [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) (`az`) is installed before proceeding.
+Make sure the **latest version** of [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) (`az`) is installed before proceeding.
 :::
 
 Run this `az` command to create a bare minimum cluster with 2 `Standard_D4s_v3` nodes:
@@ -70,7 +70,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
 <TabItem value="eks">
 
 :::important
-Make sure [Amazon EKS CLI](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) (`eksctl`) (version 0.30.0 or higher) is installed before proceeding.
+Make sure the **latest version** of [Amazon EKS CLI](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) (`eksctl`) is installed before proceeding.
 :::
 
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
@@ -107,7 +107,7 @@ eksctl utils update-cluster-logging --enable-types all
 <TabItem value="gke">
 
 :::important
-Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is installed before proceeding.
+Make sure the **latest version** of [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is installed before proceeding.
 :::
 
 Run this `gcloud` command to create a bare minimum cluster with 2 `n1-standard-4` nodes:
