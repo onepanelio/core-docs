@@ -4,8 +4,8 @@ sidebar_label: Workflow Templates
 description: Workflow Templates for training models, ETL tasks and more on Onepanel 
 ---
 
-:::tip
-See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workflows) for a list of ready to use Workflow Templates. You can also use these as reference for defining youur own Workflow Templates.
+:::important
+Onepanel's Workflows are based on [Argo Workflows](https://github.com/argoproj/argo). Most functionality is the same, one exception is that Onepanel Workflows entrypoint should always be a [DAG template](https://github.com/argoproj/argo/tree/master/examples#steps) and **Step templates** are not supported.
 :::
 
 ## Getting started
