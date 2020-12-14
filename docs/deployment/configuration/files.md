@@ -245,7 +245,11 @@ nodePool:
 See [adding more nodes](/docs/deployment/components/nodes) for more information on adding additional CPU or GPU nodes to your cluster.
 
 ### artifactRepository
-This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which includes Workflow log storage. Onepanel currently supports any S3 compatible artifact repository such as AWS, GCS and Minio.
+This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which is used to store logs, models and any other output you designate. Onepanel will automatically upload and download files from this object storage.
+
+:::note
+Currently only S3 compatible object storages such as AWS, GCS and Minio are supported
+:::
 
 Here's an example AWS S3 configuration:
 
@@ -283,6 +287,7 @@ artifactRepository:
     endpoint: my-minio-endpoint.default:9000
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
+    insecure: true  # Set this to true if Minio is deployed internally into the Cluster
 ```
 
 <!-- ```yaml
@@ -314,10 +319,6 @@ gcloud iam service-accounts keys create key.json \
    --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
 ```
 ::: -->
-
-:::important
-Onepanel Workflows will automatically upload or download artifacts from `artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}`. See [Workflow artifacts](/docs/reference/workflows/templates#artifacts) for more information.
-:::
 
 ### certManager
 If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.
