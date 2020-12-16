@@ -87,20 +87,6 @@ postExecutionWorkflow:
 
 ## Sections
 
-### Workspace Access on Minikube
-
-When running workspaces on Minikube, extra steps are necessary to properly access the workspace.
-DNS on a local machine needs extra updates.
-
-The following needs to be added to `/etc/hosts`
-```text
-<workspacename>--<namespace>.app.example.com  <minikube-ip>
-```
-So if you create a workspace with the name "cvat" under namespace "default".
-```text
-cvat--default.app.example.com  <minikube-ip>
-```
-
 ### arguments (optional)
 #### parameters
 

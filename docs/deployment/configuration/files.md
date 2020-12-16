@@ -49,20 +49,24 @@ application:
   # HTTP or HTTPS - Do not change, determined by `opctl init --enable-https`
   # CLI flag: --enable-https
   insecure: false
-  # Node pool or group label keys and values used for AutoScaling and for NodeSelectors
-  # The provider will set these label key and values on your nodes automatically
-  # These can also be customized depending on your provider
+  # Node pool key and values used for AutoScaling
   nodePool:
-    label: <node-pool-label>
-    # Add more by following the format:
-    # - name: <name>
-    #   value: <value>
+    # Cloud providers will automatically set label key as "node.kubernetes.io/instance-type" on all nodes
+    # For Kubernetes 1.16.x, use "beta.kubernetes.io/instance-type"
+    label: node.kubernetes.io/instance-type
+    # These are the machine type options that will be available in Onepanel
+    #   `name` can be any user friendly name
+    #   `value` should be the instance type in your cloud provider
+    #   `resources.limits` should only be set if the node pool has GPUs
     # The first option will be used as default.
     options:
-    - name: 'Use friendly name 1'
-      value: <value-1>
-    - name: 'Use friendly name 2'
-      value: <value-2>
+      - name: 'CPU: X, RAM: Z GB'
+        value: <instance-type-name-1>
+      - name: 'CPU: X, GPU: Y, RAM: Z GB'
+        value: <instance-type-name-2>
+        resources:
+          limits:
+            nvidia.com/gpu: 1
   # The kubernetes cluster where Onepanel will be deployed.
   # Valid values: minikube, microk8s, aks, eks, gke
   provider: aks
@@ -113,22 +117,24 @@ certManager:
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 database:
   # Name of database
-  # If using an external production database, use the name of that database.
-  # For in-cluster test database, use any name you like.
+  # If using a managed database, use the name of that database.
+  # For in-cluster database, leave as "onepanel".
   databaseName: onepanel
   # Do not change, only `postgres` driver is supported at this time.
   driverName: postgres
-  # Database host - use `postgres` for in-cluster test database
-  host: <database-ip-or-hostname>
+  # Database host
+  # If using a managed databases, use the database host name.
+  # Leave as `postgres` for in-cluster database.
+  host: postgres
   # Database password
-  # If using an external production database, use the password for that database.
-  # For in-cluster test database, use any password you like.
+  # If using a managed database, use the password for that database.
+  # For in-cluster database, pick any password.
   password: <password>
   # Database port
   port: 5432
   # Database username
-  # If using an external production database, use the username for that database.
-  # For in-cluster test database, use any username you like.
+  # If using a managed database, use the username for that database.
+  # For in-cluster database, pick any username.
   username: <username>
 ```
 <!-- 
@@ -176,7 +182,11 @@ Depending on your provider, these are either called node pools or node groups. T
 A common `label` to identify these is `node.kubernetes.io/instance-type` which most cloud providers automatically set. The value of this label is usually set to the instance type of the cloud provider.
 
 :::important
-In Kubernetes version 1.16.x, you may need to use `beta.kubernetes.io/instance-type` instead. If you are using EKS 1.16.x, make sure to use this label there as well when adding node groups.
+**Kubernetes 1.16.x** you will need to use `beta.kubernetes.io/instance-type` instead.
+
+**AKS and GKE 1.17.x:** you may need to use `beta.kubernetes.io/instance-type` as well.
+
+**EKS 1.16.x:** make sure to use `beta.kubernetes.io/instance-type` label in tags when adding node groups.
 :::
 
 You can see all labels on your nodes by running:
@@ -209,28 +219,37 @@ For example after running the `kubectl` command above, you may get the following
 
 ```bash {3}
 agentpool=nodepool1,
-beta.kubernetes.io/arch=amd64,
+kubernetes.io/arch=amd64,
 node.kubernetes.io/instance-type=Standard_D2s_v3,
-beta.kubernetes.io/os=linux,
-failure-domain.beta.kubernetes.io/region=eastus,
+kubernetes.io/os=linux,
 ```
 
-You can then use the label key/value pairs as follows:
+You can then use the label key/value pairs as follows. Note that setting `resources.limits` field is required for GPUs.
 
-```yaml {2,4-5}
+```yaml {2,4-5,8-13}
 nodePool:
-  label: node.kubernetes.io/instance-type  # node label key
+  label: node.kubernetes.io/instance-type     # node label key
   options:
-    - name: 'CPU: 2, RAM: 8GB'      # friendly name for instance
-      value: 'Standard_D2s_v3'      # node label value
-    - name: 'CPU: 4, RAM: 16GB'
-      value: Standard_D4s_v3
-    - name: 'GPU: 1xK80, CPU: 6, RAM: 56GB'
-      value: Standard_NC6
+    - name: 'CPU: 4, RAM: 16GB'               # friendly name for instance
+      value: m5.xlarge                        # node label value
+    - name: 'GPU: 1xV100, CPU: 8, RAM: 61GB'
+      value: p3.2xlarge
+      resources:
+        limits:
+          # Type and number of GPUs, possible values are:
+          #   amd.com/gpu: <number-of-gpus>
+          #   nvidia.com/gpu: <number-of-gpus>
+          nvidia.com/gpu: 1
 ```
+
+See [adding more nodes](/docs/deployment/components/nodes) for more information on adding additional CPU or GPU nodes to your cluster.
 
 ### artifactRepository
-This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which includes Workflow log storage. Onepanel currently supports any S3 compatible artifact repository such as AWS, GCS and Minio.
+This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which is used to store logs, models and any other output you designate. Onepanel will automatically upload and download files from this object storage.
+
+:::note
+Currently only S3 compatible object storages such as AWS, GCS and Minio are supported
+:::
 
 Here's an example AWS S3 configuration:
 
@@ -238,7 +257,7 @@ Here's an example AWS S3 configuration:
 artifactRepository:
   s3:
     accessKey: AKIAJSIE27KKMHXI3BJQ
-    bucket: pipelines.example.com
+    bucket: my-data-bucket
     endpoint: s3.amazonaws.com
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
@@ -252,7 +271,7 @@ Here's an example GCS configuration:
 artifactRepository:
   s3:
     accessKey: GOOG1EQPAXHU77377T6TGRYGD7NDV6AA3TFYIIKXP2RZLHI3DZB76FIFGDNLQ
-    bucket: pipelines.example.com
+    bucket: my-data-bucket
     endpoint: storage.googleapis.com
     region: us-west-2
     secretKey: S3hdxSL6HlPGTAAFZYxG/iaKhtlDHVCbyiIBRPxq
@@ -264,16 +283,17 @@ And example Minio configuration:
 artifactRepository:
   s3:
     accessKey: AKIAJSIE27KKMHXI3BJQ
-    bucket: my-bucket
+    bucket: my-data-bucket
     endpoint: my-minio-endpoint.default:9000
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
+    insecure: true  # Set this to true if Minio is deployed internally into the Cluster
 ```
 
 <!-- ```yaml
 artifactRepository:
  gcs:
-    bucket: mygreatbucket
+    bucket: my-data-bucket
     endpoint: storage.googleapis.com
     insecure: false
     keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
@@ -299,10 +319,6 @@ gcloud iam service-accounts keys create key.json \
    --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
 ```
 ::: -->
-
-:::important
-Onepanel Workflows will automatically upload or download artifacts from `artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}`. See [Workflow artifacts](/docs/reference/workflows/templates#artifacts) for more information.
-:::
 
 ### certManager
 If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.

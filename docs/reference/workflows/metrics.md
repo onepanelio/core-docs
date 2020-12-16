@@ -3,14 +3,18 @@ title: Persisting training metrics
 sidebar_label: Persisting training metrics
 description: Onepanel - Persisting training metrics
 ---
-## Persisting metrics
+
+## Persisting metrics metrics in tasks
 
 You can persist metrics into as JSON in a special file `/tmp/sys-metrics.json`. The JSON syntax is as an array as follows:
 
 ```json
 [
-    {"name": "<metric-1-name>", "value": "metric-1-value"},
-    {"name": "<metric-2-name>", "value": "metric-2-value"},
+    {
+      "name": "accuracy", // Name of metric, should be string
+      "value": 0.98,      // Value of metric, should be a `number`
+      "format": ""        // Optional, valid values: "" or "%"
+    },
     ...
 ]
 ```
@@ -94,124 +98,122 @@ templates:
         print(task_a_metrics)
 ```
 
-## Advance example
+## Persisting metrics in Workflows
 
-This example shows a Workflow that saves metrics (`accuracy` and `loss`) in two different tasks **A** and **B**, and then compares the accuracies in a subsequent task **C**, and finally sends a Slack notification of the metrics with the best accuracy.
+You can use Onepanel's [Python SDK](https://github.com/onepanelio/python-sdk#pip-install) to persist final metrics for a Workflow. These metrics are displayed in Workflow listing and detail pages and can also be edited using the web UI.
+
+The Python SDK snippet looks like this:
+
+```python
+# Set metrics variable to be passed into Onepanel SDK
+metrics = [
+    {'name': 'accuracy', 'value': 0.981},
+    {'name': 'loss', 'value': 0.018}
+]
+
+# Configure API authorization
+configuration = onepanel.core.api.Configuration(
+    host = '<api-url>',
+    api_key = {
+        'authorization': '<token>'
+    }
+)
+configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# Call SDK method to save metrics
+with onepanel.core.api.ApiClient(configuration) as api_client:
+    api_instance = onepanel.core.api.WorkflowServiceApi(api_client)
+    namespace = '<namespace>'
+    uid = '<workflow-uid>'
+    body = onepanel.core.api.AddWorkflowExecutionsMetricsRequest()
+    body.metrics = metrics
+    try:
+        api_response = api_instance.add_workflow_execution_metrics(namespace, uid, body)
+        print('Metrics added.')
+    except ApiException as e:
+        print("Exception when calling WorkflowServiceApi->add_workflow_execution_metrics: %s\n" % e)
+```
+
+Here's a full Python script example that installs Onepanel's SDK and persists metrics in a Workflow:
+
+```python {7-8,10-13,38-68}
+import os
+import datetime
+import subprocess
+import sys
+import tensorflow as tf
+
+# Install onepanel-sdk
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'onepanel-sdk==0.16.0b10'])
+
+import onepanel.core.api
+from onepanel.core.api.models.metric import Metric
+from onepanel.core.api.rest import ApiException
+from onepanel.core.api.models import Parameter
+
+mnist = tf.keras.datasets.mnist
+
+(x_train, y_train),(x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+def create_model():
+  return tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(input_shape=(28, 28)),
+    tf.keras.layers.Dense(512, activation='relu'),
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(10, activation='softmax')
+  ])
+
+model = create_model()
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+history = model.fit(x=x_train, 
+          y=y_train, 
+          epochs=10, 
+          validation_data=(x_test, y_test))
+
+# Set metrics variable to be passed into Onepanel SDK
+metrics = [
+    {'name': 'accuracy', 'value': history.history['accuracy'][-1]},
+    {'name': 'loss', 'value': history.history['loss'][-1]}
+]
+
+# Get mounted service account token to use as API Key
+with open('/var/run/secrets/kubernetes.io/serviceaccount/token') as f:
+    token = f.read()
+
+# Configure API authorization
+configuration = onepanel.core.api.Configuration(
+    host = os.getenv('ONEPANEL_API_URL'),
+    api_key = {
+        'authorization': token
+    }
+)
+configuration.api_key_prefix['authorization'] = 'Bearer'
+
+# Call SDK method to save metrics
+with onepanel.core.api.ApiClient(configuration) as api_client:
+    api_instance = onepanel.core.api.WorkflowServiceApi(api_client)
+    namespace = '{{workflow.namespace}}'
+    uid = '{{workflow.name}}'
+    body = onepanel.core.api.AddWorkflowExecutionsMetricsRequest()
+    body.metrics = metrics
+    try:
+        api_response = api_instance.add_workflow_execution_metrics(namespace, uid, body)
+        print('Metrics added.')
+    except ApiException as e:
+        print("Exception when calling WorkflowServiceApi->add_workflow_execution_metrics: %s\n" % e)
+```
+
+You can use the above example in a Workflow script template:
 
 ```yaml
-entrypoint: main
-templates:
-  - name: main
-    dag:
-      tasks:
-      - name: A
-        template: task-a-script
-      - name: B
-        template: task-b-script
-      - name: C
-        dependencies: [A, B]
-        template: task-c-script
-        arguments:
-          artifacts:
-          - name: task-a-metrics
-            from: "{{tasks.A.outputs.artifacts.sys-metrics}}"
-          - name: task-b-metrics
-            from: "{{tasks.B.outputs.artifacts.sys-metrics}}"
-      - name: notify-in-slack
-        dependencies: [C]
-        template: slack-notify-success
-        arguments:
-          artifacts:
-          - name: task-c-metrics
-            from: "{{tasks.C.outputs.artifacts.sys-metrics}}"
-  - name: task-a-script
-    script:
-      image: python:3.7-alpine
-      command: [python, '-u']
-      source: |
-        import json
-        
-        # Training code here
-        
-        # JSON format for metrics
-        metrics = [
-          {'name': 'accuracy', 'value': 0.981},
-          {'name': 'loss', 'value': 0.018},
-        ]
-        
-        # Write metrics to `/tmp/sys-metrics.json`
-        with open('/tmp/sys-metrics.json', 'w') as f:
-            json.dump(metrics, f)
-        
-        # Print to logs (optional)
-        print(metrics)
-  
-  - name: task-b-script
-    script:
-      image: python:3.7-alpine
-      command: [python, '-u']
-      source: |
-        import json
-        
-        # Training code here
-        
-        # JSON format for metrics
-        metrics = [
-          {'name': 'accuracy', 'value': 0.972},
-          {'name': 'loss', 'value': 0.027},
-        ]
-        
-        # Write metrics to `/tmp/sys-metrics.json`
-        with open('/tmp/sys-metrics.json', 'w') as f:
-            json.dump(metrics, f)
-            
-        # Print to logs (optional)
-        print(metrics)
-  
-  - name: task-c-script
-    inputs:
-      artifacts:
-      - name: task-a-metrics
-        path: /tmp/task-a-metrics.json
-      - name: task-b-metrics
-        path: /tmp/task-b-metrics.json
-    script:
-      image: python:3.7-alpine
-      command: [python, '-u']
-      source: |
-        import json
-        
-        # Load Task A metrics
-        with open('/tmp/task-a-metrics.json') as f:
-            task_a_metrics = json.load(f)
-        
-        # Load Task B metrics
-        with open('/tmp/task-b-metrics.json') as f:
-            task_b_metrics = json.load(f)
-        
-        # Pick the metrics with best accuracy
-        task_a_accuracy = [m['value'] for m in task_a_metrics if m['name'] == 'accuracy'][0]
-        task_b_accuracy = [m['value'] for m in task_b_metrics if m['name'] == 'accuracy'][0]
-
-        if task_a_accuracy > task_b_accuracy:
-          metrics = task_a_metrics
-        else:
-          metrics = task_b_metrics
-        
-        # Write to metrics to `/tmp/sys-metrics.json`
-        with open('/tmp/sys-metrics.json', 'w') as f:
-            json.dump(metrics, f)
-            
-        # Print to logs (optional)
-        print(metrics)
-  
-  - name: slack-notify-success
-    container:
-      image: technosophos/slack-notify
-      command: [sh,-c]
-      args: ['SLACK_USERNAME=Worker SLACK_TITLE="{{workflow.name}} metrics" SLACK_MESSAGE=$(cat /tmp/task-c-metrics.json)} ./slack-notify']
-    inputs:
-      artifacts:
-      - name: task-c-metrics
-        path: /tmp/task-c-metrics.json
+- name: metrics-example
+  script: 
+    image: tensorflow/tensorflow:2.3.0
+    command: [python, '-u']
+    source: |
+      <INSERT ABOVE SCRIPT HERE>
 ```

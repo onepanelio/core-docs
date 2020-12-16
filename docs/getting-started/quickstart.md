@@ -40,8 +40,8 @@ Let's get started by creating a Kubernetes cluster in one of the following cloud
 }>
 <TabItem value="aks">
 
-:::note
-Make sure [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) (`az`) is installed before proceeding.
+:::important
+Make sure the **latest version** of [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) (`az`) is installed before proceeding.
 :::
 
 Run this `az` command to create a bare minimum cluster with 2 `Standard_D4s_v3` nodes:
@@ -66,25 +66,11 @@ You can then get access credentials by running:
 az aks get-credentials --resource-group <resource-group> --name <cluster-name> --admin
 ```
 
-You can also add additional auto-scaling node pools to the cluster as follows:
-
-```bash
-az aks nodepool add --resource-group <resource-group> --cluster-name <cluster-name> \
-  --name <nodepool-name> \
-  --node-vm-size <node-vm-size> \
-  --enable-cluster-autoscaler \
-  --node-count 1 \
-  --min-count 0 \
-  --max-count <max-count>
-```
-
-In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
-
 </TabItem>
 <TabItem value="eks">
 
-:::note
-Make sure [Amazon EKS CLI](https://eksctl.io/introduction/#installation) (`eksctl`) (version 0.30.0 or higher) is installed before proceeding.
+:::important
+Make sure the **latest version** of [Amazon EKS CLI](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) (`eksctl`) is installed before proceeding.
 :::
 
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
@@ -101,6 +87,10 @@ eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a
     --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge"
 ```
 
+:::note 
+In order to [support scale to and from zero](https://github.com/aws/containers-roadmap/issues/724), we need to use EKS unmanaged nodes. These do not show up in EKS console but you can view them by going to **EC2** > **Auto Scaling groups**.
+:::
+
 The `eksctl` command above will automatically retrieve your cluster's access credentials but you can also get them by running:
 
 ```bash
@@ -113,31 +103,11 @@ We also recommend enabling CloudWatch monitoring as follows:
 eksctl utils update-cluster-logging --enable-types all
 ```
 
-You can also add additional auto-scaling node groups to the cluster as follows:
-
-```bash
-eksctl create nodegroup --name <nodegroup-name> --cluster <cluster-name> --region <region> --node-zones <<region>a> \
-    --nodes 0  \
-    --node-type <node-type> \
-    --node-volume-size 100 \
-    --nodes-min 0 \
-    --nodes-max 5 \
-    --asg-access \
-    --ssh-access \
-    --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=<node-type>"
-```
-
-:::note 
-In order to [support scale to and from zero](https://github.com/aws/containers-roadmap/issues/724), we need to use EKS unmanaged nodes. These do not show up in EKS console but you can view them by going to **EC2** > **Auto Scaling groups**.
-:::
-
-In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
-
 </TabItem>
 <TabItem value="gke">
 
-:::note
-Make sure [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is installed before proceeding.
+:::important
+Make sure the **latest version** of [Google Cloud SDK](https://cloud.google.com/sdk/install) (`gcloud`) is installed before proceeding.
 :::
 
 Run this `gcloud` command to create a bare minimum cluster with 2 `n1-standard-4` nodes:
@@ -160,21 +130,6 @@ The command above will automatically retrieve your cluster's access credentials 
 ```
 gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
-
-You can also add additional auto-scaling node pools to the cluster as follows:
-
-```bash
-gcloud container node-pools create <node-pool-name> --cluster <cluster-name> --zone <zone> \
-  --machine-type <machine-type> \
-  --disk-size 100 \
-  --num-nodes 0 \
-  --min-nodes 0 \
-  --max-nodes 5 \
-  --enable-autoscaling \
-  --accelerator "type=<type>,count=<count>"  # optional, example: "type=nvidia-tesla-v100,count=1"
-```
-
-In step <strong>1.3</strong> below, you can configure Onepanel to automatically scale these nodes as needed.
 
 </TabItem>
 <TabItem value="minikube">
@@ -343,6 +298,10 @@ Next, get the kubeconfig by running
 </TabItem>
 </Tabs>
 
+:::tip
+Once you are done with these quick start steps, see [adding more nodes](/docs/deployment/components/nodes) to add additional CPU or GPU nodes to your cluster.
+:::
+
 ## Step 1: Install Onepanel
 
 1. Download the latest `opctl` for your operating system from [our release page](https://github.com/onepanelio/core/releases/latest).
@@ -420,10 +379,6 @@ Next, get the kubeconfig by running
     --gpu-device-plugins nvidia
   ```
 
-  :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
-  :::
-
   </TabItem>
   <TabItem value="eks">
 
@@ -433,21 +388,15 @@ Next, get the kubeconfig by running
     --gpu-device-plugins nvidia
   ```
 
-  :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
-  :::
-
   </TabItem>
   <TabItem value="gke">
 
   ```bash
   opctl init --provider gke \
-    --artifact-repository-provider s3
+    --artifact-repository-provider s3 \
+    --gpu-device-plugins nvidia
   ```
 
-  :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
-  :::
   </TabItem>
 
   <TabItem value="minikube">
@@ -457,10 +406,6 @@ Next, get the kubeconfig by running
       --enable-metallb \
       --artifact-repository-provider s3
   ```
-
-  :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create). 
-  :::
 
   </TabItem>
 
@@ -478,6 +423,10 @@ Next, get the kubeconfig by running
 
   </TabItem>
   </Tabs>
+
+  :::note
+  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create).
+  :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
@@ -555,7 +504,7 @@ Next, get the kubeconfig by running
 7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
   :::note
-  If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, reach out in [GitHub discussions](https://github.com/onepanelio/core/discussions).
+  If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, reach out in [Slack](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or [GitHub discussions](https://github.com/onepanelio/core/discussions).
   :::
 
 8. Use the following command to get your auth token to log into Onepanel:

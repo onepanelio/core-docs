@@ -20,7 +20,9 @@ module.exports = {
         'getting-started/concepts/namespaces',
         'getting-started/concepts/workspaces',
         'getting-started/concepts/workflows',
+        'getting-started/concepts/labels',
         'getting-started/concepts/environment-variables',
+        'getting-started/concepts/sdk',
       ]
     },
     {
@@ -57,11 +59,12 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Managing components',
+      label: 'Management',
       collapsed: false,
       items: [
         'deployment/components/add',
         'deployment/components/upgrade',
+        'deployment/components/nodes',
       ]    
     },
     { 
@@ -97,8 +100,12 @@ module.exports = {
       items: [
         'reference/workflows/execute',
         'reference/workflows/templates',
-        'reference/workflows/metrics',
+        'reference/workflows/artifacts',
         'reference/workflows/create',
+        'reference/workflows/metrics',
+        'reference/workflows/tensorboard',
+        // 'reference/workflows/hyperparamtuning',
+        'reference/workflows/troubleshooting',
       ]
     },
     { 

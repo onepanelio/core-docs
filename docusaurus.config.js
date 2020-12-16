@@ -37,7 +37,7 @@ module.exports = {
           className: 'header-community-label',
         },
         {
-          href: 'https://github.com/onepanelio/core/discussions',
+          href: 'https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg',
           position: 'right',
           className: 'header-icon-link header-slack-link',
         },
