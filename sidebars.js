@@ -21,7 +21,6 @@ module.exports = {
         'getting-started/concepts/workspaces',
         'getting-started/concepts/workflows',
         'getting-started/concepts/environment-variables',
-        'getting-started/concepts/minio'
       ]
     },
     {
@@ -54,6 +53,8 @@ module.exports = {
         'deployment/configuration/cli',
         'deployment/configuration/files',
         'deployment/configuration/tls',
+        'deployment/configuration/minio',
+        'deployment/configuration/nipio',
       ]
     },
     {
