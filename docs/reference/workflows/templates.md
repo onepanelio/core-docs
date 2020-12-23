@@ -87,6 +87,7 @@ If a parameter is defined, `name` and `value` are required.
     - `input.number` renders a textbox that only accepts numbers
     - `input.radio` renders radio buttons
     - `select.select` renders a dropdown
+    - `select.nodepool` renders a dropdown populated with the node pool options available. Use `default` for the value.
     - `textarea.textarea` renders a textarea
 - `options` define options if `type` is `select.select` or `input.radio`
 - `visibility` defines whether the parameter should be visible in Workflow execution form. Possible values are:
