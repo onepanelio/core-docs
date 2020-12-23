@@ -88,7 +88,7 @@ For how to set epochs, you can take a look at first model since both models are 
 
 Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
 
-***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
+**_Defaults_**: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 
 #### frcnn-res101-coco: 
@@ -100,7 +100,7 @@ For how to set epochs, you can take a look at first model since both models are 
 Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
 
 
-***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
+**_Defaults_**: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 #### frcnn-res101-lowp
 
@@ -119,7 +119,7 @@ For how to set epochs, you can take a look at first model since both models are 
 
 Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change batch_size.
 
-***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
+**_Defaults_**: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 #### ssd-mobilenet-v2-coco
 
@@ -131,7 +131,7 @@ This model is a good place to start if you don't have any specific model in mind
 
 Depending upon your data, you can set epochs to train your model. There is no standard value which can work for all datasets. You generally have to try different number of epochs to get the best model. Ideally, you do so by monitoring loss of your model while training. But if you are looking for a recommendation. Then, we recommend you set epochs as follows: (number of images / batch_size (default: 24)) * 1000. For instance, if you have 100 images, then your epochs will be 4000 (rounded). Note that the model will be trained using a pre-trained model, so you don't need to train as long as you would have to when not using the pre-trained model.
 
-***Defaults***: batch_size: 24, learning_rate: 0.004, epochs=10000
+**_Defaults_**: batch_size: 24, learning_rate: 0.004, epochs=10000
 
 Note that same instructions apply for **ssd-mobilenet-v1** and **ssd-mobilenet-lite**. The only difference is the backbone model (i.e mobilenet v1) that they use.
 
@@ -144,7 +144,7 @@ The process to train a Mask-RCNN model on CVAT is similar to the above process e
 
 ![MaskRCNN Workflow](/img/maskrcnn-training.png)
 
-***Parameters***: Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass the correct epochs according to your data. Mask-RCNN is a very deep model that takes too much time to train and get enough accuracy. We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
+**_Parameters_**: Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass the correct epochs according to your data. Mask-RCNN is a very deep model that takes too much time to train and get enough accuracy. We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
 
 ```bash
 stage-1-epochs=1
