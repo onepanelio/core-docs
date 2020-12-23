@@ -31,7 +31,7 @@ Once you have annotated enough data, you can train a model to pre-annotate the r
   Note you can easily add your own models as well. See our [documentation](/docs/getting-started/use-cases/computervision/annotation/cvat/adding_custom_model) for more information on adding custom models. 
   :::
 
-5. Update hyper-parameters and settings as per your requirements. Most of the parameters visible above are related to the model (MaskRCNN) and system (i.e machine). For this guide, you can change `num-steps` from default 10000 to 1000. You can also select the checkpoint path from previously trained model. You can leave it empty if you don't have an appropriate, previously trained model.
+5. Update hyper-parameters and settings as per your requirements. Most of the above parameters are related to the model (MaskRCNN) and system (i.e. machine type, machine image). For this guide, you can change `num-steps` from default 10000 to 1000. You can also select the checkpoint path from a previously trained model. You can leave it empty if you don't have an appropriate, previously trained model. _Note:_ You should select the machine image accordingly; if you choose a GPU machine with a CPU image, the training workflow will not take advantage of the GPU hardware.
 
 6. Click **Submit**. This will execute the Onepanel Workflow for selected model. You can see Workflow logs by going to Workflow execution page. You can find the URL for the same in the notification card.
   
@@ -144,14 +144,15 @@ The process to train a Mask-RCNN model on CVAT is similar to the above process e
 
 ![MaskRCNN Workflow](/img/maskrcnn-training.png)
 
-***Parameters***: Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
-We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
+***Parameters***: Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass the correct epochs according to your data. Mask-RCNN is a very deep model that takes too much time to train and get enough accuracy. We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
 
 ```bash
 stage-1-epochs=1
 stage-2-epochs=2
 stage-3-epochs=3
 ```
+
+You should notice that epochs at every stage are cumulative; this means that if you use `stage-1-epochs=1`, `stage-2-epochs=2` and `stage-3-epochs=3` as hyperparameters, you will only train the network one epoch at each stage with total epochs of 3.
 
 If you have few images (few hundreds), then we recommend you set total epochs (stage1+stage2+stage3) less than 10. We advise you set more epochs for stage1 than others. As your data size increases or the complexity of your data increases you might want to increase epochs. 
 
