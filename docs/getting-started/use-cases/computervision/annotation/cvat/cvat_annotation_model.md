@@ -44,7 +44,7 @@ You can use any of the models that we support for TensorFlow Object Detection AP
 
 ![TensorFlow Object Detection Workflow](/img/tf-object-detection.png)
 
-### Hyperparameters
+### TFOD hyperparameters
 
 You can specify some arguments in the `Hyperparameters` field seperated by new line. 
 
@@ -126,7 +126,6 @@ Depending upon your data, you can set epochs to train your model. There is no st
 
 Note that same instructions apply for **ssd-mobilenet-v1** and **ssd-mobilenet-lite**. The only difference is the backbone model (i.e mobilenet v1) that they use.
 
-
 ## MaskRCNN model
 
 MaskRCNN is a popular model for segmentation tasks. We use [this](https://github.com/matterport/Mask_RCNN) implementation of MaskRCNN for training and inference.
@@ -135,7 +134,7 @@ The process to train a Mask-RCNN model on CVAT is similar to the above process e
 
 ![MaskRCNN Workflow](/img/maskrcnn-training.png)
 
-### Hyperparameters 
+### MaskRCNN hyperparameters 
 
 Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
 We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
