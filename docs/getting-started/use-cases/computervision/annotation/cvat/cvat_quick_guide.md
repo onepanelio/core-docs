@@ -76,7 +76,7 @@ Once you have created a new task, you can start annotating your data. CVAT suppo
   ![](/img/cvat_open.png)
 
 2. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
-    - **Bounding box**:
+    - **Bounding boxes**:
     Select Box from the left sidebar and press N to start annotating once done, press N to finish annotation. Sometimes N will draw `rectangle shape` and sometimes it will draw `rectangle track`. In order to ensure you have the right one, draw one box by manually selecting Shape or Track from the UI. Once you manually select type of box from the UI, it will draw what you selected for the box everytime you press N.
       ![Annotation](/img/cvat_draw_box.png)
 
@@ -87,8 +87,5 @@ Once you have created a new task, you can start annotating your data. CVAT suppo
 3. Press `ctrl` + `s` to save your task.
   :::tip
   It is highly recommended that you dump your annotation periodically. In case of any failure, this can be used to recover the tasks.
-  :::
-  :::note
-  Note that you can use pre-trained models for pre-annotation of your frames. This will drastically reduce time it takes for annotation. For more information on pre-annotation, see section 4.
   :::
 
