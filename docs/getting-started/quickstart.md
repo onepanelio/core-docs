@@ -97,7 +97,11 @@ The `eksctl` command above will automatically retrieve your cluster's access cre
 eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
 ```
 
-If you want to give admin access to this cluster after creation, see this [knowledge center article](https://aws.amazon.com/premiumsupport/knowledge-center/amazon-eks-cluster-access/).
+If you want to give another user admin access to this cluster after creation:
+
+```bash
+eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::<number>:user/<username> --group system:masters --username <username>
+```
 
 We also recommend enabling CloudWatch monitoring as follows:
 
