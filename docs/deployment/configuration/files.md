@@ -52,7 +52,8 @@ application:
   # Node pool key and values used for AutoScaling
   nodePool:
     # Cloud providers will automatically set label key as "node.kubernetes.io/instance-type" on all nodes
-    # For Kubernetes 1.16.x, use "beta.kubernetes.io/instance-type"
+    # For all Kubernetes 1.16.x versions, use "beta.kubernetes.io/instance-type"
+    # You would also need to use "beta.kubernetes.io/instance-type" for all versions of AKS and GKE 1.17.x
     label: node.kubernetes.io/instance-type
     # These are the machine type options that will be available in Onepanel
     #   `name` can be any user friendly name
