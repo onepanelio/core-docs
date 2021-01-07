@@ -249,7 +249,7 @@ See [adding more nodes](/docs/deployment/components/nodes) for more information 
 This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which is used to store logs, models and any other output you designate. Onepanel will automatically upload and download files from this object storage.
 
 :::note
-Currently only S3 compatible object storages such as AWS, GCS and Minio are supported
+Currently only S3 compatible object storages (AWS, GCS and Minio) and Azure Blog Storage are supported
 :::
 
 Here's an example AWS S3 configuration:
@@ -289,6 +289,19 @@ artifactRepository:
     region: us-west-2
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
     insecure: true  # Set this to true if Minio is deployed internally into the Cluster
+```
+
+and finally, Azure Blob Storage configuration example which is different from the S3 compatible object storages:
+
+```yaml
+artifactRepository:
+  abs:
+    # Name of Azure block storage container, example: my-container
+    container: my-data-container
+    # Azure storagee account key
+    storageAccountKey: VsMyhYqFiFK1rNj5cNhMd6h9m01pCIQaMTDXmUIEOeMDtjspm12HvKxLs1dxvag2RJ1sYTuPWMQBDKvmIGPWIZ==
+    # Azure storage account name
+    storageAccountName: my-storage-account-name
 ```
 
 <!-- ```yaml

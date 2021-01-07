@@ -381,7 +381,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
   ```bash
   opctl init --provider aks \
-    --artifact-repository-provider s3 \
+    --artifact-repository-provider abs \
     --gpu-device-plugins nvidia
   ```
 
