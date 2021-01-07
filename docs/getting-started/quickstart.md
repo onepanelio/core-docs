@@ -431,7 +431,11 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   </Tabs>
 
   :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create).
+  Currently, valid options for `--artifact-repository-provider` flag are `s3` and `abs`. 
+  
+  The `s3` option supports [Amazon S3](https://aws.amazon.com/s3/) and any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create).
+
+  The `abs` option supports [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/).
   :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
