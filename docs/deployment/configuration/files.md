@@ -274,7 +274,7 @@ artifactRepository:
     accessKey: GOOG1EQPAXHU77377T6TGRYGD7NDV6AA3TFYIIKXP2RZLHI3DZB76FIFGDNLQ
     bucket: my-data-bucket
     endpoint: storage.googleapis.com
-    region: us-west-2
+    region: us-west2 # Note the GCS specific region value
     secretKey: S3hdxSL6HlPGTAAFZYxG/iaKhtlDHVCbyiIBRPxq
 ```
 
@@ -286,7 +286,7 @@ artifactRepository:
     accessKey: AKIAJSIE27KKMHXI3BJQ
     bucket: my-data-bucket
     endpoint: my-minio-endpoint.default:9000
-    region: us-west-2
+    region: us-west-2 # The label for the Minio server location
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
     insecure: true  # Set this to true if Minio is deployed internally into the Cluster
 ```
