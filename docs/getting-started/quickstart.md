@@ -70,7 +70,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
 <TabItem value="eks">
 
 :::important
-Make sure the **latest version** of [Amazon EKS CLI](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) (`eksctl`) is installed before proceeding.
+Make sure version `0.36.0-rc.1` or higher of [Amazon EKS CLI](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) (`eksctl`) is installed before proceeding.
 :::
 
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
