@@ -35,7 +35,7 @@ templates:
 ### Complete example
 
 :::note
-This example is also available in the application in **Workflows** under **TensorFlow Training**.
+This example is also available in the application in **Workflows** > **Workflow Templates** > **TensorFlow Training**.
 :::
 
 ```yaml {42,48,50-52,54-68,70-78}
