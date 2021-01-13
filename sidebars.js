@@ -104,7 +104,7 @@ module.exports = {
         'reference/workflows/create',
         'reference/workflows/metrics',
         'reference/workflows/tensorboard',
-        // 'reference/workflows/hyperparamtuning',
+        'reference/workflows/hyperparamtuning',
         'reference/workflows/troubleshooting',
       ]
     },
