@@ -185,7 +185,7 @@ You can also view the corresponding TensorBoard by clicking **Open TensorBoard**
 
 ![](../../../static/img/hyperparamtuning-171133.png)
 
-## Persisting metrics and saving best model and parameters
+## Persisting best metrics, model and hyperparameters
 Although optional, you should persist the best metrics to your Workflow and save the best model and parameters to your object storage.
 
 Refer to the [MNIST example code](https://github.com/onepanelio/templates/tree/master/workflows/hyperparameter-tuning/mnist/main.py) for an example of how to do this.
