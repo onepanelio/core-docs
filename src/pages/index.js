@@ -133,7 +133,7 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/getting-started/quickstart')}>
-              GET STARTED
+              DEPLOY ONEPANEL
             </Link>
             <Link
               className={classnames(
