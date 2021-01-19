@@ -70,7 +70,7 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
 <TabItem value="eks">
 
 :::important
-Make sure the **latest version** of [Amazon EKS CLI](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) (`eksctl`) is installed before proceeding.
+Make sure version `0.36.0-rc.1` or higher of [Amazon EKS CLI](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) (`eksctl`) is installed before proceeding.
 :::
 
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
@@ -95,6 +95,12 @@ The `eksctl` command above will automatically retrieve your cluster's access cre
 
 ```bash
 eksctl utils write-kubeconfig --cluster=<cluster-name> --region <region>
+```
+
+If you want to give another user admin access to this cluster after creation:
+
+```bash
+eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::<number>:user/<username> --group system:masters --username <username>
 ```
 
 We also recommend enabling CloudWatch monitoring as follows:
@@ -375,7 +381,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
   ```bash
   opctl init --provider aks \
-    --artifact-repository-provider s3 \
+    --artifact-repository-provider abs \
     --gpu-device-plugins nvidia
   ```
 
@@ -425,7 +431,11 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   </Tabs>
 
   :::note
-  Currently, the only valid option for `--artifact-repository-provider` flag is `s3`, which supports any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create).
+  Currently, valid options for `--artifact-repository-provider` flag are `s3` and `abs`. 
+  
+  The `s3` option supports [Amazon S3](https://aws.amazon.com/s3/) and any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create).
+
+  The `abs` option supports [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/).
   :::
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.

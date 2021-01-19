@@ -40,6 +40,9 @@ containers:
   volumeMounts:
   - name: data
     mountPath: /data
+# Credentials to use for private Docker registries (optional)
+imagePullSecrets:
+- name: docker-credentials
 # Ports that need to be exposed
 ports:
 - name: http # a friendly name. Does NOT have to match the container port.
@@ -234,6 +237,28 @@ volumeMounts:
 :::note
 You can mount an number of volumes allowed by the cloud provider's machine type. There is generally a limit on how many disks you can attach based on the size of the machine.
 :::
+
+### imagePullSecrets
+
+You can set your private Docker registry credentials using the `imagePullSecrets` field.
+
+You will first need to store your credentials in a `docker-registry` secret:
+
+```bash
+kubectl create secret docker-registry docker-credentials --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+```
+
+For Docker Hub, you can set `docker-server` to `docker.io`.
+
+Then you can reference the secret in your template as follows:
+
+```yaml
+imagePullSecrets:
+- name: docker-credentials
+```
+
+See [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) for more information.
+
 
 ### ports
 

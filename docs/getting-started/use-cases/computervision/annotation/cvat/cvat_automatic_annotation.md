@@ -1,12 +1,10 @@
 ---
-title: Semi-automatic annotation with CVAT
+title: Using trained models for automatic annotation
 sidebar_label: Using trained models for automatic annotation
-description: Onepanel - vision AI automatic annotation
+description: Onepanel - Using trained models for automatic annotation
 ---
 
-You can use your TensorFlow models for Object Detection and Semantic Segmentation to pre-annotate your data. This can save you a lot of time since you don't have to annotate images from scratch. On Onepanel, you can leverage these features to pre-annotate your bounding boxes or polygon masks. You can also use Object Tracking to track objects in a sequence of frames.
-
-This page provides detailed information about pre-annotation in CVAT.
+You can use your trained models to pre-annotate your data. This can save you a lot of time since you don't have to annotate images from scratch. On Onepanel, you can leverage these features to pre-annotate your bounding boxes or polygon masks. You can also use Object Tracking to track objects in a sequence of frames.
 
 ## Uploading your model on CVAT
 
@@ -14,11 +12,13 @@ Before using any type of semi-automatic annotation, you will need to upload your
 
 1. To upload a model, click on **Models**, and then click on **Create new model**. 
 
-2. Click on select files and upload your model (`.pb` and `.csv` for TensorFlow Object Detection). Hit submit to upload the model. 
+2. Click on select files and upload your model. Hit submit to upload the model. 
   :::note
-  For TF Object Detection API and MaskRCNN, you will need two files- **model** and **classes.csv**. For TF Object Detection API, the model should be Tensorflow Frozen Graph (`.pb`). For MaskRCNN, it should be Keras model (`.h5`).
+  For TF Object Detection API and MaskRCNN, you will need two files the **model** and **classes.csv**. For TF Object Detection API, the model should be Tensorflow Frozen Graph (`.pb`). For MaskRCNN, it should be Keras model (`.h5`).
   :::
+
   ![Model Manager](/img/upload_model.PNG)
+  
   :::note
   Since Onepanel automatically syncs data from cloud storage to local directory. You can click on **Connected file share** to use models from S3. You will find trained models in `root -> output -> <cvat-task-name> -> <workflow-name> -> <workflow-execution-name>`. For TensorFlow Object Detection API, there will be one more folder before `workflow-execution-time` based on the model you trained (i.e `frcnn-res50-coco`).
   :::

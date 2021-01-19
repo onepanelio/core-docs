@@ -5,7 +5,7 @@ description: Workflow Templates for training models, ETL tasks and more on Onepa
 ---
 
 :::important
-Onepanel's Workflows are based on [Argo Workflows](https://github.com/argoproj/argo). Most functionality is the same, one exception is that Onepanel Workflows entrypoint should always be a [DAG template](https://github.com/argoproj/argo/tree/master/examples#steps) and **Step templates** are not supported.
+Onepanel's Workflows are based on [Argo Workflows](https://github.com/argoproj/argo/tree/master/examples). Most functionality is the same, one exception is that Onepanel Workflows entrypoint should always be a [DAG template](https://github.com/argoproj/argo/tree/master/examples#dag) and **Step templates** are not supported.
 :::
 
 ## Getting started

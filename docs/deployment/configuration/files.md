@@ -52,7 +52,8 @@ application:
   # Node pool key and values used for AutoScaling
   nodePool:
     # Cloud providers will automatically set label key as "node.kubernetes.io/instance-type" on all nodes
-    # For Kubernetes 1.16.x, use "beta.kubernetes.io/instance-type"
+    # For all Kubernetes 1.16.x versions, use "beta.kubernetes.io/instance-type"
+    # You would also need to use "beta.kubernetes.io/instance-type" for all versions of AKS and GKE 1.17.x
     label: node.kubernetes.io/instance-type
     # These are the machine type options that will be available in Onepanel
     #   `name` can be any user friendly name
@@ -184,7 +185,7 @@ A common `label` to identify these is `node.kubernetes.io/instance-type` which m
 :::important
 **Kubernetes 1.16.x** you will need to use `beta.kubernetes.io/instance-type` instead.
 
-**AKS and GKE 1.17.x:** you may need to use `beta.kubernetes.io/instance-type` as well.
+**AKS (all versions) and GKE 1.17.x:** you would need to use `beta.kubernetes.io/instance-type` as well.
 
 **EKS 1.16.x:** make sure to use `beta.kubernetes.io/instance-type` label in tags when adding node groups.
 :::
@@ -248,7 +249,7 @@ See [adding more nodes](/docs/deployment/components/nodes) for more information 
 This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which is used to store logs, models and any other output you designate. Onepanel will automatically upload and download files from this object storage.
 
 :::note
-Currently only S3 compatible object storages such as AWS, GCS and Minio are supported
+Currently only S3 compatible object storages (AWS, GCS and Minio) and Azure Blog Storage are supported
 :::
 
 Here's an example AWS S3 configuration:
@@ -273,7 +274,7 @@ artifactRepository:
     accessKey: GOOG1EQPAXHU77377T6TGRYGD7NDV6AA3TFYIIKXP2RZLHI3DZB76FIFGDNLQ
     bucket: my-data-bucket
     endpoint: storage.googleapis.com
-    region: us-west-2
+    region: us-west2 # Note the GCS specific region value
     secretKey: S3hdxSL6HlPGTAAFZYxG/iaKhtlDHVCbyiIBRPxq
 ```
 
@@ -285,9 +286,22 @@ artifactRepository:
     accessKey: AKIAJSIE27KKMHXI3BJQ
     bucket: my-data-bucket
     endpoint: my-minio-endpoint.default:9000
-    region: us-west-2
+    region: us-west-2 # The label for the Minio server location
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
     insecure: true  # Set this to true if Minio is deployed internally into the Cluster
+```
+
+and finally, Azure Blob Storage configuration example which is different from the S3 compatible object storages:
+
+```yaml
+artifactRepository:
+  abs:
+    # Name of Azure block storage container, example: my-container
+    container: my-data-container
+    # Azure storagee account key
+    storageAccountKey: VsMyhYqFiFK1rNj5cNhMd6h9m01pCIQaMTDXmUIEOeMDtjspm12HvKxLs1dxvag2RJ1sYTuPWMQBDKvmIGPWIZ==
+    # Azure storage account name
+    storageAccountName: my-storage-account-name
 ```
 
 <!-- ```yaml

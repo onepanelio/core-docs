@@ -1,30 +1,31 @@
 ---
-title: Adding a custom deep learning model and training Workflow to CVAT
-sidebar_label: Adding custom deep learning models
-description: Onepanel - vision AI model training pipelines
+title: Adding custom models and training Workflows in CVAT
+sidebar_label: Adding custom training Workflows
+description: Onepanel - Adding custom models and training Workflows in CVAT
 ---
 
-The default CVAT workspace comes with two workflows (i.e models)- MaskRCNN Training and TF Object Detection Training. These two workflows are generally good for semantic segmentation  and object detection tasks respectively. But you can do more with your CVAT tasks. You can, for example, train a Generative Adversarial Network model to generate synthetic data for your task. You can add your own model, if default models don't satisfy your requirements.
+CVAT in Onepanel comes with two training Workflow Templates **MaskRCNN Training** and **TF Object Detection Training**, which generally perform well for training models for semantic segmentation and object detection respectively. You can however add more training Workflow Templates that you can use in CVAT for automatic annotation.
 
-This guide will walk you through the process of how can you add your own workflows for CVAT on Onepanel.
+This guide will walk you through the process adding your own training Workflow Templates.
 
-## 1. Requirements
+## 0. Requirements
 
-Before we dive into technical details of adding custom model support in CVAT, it's important to know what types of models and data can be used with CVAT.
+Before we dive into technical details of adding custom training Workflow Templates in CVAT, it's important to know the types of models and data that are supported in CVAT.
 
-You can think of `Execute training Workflow` feature as a bridge between data in CVAT, be it annotated or just frames, and Onepanel Workflows. You can have Onepanel Workflows for model training, inference, and many other things. Let's say you have a training workflow for some model X. Then, you can use this feature to use annotated frames from CVAT to train the model X. It dumps annotated data on cloud storage and Onepanel Workflows grabs data from the same location. More details on how to actually create such workflows will be discussed in following sections.
+When you click **Execute training Workflow** in CVAT, the annotation data dump is uploaded to your default object storage and then a Workflow Template (containing the relevant training code) is triggered with reference to the location of the annotation data dump.
 
-Now that you know how this feature works, it is safe to say that the **only requirement** here is that your training code has to support format that CVAT data was dumped into. For example, if your training code accepts data that follows COCO format (i.e JSON) then you need to export data in COCO format from CVAT. So, if your code does not accept data in any of the format that CVAT supports, then you can't use that workflow from CVAT unless you just need frames and not the annotations. In any case, you can still create training workflow and execute on Onepanel. But you won't be able to use this directly from CVAT. You will have to export data from CVAT, upload to cloud storage, execute workflow and pass-in correct cloud storage path.
+Now that you know how this feature works, the only requirement is that your training code needs to support the annotation formats that are supported by CVAT. For example, if your training code accepts data that follows COCO format (i.e JSON) then you need to indicate that in your newly created Workflow Template.
 
-If your code supports one of the following formats, then you are good to go.
-1. MS COCO
-2. YOLO
-3. TF Detection API (TFRecords)
-4. MOT
-5. LabelMe
-6. DatuMaro
+The following annotation formats are supported by CVAT:
 
-## 2. Upload code to Github
+- MS COCO
+- YOLO
+- TF Detection API (TFRecord)
+- MOT
+- LabelMe
+- DatuMaro
+
+## 1. Upload code to Github
 
 Now that you know your code will work with CVAT, let's go ahead and create a workflow for the same.The first step here is to upload your repository to Github. The workflow you are about to create will clone this repository and execute training command. 
 
@@ -32,7 +33,7 @@ For this example, you are going to add a training workflow for DEtection TRansfo
 
 The first thing you need to do is clone their Github [repository](https://github.com/facebookresearch/detr). We are cloning this because you may need to make some changes in code. If your code is stored locally, then you'll have to upload it to Github. Also note that this code supports MS COCO format, so you can use this directly from CVAT.
 
-## 3. Running code in JupyterLab
+## 2. Running code in JupyterLab
 
 Before you create a workflow for this, you need to make sure it works without any issues and also understand how it works. You may also need to make some minor changes. You can do this locally or create a JupyterLab workspace on Onepanel. 
 
@@ -96,7 +97,7 @@ Once this is done. You are good to go. You can now go ahead and create Onepanel 
 
 If you want Onepanel Workflows to store outputs on cloud storage, you can just write output to `/mnt/output/` and it will automatically upload outputs onto cloud storage. For this to work, you just need to add output artifact in our template as discussed in the following section.
 
-## 4. Create a workflow
+## 3. Create a Workflow Template
 
 Now, let's go ahead and actually create a workflow. You can create a new workflow but we recommend you just clone MaskRCNN Training Workflow which is included by default and make changes there.
 
@@ -244,7 +245,7 @@ volumeClaimTemplates:
 
 Even though this looks cryptic, it isn't. Let us go through following three steps to create template for DETR.
 
-### a. Update workflow parameters
+### a. Update parameters
 
 The first thing you should do is add/remove parameters from above template. Now, how do you figure out which parameters should you use in there? Use arguments/parameters that you take from user plus some system related parameter (optional). Some examples of this is `epochs`, `batch_size`, etc. Again, this depends on your code as well. In this case, our `main.py` accepts all those hyperparameters as an argument. If your code didn't have such an argument parser, then you can pass all hyperparameters, as shown above for `hyperparameters` parameter, and parse it in your code.
 
@@ -507,7 +508,7 @@ One last thing you need to do in order to use this template from CVAT is to add 
 
 With this, you have a final template for training DETR model.
 
-## 5. Using it in CVAT 
+## 4. Using the new Workflow in CVAT 
 
 Now, you can use this model to train models from CVAT.
 
