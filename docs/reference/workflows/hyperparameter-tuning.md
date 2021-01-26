@@ -6,7 +6,7 @@ description: Onepanel - Hyperparameter tuning
 
 Onepanel supports hyperparameter tuning for your TensorFlow and PyTorch models by fully integrating with [NNI](https://github.com/microsoft/nni) and its [built-in tuners](https://nni.readthedocs.io/en/stable/Tuner/BuiltinTuner.html).
 
-To understand how to add hyperparameter tuning into Onepanel Workflows, we'll walk through this [simple MNIST example](https://github.com/onepanelio/templates/tree/master/workflows/hyperparameter-tuning/mnist). Note that this example is also available when you deploy Onepanel under **Workflows** > **Workflow Templates** > **Hyperparameter Tuning Example**, so you can **Clone** it and make minor changes to make it work with your own model architecture and training code.
+To understand how to add hyperparameter tuning into Onepanel Workflows, we'll walk through this [simple MNIST example](https://github.com/onepanelio/templates/tree/master/workflows/hyperparameter-tuning/mnist). Note that this example is also available when you deploy Onepanel under **Workflows** > **Workflow Templates** > **Hyperparameter Tuning Example** and also as a starter template under **Workflows** > **Workflow Templates** > **Create Template** > **Hyperparamter tuning**.
 
 There are 4 parts to configuring hyperparameter tuning into your Workflows:
 
@@ -75,9 +75,9 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
         main(parser.parse_args(), params)
     ```
 
-2. Go to **Workflows** > **Workflow Templates** > **Hyperparameter Tuning Example** and click **Clone**.
+2. Go to **Workflows** > **Workflow Templates** > **Create Template** and select **Hyperparamter tuning**.
 
-3. Update the cloned Workflow Template to use your repository and update the paths in `/mnt/src` to match your repository's directory structure. The `...` indicate sections that were removed for brevity.
+3. Update the Workflow Template to use your repository and update the paths in `/mnt/src` to match your repository's directory structure. The `...` indicate sections that were removed for brevity.
     ```yaml {6,26,31,40}
     entrypoint: main
     arguments:
