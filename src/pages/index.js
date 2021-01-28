@@ -8,11 +8,10 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Image and video annotation with automatic pre-annotation</>,
-    imageUrl: 'img/landing/ann.png',
+    videoUrl: 'img/landing/automatic_annotation.mp4',
     description: (
       <>
-        Annotate images and video using <a href="https://github.com/opencv/cvat" target="_blank">CVAT</a>, with object tracking and semi-automatic annotation of bounding boxes and polygon masks.
+        Iteratively annotate, train and automatically annotate with bounding boxes and polygon masks.
       </>
     ),
   },
@@ -26,29 +25,26 @@ const features = [
   //   ),
   // },
   {
-    title: <>Build your models with GPU optimized frameworks and IDEs</>,
-    imageUrl: 'img/landing/env.png',
+    videoUrl: 'img/landing/hyperparam_tuning.mp4',
     description: (
       <>
-        Seamlessly switch environments between CPU and GPU machines, preloaded with PyTorch, TensorFlow, JupyterLab, VSCode and <a href="https://github.com/onepanelio/templates/tree/master/workspaces" target="_blank">more</a>. 
+        Easily add hyperparameter tuning to any training pipeline, saving the best metrics, parameters and model.
       </>
     ),
   },
   {
-    title: <>Create pipelines as code for model training and data processing</>,
-    imageUrl: 'img/landing/pip.png',
+    videoUrl: 'img/landing/jupyterlabs.mp4',
     description: (
       <>
-        Build reproducible training and data processing pipelines that can perform parallel or distributed tasks on multiple machines.
+        JupyterLab with TensorBoard, Git, debugging, diffing, Conda, OpenCV, TensorFlow, PyTorch and GPU support.
       </>
     ),
   },
   {
-    title: <>Track experiments and visualize model metrics</>,
-    imageUrl: 'img/landing/met.png',
+    videoUrl: 'img/landing/training_pipeline.mp4',
     description: (
       <>
-        Track and visualize model metrics and experiments with <a href="https://github.com/tensorflow/tensorboard" target="_blank">TensorBoard</a> or bring your own experiment tracking tools.
+        Build reproducible, distributed and parallel data and training pipelines with realtime logs and output snapshots.
       </>
     ),
   },
@@ -62,20 +58,26 @@ const features = [
   //   ),
   // },
   {
-    title: <>Bring your own tools as reproducible templates</>,
-    imageUrl: 'img/landing/mod.png',
+    videoUrl: 'img/landing/tools.mp4',
     description: (
       <>
-        Easily bring your own specialized cloud-native tools for development, annotation, pipelines and more.
+        Bring your own IDEs, tools and pipelines with a version controlled YAML and Docker based template engine.
       </>
     ),
   },
   {
-    title: <>Integrate with existing systems using APIs and SDKs</>,
-    imageUrl: 'img/landing/sdk.png',
+    videoUrl: 'img/landing/metric_tools.mp4',
     description: (
       <>
-        Extend Onepanel with our powerful REST APIs and SDKs to further automate your pipelines and environments.
+        Track and visualize metrics and experiments with TensorBoard, NNI UI or bring your own tool.
+      </>
+    ),
+  },
+  {
+    videoUrl: 'img/landing/python_sdk.mp4',
+    description: (
+      <>
+        Programmatically execute and define your pipelines with a powerful <a href='https://github.com/onepanelio/python-sdk' target="_blank">Python SDK</a>.
       </>
     ),
   },
@@ -99,13 +101,21 @@ const features = [
   // }
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({imageUrl, videoUrl, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
+  const vidUrl = useBaseUrl(videoUrl);
   return (
-    <div className={classnames('col col--4', styles.feature)}>
+    <div className={classnames('col col--6', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
+        </div>
+      )}
+      {vidUrl && (
+        <div className="text--center">
+          <video autoPlay loop muted playsInline width="80%">
+              <source type="video/mp4" src={vidUrl} />
+            </video>
         </div>
       )}
       <h3 className="text--center">{title}</h3>
