@@ -82,9 +82,14 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
     entrypoint: main
     arguments:
         parameters:
+        # [CHANGE] Path to your training/model architecture code repository
+        # Change this value and revision value to your code repository and branch respectively
         - name: source
-          # Path to your training/model architecture code repository
           value: https://github.com/onepanelio/templates
+        # [CHANGE] Revision is the branch or tag that you want to use
+        # You can change this to any tag or branch name in your repository
+        - name: revision
+          value: v0.18.0
     ...
     templates:
     - name: main
@@ -103,12 +108,16 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
             revision: '{{workflow.parameters.revision}}'
           path: /mnt/data/src
         - name: config
-          # Path to where your tuner configuration (config.yaml) will be written - same directory as your training code
+          # [CHANGE] Path where config.yaml will be generated or already exists
+          # Update the path below so that config.yaml is written to the same directory as your main.py file
+          # Note that your source code is cloned to /mnt/data/src
           path: /mnt/data/src/<path-to-training-code-directory>/config.yaml
           raw:
             data: '{{workflow.parameters.config}}'
         - name: search-space
-          # Path to where your hyperparameter search space (search_space.json) will be written - same directory as your training code
+          # [CHANGE] Path where search_space.json will be generated or already exists
+          # Update the path below so that search_space.json is written to the same directory as your main.py file
+          # Note that your source code is cloned to /mnt/data/src
           path: /mnt/data/src/<path-to-training-code-directory>/search_space.json
           raw:
             data: '{{workflow.parameters.search-space}}'
@@ -117,7 +126,7 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
         image: onepanel/dl:0.17.0
         args:
             - --config
-            # Path to config.yaml file that is written above
+            # [CHANGE] Update the path below to point to config.yaml path as described above
             - /mnt/data/src/<path-to-training-code-directory>/config.yaml
     ...
     ```
