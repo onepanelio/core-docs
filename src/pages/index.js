@@ -12,7 +12,8 @@ const features = [
     title: 'Image and video annotation with automatic annotation',
     description: (
       <>
-        Iteratively annotate, train and automatically annotate with bounding boxes and polygon masks.
+        Iteratively annotate, train and automatically annotate with bounding boxes and polygon masks.<br/>
+        <a href='' target='_blank'>See documentation</a>
       </>
     ),
   },
@@ -30,7 +31,8 @@ const features = [
     titleRight: 'Hyperparameter tuning with NNI',
     descriptionRight: (
       <>
-        Easily add hyperparameter tuning to any training pipeline, saving the best metrics, parameters and model.
+        Easily add hyperparameter tuning to any training pipeline, saving the best metrics, parameters and model.<br/>
+        <a href='' target='_blank'>See documentation</a>
       </>
     ),
   },
@@ -39,7 +41,8 @@ const features = [
     title: 'JupyterLab with TensorFlow, PyTorch and GPU support',
     description: (
       <>
-        JupyterLab with TensorBoard, Git, debugging, diffing, Conda, OpenCV, TensorFlow, PyTorch and GPU support.
+        JupyterLab with TensorBoard, Git, debugging, diffing, Conda, OpenCV, TensorFlow, PyTorch and GPU support.<br/>
+        <a href='' target='_blank'>See documentation</a>
       </>
     ),
   },
@@ -48,7 +51,8 @@ const features = [
     titleRight: 'Auto scaling, distributed and parallel data processing and training pipelines',
     descriptionRight: (
       <>
-        Build reproducible, distributed and parallel data and training pipelines with realtime logs and output snapshots.
+        Build reproducible, distributed and parallel data and training pipelines with realtime logs and output snapshots.<br/>
+        <a href='' target='_blank'>See documentation</a>
       </>
     ),
   },
@@ -66,7 +70,8 @@ const features = [
     title: 'Version controlled pipelines and environments as code',
     description: (
       <>
-        Bring your own IDEs, tools and pipelines with a version controlled YAML and Docker based template engine.
+        Bring your own IDEs, tools and pipelines with a version controlled YAML and Docker based template engine.<br/>
+        <a href='' target='_blank'>See documentation</a>
       </>
     ),
   },
@@ -75,7 +80,8 @@ const features = [
     titleRight: 'Deploy with custom visualization tools',
     descriptionRight: (
       <>
-        Track and visualize metrics and experiments with TensorBoard, NNI UI or bring your own tool.
+        Track and visualize metrics and experiments with TensorBoard, NNI UI or bring your own tool.<br/>
+        <a href='' target='_blank'>See documentation</a>
       </>
     ),
   },
@@ -84,7 +90,8 @@ const features = [
     title: 'Python SDK',
     description: (
       <>
-        Programmatically execute and define your pipelines with a powerful <a href='https://github.com/onepanelio/python-sdk' target="_blank">Python SDK</a>.
+        Programmatically execute and define your pipelines with a powerful <a href='https://github.com/onepanelio/python-sdk' target="_blank">Python SDK</a>.<br/>
+        <a href='' target='_blank'>See documentation</a>
       </>
     ),
   },
@@ -190,6 +197,7 @@ function Home() {
         {features && features.length && (
           <section className={styles.features}>
             <div className="container">
+            <h1 class="heading-2 center">Feature highlights</h1>
               <div className="row">
                 {features.map((props, idx) => (
                   <Feature key={idx} {...props} />

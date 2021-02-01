@@ -337,6 +337,23 @@ article > div > span.badge--secondary {
   float: left;
 }
 
+h1 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-family: 'Proxima Nova',sans-serif;
+  color: #01579b;
+  font-size: 42px;
+  line-height: 40px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.heading-2 {
+  padding-top: 60px;
+  font-size: 45px;
+  text-align: center;
+}
+
 h3 {
   margin-top: 0;
   margin-bottom: 16px;
