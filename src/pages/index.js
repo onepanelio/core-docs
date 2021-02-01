@@ -180,7 +180,7 @@ function Home() {
           </div>
           <div className="hero__video">
             {/* <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-            <video autoPlay loop muted playsInline width="80%">
+            <video autoPlay loop muted playsInline width="100%">
               <source type="video/mp4" src="img/landing/onepanel.mp4" /> 
             </video>
           </div>
