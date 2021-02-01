@@ -368,7 +368,7 @@ h3 {
   width: 100%;
   margin-bottom: 32px;
   float: left;
-  font-family: 'Proxima Nova',sans-serif;
+  font-family: 'Proxima Nova', sans-serif;
   color: #333;
   font-size: 19px;
   line-height: 28px;
@@ -376,7 +376,8 @@ h3 {
   text-align: left;
 }
 
-.w-clearfix::after, .w-clearfix::before {
+.w-clearfix::after,
+.w-clearfix::before {
   content: " ";
   display: table;
   grid-column-start: 1;
