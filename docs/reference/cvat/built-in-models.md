@@ -18,7 +18,7 @@ description: Onepanel - Training with built-in models
 
 4. Select a training Workflow Template. By default, you can use **TF Object Detection Training** for object detection or **MaskRCNN Training** for semantic segmentation.
 
-  ![Train a model from CVAT](/img/tf-object-detection.png)
+  ![](../../../static/img/built-in-models-153544.png)
 
   :::tip
   Note you can easily add your own models as well. See our [documentation](/docs/reference/cvat/custom-models) for more information on adding custom models. 
@@ -26,13 +26,11 @@ description: Onepanel - Training with built-in models
 
 5. Update hyperparameters and settings depending on your model and data. See below for more information.
 
-6. You can optionally select the checkpoint path from previously trained model or leave this field empty.
+6. You can optionally copy and paste a model path from previously trained model or leave this field empty.
 
-7. Click **Submit**. This will execute the Onepanel Workflow for selected model. You can see Workflow logs by going to Workflow execution page. You can find the URL for the same in the notification card.
+7. Click **Submit**. This will execute the training Workflow for the selected model. You can view real-time logs and view TensorBoard by clicking **Open Workflow details**.
   
-  ![Workflow URL](/img/execution_url.png)
-
-  Trained model and other outputs will be stored on cloud storage and will be synced with CVAT locally so that you can use this to pre-annotate other frames. 
+  ![](../../../static/img/built-in-models-155143.png)
 
   :::note
   You can also use this trained model to run automatic pre-annotation in CVAT. See [documentation](/docs/reference/cvat/automatic-annotation) for more information on automatic pre-annotation.

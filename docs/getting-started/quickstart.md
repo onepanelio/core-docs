@@ -579,9 +579,7 @@ Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https
 
 ## Step 3: Train a model on annotated data
 
-Onepanel allows you to train deep learning models on annotated data in CVAT in a matter of a few clicks. 
-
-You can directly train object detection or segmentation model from CVAT which you can use later to pre-annotate new data. This dramatically reduces time it takes to train new models and use them to pre-annotate new data. Moreover, apart from default models that we provide, you easily add new models or even modify exising model workflows.
+You can train object detection or semantic segmentation models directly from CVAT, which you can then use to automatically pre-annotate new data. This dramatically reduces the time it takes to train new models and iteratively improve your models. Moreover, apart from default models that we provide, you easily add custom model training Workflows and use them for pre-annotation as well.
 
 1. Click on **Open** for a task you want to train a model on.
 
@@ -593,15 +591,15 @@ You can directly train object detection or segmentation model from CVAT which yo
 
   ![Select training workflow](/img/cvat_select_workflow_execution.png)
 
-4. Select Workflow template (i.e model to train). By default, you can use TensorFlow Object Detection for object detection or MaskRCNN for semantic segmentation. Below image shows a case for Tensorflow Object Detection.
-  
-  ![Train a model from CVAT](/img/tf-object-detection.png)
+4. Select a training Workflow Template. By default, you can use **TF Object Detection Training** for object detection or **MaskRCNN Training** for semantic segmentation.
 
-5. Update hyper-parameters and settings as per your requirements. Most of the parameters visible above are related to the model (MaskRCNN) and system (i.e machine). For this guide, you can change `num-steps` from default 10000 to 1000. You can also select the checkpoint path from previously trained model. You can leave it empty if you don't have an appropriate, previously trained model.
+  ![](../../static/img/built-in-models-153544.png)
 
-6. Click **Submit**. This will execute the Onepanel Workflow for selected model. You can see Workflow logs by going to Workflow execution page. You can find the URL for the same in the notification card.
+5. Update hyperparameters and settings depending on your model and data. See [TensorFlow Object Detection models](/docs/reference/cvat/built-in-models#tensorflow-object-detection-models) and [MaskRCNN model](/docs/reference/cvat/built-in-models#maskrcnn-model) for more information on adjusting these hyperparameters.
+
+6. Click **Submit**. This will execute the training Workflow for the selected model. You can view real-time logs and view TensorBoard by clicking **Open Workflow details**.
   
-  ![Workflow URL](/img/execution_url.png)
+  ![](../../static/img/quickstart-155149.png)
 
 :::tip
 Note that you can easily add your own models as well. See [adding custom models](/docs/reference/cvat/custom-models) for more information on adding custom models.
