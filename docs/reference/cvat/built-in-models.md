@@ -46,23 +46,19 @@ You can use any of the models that we support for TensorFlow Object Detection AP
 
 ### TFOD hyperparameters
 
-You can specify some arguments in the `Hyperparameters` field seperated by new line. 
+You can specify arguments for all the available models in TFOD in the `Hyperparameters` field in YAML format.
 
-Here is a sample for Tensorflow Object Detection API: 
+Here's an example:
 
 ```bash
-num-steps=100
+num_steps: 10000               #  Number of steps. If left empty, Onepanel will pick the recommended defaults for that model.
+batch_size: 1                  #  Batch size for the training
+initial_learning_rate: 0.0003  #  Initial learning rate for the model. We recommend you do not change this.
+num_clones: 1                  #  Number of GPUs to use for training. Change to number of GPUs for your machine.
 ``` 
 
-Details:
-- num-steps : number of steps to train your model for. If left empty, Onepanel will pick the recommended defaults for that model.
-- batch-size : batch size for the training
-- initial-learning-rate : initial learning rate for the model. We recommend you do not change this.
-- num-clones (default=1): number of GPUs to train the model 
-- schedule-step-1: step 1 for linear learning rate decay
-- schedule-step-2: step 2 for linear learning rate decay
+See [this file](https://github.com/onepanelio/templates/blob/release-v0.18.0/workflows/tf-object-detection-training/defaults.json) for all available hyperparameters for each TFOD model. Also see [picking model parameters](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md#picking-model-parameters)
 
-Note that you need to set `num-clones` to `4` (number of GPUs) if you select a node pool with say 4 GPUs (Tesla V100).
 
 ### Choosing the right model
 
@@ -76,8 +72,6 @@ Note that you need to set `num-clones` to `4` (number of GPUs) if you select a n
 
 This is a type of faster-rcnn model with NAS backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2).
 
-For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
-
 Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change `batch_size`.
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
@@ -85,8 +79,6 @@ Note that current implementation of faster-rcnn in TensorFlow Object Detection A
 #### frcnn-res101-coco: 
 
 This is a type of faster-rcnn model with ResNet101 backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). 
-
-For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
 
 Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change `batch_size`.
 
@@ -96,8 +88,6 @@ Note that current implementation of faster-rcnn in TensorFlow Object Detection A
 
 This is a type of faster-rcnn model with ResNet101 backbone with low number of proposals. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
 
-For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
-
 Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change `batch_size`.
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
@@ -105,8 +95,6 @@ Note that current implementation of faster-rcnn in TensorFlow Object Detection A
 #### frcnn-res50-coco
 
 This is a type of faster-rcnn model with ResNet50 backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
-
-For how to set epochs, you can take a look at first model since both models are faster-rcnn based.
 
 Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change `batch_size`.
 
@@ -136,15 +124,17 @@ The process to train a Mask-RCNN model on CVAT is similar to the above process e
 
 ### MaskRCNN hyperparameters 
 
-Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes too much time to train and also to get enough accuracy. 
-We allow you to set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3`. You can set corresponding epochs as follows:
+Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes time to train and also to get enough accuracy.
+
+In addition to `num_steps`, you can set epochs for three different parts of the model These parts are called `stage1`, `stage2` and `stage3` as follows:
 
 ```bash
-stage-1-epochs=1
-stage-2-epochs=2
-stage-3-epochs=3
+stage-1-epochs: 1    #  Epochs for network heads
+stage-2-epochs: 1    #  Epochs for finetune layers
+stage-3-epochs: 1    #  Epochs for all layers
+num_steps: 1000      #  Num steps per epoch
 ```
 
 If you have few images (few hundreds), then we recommend you set total epochs (stage1+stage2+stage3) less than 10. We advise you set more epochs for stage1 than others. As your data size increases or the complexity of your data increases you might want to increase epochs. 
 
-If you have ~1000 images then you don't have to set any parameters, CVAT will take care of it.
+If you have ~1000 images, then you don't have to change any parameters.
