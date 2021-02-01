@@ -561,9 +561,9 @@ Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https
 
 9. Click the Onepanel icon in bottom right corner to bring up the Workspace panel.
 
-10. Selection the location you want to sync your data from object storage under **Workspace path**, then browse to the folder containing your images or videos under **Object storage location**.
+10. Under **Workspace path**, type in the path to use to sync your object storage data to, then browse to the folder containing your images or videos under **Object storage location**.
 
-  ![](../../static/img/quickstart-214541.png)
+  ![](../../static/img/quickstart-111117.png)
 
 11. Click **Sync to Workspace** to sync your files to this Workspace. Once syncing is complete, click **Refresh** and select your files.
 
