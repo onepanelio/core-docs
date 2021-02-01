@@ -72,15 +72,11 @@ See [this file](https://github.com/onepanelio/templates/blob/release-v0.18.0/wor
 
 This is a type of faster-rcnn model with NAS backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2).
 
-Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change `batch_size`.
-
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 #### frcnn-res101-coco: 
 
 This is a type of faster-rcnn model with ResNet101 backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). 
-
-Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change `batch_size`.
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
@@ -88,15 +84,11 @@ Note that current implementation of faster-rcnn in TensorFlow Object Detection A
 
 This is a type of faster-rcnn model with ResNet101 backbone with low number of proposals. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
 
-Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change `batch_size`.
-
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
 #### frcnn-res50-coco
 
 This is a type of faster-rcnn model with ResNet50 backbone. If you are not sure about which model to use then we recommend you use SSD based model (i.e ssd-mobilenet-v2). If you are looking for more complex and accurate model then check out frcnn-res101-coco or frcnn-inc-resv2-atr-coco.
-
-Note that current implementation of faster-rcnn in TensorFlow Object Detection API does not support batch training. That is, you shouldn't change `batch_size`.
 
 ***Defaults***: batch_size: 1, learning_rate: 0.0003, epochs=10000
 
