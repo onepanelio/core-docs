@@ -81,7 +81,7 @@ const features = [
   },
   {
     videoUrlRight: 'img/landing/python_sdk.mp4',
-    title: "Onepanel's Python SDK",
+    title: 'Python SDK',
     description: (
       <>
         Programmatically execute and define your pipelines with a powerful <a href='https://github.com/onepanelio/python-sdk' target="_blank">Python SDK</a>.
