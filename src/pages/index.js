@@ -197,7 +197,7 @@ function Home() {
         {features && features.length && (
           <section className={styles.features}>
             <div className="container">
-            <h1 class="heading-2 center">Feature highlights</h1>
+            <h1 id='features' class="heading-2 center">Feature highlights</h1>
               <div className="row">
                 {features.map((props, idx) => (
                   <Feature key={idx} {...props} />

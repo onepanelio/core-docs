@@ -337,7 +337,7 @@ article > div > span.badge--secondary {
   float: left;
 }
 
-h1 {
+#features {
   margin-top: 0;
   margin-bottom: 24px;
   font-family: 'Proxima Nova',sans-serif;
