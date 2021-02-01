@@ -543,36 +543,39 @@ Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https
   Some providers have limits on how many volumes you can attach to a node. The default CVAT template in Onepanel requires 3 volumes, so make sure to pick a machine that can support at least that many volumes.
   :::
 
-4. Next, add the directory you want Onepanel to pull raw input data and store training output (pickled models, classes, etc.). This directory should be in the default object storage you configured when you launched Onepanel and in a directory that matches your current namespace.
+4. Click **Create and Run** to launch your CVAT Workspace.
 
-  ![](/img/quickstart-171037.png)
-
-5. Click **Create and Run** to launch your CVAT Workspace.
-
-6. Once CVAT is running, click **View**.
+5. Once CVAT is running, click **View**.
 
   ![](/img/quickstart-173734.png)
 
-7. In CVAT, click **Create new task**.
+6. In CVAT, click **Create new task**.
 
   ![](/img/quickstart-173841.png)
 
-8. Enter a name for your task and then under **Constructor**, add your labels. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#creating-an-annotation-task) for additional information on more advanced label configuration.
+7. Enter a name for your task and then under **Constructor**, add your labels. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#creating-an-annotation-task) for additional information on more advanced label configuration.
 
-9. Under "Select files", click **Connected file share**. Files from your object storage location above should have already synced here. Pick the ones you want to annotate.
-  
-  ![](/img/quickstart-180004.png)
-  :::important
-  Onepanel's FileSyncer automatically syncs files from your object storage location to this CVAT instance every 5 minutes.
-  :::
+8. Assuming you have already uploaded your images or videos to your object storage, under "Select files", click **Connected file share**.
 
-10. Click **Submit** and then click the **Tasks** menu item to go to the tasks list.
+  ![](../../static/img/quickstart-212157.png)
 
-11. Click **Open** to open task details.
-  
+9. Click the Onepanel icon in bottom right corner to bring up the Workspace panel.
+
+10. Selection the location you want to sync your data from object storage under **Workspace path**, then browse to the folder containing your images or videos under **Object storage location**.
+
+  ![](../../static/img/quickstart-214541.png)
+
+11. Click **Sync to Workspace** to sync your files to this Workspace. Once syncing is complete, click **Refresh** and select your files.
+
+  ![](../../static/img/quickstart-213616.png)
+
+12. Click **Submit** and then click the **Tasks** menu item to go to the tasks list.
+
+13. Click **Open** to open task details.
+
   ![](/img/cvat_open.png)
 
-12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
+14. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
 
 ## Step 3: Train a model on annotated data
 
