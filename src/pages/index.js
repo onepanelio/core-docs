@@ -8,7 +8,8 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    videoUrl: 'img/landing/automatic_annotation.mp4',
+    videoUrl_right: 'img/landing/automatic_annotation.mp4',
+    title: 'Image and video annotation with automatic annotation',
     description: (
       <>
         Iteratively annotate, train and automatically annotate with bounding boxes and polygon masks.
@@ -26,14 +27,16 @@ const features = [
   // },
   {
     videoUrl: 'img/landing/hyperparam_tuning.mp4',
-    description: (
+    title_right: 'Hyperparameter tuning with NNI',
+    description_right: (
       <>
         Easily add hyperparameter tuning to any training pipeline, saving the best metrics, parameters and model.
       </>
     ),
   },
   {
-    videoUrl: 'img/landing/jupyterlabs.mp4',
+    videoUrl_right: 'img/landing/jupyterlabs.mp4',
+    title: 'JupyterLab with TensorFlow, PyTorch and GPU support',
     description: (
       <>
         JupyterLab with TensorBoard, Git, debugging, diffing, Conda, OpenCV, TensorFlow, PyTorch and GPU support.
@@ -42,7 +45,8 @@ const features = [
   },
   {
     videoUrl: 'img/landing/training_pipeline.mp4',
-    description: (
+    title_right: 'Auto scaling, distributed and parallel data processing and training pipelines',
+    description_right: (
       <>
         Build reproducible, distributed and parallel data and training pipelines with realtime logs and output snapshots.
       </>
@@ -58,7 +62,8 @@ const features = [
   //   ),
   // },
   {
-    videoUrl: 'img/landing/tools.mp4',
+    videoUrl_right: 'img/landing/tools.mp4',
+    title: 'Version controlled pipelines and environments as code',
     description: (
       <>
         Bring your own IDEs, tools and pipelines with a version controlled YAML and Docker based template engine.
@@ -67,14 +72,16 @@ const features = [
   },
   {
     videoUrl: 'img/landing/metric_tools.mp4',
-    description: (
+    title_right: 'Deploy with custom visualization tools',
+    description_right: (
       <>
         Track and visualize metrics and experiments with TensorBoard, NNI UI or bring your own tool.
       </>
     ),
   },
   {
-    videoUrl: 'img/landing/python_sdk.mp4',
+    videoUrl_right: 'img/landing/python_sdk.mp4',
+    title: "Onepanel's Python SDK",
     description: (
       <>
         Programmatically execute and define your pipelines with a powerful <a href='https://github.com/onepanelio/python-sdk' target="_blank">Python SDK</a>.
@@ -101,26 +108,43 @@ const features = [
   // }
 ];
 
-function Feature({imageUrl, videoUrl, title, description}) {
+function Feature({imageUrl, videoUrl, videoUrl_right, title, title_right, description, description_right}) {
   const imgUrl = useBaseUrl(imageUrl);
   const vidUrl = useBaseUrl(videoUrl);
+  const vidUrl_right = useBaseUrl(videoUrl_right);
   return (
-    <div className={classnames('col col--6', styles.feature)}>
+    <div className={classnames('col col--12', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
-      {vidUrl && (
-        <div className="text--center">
-          <video autoPlay loop muted playsInline width="80%">
-              <source type="video/mp4" src={vidUrl} />
-            </video>
+
+      {vidUrl_right && (
+        <div className="right_side_pic">
+          <video autoPlay loop muted playsInline width="100%">
+            <source type="video/mp4" src={vidUrl_right} />
+          </video>
         </div>
       )}
-      <h3 className="text--center">{title}</h3>
-      <p className="text--center">{description}</p>
-    </div>
+
+      {videoUrl && (
+        <div className="left_side_pic">
+          <video autoPlay loop muted playsInline width="100%">
+            <source type="video/mp4" src={videoUrl} />
+          </video>
+        </div>
+        )}
+
+        <div class="left_side_content w-clearfix">
+          <h3 className="h3_left_aligned">{title}</h3>
+          <p className="p_fl">{description}</p>
+        </div>
+        <div class="right_side_content w-clearfix">
+          <h3 className="h3_left_aligned">{title_right}</h3>
+          <p className="p_fl">{description_right}</p>
+        </div>
+      </div>
   );
 }
 
@@ -156,7 +180,7 @@ function Home() {
           </div>
           <div className="hero__video">
             {/* <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-            <video autoPlay loop muted playsInline width="100%">
+            <video autoPlay loop muted playsInline width="80%">
               <source type="video/mp4" src="img/landing/onepanel.mp4" /> 
             </video>
           </div>
