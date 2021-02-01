@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    videoUrl_right: 'img/landing/automatic_annotation.mp4',
+    videoUrlRight: 'img/landing/automatic_annotation.mp4',
     title: 'Image and video annotation with automatic annotation',
     description: (
       <>
@@ -27,15 +27,15 @@ const features = [
   // },
   {
     videoUrl: 'img/landing/hyperparam_tuning.mp4',
-    title_right: 'Hyperparameter tuning with NNI',
-    description_right: (
+    titleRight: 'Hyperparameter tuning with NNI',
+    descriptionRight: (
       <>
         Easily add hyperparameter tuning to any training pipeline, saving the best metrics, parameters and model.
       </>
     ),
   },
   {
-    videoUrl_right: 'img/landing/jupyterlabs.mp4',
+    videoUrlRight: 'img/landing/jupyterlabs.mp4',
     title: 'JupyterLab with TensorFlow, PyTorch and GPU support',
     description: (
       <>
@@ -45,8 +45,8 @@ const features = [
   },
   {
     videoUrl: 'img/landing/training_pipeline.mp4',
-    title_right: 'Auto scaling, distributed and parallel data processing and training pipelines',
-    description_right: (
+    titleRight: 'Auto scaling, distributed and parallel data processing and training pipelines',
+    descriptionRight: (
       <>
         Build reproducible, distributed and parallel data and training pipelines with realtime logs and output snapshots.
       </>
@@ -62,7 +62,7 @@ const features = [
   //   ),
   // },
   {
-    videoUrl_right: 'img/landing/tools.mp4',
+    videoUrlRight: 'img/landing/tools.mp4',
     title: 'Version controlled pipelines and environments as code',
     description: (
       <>
@@ -72,15 +72,15 @@ const features = [
   },
   {
     videoUrl: 'img/landing/metric_tools.mp4',
-    title_right: 'Deploy with custom visualization tools',
-    description_right: (
+    titleRight: 'Deploy with custom visualization tools',
+    descriptionRight: (
       <>
         Track and visualize metrics and experiments with TensorBoard, NNI UI or bring your own tool.
       </>
     ),
   },
   {
-    videoUrl_right: 'img/landing/python_sdk.mp4',
+    videoUrlRight: 'img/landing/python_sdk.mp4',
     title: "Onepanel's Python SDK",
     description: (
       <>
@@ -108,10 +108,10 @@ const features = [
   // }
 ];
 
-function Feature({imageUrl, videoUrl, videoUrl_right, title, title_right, description, description_right}) {
+function Feature({imageUrl, videoUrl, videoUrlRight, title, titleRight, description, descriptionRight}) {
   const imgUrl = useBaseUrl(imageUrl);
   const vidUrl = useBaseUrl(videoUrl);
-  const vidUrl_right = useBaseUrl(videoUrl_right);
+  const vidUrlRight = useBaseUrl(videoUrlRight);
   return (
     <div className={classnames('col col--12', styles.feature)}>
       {imgUrl && (
@@ -120,10 +120,10 @@ function Feature({imageUrl, videoUrl, videoUrl_right, title, title_right, descri
         </div>
       )}
 
-      {vidUrl_right && (
+      {vidUrlRight && (
         <div className="right_side_pic">
           <video autoPlay loop muted playsInline width="100%">
-            <source type="video/mp4" src={vidUrl_right} />
+            <source type="video/mp4" src={vidUrlRight} />
           </video>
         </div>
       )}
@@ -141,8 +141,8 @@ function Feature({imageUrl, videoUrl, videoUrl_right, title, title_right, descri
           <p className="p_fl">{description}</p>
         </div>
         <div class="right_side_content w-clearfix">
-          <h3 className="h3_left_aligned">{title_right}</h3>
-          <p className="p_fl">{description_right}</p>
+          <h3 className="h3_left_aligned">{titleRight}</h3>
+          <p className="p_fl">{descriptionRight}</p>
         </div>
       </div>
   );
