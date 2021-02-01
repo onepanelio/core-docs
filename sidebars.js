@@ -113,10 +113,10 @@ module.exports = {
       label: 'CVAT Workspace',
       collapsed: false,
       items: [
-        'getting-started/use-cases/computervision/annotation/cvat/cvat_quick_guide',
-        'getting-started/use-cases/computervision/annotation/cvat/cvat_annotation_model',
-        'getting-started/use-cases/computervision/annotation/cvat/cvat_automatic_annotation',
-        'getting-started/use-cases/computervision/annotation/cvat/adding_custom_model',
+        'reference/cvat/quickstart',
+        'reference/cvat/built-in-models',
+        'reference/cvat/automatic-annotation',
+        'reference/cvat/custom-models',
       ]
     },
     { 
@@ -131,13 +131,5 @@ module.exports = {
         'reference/jupyterlab/language-server',
       ]
     },
-    // {
-    //   type: 'category',
-    //   label: 'Services',
-    //   items: [
-    //     'reference/services/overview',
-    //     'reference/services/modeldb'
-    //   ]
-    // },
   ]
 };
