@@ -4,7 +4,7 @@ sidebar_label: Training with built-in models
 description: Onepanel - Training with built-in model training Workflows
 ---
 
-## Training with built-in models from CVAT
+You can train object detection or semantic segmentation models directly from CVAT, which you can then use to automatically pre-annotate new data. This dramatically reduces the time it takes to train new models and iteratively improve your models. Moreover, apart from built-in models that we provide, you easily add custom model training Workflows and use them for pre-annotation as well.
 
 1. Click on **Open** for a task you want to train a model on.
   
