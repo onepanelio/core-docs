@@ -40,7 +40,7 @@ description: Onepanel - Training with built-in models
 
 You can use any of the models that we support for TensorFlow Object Detection API to train your custom pre-annotation models. Here, we provide a brief explanation on how to choose one model over another based on your needs. Some models are faster than others, whereas some are more accurate than others.  We hope this information will help you choose the right model for your task. 
 
-![TensorFlow Object Detection Workflow](/img/tf-object-detection.png)
+![](../../../static/img/built-in-models-160405.png)
 
 ### TFOD hyperparameters
 
@@ -110,13 +110,13 @@ MaskRCNN is a popular model for segmentation tasks. We use [this](https://github
 
 The process to train a Mask-RCNN model on CVAT is similar to the above process except that you need to select Mask-RCNN after clicking on Create Annotation Model.
 
-![MaskRCNN Workflow](/img/maskrcnn-training.png)
+![](../../../static/img/built-in-models-153544.png)
 
 ### MaskRCNN hyperparameters 
 
 Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes time to train and also to get enough accuracy.
 
-In addition to `num_steps`, you can set epochs for three different parts of the model These parts are called `stage1`, `stage2` and `stage3` as follows:
+In addition to `num_steps`, you can set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3` and their number of epochs can be set as follows:
 
 ```bash
 stage-1-epochs: 1    #  Epochs for network heads
