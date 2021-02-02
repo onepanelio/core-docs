@@ -38,7 +38,7 @@ description: Onepanel - Training with built-in models
 
 ## TensorFlow Object Detection models
 
-You can use any of the models that we support for TensorFlow Object Detection API to train your custom pre-annotation models. Here, we provide a brief explanation on how to choose one model over another based on your needs. Some models are faster than others, whereas some are more accurate than others.  We hope this information will help you choose the right model for your task. 
+You can use any of the supported TensorFlow Object Detection API models to train models on your data. Following is an overview on how to choose one model over another based on your needs. Some models are faster than others, whereas some are more accurate than others.
 
 ![](../../../static/img/built-in-models-160405.png)
 
