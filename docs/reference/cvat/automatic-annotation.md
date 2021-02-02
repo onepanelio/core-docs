@@ -4,30 +4,57 @@ sidebar_label: Using trained models for automatic annotation
 description: Onepanel - Using trained models for automatic annotation
 ---
 
-You can use your trained models to pre-annotate your data. This can save you a lot of time since you don't have to annotate images from scratch. On Onepanel, you can leverage these features to pre-annotate your bounding boxes or polygon masks. You can also use Object Tracking to track objects in a sequence of frames.
+You can use your trained models to automatically pre-annotate your data. This can save you a lot of time since you don't have to annotate images from scratch. On Onepanel, you can leverage these features to pre-annotate bounding boxes or polygon masks.
 
-## Uploading your model on CVAT
+## Uploading your trained model into CVAT Workspace
 
-Before using any type of semi-automatic annotation, you will need to upload your model to CVAT Model Manager by clicking on **Models**. 
+First, you will need to upload your trained model into CVAT.
 
-1. To upload a model, click on **Models**, and then click on **Create new model**. 
+1. First, navigate to the Workflow that you used to train your model. You can go to **Workflows** and then filter by `workspace-uid: <your-cvat-workspace-uid>`.
 
-2. Click on select files and upload your model. Hit submit to upload the model. 
-  :::note
-  For TF Object Detection API and MaskRCNN, you will need two files the **model** and **classes.csv**. For TF Object Detection API, the model should be Tensorflow Frozen Graph (`.pb`). For MaskRCNN, it should be Keras model (`.h5`).
-  :::
+    ![](../../../static/img/automatic-annotation-131131.png)
 
-  ![Model Manager](/img/upload_model.PNG)
+2. Click on the **train-model** task and then click **Outputs** in the task panel on the right hand side.
+
+    ![](../../../static/img/automatic-annotation-130955.png)
+
+3. In the file browser, click on **output** > **model** and then click the copy icon next to the location.
+
+    ![](../../../static/img/automatic-annotation-131405.png)
+
+    :::note
+    The screenshot above is showing MaskRCNN model output, TensorFlow Object Detection output has a few more files and the model name is `frozen_inference_graph.pb`.
+    :::
+
+4. Return to your CVAT Workspace and click on **Models** in the top menu and then click on **Create new model** button.
+
+5. Click on **Connected file share**.
+
+    ![](../../../static/img/quickstart-212157.png)
   
-  :::note
-  Since Onepanel automatically syncs data from cloud storage to local directory. You can click on **Connected file share** to use models from S3. You will find trained models in `root -> output -> <cvat-task-name> -> <workflow-name> -> <workflow-execution-name>`. For TensorFlow Object Detection API, there will be one more folder before `workflow-execution-time` based on the model you trained (i.e `frcnn-res50-coco`).
-  :::
+6. Click the Onepanel icon in bottom right corner to bring up the Workspace panel. Under **Sync files**, in the **Workspace path** field, type in the path you want to sync your model data into, and then paste the path you copied above into **Object storage location** field.
 
-3. Click on **Models** again and you will find your model in the list. You can also use files from `Connected file share` just like creating new tasks.
+    ![](../../../static/img/automatic-annotation-142205.png)
 
-  ![Uploaded Models](/img/upload_model_after.PNG)
+7. Click **Sync to Workspace**, you should see a log showing data being synced. Once complete, close the **Logs** panel.
 
-## Running pre-annotation in CVAT
+8. Click **Refresh** under **Connected file share**.
+
+    ![](../../../static/img/automatic-annotation-142859.png)
+
+9.  Expand the file tree to navigate to your model folder and select **classes.csv** and **onepanel_trained_model.h5** (or **frozen_inference_graph.pb** if using TFOD).
+
+    ![](../../../static/img/automatic-annotation-143127.png)
+
+10. Enter a name for your model and click **Submit**.
+
+11. Once the model is uploaded, click **Models** to verify that it's there.
+
+    ![](../../../static/img/automatic-annotation-143520.png)
+
+12. Follow the steps in the next section below to use this model for automatic annotation.
+
+## Running automatic annotation in CVAT
 
 1. The first step is to upload your model on CVAT or use our default models which are available on CVAT. 
 
