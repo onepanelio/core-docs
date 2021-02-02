@@ -116,15 +116,17 @@ The process to train a Mask-RCNN model on CVAT is similar to the above process e
 
 Even though you don't need to enter any other parameters to start the training of Mask-RCNN, it is recommended that you pass correct epochs according your data. Mask-RCNN is a very deep model which takes time to train and also to get enough accuracy.
 
-In addition to `num_steps`, you can set epochs for three different parts of the model. These parts are called `stage1`, `stage2` and `stage3` and their number of epochs can be set as follows:
+In addition to `num_steps`, you can set epochs for three different stages of the model. These parts are called `stage_1`, `stage_2` and `stage_3` and their number of epochs can be set as follows:
 
 ```bash
-stage-1-epochs: 1    #  Epochs for network heads
-stage-2-epochs: 1    #  Epochs for finetune layers
-stage-3-epochs: 1    #  Epochs for all layers
+stage_1_epochs: 1    #  Epochs for network heads
+stage_2_epochs: 1    #  Epochs for finetune layers
+stage_3_epochs: 1    #  Epochs for all layers
 num_steps: 1000      #  Num steps per epoch
 ```
 
-If you have few images (few hundreds), then we recommend you set total epochs (stage1+stage2+stage3) less than 10. We advise you set more epochs for stage1 than others. As your data size increases or the complexity of your data increases you might want to increase epochs. 
+In `stage_1`, the model learns to classify from extracted features. In `stage_2`, the model learns to better extract features. In `stage_3`, the whole model changes to adapt to new data.
+
+If you are training images that are similar to the ones in the COCO dataset, it is best to train more epochs in `stage_1`, otherwise it's best to train more epochs in `stage_2` where the model is learning to better extract features.
 
 If you have ~1000 images, then you don't have to change any parameters.
