@@ -110,7 +110,7 @@ module.exports = {
     },
     { 
       type: 'category',
-      label: 'Built-in Workflow Templates',
+      label: 'Built-in Workflows',
       collapsed: false,
       items: [
         'reference/workflows/training',
