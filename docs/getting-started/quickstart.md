@@ -595,7 +595,7 @@ You can train object detection or semantic segmentation models directly from CVA
 
   ![](../../static/img/built-in-models-153544.png)
 
-5. Update hyperparameters and settings depending on your model and data. See [TensorFlow Object Detection models](/docs/reference/cvat/built-in-models#tensorflow-object-detection-models) and [MaskRCNN model](/docs/reference/cvat/built-in-models#maskrcnn-model) for more information on adjusting these hyperparameters.
+5. Update [hyperparameters](/docs/reference/workflows/training) depending on your model and data. These training Workflows also include [data augmentation](/docs/reference/workflows/data-augmentation) fields that you can adjust accordingly as well.
 
 6. Click **Submit**. This will execute the training Workflow for the selected model. You can view real-time logs and view TensorBoard by clicking **Open Workflow details**.
   

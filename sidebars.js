@@ -110,6 +110,15 @@ module.exports = {
     },
     { 
       type: 'category',
+      label: 'Built-in Workflow Templates',
+      collapsed: false,
+      items: [
+        'reference/workflows/training',
+        'reference/workflows/data-augmentation',
+      ]
+    },
+    { 
+      type: 'category',
       label: 'CVAT Workspace',
       collapsed: false,
       items: [
