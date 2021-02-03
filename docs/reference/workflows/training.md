@@ -9,9 +9,9 @@ Onepanel supports the following built-in models for object detection and semanti
 - TensorFlow Object Detection API models for object detection.
 - MaskRCNN model for semantic segmentation.
 
-These models are available as training Workflows under **Workflows** and can be [executed from any CVAT Workspace](/docs/reference/cvat/built-in-models) to train on your annotated data.
+These models are available as training Workflows under **Workflows** > **Workflow Templates** and can be [executed from any CVAT Workspace](/docs/reference/cvat/built-in-models) to train on your annotated data.
 
-[TensorBoard](/docs/reference/workflows/tensorboard#launching-tensorboard) is also fully integrated and can be accessed while your model is training.
+[TensorBoard](/docs/reference/workflows/tensorboard#launching-tensorboard) is also fully integrated and along with real-time logs can be accessed while your model is training.
 
 ## TensorFlow Object Detection
 
