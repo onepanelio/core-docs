@@ -5,7 +5,7 @@ description: Creating Workspace Templates for multiple environments like CVAT, V
 ---
 
 :::tip
-See our [Templates repository](https://github.com/onepanelio/templates/tree/master/workspaces) for a list of ready to use Workspace Templates. You can also use these as reference for defining youur own Workspace Templates.
+See our [Templates repository](https://github.com/onepanelio/templates/tree/v0.18.0) for a list of ready to use Workspace Templates. You can also use these as reference for defining youur own Workspace Templates.
 :::
 
 ## Getting started with Workspace Templates
