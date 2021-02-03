@@ -56,48 +56,44 @@ First, you will need to upload your trained model into CVAT.
 
 ## Running automatic annotation in CVAT
 
-1. The first step is to upload your model on CVAT or use our default models which are available on CVAT. 
+1. Make sure you have uploaded your trained model as [outlined above](#uploading-your-trained-model-into-cvat-workspace).
 
-2. Click on **Automatic annotation** under Actions menu. 
+2. (Optional but [recommended](#machine-types-and-annotation-time)) If the Workspace is on a CPU machine, switch to a GPU machine by clicking the Onepanel icon and choosing a GPU node pool from the **Node pool** dropdown and click **Update**. Once the Workspace is ready, continue to next step.
 
-  ![Click Actions](/img/cvat_select_automatic_annotation.png)
+    ![](../../../static/img/automatic-annotation-155820.png)
 
-3. Select the model for pre-annotation. By default, you can use RCNN Object Detector (from Tensorflow Object Detection API) or  Mask RCNN Object Detector for semantic segmentation.
+3. Click **Automatic annotation** under **Actions** menu for the task you want to annotate. 
 
-4. If you selected any models other than default ones then you will asked to do class mapping. CVAT will automatically map class from task to model's class.
+  ![](../../../static/img/automatic-annotation-154827.png)
 
-  ![Class mapping](/img/class_mapping.png)
+4. Select the model you created earlier and make sure the class (label) mappings are correct.
 
-5. Click on **Submit** to start pre-annotation. Once it's done, you can click on **Open** to access the annotation.
-  ![Automatic Annotation Running](/img/cvat_automatic_annotation_running.png)
+    ![](../../../static/img/automatic-annotation-155007.png)
 
-6. Here is a output from default object detection model.
+5. Click **Submit** to start the annotation process.
 
-  ![Inference Output](/img/cvat_inference_output.png)
+    ![](../../../static/img/automatic-annotation-162019.png)
 
-## Hardware requirements 
+6. Once complete, you can click on **Open** and click **Job #** to view annotations.
 
-For training a model(Execute training Workflow), you can choose any GPU machine from the list. All of our models will work on any of the GPU machine. But if you want to train it faster, then we suggest you select machines with multiple GPUs (i.e 8 V100).
+    ![](../../../static/img/automatic-annotation-162205.png)
 
-See the table below which details machine type with the corresponding runtime to perform pre-annotations.
-For this test, we used a task with **3550 images (2GB)** to perform pre-annotations.
+    :::note
+    If for some reason you don't see any annotations, refresh the page and click **Open** again.
+    :::
+
+## Machine types and annotation time
+
+See the table below which details machine type with the corresponding time to complete automatic annotation. For this test, we used a task with **3550 images (2GB)**.
 
 Machine     | Time     
 ------------|---------------
-K80         | 160 minutes  
-V100        | 80 minutes 
-V100 x 4    | 21 minutes 
+1 x K80     | 160 minutes
+1 x V100    | 80 minutes
+4 x V100    | 21 minutes
 
-Run time depends on factors such as **model, number of images, type of machine.**
+The above data was generated for `ssd-mobilenet-v2` model which is the model we suggest to use in normal circumstances. If you have complex annotations and want to use faster-rcnn based model, then it might take slightly more time but it won’t significantly alter the data presented above.
 
-The above data was generated for ssd-mobilenet-v2 model which is the model we suggest to use in normal circumstances. If you have complex annotations and want to use faster-rcnn based model, then it might take slightly more time. But note that it won’t significantly alter the data presented above.
+The other factor is image compression. By default, CVAT compresses images by 50%. If you use the original images without compression, your automatic annotation time will be increased by ~5-6% of that of 50% compressed images. So in the above table, if you use images without compression and use a V100, it will take 84 minutes instead of 80 minutes.
 
-The other factor is image compression. By default, CVAT compresses images by 50%. We did some testing to find out if we use original images (without compression) then how much time it will take.
-
-It turns out that if you use the original images without compression, your pre-annotation time will be increased by ~5-6% of that of 50% compressed images. So in the above table, if you use images without compression and use a V100, it will take 84 minutes instead of 80 minutes. Note that this compression does not affect annotation in any way.
-
-Note that this data was calculated on 3550 images (1280 x 960)(total size=2GB), so if your data size is different you can easily extrapolate the data from the above table. For example, if you have 10gb of images then ideally it will take around 400 minutes on a V100 GPU. 
-
-If the resolution of your images is slightly different, then it won’t affect run time significantly. In fact, if the difference is ~200 pixels then it won’t change at all, generally.
-
-If you still have any questions, feel free to reach out to us at info@onepanel.io
+If your data size is different from above, then you can easily extrapolate the annotation time from the above table.
