@@ -601,10 +601,12 @@ You can train object detection or semantic segmentation models directly from CVA
   
   ![](../../static/img/quickstart-155149.png)
 
-:::tip
-Note that you can easily add your own models as well. See [adding custom models](/docs/reference/cvat/custom-models) for more information on adding custom models.
 
-You can also use this trained model to run pre-annotation in CVAT. See [automatic annotation](/docs/reference/cvat/automatic-annotation) for more information on pre-annotation.
-:::
+## Step 4: Automatic annotation
 
-For more information about CVAT on Onepanel, see our [CVAT documentation](/docs/reference/cvat/quickstart).
+If you want to use your trained model for automatic annotation in CVAT, follow the steps outlined in [Using trained models for automatic annotation](/docs/reference/cvat/automatic-annotation).
+
+## Next steps
+
+You can also easily add your own custom model training Workflows. See [adding custom models](/docs/reference/cvat/custom-models) for more information on adding custom models.
+
