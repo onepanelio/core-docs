@@ -602,7 +602,7 @@ You can train object detection or semantic segmentation models directly from CVA
   ![](../../static/img/quickstart-155149.png)
 
 
-## Step 4: Automatic annotation
+## Step 4: Use trained model for automatic annotation
 
 If you want to use your trained model for automatic annotation in CVAT, follow the steps outlined in [Using trained models for automatic annotation](/docs/reference/cvat/automatic-annotation).
 
