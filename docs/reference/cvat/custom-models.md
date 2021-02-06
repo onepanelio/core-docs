@@ -4,26 +4,199 @@ sidebar_label: Adding custom training Workflows
 description: Onepanel - Adding custom models and training Workflows in CVAT
 ---
 
-CVAT in Onepanel comes with two training Workflow Templates **MaskRCNN Training** and **TF Object Detection Training**, which generally perform well for training models for semantic segmentation and object detection respectively. You can however add more training Workflow Templates that you can use in CVAT for automatic annotation.
+This guide will walk you through the process adding custom object detection or semantic segmentation training Workflow Templates in Onepanel that can be triggered from CVAT just like the [built-in model training Workflows](/docs/reference/cvat/built-in-models)
 
-This guide will walk you through the process adding your own training Workflow Templates.
+The steps to add your custom model training are as follows:
 
-## 0. Requirements
+1. Make sure your training code supports CVAT's annotation formats
+2. Overview of the **CVAT training Workflow Template** that we'll be using as base
+3. Update your training code's input and output directory structures and push to a git repository (e.g. GitHub)
+4. Update **CVAT training Workflow Template** to point to your new code and install dependencies (if any)
 
-Before we dive into technical details of adding custom training Workflow Templates in CVAT, it's important to know the types of models and data that are supported in CVAT.
+We will walk through these steps by adding the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) model for semantic segmentation.
 
-When you click **Execute training Workflow** in CVAT, the annotation data dump is uploaded to your default object storage and then a Workflow Template (containing the relevant training code) is triggered with reference to the location of the annotation data dump.
+## 1. Supported annotation formats
 
-Now that you know how this feature works, the only requirement is that your training code needs to support the annotation formats that are supported by CVAT. For example, if your training code accepts data that follows COCO format (i.e JSON) then you need to indicate that in your newly created Workflow Template.
+When you click **Execute training Workflow** in CVAT, the annotation data dump is uploaded to your [default object storage](/docs/deployment/configuration/files#artifactrepository) and then a Workflow Template (containing the relevant training code) is executed with reference to the location of the annotation data dump.
+
+Now that you know how this feature works, the only requirement is that your training code needs to support the annotation formats that are supported by CVAT. For example, if your training code accepts data that follows COCO format (i.e JSON) then you need to indicate that in your newly created Workflow Template by updating the `dump_format` field (more on this field later in steps below).
 
 The following annotation formats are supported by CVAT:
 
-- MS COCO
-- YOLO
-- TF Detection API (TFRecord)
-- MOT
-- LabelMe
-- DatuMaro
+- MS COCO (`cvat_coco`)
+- YOLO (`cvat_yolo`)
+- TF Detection API (TFRecord) (`cvat_tfrecord`)
+- MOT (`cvat_mot`)
+- LabelMe (`cvat_label_me`)
+
+## 2. CVAT training Workflow Template Overview
+
+The **CVAT training Workflow Template** is the base template you can use to add any custom object detection or semantic segmentation model that will work directly with any CVAT Workspace. 
+
+This template is available in Onepanel by navigating to **Workflows** > **Workflow Templates** > **Create Template** and selecting **CVAT Training** under **Templates**.
+
+Below is the content of this template with in-line comments describing the fields and what you would need to change. Note that you will only need to change the fields marked with `[CHANGE]`.
+
+The fields with the `cvat-` prefix are automatically populated by CVAT. The `dump_format` indicates to CVAT in which format to dump the annotations. 
+
+We will walk through updating this template to add DETR.
+
+```yaml
+# Workflow Template for building object detection or semantic segmentation 
+# model training Workflow that can be executed from CVAT
+#
+# Only change the fields marked with [CHANGE]
+arguments:
+  parameters:
+
+    # This is the path to data and annotation files, keep this intact so CVAT knows to populate this
+    - name: cvat-annotation-path
+      # Default value, this will be automatically populated by CVAT
+      value: 'artifacts/{{workflow.namespace}}/annotations/'
+      # Friendly name to be displayed to user
+      displayName: Dataset path
+      # Hint to be displayed to user
+      hint: Path to annotated data in default object storage. In CVAT, this parameter will be pre-populated.
+      # For information on 'visibility', see https://docs.onepanel.ai/docs/reference/workflows/templates/#parameters
+      visibility: internal
+
+    # This is the path to a checkpoint, you can set this in CVAT to a previously trained model
+    - name: cvat-finetune-checkpoint
+      value: ''
+      hint: Path to the last fine-tune checkpoint for this model in default object storage. Leave empty if this is the first time you're training this model.
+      displayName: Checkpoint path
+      visibility: public
+
+    # Number of classes
+    - name: cvat-num-classes
+      displayName: Number of classes
+      hint: Number of classes. In CVAT, this parameter will be pre-populated.
+      value: '10'
+      visibility: internal
+
+    # [CHANGE] Hyperparameters for your model
+    # Note that this will come in as multiline text that you will need to parse in your code
+    - name: hyperparameters
+      displayName: Hyperparameters
+      visibility: public
+      type: textarea.textarea
+      value: |-
+        stage-1-epochs: 1    #  Epochs for network heads
+        stage-2-epochs: 2    #  Epochs for finetune layers
+        stage-3-epochs: 3    #  Epochs for all layers
+        num_steps: 1000     #   Num steps per epoch
+      hint: List of available hyperparameters
+
+    # [CHANGE] Dump format that your model expects from CVAT
+    # Valid values are: cvat_coco, cvat_voc, cvat_tfrecord, cvat_yolo, cvat_mot, cvat_label_me
+    - name: dump-format
+      value: cvat_coco
+      displayName: CVAT dump format
+      visibility: private
+
+    # Node pool dropdown (Node group in EKS)
+    # You can add more of these if you have additional tasks that can run on different node pools
+    - displayName: Node pool
+      hint: Name of node pool or group to run this workflow task
+      type: select.nodepool
+      visibility: public
+      name: sys-node-pool
+      value: default
+      required: true
+
+entrypoint: main
+templates:
+- dag:
+    tasks:
+      - name: train-model
+        template: train-model
+  name: main
+- container:
+    # [CHANGE] Bash command to run your code
+    # Note that your code will be cloned into /mnt/src/train, so you will need to change to the appropriate directory
+    args:
+      - |
+        pip install pycocotools scikit-image==0.16.2 && \
+        cd /mnt/src/train/workflows/maskrcnn-training && \
+        python -u main.py train --dataset=/mnt/data/datasets \
+          --model=workflow_maskrcnn \
+          --extras="{{workflow.parameters.hyperparameters}}" \
+          --ref_model_path="{{workflow.parameters.cvat-finetune-checkpoint}}" \
+          --num_classes="{{workflow.parameters.cvat-num-classes}}"
+    command:
+      - sh
+      - -c
+    # [CHANGE] Docker image to use to run your code
+    # You can keep this as is if your code uses TensorFlow 2.3 or PyTorch 1.5
+    # For private Docker repositories use imagePullSecrets: https://github.com/argoproj/argo/blob/master/examples/image-pull-secrets.yaml#L10-L11
+    image: 'onepanel/dl:0.17.0'
+    volumeMounts:
+      - mountPath: /mnt/data
+        name: data
+      - mountPath: /mnt/output
+        name: output
+    workingDir: /mnt/src
+  sidecars:
+    - name: tensorboard
+      image: 'onepanel/dl:0.17.0'
+      command: [ sh, -c ]
+      env:
+        - name: ONEPANEL_INTERACTIVE_SIDECAR
+          value: 'true'
+      # [CHANGE] Path to your TensorBoard logs
+      # Note that we recommend not changing this and updating your code to write the logs to /mnt/output/tensorboard
+      args: [ "tensorboard --logdir /mnt/output/" ]
+      ports:
+        - containerPort: 6006
+          name: tensorboard
+  nodeSelector:
+    node.kubernetes.io/instance-type: '{{workflow.parameters.sys-node-pool}}'
+  inputs:
+    artifacts:
+      - name: data
+        path: /mnt/data/datasets/
+        s3:
+          key: '{{workflow.parameters.cvat-annotation-path}}'
+      - name: models
+        path: /mnt/data/models/
+        optional: true
+        s3:
+          key: '{{workflow.parameters.cvat-finetune-checkpoint}}'
+      - git:
+          # [CHANGE] Point this to your code repository
+          # For private repositories see: https://docs.onepanel.ai/docs/reference/workflows/artifacts#git
+          repo: https://github.com/onepanelio/templates.git
+          revision: v0.18.0
+        name: src
+        path: /mnt/src/train
+  name: train-model
+  outputs:
+    artifacts:
+      - name: model
+        optional: true
+        path: /mnt/output
+
+# [CHANGE] Volumes that will mount to /mnt/data (annotated data) and /mnt/output (models, checkpoints, logs)
+# Update this depending on your annotation data, model, checkpoint, logs, etc. sizes
+# Example values: 250Mi, 500Gi, 1Ti
+volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 200Gi
+  - metadata:
+      name: output
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 200Gi
+```
 
 ## 1. Upload code to Github
 
@@ -112,136 +285,6 @@ Give this template an appropriate name. For this example, we will be using `DETR
 You can use [MaskRCNN template](https://github.com/onepanelio/templates/blob/master/workflows/maskrcnn-training/template.yaml) as our starting point and you can modify it for your needs.
 
 Below is a MaskRCNN template which we'll use as our base template. Hints and other unnecessary stuff was removed for brevity. You can find complete template [here](https://github.com/onepanelio/templates/blob/master/workflows/maskrcnn-training/template.yaml).
-
-```yaml
-arguments:
-  parameters:
-  - name: source
-    value: https://github.com/onepanelio/Mask_RCNN.git
-    displayName: Model source code
-    type: hidden
-    visibility: private
-
-  - name: cvat-annotation-path
-    value: annotation-dump/sample_dataset
-    hint: Path to annotated data in default object storage (i.e S3). In CVAT, this parameter will be pre-populated.
-    displayName: Dataset path
-    visibility: private
-    
-  - name: cvat-output-path
-    value: workflow-data/output/sample_output
-    hint: Path to store output artifacts in default object storage (i.e s3). In CVAT, this parameter will be pre-populated.
-    displayName: Workflow output path
-    visibility: private
-  
-  - name: hyperparameters
-    displayName: Hyperparameters
-    visibility: public
-    type: textarea.textarea
-    value: |-
-      stage-1-epochs=1    #  Epochs for network heads
-      stage-2-epochs=2    #  Epochs for finetune layers
-      stage-3-epochs=3    #  Epochs for all layers
-   
-  - name: cvat-finetune-checkpoint
-    value: ''
-    visibility: public
-  
-  - name: cvat-num-classes
-    value: 81
-    visibility: private
-    
-  - name: dump-format
-    value: cvat_coco
-    visibility: public
-      
-  - name: tf-image
-    value: tensorflow/tensorflow:1.13.1-py3
-    visibility: public
-
-  - name: sys-node-pool
-    value: Standard_D4s_v3
-    visibility: public
-
-entrypoint: main
-templates:
-- dag:
-    tasks:
-    - name: train-model
-      template: tensorflow
-  name: main
-- container:
-    args:
-    - |
-      apt-get update \
-      && apt-get install -y git wget libglib2.0-0 libsm6 libxext6 libxrender-dev \
-      && pip install -r requirements.txt \
-      && pip install boto3 pyyaml google-cloud-storage \
-      && git clone https://github.com/waleedka/coco \
-      && cd coco/PythonAPI \
-      && python setup.py build_ext install \
-      && rm -rf build \
-      && cd ../../ \
-      && wget https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5 \
-      && python setup.py install && ls \
-      && python samples/coco/cvat.py train --dataset=/mnt/data/datasets \
-        --model=workflow_maskrcnn \
-        --extras="{{workflow.parameters.extras}}"  \
-        --ref_model_path="{{workflow.parameters.cvat-finetune-checkpoint}}"  \
-        --num_classes="{{workflow.parameters.cvat-num-classes}}" \
-      && cd /mnt/src/ \
-      && python prepare_dataset.py /mnt/data/datasets/annotations/instances_default.json
-    command:
-    - sh
-    - -c
-    image: '{{workflow.parameters.tf-image}}'
-    volumeMounts:
-    - mountPath: /mnt/data
-      name: data
-    - mountPath: /mnt/output
-      name: output
-    workingDir: /mnt/src
-  nodeSelector:
-    beta.kubernetes.io/instance-type: '{{workflow.parameters.cvat-node-pool}}'
-  inputs:
-    artifacts:
-    - name: data
-      path: /mnt/data/datasets/
-      s3:
-        key: '{{workflow.namespace}}/{{workflow.parameters.cvat-annotation-path}}'
-    - git:
-        repo: '{{workflow.parameters.source}}'
-        revision: "no-boto"
-      name: src
-      path: /mnt/src
-  name: tensorflow
-  outputs:
-    artifacts:
-    - name: model
-      optional: true
-      path: /mnt/output
-      s3:
-        key: '{{workflow.namespace}}/{{workflow.parameters.cvat-output-path}}/{{workflow.name}}'
-volumeClaimTemplates:
-- metadata:
-    creationTimestamp: null
-    name: data
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 200Gi
-- metadata:
-    creationTimestamp: null
-    name: output
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 200Gi
-```
 
 Even though this looks cryptic, it isn't. Let us go through following three steps to create template for DETR.
 
