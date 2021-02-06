@@ -9,7 +9,7 @@ This guide will walk you through the process adding custom object detection or s
 The steps to add your custom model training are as follows:
 
 1. Make sure your training code supports CVAT's annotation formats.
-2. Overview of the **CVAT training Workflow Template** that we'll be using as base.
+2. Overview of the **CVAT training Workflow Template** that you'll be using as base.
 3. Update your training code's input and output directory structures and push to a Git repository (e.g. GitHub).
 4. Update **CVAT training Workflow Template** to reference your training code and install dependencies (if any).
 
@@ -205,9 +205,11 @@ volumeClaimTemplates:
 
 ## 3. Update the training code
 
+In this step, you will launch a JupyterLab Workspace in Onepanel to test and adjust your code before it is added to the the CVAT training Workflow Template. The JupyterLab Workspace Template just like the CVAT training Workflow Template, uses the `onepanel/dl` Docker image which has both PyTorch 1.6 and TensorFlow 2.3 installed and provides a consistent environment for testing and deploying your training code.
+
 1. Fork the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) repository.
 
-2. Launch a **JupyterLab** Workspace in Onepanel and then [clone](/docs/reference/jupyterlab/git#cloning) your fork.
+2. Launch a **JupyterLab** Workspace on a GPU node pool, then [clone](/docs/reference/jupyterlab/git#cloning) your fork.
 
 3. In JupyterLab, open the `detr` directory and navigate to `datasets/coco.py`; then update the following lines:
 
@@ -228,12 +230,35 @@ volumeClaimTemplates:
     ```
 
     :::note
-    For simplicity, we are using the same data for train and validation sets. You can write a script or add another task that runs prior to this task in the CVAT training Workflow Template that splits this data accordingly. See our [Albumentations Workflow Template](https://github.com/onepanelio/templates/tree/release-v0.18.0/workflows/albumentations-preprocessing) or the [built-in training Workflows](http://localhost:3000/docs/reference/workflows/training) for reference on how to do this.
+    For simplicity, the same data for train and validation sets. You can write a script or add another task that runs prior to this task in the CVAT training Workflow Template that splits this data accordingly. See our [Albumentations Workflow Template](https://github.com/onepanelio/templates/tree/release-v0.18.0/workflows/albumentations-preprocessing) or the [built-in training Workflows](/docs/reference/workflows/training) for reference on how to do this.
     :::
 
-4. [Commit and push](http://localhost:3000/docs/reference/jupyterlab/git#other-git-actions) your changes back to your repository.
+4. As mentioned before, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`, so you need to add a script to prefix `file_name` in `instances_default.json` (COCO JSON file) with this directory location.
 
-As mentioned before, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`. Since this code takes this path as an argument (`--coco_path`), we will pass the correct path in the Workflow Template later. Same applies to passing `/mnt/output` to  `--output_dir`. If your training code doesn't have these parameters, we recommend you add them instead of hard coding these paths in your code.
+5. Upload your data dump from CVAT into JupyterLab and then move the data to `/mnt/data/datasets` (you will have to create this directory).
+
+6. Run the following command to test your changes:
+
+    ```bash
+    python main.py --coco_path /mnt/data/datasets --output_dir /mnt/output --epochs 1
+    ```
+
+    You will get an error that `pycocotools` is missing, install it by running:
+
+    ```bash
+    pip install pycocotools
+    ```
+
+    Take a note of these commands, you will be adding them to the CVAT training Workflow Template in later steps as follows:
+
+    ```bash
+    pip install pycocotools && \
+        python main.py --coco_path /mnt/data/datasets --output_dir /mnt/output
+    ```
+
+7. [Commit and push](/docs/reference/jupyterlab/git#other-git-actions) your changes back to your repository.
+
+As mentioned before, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`. Since this code takes this path as an argument (`--coco_path`), you will pass the correct path in the Workflow Template later. Same applies to passing `/mnt/output` to  `--output_dir`. If your training code doesn't have these parameters, we recommend you add them instead of hard coding these paths in your code.
 
 ## 4. Update CVAT training Workflow Template
 
