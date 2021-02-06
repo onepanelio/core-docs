@@ -8,10 +8,10 @@ This guide will walk you through the process adding custom object detection or s
 
 The steps to add your custom model training are as follows:
 
-1. Make sure your training code supports CVAT's annotation formats
-2. Overview of the **CVAT training Workflow Template** that we'll be using as base
-3. Update your training code's input and output directory structures and push to a git repository (e.g. GitHub)
-4. Update **CVAT training Workflow Template** to point to your new code and install dependencies (if any)
+1. Make sure your training code supports CVAT's annotation formats.
+2. Overview of the **CVAT training Workflow Template** that we'll be using as base.
+3. Update your training code's input and output directory structures and push to a Git repository (e.g. GitHub).
+4. Update **CVAT training Workflow Template** to reference your training code and install dependencies (if any).
 
 We will walk through these steps by adding the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) model for semantic segmentation.
 
@@ -37,9 +37,14 @@ This template is available in Onepanel by navigating to **Workflows** > **Workfl
 
 Below is the content of this template with in-line comments describing the fields and what you would need to change. Note that you will only need to change the fields marked with `[CHANGE]`.
 
-The fields with the `cvat-` prefix are automatically populated by CVAT. The `dump_format` indicates to CVAT in which format to dump the annotations. 
+Some important notes about this template:
 
-We will walk through updating this template to add DETR.
+1. The fields with the `cvat-` prefix are automatically populated by CVAT. The `dump_format` indicates to CVAT in which format to dump the annotations.
+2. Your training code is cloned from your Git repository into `/mnt/src/train`.
+3. The annotation dump is downloaded from object storage to `/mnt/data/datasets` and if any checkpoint models are selected, that is downloaded to `/mnt/data/models`.
+4. Any output from your training code (model and `classes.csv` file) is expected to be written to `/mnt/output`. Files written to this location will be automatically uploaded to your default object storage and accessible to CVAT and other Workspaces.
+
+We will walk through updating the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) code and this template in the next few sections.
 
 ```yaml
 # Workflow Template for building object detection or semantic segmentation 
