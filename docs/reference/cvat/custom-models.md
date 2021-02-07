@@ -209,7 +209,7 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
 
 1. Fork the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) repository.
 
-2. Launch a **JupyterLab** Workspace on a GPU node pool, then [clone](/docs/reference/jupyterlab/git#cloning) your fork.
+2. Launch a **JupyterLab** Workspace on a GPU node pool, then [clone](/docs/reference/jupyterlab/git#cloning) your fork. You can optionally run on a CPU node pool but it will take much longer to test.
 
 3. In JupyterLab, open the `detr` directory and navigate to `datasets/coco.py`; then update the following lines:
 
@@ -233,13 +233,23 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
     For simplicity, the same data for train and validation sets. You can write a script or add another task that runs prior to this task in the CVAT training Workflow Template that splits this data accordingly. See our [Albumentations Workflow Template](https://github.com/onepanelio/templates/tree/release-v0.18.0/workflows/albumentations-preprocessing) or the [built-in training Workflows](/docs/reference/workflows/training) for reference on how to do this.
     :::
 
-4. As mentioned before, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`, so you need to add a script to prefix `file_name` in `instances_default.json` (COCO JSON file) with this directory location.
+4. As mentioned before, in the Workflow, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`, so you need to add a script to prefix `file_name` in `instances_default.json` (COCO JSON file) with this directory location.
 
-5. Upload your data dump from CVAT into JupyterLab and then move the data to `/mnt/data/datasets` (you will have to create this directory).
+5. Upload your data dump from CVAT into JupyterLab and then copy or move the data to `/mnt/data/datasets`. Note that the JupyterLab default directory is `/data`.
+
+    ```bash
+    mkdir -p /mnt/data/datasets
+    cp -r /data/<path-to-dataset>/* /mnt/data/datasets
+    ```
+
+    :::note
+    The data and directories are automatically mounted and created in CVAT training Workflow, so you do not have to do this when you add this code the Workflow.
+    :::
 
 6. Run the following command to test your changes:
 
     ```bash
+    # if you are running on CPU, add  `--device cpu` flag
     python main.py --coco_path /mnt/data/datasets --output_dir /mnt/output --epochs 1
     ```
 
@@ -260,7 +270,15 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
 
 As mentioned before, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`. Since this code takes this path as an argument (`--coco_path`), you will pass the correct path in the Workflow Template later. Same applies to passing `/mnt/output` to  `--output_dir`. If your training code doesn't have these parameters, we recommend you add them instead of hard coding these paths in your code.
 
-## 4. Update CVAT training Workflow Template
+## 4. Add new CVAT training Workflow Template
+
+Now that your code is update properly, you will need to add it in as a Workflow so that it can be used from CVAT (or even triggred from the [Python SDK](https://github.com/onepanelio/python-sdk/blob/master/examples/execute-workflow.ipynb)) to train models on your data.
+
+1. Navigate to **Workflows** > **Workflow Templates** > **Create Template** and select **CVAT Training** under **Templates**.
+
+    ![](../../../static/img/custom-models-120434.png)
+
+2. Give your template a name, in this case **DETR object detection training**.
 
 
 
