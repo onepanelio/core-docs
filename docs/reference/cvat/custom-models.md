@@ -165,7 +165,7 @@ Now that your code is update properly, you will need to add it in as a Workflow 
       hint: List of available hyperparameters
     ```
 
-6. Add `epochs` and `batch-size` as parameters so we can use pass them as arguments to our training code. You can add as many parameters as your training code needs.
+6. Add `epochs` and `batch-size` as parameters so we can pass them as arguments to our training code. You can add as many parameters as your training code needs.
 
     ```yaml
     - name: epochs
@@ -179,14 +179,25 @@ Now that your code is update properly, you will need to add it in as a Workflow 
       type: input.number
     ```
 
-7. Click **Show Parameters Form Preview** to preview how your parameters are displayed.
+7. Update `dump-format` parameter to a value that your training code expects from CVAT. In this case you can leave it as `cvat_coco` since we are expecting COCO JSON.
+
+    ```yaml {4}
+    # [CHANGE] Dump format that your model expects from CVAT
+    # Valid values are: cvat_coco, cvat_voc, cvat_tfrecord, cvat_yolo, cvat_mot, cvat_label_me
+    - name: dump-format
+      value: cvat_coco
+      displayName: CVAT dump format
+      visibility: private
+    ```
+
+8. Click **Show Parameters Form Preview** to preview how your parameters are displayed.
 
     ![](../../../static/img/custom-models-121715.png)
 
-8. Following the in-line comments, update the `args` value under `containers` to match the commands we ran earlier in JupyterLab. Important differences to note here is that your repository is cloned into `/mnt/src/train` and that `epochs` and `batch-size` are passed in `main.py` as arguments by using parameter references `"{{workflow.parameters.<parameter-name>}}"`.
+9. Following the in-line comments, update the `args` value under `containers` to match the commands we ran earlier in JupyterLab. Important differences to note here are that your repository is cloned into `/mnt/src/train` and that `epochs` and `batch-size` are passed into `main.py` as arguments by using parameter references in the format `"{{workflow.parameters.<parameter-name>}}"`.
 
     ```yaml {6-11}
-    container:
+    - container:
         # [CHANGE] Bash command to run your code
         # Note that your code will be cloned into /mnt/src/train, so you will need to change to the appropriate directory
         args:
@@ -199,7 +210,7 @@ Now that your code is update properly, you will need to add it in as a Workflow 
                 --batch_size="{{workflow.parameters.batch-size}}"
     ```
 
-9. (optional) If your training code is not compatible TensorFlow 2.3 or PyTorch 1.5, you will need to update `image` to use a Docker image that is compatible with your training code.
+10. (optional) If your training code is not compatible TensorFlow 2.3 or PyTorch 1.5, you will need to update `image` to use a Docker image that is compatible with your training code.
 
     ```yaml {16}
     - container:
@@ -220,8 +231,10 @@ Now that your code is update properly, you will need to add it in as a Workflow 
         image: onepanel/dl:0.17.0
     ```
 
-10. Click **Save** to create your new training Workflow Template.
+11. Click **Save** to create your new training Workflow Template.
 
 ## 5. Using your new training Workflow Template in CVAT 
 
 Now you can use your new Workflow Template to train on your data directly from CVAT just like the [built-in training Workflow Templates](docs/reference/cvat/built-in-models).
+
+![](../../../static/img/custom-models-141235.png)
