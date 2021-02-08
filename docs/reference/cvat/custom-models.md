@@ -12,6 +12,7 @@ The steps to add your custom model training are as follows:
 2. Overview of the **CVAT training Workflow Template** that you'll be using as base.
 3. Update your training code's input and output directory structures and push to a Git repository (e.g. GitHub).
 4. Update **CVAT training Workflow Template** to reference your training code and install dependencies (if any).
+5. Use your new Workflow Template to train models directly from CVAT.
 
 We will walk through these steps by adding the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) model for semantic segmentation.
 
@@ -53,8 +54,23 @@ We will walk through updating the [DEtection TRansformer (DETR)](https://github.
 # Only change the fields marked with [CHANGE]
 arguments:
   parameters:
+    # [CHANGE] This is the path to your training code repository that will be cloned
+    # For private repositories see: https://docs.onepanel.ai/docs/reference/workflows/artifacts#git
+    - name: code
+      value: https://github.com/onepanelio/templates.git
+      displayName: Model training code repository
+      type: hidden
+      visibility: private
 
-    # This is the path to data and annotation files, keep this intact so CVAT knows to populate this
+    # [CHANGE] This is the name of branch or tag in your repository that will be used to clone your code
+    - name: revision
+      value: v0.18.0
+      displayName: Model training code repository branch or tag name
+      type: hidden
+      visibility: private
+
+    # This is the path to data and annotation files
+    # Any parameter prefixed with 'cvat-' is automatically populated
     - name: cvat-annotation-path
       # Default value, this will be automatically populated by CVAT
       value: 'artifacts/{{workflow.namespace}}/annotations/'
@@ -72,7 +88,8 @@ arguments:
       displayName: Checkpoint path
       visibility: public
 
-    # Number of classes
+    # [CHANGE] Number of classes
+    # You can remove this if your code can deduce classes from annotation data
     - name: cvat-num-classes
       displayName: Number of classes
       hint: Number of classes. In CVAT, this parameter will be pre-populated.
@@ -81,14 +98,12 @@ arguments:
 
     # [CHANGE] Hyperparameters for your model
     # Note that this will come in as multiline text that you will need to parse in your code
+    # You may also create a separate parameter for each hyperparameter and pass it as a flag
     - name: hyperparameters
       displayName: Hyperparameters
       visibility: public
       type: textarea.textarea
       value: |-
-        stage-1-epochs: 1    #  Epochs for network heads
-        stage-2-epochs: 2    #  Epochs for finetune layers
-        stage-3-epochs: 3    #  Epochs for all layers
         num_steps: 1000     #   Num steps per epoch
       hint: List of available hyperparameters
 
@@ -134,7 +149,7 @@ templates:
     # [CHANGE] Docker image to use to run your code
     # You can keep this as is if your code uses TensorFlow 2.3 or PyTorch 1.5
     # For private Docker repositories use imagePullSecrets: https://github.com/argoproj/argo/blob/master/examples/image-pull-secrets.yaml#L10-L11
-    image: 'onepanel/dl:0.17.0'
+    image: onepanel/dl:0.17.0
     volumeMounts:
       - mountPath: /mnt/data
         name: data
@@ -143,7 +158,7 @@ templates:
     workingDir: /mnt/src
   sidecars:
     - name: tensorboard
-      image: 'onepanel/dl:0.17.0'
+      image: onepanel/dl:0.17.0
       command: [ sh, -c ]
       env:
         - name: ONEPANEL_INTERACTIVE_SIDECAR
@@ -168,10 +183,8 @@ templates:
         s3:
           key: '{{workflow.parameters.cvat-finetune-checkpoint}}'
       - git:
-          # [CHANGE] Point this to your code repository
-          # For private repositories see: https://docs.onepanel.ai/docs/reference/workflows/artifacts#git
-          repo: https://github.com/onepanelio/templates.git
-          revision: v0.18.0
+          repo: {{workflow.parameters.code}}
+          revision: {{workflow.parameters.revision}}
         name: src
         path: /mnt/src/train
   name: train-model
@@ -259,12 +272,7 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
     pip install pycocotools
     ```
 
-    Take a note of these commands, you will be adding them to the CVAT training Workflow Template in later steps as follows:
-
-    ```bash
-    pip install pycocotools && \
-        python main.py --coco_path /mnt/data/datasets --output_dir /mnt/output
-    ```
+    Take a note of these commands, you will be adding them to the CVAT training Workflow Template in later steps.
 
 7. [Commit and push](/docs/reference/jupyterlab/git#other-git-actions) your changes back to your repository.
 
@@ -282,18 +290,6 @@ Now that your code is update properly, you will need to add it in as a Workflow 
 
 
 
-## 5. Using the new Workflow in CVAT 
+## 5. Using your new training Workflow Template in CVAT 
 
-Now, you can use this model to train models from CVAT.
-
-Click on `Actions` menu under the CVAT task you want to train model on, select `Execute training Workflow`.
-
-Select the newly created template. In my case, it was `DETR Training`.
-
-![DETR Execute](/img/detr_execute.png)
-
-Modify parameters, if you want. But changes aren't required. Just hit `Submit` and it will start the training by executing this workflow. 
-
-![DETR Training](/img/detr_training.png)
-
-You can find your trained model (i.e output) in `cvat-output-path` directory on your cloud storage.
+Now you can use your new Workflow Template to train on your data directly from CVAT just like the [built-in training Workflow Templates](docs/reference/cvat/built-in-models).
