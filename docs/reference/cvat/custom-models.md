@@ -77,9 +77,7 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
     For simplicity, the same data for train and validation sets. You can write a script or add another task that runs prior to this task in the CVAT training Workflow Template that splits this data accordingly. See our [Albumentations Workflow Template](https://github.com/onepanelio/templates/tree/release-v0.18.0/workflows/albumentations-preprocessing) or the [built-in training Workflows](/docs/reference/workflows/training) for reference on how to do this.
     :::
 
-4. As mentioned before, in the Workflow, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`, so you need to add a script to prefix `file_name` in `instances_default.json` (COCO JSON file) with this directory location.
-
-5. Upload your data dump from CVAT into JupyterLab and then copy or move the data to `/mnt/data/datasets`. Note that the JupyterLab default directory is `/data`.
+4. Upload your data dump from CVAT into JupyterLab and then copy or move the data to `/mnt/data/datasets`. Note that the JupyterLab default directory is `/data`.
 
     ```bash
     mkdir -p /mnt/data/datasets
@@ -90,7 +88,7 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
     The data and directories are automatically mounted and created in CVAT training Workflow, so you do not have to do this when you add this code the Workflow.
     :::
 
-6. Run the following command to test your changes:
+5. Run the following command to test your changes:
 
     ```bash
     # if you are running on CPU, add  `--device cpu` flag
@@ -105,7 +103,7 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
 
     Take a note of these commands, you will be adding them to the CVAT training Workflow Template in later steps.
 
-7. [Commit and push](/docs/reference/jupyterlab/git#other-git-actions) your changes back to your repository.
+6. [Commit and push](/docs/reference/jupyterlab/git#other-git-actions) your changes back to your repository.
 
 As mentioned before, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`. Since this code takes this path as an argument (`--coco_path`), you will pass the correct path in the Workflow Template later. Same applies to passing `/mnt/output` to  `--output_dir`. If your training code doesn't have these parameters, we recommend you add them instead of hard coding these paths in your code.
 
