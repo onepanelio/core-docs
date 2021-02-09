@@ -34,38 +34,39 @@ You can also bring your own labeling tool as a reproducible template in Onepanel
   You can switch to a different node pool (for example one that supports GPUs) in a running Workspace at any time by clicking the Onepanel icon in the bottom right corner of your Workspace.
   :::
 
-4. Next, add the directory you want Onepanel to pull raw input data and store training output (pickled models, classes, etc.). This directory should be in the default object storage you configured when you launched Onepanel and in a directory that matches your current namespace.
+4. Click **Create and Run** to launch your CVAT Workspace.
 
-  ![](/img/quickstart-171037.png)
-
-5. Click **Create and Run** to launch your CVAT Workspace.
-
-6. Once CVAT is running, click **View**.
+5. Once CVAT is running, click **View**.
 
   ![](/img/quickstart-173734.png)
 
-7. In CVAT, click **Create new task**.
+6. In CVAT, click **Create new task**.
 
   ![](/img/quickstart-173841.png)
 
-8. Enter a name for your task and then under **Constructor**, add your labels. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#creating-an-annotation-task) for additional information on more advanced label configuration.
+7. Enter a name for your task and then under **Constructor**, add your labels. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#creating-an-annotation-task) for additional information on more advanced label configuration.
 
-9. Under "Select files", click **Connected file share**. Files from your object storage location above should have already synced here. Pick the ones you want to annotate.
+8. Assuming you have already uploaded your images or videos to your object storage, under "Select files", click **Connected file share**.
 
-  ![](/img/quickstart-180004.png)
-  :::important
-  Onepanel's FileSyncer automatically syncs files from your object storage location to this CVAT instance (`/mnt/share`) every 5 minutes. You should not change the directory on local machine since CVAT reads data from that directory. However, you can specify directory on your cloud storage (i.e S3). By default, this directory on cloud storage is `workflow-data`. We recommend you don't change this directory. But if required, you can change this directory by modifying default directory name while creating CVAT workspace.
+  ![](../../../static/img/quickstart-212157.png)
 
-  You can put raw input files inside `workflow-data/<sample-input-folder>` as Workflow outputs will be stored in `workflow-data/output`.
-  :::
+9. Click the Onepanel icon in bottom right corner to bring up the Workspace panel.
 
-10. Click **Submit** and then click the **Tasks** menu item to go to the tasks list.
+10. Under **Workspace path**, type in the path to use to sync your object storage data to, then browse to the folder containing your images or videos under **Object storage location**.
 
-11. Click **Open** to open task details.
+  ![](../../../static/img/quickstart-111117.png)
+
+11. Click **Sync to Workspace** to sync your files to this Workspace. Once syncing is complete, click **Refresh** and select your files.
+
+  ![](../../../static/img/quickstart-213616.png)
+
+12. Click **Submit** and then click the **Tasks** menu item to go to the tasks list.
+
+13. Click **Open** to open task details.
 
   ![](/img/cvat_open.png)
 
-12. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
+14. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
 
 ## Annotating frames in CVAT
 

@@ -6,7 +6,7 @@ description: Onepanel - Hyperparameter tuning
 
 Onepanel supports hyperparameter tuning for your TensorFlow and PyTorch models by fully integrating with [NNI](https://github.com/microsoft/nni) and its [built-in tuners](https://nni.readthedocs.io/en/stable/Tuner/BuiltinTuner.html).
 
-To understand how to add hyperparameter tuning into Onepanel Workflows, we'll walk through this [simple MNIST example](https://github.com/onepanelio/templates/tree/master/workflows/hyperparameter-tuning/mnist). Note that this example is also available when you deploy Onepanel under **Workflows** > **Workflow Templates** > **Hyperparameter Tuning Example**, so you can **Clone** it and make minor changes to make it work with your own model architecture and training code.
+To understand how to add hyperparameter tuning into Onepanel Workflows, we'll walk through this [simple MNIST example](https://github.com/onepanelio/templates/tree/v0.18.0/workflows/hyperparameter-tuning/mnist). Note that this example is also available when you deploy Onepanel under **Workflows** > **Workflow Templates** > **Hyperparameter Tuning Example** and also as a starter template under **Workflows** > **Workflow Templates** > **Create Template** > **Hyperparamter tuning**.
 
 There are 4 parts to configuring hyperparameter tuning into your Workflows:
 
@@ -17,7 +17,7 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
 
 ## Setting up your Workflow Template
 
-1. First, make changes to your training code to grab the parameters from NNI and report results back to NNI. Highlighted below are all the changes we had to make to [MNIST example code](https://github.com/onepanelio/templates/tree/master/workflows/hyperparameter-tuning/mnist/main.py) to support hyperparameter tuning. The `...` indicate code that was removed for brevity.
+1. First, make changes to your training code to grab the parameters from NNI and report results back to NNI. Highlighted below are all the changes we had to make to [MNIST example code](https://github.com/onepanelio/templates/tree/v0.18.0/workflows/hyperparameter-tuning/mnist/main.py) to support hyperparameter tuning. The `...` indicate code that was removed for brevity.
 
     ```python {1,4-7,25,32,49-50}
     import nni
@@ -75,16 +75,21 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
         main(parser.parse_args(), params)
     ```
 
-2. Go to **Workflows** > **Workflow Templates** > **Hyperparameter Tuning Example** and click **Clone**.
+2. Go to **Workflows** > **Workflow Templates** > **Create Template** and select **Hyperparamter tuning**.
 
-3. Update the cloned Workflow Template to use your repository and update the paths in `/mnt/src` to match your repository's directory structure. The `...` indicate sections that were removed for brevity.
+3. Update the Workflow Template to use your repository and update the paths in `/mnt/src` to match your repository's directory structure. The `...` indicate sections that were removed for brevity.
     ```yaml {6,26,31,40}
     entrypoint: main
     arguments:
         parameters:
+        # [CHANGE] Path to your training/model architecture code repository
+        # Change this value and revision value to your code repository and branch respectively
         - name: source
-          # Path to your training/model architecture code repository
           value: https://github.com/onepanelio/templates
+        # [CHANGE] Revision is the branch or tag that you want to use
+        # You can change this to any tag or branch name in your repository
+        - name: revision
+          value: v0.18.0
     ...
     templates:
     - name: main
@@ -103,12 +108,16 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
             revision: '{{workflow.parameters.revision}}'
           path: /mnt/data/src
         - name: config
-          # Path to where your tuner configuration (config.yaml) will be written - same directory as your training code
+          # [CHANGE] Path where config.yaml will be generated or already exists
+          # Update the path below so that config.yaml is written to the same directory as your main.py file
+          # Note that your source code is cloned to /mnt/data/src
           path: /mnt/data/src/<path-to-training-code-directory>/config.yaml
           raw:
             data: '{{workflow.parameters.config}}'
         - name: search-space
-          # Path to where your hyperparameter search space (search_space.json) will be written - same directory as your training code
+          # [CHANGE] Path where search_space.json will be generated or already exists
+          # Update the path below so that search_space.json is written to the same directory as your main.py file
+          # Note that your source code is cloned to /mnt/data/src
           path: /mnt/data/src/<path-to-training-code-directory>/search_space.json
           raw:
             data: '{{workflow.parameters.search-space}}'
@@ -117,7 +126,7 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
         image: onepanel/dl:0.17.0
         args:
             - --config
-            # Path to config.yaml file that is written above
+            # [CHANGE] Update the path below to point to config.yaml path as described above
             - /mnt/data/src/<path-to-training-code-directory>/config.yaml
     ...
     ```
@@ -188,6 +197,6 @@ You can also view the corresponding TensorBoard by clicking **Open TensorBoard**
 ## Persisting best metrics, model and hyperparameters
 Although optional, you should persist the best metrics to your Workflow and save the best model and parameters to your object storage.
 
-Refer to the [MNIST example code](https://github.com/onepanelio/templates/tree/master/workflows/hyperparameter-tuning/mnist/main.py) for an example of how to do this.
+Refer to the [MNIST example code](https://github.com/onepanelio/templates/tree/v0.18.0/workflows/hyperparameter-tuning/mnist/main.py) for an example of how to do this.
 
 ![](../../../static/img/hyperparamtuning-173059.png)
