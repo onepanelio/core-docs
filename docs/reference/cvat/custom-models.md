@@ -208,7 +208,7 @@ Now that your code is update properly, you will need to add it in as a Workflow 
                 --batch_size="{{workflow.parameters.batch-size}}"
     ```
 
-10. (optional) If your training code is not compatible TensorFlow 2.3 or PyTorch 1.5, you will need to update `image` to use a Docker image that is compatible with your training code.
+10. (Optional) If your training code is not compatible TensorFlow 2.3 or PyTorch 1.5, you will need to update `image` to use a Docker image that is compatible with your training code.
 
     ```yaml {16}
     - container:
@@ -228,6 +228,8 @@ Now that your code is update properly, you will need to add it in as a Workflow 
         # For private Docker repositories use imagePullSecrets: https://github.com/argoproj/argo/blob/master/examples/image-pull-secrets.yaml#L10-L11
         image: onepanel/dl:0.17.0
     ```
+
+11. (Optional) If your training code has TensorBoard callbacks, make sure to write the TensorBoard logs to `/mnt/output` (we generally recommend writing to `/mnt/output/tensorboard` to better organize your output). You can then [access TensorBoard](/docs/reference/workflows/tensorboard) when this training Workflow is running.
 
 11. Click **Save** to create your new training Workflow Template.
 
