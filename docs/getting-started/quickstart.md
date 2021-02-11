@@ -523,6 +523,10 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   opctl auth token
   ```
 
+:::important
+You will most likely need use a GPU node pool for **Step 3: Train a model on annotated data** below. See [adding more nodes](/docs/deployment/components/nodes) for instructions on adding GPU node pools to your cluster.
+:::
+
 ## Step 2: Annotate your data
 
 Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https://github.com/opencv/cvat), allowing you to annotate images and videos and then train models on the annotated data with a few clicks. You can then use these newly trained models to automatically pre-annotate additional data, iteratively improving your object detection or semantic segmentation models.
