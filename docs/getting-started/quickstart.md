@@ -20,7 +20,7 @@ Before getting started, take a look at [concepts](/docs/getting-started/concepts
 You can also follow along with our getting started videos, but be sure to use the commands from the docs:
 
 - [Getting started with Microsoft Azure](https://youtu.be/6KmyW-gfi94)
-- [Getting started with Amazon EKS](https://youtu.be/Ipdd8f6D6IM)
+- [Getting started with Amazon EKS](https://youtu.be/hFCqM-ZxXYo)
 - [Getting started with Google Cloud GKE](https://youtu.be/pZRO63SnQ8A)
 :::
 
