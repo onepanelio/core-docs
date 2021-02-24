@@ -51,7 +51,7 @@ fix: issue where workspace page crashed upon three refreshes
 Onepanel consists of the following repositories. For more information on making contributions, see `CONTRIBUTING.md` in each repository.
 
 ### Platform
-- [Backend](https://github.com/onepanelio/core/) (this repository) - Code base for backend (Go)
+- [Backend](https://github.com/onepanelio/onepanel/) - Code base for backend (Go)
 - [Frontend](https://github.com/onepanelio/core-ui/) - Code base for frontend (Angular + TypeScript)
 - [CLI](https://github.com/onepanelio/cli/) - Code base for installation and management CLI (Go)
 - [Manifests](https://github.com/onepanelio/core-ui/) - Kustomize manifests used by installation and management CLI (YAML)
