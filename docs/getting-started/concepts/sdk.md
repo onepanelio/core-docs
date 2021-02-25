@@ -4,12 +4,8 @@ sidebar_label: Python SDK
 description: Onepanel - Python SDK
 ---
 
-Onepanel's [Python SDK](https://github.com/onepanelio/python-sdk) can be used to programmatically perform any task that is available through the web UI.
+Onepanel's Python SDK can be used to programmatically perform any task that is available through the web UI. It is by default installed in all out of the box Workspaces and Workflows in Onepanel.
 
-Additionally, you can use the Python SDK to [define Workflows](https://github.com/onepanelio/python-sdk/blob/master/examples/python-defined-workflow.ipynb)
+Additionally, you can use the Python SDK to define Workflows in Python and execute them from any environment that supports Python.
 
-Some examples include:
-
-- [Define Workflows in Python](https://github.com/onepanelio/python-sdk/blob/master/examples/python-defined-workflow.ipynb)
-- [Execute Workflows from Workspaces](https://github.com/onepanelio/python-sdk/blob/master/examples/execute-workflow.ipynb)
-- [Automatically launch CVAT annotation Workspaces](https://github.com/onepanelio/templates/tree/release-v0.18.0/workflows/auto-cvat)
+See [Python SDK](/docs/reference/sdks/python) in **User Guide** for more detailed information.
