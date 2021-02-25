@@ -27,7 +27,6 @@ module.exports = {
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
         {to: 'docs/reference/overview', label: 'User Guide', position: 'left'},
         {to: 'docs/deployment/overview', label: 'Operator Manual', position: 'left'},
-        {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
         {href: 'https://github.com/onepanelio/core/releases', label: 'Releases', position: 'left'},
         {href: 'https://github.com/onepanelio/core/milestones?direction=asc&sort=due_date&state=open', label: 'Roadmap', position: 'left'},
         // {to: 'blog', label: 'Changelog', position: 'left'},
