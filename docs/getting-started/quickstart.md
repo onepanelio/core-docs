@@ -581,6 +581,10 @@ Onepanel is fully integrated with [Computer Vision Annotation Tool (CVAT)](https
 
 14. Click **Job #1** to go into CVAT to start annotating your data. See [CVAT's user guide](https://github.com/opencv/cvat/blob/develop/cvat/apps/documentation/user_guide.md#interface-of-the-annotation-tool) for more information on the annotation tool interface.
 
+:::important
+When annotating polygons for semantic segmentation (MaskRCNN, etc.), make sure that all images have annotations and that every polygon has at least 5 vertices.
+:::
+
 ## Step 3: Train a model on annotated data
 
 You can train object detection or semantic segmentation models directly from CVAT, which you can then use to automatically pre-annotate new data. This dramatically reduces the time it takes to train new models and iteratively improve your models. Moreover, apart from default models that we provide, you easily add custom model training Workflows and use them for pre-annotation as well.
