@@ -21,7 +21,7 @@ You can also follow along with our getting started videos, but be sure to use th
 
 - [Getting started with Microsoft Azure](https://youtu.be/6KmyW-gfi94)
 - [Getting started with Amazon EKS](https://youtu.be/hFCqM-ZxXYo)
-- [Getting started with Google Cloud GKE](https://youtu.be/pZRO63SnQ8A)
+- [Getting started with Google Cloud GKE](https://youtu.be/hIktM1zAFMI)
 :::
 
 ## Step 0: Create a Kubernetes cluster
