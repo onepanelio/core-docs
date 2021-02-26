@@ -14,6 +14,6 @@ The following system environment variables are always automatically added to bot
 - `ONEPANEL_RESOURCE_NAMESPACE` The namespace where the resource is running.
 - `ONEPANEL_RESOURCE_UID` The unique ID of the resource in namespace.
 
-You can add your own environment variables by navigating to the **Settings** and clicking **Add environment variable**.
+You can add your own environment variables by navigating to the **Settings** menu and clicking **Add environment variable**.
 
 ![](../../../static/img/environment-variables-155310.png)
