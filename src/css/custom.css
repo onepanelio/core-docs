@@ -312,3 +312,52 @@ ol > li::before {
 article > div > span.badge--secondary {
   display: none;
 }
+
+.features_src-pages- {
+  background-color: #fafafa;
+}
+
+/* .features_src-pages- .col--3 {
+  border-right: 1px dashed #eee;
+}
+
+.features_src-pages- .col--3:last-child {
+  border-right: none;
+} */
+
+.features__list ul {
+  list-style-type: none;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.features__list ul li {
+  margin-bottom: 12px;
+}
+
+.features__list ul li h4 {
+  font-size: 12px;
+  color: var(--ifm-color-primary-darkest);
+  margin-bottom: 4px;
+}
+
+.features_src-pages- .features__arrow-1 {
+  position: relative;
+  right: -100px;
+  height: 20px;
+  top: 2px;
+}
+
+.features_src-pages- .features__arrow-2 {
+  position: relative;
+  right: -100px;
+  height: 20px;
+  top: 2px;
+}
+
+.features_src-pages- .features__arrow-3 {
+  position: relative;
+  right: -75px;
+  height: 20px;
+  top: 2px;
+}

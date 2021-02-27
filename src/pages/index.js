@@ -8,108 +8,106 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Image and video annotation with automatic pre-annotation</>,
-    imageUrl: 'img/landing/ann.png',
+    title: <>Prepare <img className="features__arrow-1" src="img/landing/arrow.svg"></img></>,
+    imageUrl: 'img/landing/prepare.svg',
     description: (
       <>
-        Annotate images and video using <a href="https://github.com/opencv/cvat" target="_blank">CVAT</a>, with object tracking and semi-automatic annotation of bounding boxes and polygon masks.
-      </>
-    ),
-  },
-  // {
-  //   title: <>Deploy complete aerial imaging pipelines with photogrammetry tools</>,
-  //   imageUrl: 'img/landing/odm.png',
-  //   description: (
-  //     <>
-  //       Leverage tools like <a href="https://github.com/OpenDroneMap/WebODM" target="_blank">WebODM</a> with GPUs to accelerate image processing and to perform pre-annotation for object detection.
-  //     </>
-  //   ),
-  // },
-  {
-    title: <>Build your models with GPU optimized frameworks and IDEs</>,
-    imageUrl: 'img/landing/env.png',
-    description: (
-      <>
-        Seamlessly switch environments between CPU and GPU machines, preloaded with PyTorch, TensorFlow, JupyterLab, VSCode and <a href="https://github.com/onepanelio/templates/tree/master/workspaces" target="_blank">more</a>. 
+        <ul>
+          <li>
+            <h4>Computer Vision Annotation Tool</h4>
+            Annotate images and videos with automatic annotation for semantic segmentation and object detection  
+          </li>
+          <li>
+            <h4>Data augmentation and processing</h4>
+            Augment and pre-process your data using Albumentations, imgaug or bring-your-own library  
+          </li>
+          <li>
+            <h4>Bring your own tools</h4>
+            Bring your own data preparation and annotation tools and integrate them into your pipelines
+          </li>
+        </ul>
       </>
     ),
   },
   {
-    title: <>Create pipelines as code for model training and data processing</>,
-    imageUrl: 'img/landing/pip.png',
+    title: <>Build <img className="features__arrow-2" src="img/landing/arrow.svg"></img></>,
+    imageUrl: 'img/landing/build.svg',
     description: (
       <>
-        Build reproducible training and data processing pipelines that can perform parallel or distributed tasks on multiple machines.
+        <ul>
+          <li>
+            <h4>Elastic JupyterLab Workspaces</h4>
+            JupyterLab with TensorBoard, Git, debugging, diffing, Conda, OpenCV, TensorFlow, PyTorch and GPU support  
+          </li>
+          <li>
+            <h4>Elastic VS Code Workspaces</h4>
+            VSCode environments with the same libraries and tools that are consistent with your other environments  
+          </li>
+          <li>
+            <h4>Bring your own IDE or VNC tools</h4>
+            Bring your own IDEs or VNC tools using a robust YAML and Docker based templating engine
+          </li>
+        </ul>
       </>
     ),
   },
   {
-    title: <>Track experiments and visualize model metrics</>,
-    imageUrl: 'img/landing/met.png',
+    title: <>Train and Tune <img className="features__arrow-3" src="img/landing/arrow.svg"></img></>,
+    imageUrl: 'img/landing/train.svg',
     description: (
       <>
-        Track and visualize model metrics and experiments with <a href="https://github.com/tensorflow/tensorboard" target="_blank">TensorBoard</a> or bring your own experiment tracking tools.
-      </>
-    ),
-  },
-  // {
-  //   title: <>Web-based VNC environments that you can access with your browser</>,
-  //   imageUrl: 'img/landing/vnc.png',
-  //   description: (
-  //     <>
-  //       Access and share tools like AirSim, Carla, Gazebo or OpenAI Gym through your browser with VNC enabled workspaces. 
-  //     </>
-  //   ),
-  // },
-  {
-    title: <>Bring your own tools as reproducible templates</>,
-    imageUrl: 'img/landing/mod.png',
-    description: (
-      <>
-        Easily bring your own specialized cloud-native tools for development, annotation, pipelines and more.
+        <ul>
+          <li>
+            <h4>Training pipelines</h4>
+            Train models with built-in algorithms for object detection and semantic segmentation
+          </li>
+          <li>
+            <h4>Hyperparameter tuning</h4>
+            Fully integrated with NNI for hyperparameter tuning for object detection and semantic segmentation
+          </li>
+          <li>
+            <h4>Visualization tools</h4>
+            Training and tuning visualizations with TensorBoard and NNI Web UI
+          </li>
+        </ul>
       </>
     ),
   },
   {
-    title: <>Integrate with existing systems using APIs and SDKs</>,
-    imageUrl: 'img/landing/sdk.png',
+    title: <>Deploy and Manage</>,
+    imageUrl: 'img/landing/deploy.svg',
     description: (
       <>
-        Extend Onepanel with our powerful REST APIs and SDKs to further automate your pipelines and environments.
+        <ul>
+          <li>
+            <h4>Workflow orchestration</h4>
+            Automate, orchestrate and schedule distributed and parallel workflows across multiple machines 
+          </li>
+          <li>
+            <h4>Inference and model ensembles</h4>
+            Use your trained models to run inference Workflows or ensemble multiple models in the same Workflow
+          </li>
+          <li>
+            <h4>Python SDK</h4>
+            Programmatically perform any task that is available through the web UI
+          </li>
+        </ul>
       </>
     ),
   },
-  // {
-  //   title: <>Infrastructure and workflows as code</>,
-  //   imageUrl: 'img/landing/iac.png',
-  //   description: (
-  //     <>
-  //       Workflows, environments and infrastructure are all defined as code and version controlled, making them reproducible and portable.
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: <>Powered by Kubernetes so you can deploy anywhere</>,
-  //   imageUrl: 'img/landing/k8s.png',
-  //   description: (
-  //     <>
-  //       Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
-  //     </>
-  //   ),
-  // }
 ];
 
 function Feature({imageUrl, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={classnames('col col--4', styles.feature)}>
+    <div className={classnames('col col--3', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
       <h3 className="text--center">{title}</h3>
-      <p className="text--center">{description}</p>
+      <p className="features__list">{description}</p>
     </div>
   );
 }
