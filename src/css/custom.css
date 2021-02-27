@@ -19,8 +19,15 @@
   --ifm-heading-color: var(--ifm-color-primary-darker);
   --ifm-font-size-base: 16px;
   --ifm-list-left-padding: 1.25rem;
-  --ifm-navbar-link-hover-color: rgb(255, 255, 255);
-  --ifm-navbar-link-color: rgb(255, 255, 255, 0.8);
+}
+
+.heroBanner_src-pages- {
+  padding: 1rem 0 !important;
+}
+
+.hero--primary {
+  --ifm-hero-background-color: #E4ECF2;
+  --ifm-hero-text-color: var(--ifm-font-color-base);
 }
 
 ol > li::marker {
@@ -67,19 +74,19 @@ ol > li::marker {
 }
 
 .button--primary {
-  background-color: #ff9100;
-  border-color: #ff9100;
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
   color: #fff;
 }
 
 .button--primary.button--outline {
   background-color: transparent;
-  border-color: #ff9100;
-  color: #ff9100;
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
 }
 
 .hero__name {
-  color: var(--ifm-font-base-color-inverse);
+  color: var(--ifm-color-primary);
   font-size: 3rem;
 }
 
@@ -88,7 +95,14 @@ ol > li::marker {
   font-size: 2rem;
 }
 
+.hero__subtitle {
+  font-size: 1.2rem;
+  color: var(--ifm-color-primary);
+}
+
 .hero__video {
+  width: 700px;
+  margin: 0 auto;
   margin-top: 2rem;
 }
 
@@ -314,7 +328,7 @@ article > div > span.badge--secondary {
 }
 
 .features_src-pages- {
-  background-color: #fafafa;
+  background-color: #f8fafc;
 }
 
 /* .features_src-pages- .col--3 {
@@ -339,6 +353,10 @@ article > div > span.badge--secondary {
   font-size: 12px;
   color: var(--ifm-color-primary-darkest);
   margin-bottom: 4px;
+}
+
+.features_src-pages- {
+  padding: 0.5rem !important;
 }
 
 .features_src-pages- .features__arrow-1 {

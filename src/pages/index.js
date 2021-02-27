@@ -121,13 +121,13 @@ function Home() {
       description="The open source vision AI platform with fully integrated modules for model building, automated labeling, data processing, model training and hyperparameter tuning.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__name">Onepanel</h1>
+          <h1 className="hero__name">Onepanel CE</h1>
           {/* <h2 className="hero__title">{siteConfig.title}</h2> */}
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
               className={classnames(
-                'button button--primary button--lg',
+                'button button--primary',
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/getting-started/quickstart')}>
@@ -135,7 +135,7 @@ function Home() {
             </Link>
             <Link
               className={classnames(
-                'button button--outline button--secondary button--lg ml-1',
+                'button button--outline button--primary ml-1',
                 styles.contribute,
               )}
               to={useBaseUrl('docs/getting-started/contributing')}>

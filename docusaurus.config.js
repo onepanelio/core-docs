@@ -1,6 +1,6 @@
 module.exports = {
   title: 'The open source, end-to-end vision AI platform',
-  tagline: 'The open source, production grade, end-to-end vision AI platform with fully integrated modules for model building, automated labeling, data processing, model training and hyperparameter tuning.',
+  tagline: 'The open source integrated development environment (IDE) for computer vision',
   url: 'https://docs.onepanel.ai',
   baseUrl: '/',
   favicon: 'img/favicon.png',
