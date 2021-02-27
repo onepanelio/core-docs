@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="48.5" height="36" viewBox="0 0 48.5 36">
-  <g id="Group_31" data-name="Group 31" transform="translate(-1290 -646.5)" opacity="0.999">
-    <g id="Polygon_1" data-name="Polygon 1" transform="translate(1338.5 646.5) rotate(90)" fill="#e4ecf2">
+  <g id="Group_31" data-name="Group 31" transform="translate(-1290 -646.5)" opacity="0.403">
+    <g id="Polygon_1" data-name="Polygon 1" transform="translate(1338.5 646.5) rotate(90)" fill="#01579b">
       <path d="M 35.06573486328125 26.5 L 0.9342630505561829 26.5 L 17.99999046325684 0.9013950228691101 L 35.06573486328125 26.5 Z" stroke="none"/>
-      <path d="M 17.99999046325684 1.802774429321289 L 1.868515014648438 26 L 34.1314811706543 26 L 17.99999046325684 1.802774429321289 M 17.99999046325684 0 L 36 27 L 0 27 L 17.99999046325684 0 Z" stroke="none" fill="#e4ecf2"/>
+      <path d="M 17.99999046325684 1.802774429321289 L 1.868515014648438 26 L 34.1314811706543 26 L 17.99999046325684 1.802774429321289 M 17.99999046325684 0 L 36 27 L 0 27 L 17.99999046325684 0 Z" stroke="none" fill="#014e8b"/>
     </g>
-    <g id="Rectangle_39" data-name="Rectangle 39" transform="translate(1290 657)" fill="#e4ecf2" stroke="#e4ecf2" stroke-width="1">
+    <g id="Rectangle_39" data-name="Rectangle 39" transform="translate(1290 657)" fill="#01579b" stroke="#014e8b" stroke-width="1">
       <rect width="30" height="16" stroke="none"/>
       <rect x="0.5" y="0.5" width="29" height="15" fill="none"/>
     </g>
