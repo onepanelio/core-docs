@@ -131,16 +131,9 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/getting-started/quickstart')}>
-              DEPLOY ONEPANEL
+              DEPLOY ONEPANEL ON ANY CLOUD
             </Link>
-            <Link
-              className={classnames(
-                'button button--outline button--primary ml-1',
-                styles.contribute,
-              )}
-              to={useBaseUrl('docs/getting-started/contributing')}>
-              CONTRIBUTE
-            </Link>
+            
           </div>
           <div className="hero__video">
             {/* <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
