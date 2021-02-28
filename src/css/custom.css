@@ -22,11 +22,11 @@
 }
 
 .heroBanner_src-pages- {
-  padding: 1.2rem 0 !important;
+  padding: 1.2rem 0 0 0 !important;
 }
 
 .hero--primary {
-  --ifm-hero-background-color: #E4ECF2;
+  --ifm-hero-background-color: #e4ecf2;
   --ifm-hero-text-color: var(--ifm-font-color-base);
 }
 
@@ -74,9 +74,16 @@ ol > li::marker {
 }
 
 .button--primary {
-  background-color: #F28627;
-  border-color: #F28627;
+  background-color: #f28627;
+  border-color: #f28627;
   color: #fff;
+}
+
+.button--primary:active,
+.button--primary:hover,
+.button--primary.button--active {
+  background-color: #e27d25;
+  border-color: #e27d25;
 }
 
 .button--primary.button--outline {
@@ -101,9 +108,15 @@ ol > li::marker {
 }
 
 .hero__video {
-  width: 40vw;
   margin: 0 auto;
-  margin-top: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 1.2rem;
+  background-image: url('/img/landing/video-bg.svg');
+}
+
+.hero__video video {
+  width: 40vw;
+  border: 4px solid #cedde9;
 }
 
 .navbar--light {
@@ -117,10 +130,6 @@ ol > li::marker {
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
-}
-
-.button.button--secondary.button--outline:not(.button--active):not(:hover) {
-  color: var(--ifm-color-secondary);
 }
 
 .ml-1 {
