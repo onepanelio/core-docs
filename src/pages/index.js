@@ -131,7 +131,7 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/getting-started/quickstart')}>
-              DEPLOY ONEPANEL ON ANY CLOUD
+              DEPLOY ONEPANEL TO ANY CLOUD
             </Link>
             
           </div>

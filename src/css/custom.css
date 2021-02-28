@@ -22,7 +22,7 @@
 }
 
 .heroBanner_src-pages- {
-  padding: 1rem 0 !important;
+  padding: 1.2rem 0 !important;
 }
 
 .hero--primary {
@@ -74,8 +74,8 @@ ol > li::marker {
 }
 
 .button--primary {
-  background-color: var(--ifm-color-primary);
-  border-color: var(--ifm-color-primary);
+  background-color: #F28627;
+  border-color: #F28627;
   color: #fff;
 }
 
@@ -96,12 +96,12 @@ ol > li::marker {
 }
 
 .hero__subtitle {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--ifm-color-primary);
 }
 
 .hero__video {
-  width: 700px;
+  width: 40vw;
   margin: 0 auto;
   margin-top: 2rem;
 }
