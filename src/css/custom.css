@@ -134,7 +134,8 @@ ol > li::marker {
 
 .hero__video video {
   width: 40vw;
-  border: 4px solid #cedde9;
+  border: 5px solid #cedde9;
+  border-radius: 6px;
 }
 
 .navbar--light {
