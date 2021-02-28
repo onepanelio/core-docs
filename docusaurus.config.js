@@ -10,13 +10,13 @@ module.exports = {
     colorMode: {
       disableSwitch: true,
     },
-    announcementBar: {
-      id: 'supportus',
-      content:
-        'If you like Onepanel, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/onepanelio/core">GitHub</a>! ⭐️',
-      backgroundColor: '#013d6d',
-      textColor: '#fff',
-    },
+    // announcementBar: {
+    //   id: 'supportus',
+    //   content:
+    //     'If you like Onepanel, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/onepanelio/core">GitHub</a>! ⭐️',
+    //   backgroundColor: '#013d6d',
+    //   textColor: '#fff',
+    // },
     navbar: {
       title: '',
       logo: {

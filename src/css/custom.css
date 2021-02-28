@@ -3,6 +3,7 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
+ @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
 /* You can override the default Infima variables here. */
 :root {
@@ -19,6 +20,10 @@
   --ifm-heading-color: var(--ifm-color-primary-darker);
   --ifm-font-size-base: 16px;
   --ifm-list-left-padding: 1.25rem;
+}
+
+body {
+  font-family: 'Questrial', sans-serif;
 }
 
 .heroBanner_src-pages- {
@@ -95,6 +100,19 @@ ol > li::marker {
 .hero__name {
   color: var(--ifm-color-primary);
   font-size: 3rem;
+}
+
+.hero__name div {
+  display: inline-block;
+  color: #fff;
+  background-color: var(--ifm-color-primary);
+  font-size: 1rem;
+  line-height: 1.2rem;
+  padding: 5px 5px 3px;
+  border-radius: 4px;
+  position: relative;
+  vertical-align: middle;
+  top: -8px;
 }
 
 .hero__title {

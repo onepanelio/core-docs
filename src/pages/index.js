@@ -121,7 +121,9 @@ function Home() {
       description="The open source vision AI platform with fully integrated modules for model building, automated labeling, data processing, model training and hyperparameter tuning.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__name">Onepanel CE</h1>
+          <h1 className="hero__name">
+            Onepanel <div>CE</div>
+          </h1>
           {/* <h2 className="hero__title">{siteConfig.title}</h2> */}
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
