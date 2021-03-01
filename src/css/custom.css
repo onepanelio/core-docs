@@ -125,6 +125,17 @@ ol > li::marker {
   color: var(--ifm-color-primary);
 }
 
+.hero__platforms {
+  font-size: 0.8rem;
+  color: var(--ifm-color-primary);
+  margin: 0.2rem;
+}
+
+.hero__platforms img {
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
 .hero__video {
   margin: 0 auto;
   padding-top: 2rem;

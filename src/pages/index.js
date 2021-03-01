@@ -133,9 +133,11 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/getting-started/quickstart')}>
-              DEPLOY ONEPANEL TO ANY CLOUD
+              GET STARTED WITH ONEPANEL
             </Link>
-            
+          </div>
+          <div className="hero__platforms">
+            deploy to <img src="img/landing/platforms.svg" alt="aws, azure, gcp, kubernetes"></img>
           </div>
           <div className="hero__video">
             {/* <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
