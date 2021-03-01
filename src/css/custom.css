@@ -130,10 +130,11 @@ ol > li::marker {
   padding-top: 2rem;
   padding-bottom: 1.2rem;
   background-image: url('/img/landing/video-bg.svg');
+  background-size: cover;
 }
 
 .hero__video video {
-  width: 40vw;
+  width: 680px;
   border: 5px solid #cedde9;
   border-radius: 6px;
 }
@@ -358,14 +359,6 @@ article > div > span.badge--secondary {
 .features_src-pages- {
   background-color: #f8fafc;
 }
-
-/* .features_src-pages- .col--3 {
-  border-right: 1px dashed #eee;
-}
-
-.features_src-pages- .col--3:last-child {
-  border-right: none;
-} */
 
 .features__list ul {
   list-style-type: none;
