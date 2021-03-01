@@ -357,7 +357,7 @@ ol > li::before {
   left: -26px;
   height: 26px;
   width: 26px;
-  color: var(--ifm-heading-color);
+  color: var(--ifm-color-primary);
   font-size: 18px;
   font-weight: bold;
 }
@@ -369,6 +369,10 @@ article > div > span.badge--secondary {
 
 .features_src-pages- {
   background-color: #f8fafc;
+}
+
+.features_src-pages- h3 {
+  color: var(--ifm-color-primary);
 }
 
 .features__list ul {
@@ -383,7 +387,7 @@ article > div > span.badge--secondary {
 
 .features__list ul li h4 {
   font-size: 0.85rem;
-  color: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-primary);
   margin-bottom: 4px;
 }
 
