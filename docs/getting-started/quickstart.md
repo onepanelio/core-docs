@@ -19,9 +19,9 @@ Before getting started, take a look at [concepts](/docs/getting-started/concepts
 :::tip
 You can also follow along with our getting started videos, but be sure to use the commands from the docs:
 
-- [Getting started with Microsoft Azure](https://youtu.be/6KmyW-gfi94)
-- [Getting started with Amazon EKS](https://youtu.be/hFCqM-ZxXYo)
-- [Getting started with Google Cloud GKE](https://youtu.be/hIktM1zAFMI)
+- [Getting started with Microsoft Azure](https://youtu.be/zwJM5T00qpA)
+- [Getting started with Amazon EKS](https://youtu.be/2LlOrVIrzzQ)
+- [Getting started with Google Cloud GKE](https://youtu.be/YKSOiTgpwXk)
 :::
 
 ## Step 0: Create a Kubernetes cluster
