@@ -10,7 +10,7 @@
   --ifm-color-primary: #01579b;
   --ifm-color-primary-dark: #014e8b;
   --ifm-color-primary-darker: #014a84;
-  --ifm-color-primary-darkest: #013d6d;
+  --ifm-color-primary-darkest: #00233f;
   --ifm-color-primary-light: #0160ab;
   --ifm-color-primary-lighter: #0164b2;
   --ifm-color-primary-lightest: #0171ca;
@@ -410,4 +410,8 @@ article > div > span.badge--secondary {
   right: -75px;
   height: 20px;
   top: 2px;
+}
+
+.footer {
+  background-color: var(--ifm-color-primary-darkest);
 }
