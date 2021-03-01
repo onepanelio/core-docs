@@ -369,16 +369,16 @@ article > div > span.badge--secondary {
 
 .features__list ul {
   list-style-type: none;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 0.85rem;
+  line-height: 1.2rem;
 }
 
 .features__list ul li {
-  margin-bottom: 12px;
+  margin-bottom: 1.2rem;
 }
 
 .features__list ul li h4 {
-  font-size: 12px;
+  font-size: 0.85rem;
   color: var(--ifm-color-primary-darkest);
   margin-bottom: 4px;
 }
