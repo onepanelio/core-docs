@@ -138,8 +138,7 @@ ol > li::marker {
 
 .hero__video {
   margin: 0 auto;
-  padding-top: 2rem;
-  padding-bottom: 1.2rem;
+  padding: 1.2rem 0 1.2rem 0;
   background-image: url('/img/landing/video-bg.svg');
   background-size: cover;
 }
