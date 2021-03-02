@@ -140,5 +140,13 @@ module.exports = {
         'reference/jupyterlab/language-server',
       ]
     },
+    { 
+      type: 'category',
+      label: 'SDKs',
+      collapsed: false,
+      items: [
+        'reference/sdks/python',
+      ]
+    },
   ]
 };

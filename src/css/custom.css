@@ -4,12 +4,14 @@
  * work well for content-centric websites.
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #01579b;
   --ifm-color-primary-dark: #014e8b;
   --ifm-color-primary-darker: #014a84;
-  --ifm-color-primary-darkest: #013d6d;
+  --ifm-color-primary-darkest: #00233f;
   --ifm-color-primary-light: #0160ab;
   --ifm-color-primary-lighter: #0164b2;
   --ifm-color-primary-lightest: #0171ca;
@@ -19,8 +21,16 @@
   --ifm-heading-color: var(--ifm-color-primary-darker);
   --ifm-font-size-base: 16px;
   --ifm-list-left-padding: 1.25rem;
-  --ifm-navbar-link-hover-color: rgb(255, 255, 255);
-  --ifm-navbar-link-color: rgb(255, 255, 255, 0.8);
+}
+
+body {
+  font-family: 'Questrial', sans-serif;
+}
+
+.hero.hero--primary.heroBanner_src-pages- {
+  padding: 1.2rem 0 0 0;
+  --ifm-hero-background-color: #e4ecf2;
+  --ifm-hero-text-color: var(--ifm-font-color-base);
 }
 
 ol > li::marker {
@@ -67,20 +77,40 @@ ol > li::marker {
 }
 
 .button--primary {
-  background-color: #ff9100;
-  border-color: #ff9100;
+  background-color: #f28627;
+  border-color: #f28627;
   color: #fff;
+}
+
+.button--primary:active,
+.button--primary:hover,
+.button--primary.button--active {
+  background-color: #e27d25;
+  border-color: #e27d25;
 }
 
 .button--primary.button--outline {
   background-color: transparent;
-  border-color: #ff9100;
-  color: #ff9100;
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
 }
 
 .hero__name {
-  color: var(--ifm-font-base-color-inverse);
+  color: var(--ifm-color-primary);
   font-size: 3rem;
+}
+
+.hero__name div {
+  display: inline-block;
+  color: #fff;
+  background-color: var(--ifm-color-primary);
+  font-size: 1rem;
+  line-height: 1.2rem;
+  padding: 5px 5px 3px;
+  border-radius: 4px;
+  position: relative;
+  vertical-align: middle;
+  top: -8px;
 }
 
 .hero__title {
@@ -88,8 +118,33 @@ ol > li::marker {
   font-size: 2rem;
 }
 
+.hero__subtitle {
+  font-size: 1.3rem;
+  color: var(--ifm-color-primary);
+}
+
+.hero__platforms {
+  font-size: 0.8rem;
+  color: var(--ifm-color-primary);
+  margin: 0.2rem;
+}
+
+.hero__platforms img {
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
 .hero__video {
-  margin-top: 2rem;
+  margin: 0 auto;
+  padding: 1.2rem 0 1.2rem 0;
+  background-image: url('/img/landing/video-bg.svg');
+  background-size: cover;
+}
+
+.hero__video video {
+  width: 680px;
+  border: 5px solid #cedde9;
+  border-radius: 6px;
 }
 
 .navbar--light {
@@ -103,10 +158,6 @@ ol > li::marker {
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
-}
-
-.button.button--secondary.button--outline:not(.button--active):not(:hover) {
-  color: var(--ifm-color-secondary);
 }
 
 .ml-1 {
@@ -303,7 +354,7 @@ ol > li::before {
   left: -26px;
   height: 26px;
   width: 26px;
-  color: var(--ifm-heading-color);
+  color: var(--ifm-color-primary);
   font-size: 18px;
   font-weight: bold;
 }
@@ -311,4 +362,54 @@ ol > li::before {
 /* Remove version badge */
 article > div > span.badge--secondary {
   display: none;
+}
+
+section.features_src-pages- {
+  background-color: #f8fafc;
+  padding: 0.5rem;
+}
+
+.features_src-pages- h3 {
+  color: var(--ifm-color-primary);
+}
+
+.features__list ul {
+  list-style-type: none;
+  font-size: 0.85rem;
+  line-height: 1.2rem;
+}
+
+.features__list ul li {
+  margin-bottom: 1.2rem;
+}
+
+.features__list ul li h4 {
+  font-size: 0.85rem;
+  color: var(--ifm-color-primary);
+  margin-bottom: 4px;
+}
+
+.features_src-pages- .features__arrow-1 {
+  position: relative;
+  right: -100px;
+  height: 20px;
+  top: 2px;
+}
+
+.features_src-pages- .features__arrow-2 {
+  position: relative;
+  right: -100px;
+  height: 20px;
+  top: 2px;
+}
+
+.features_src-pages- .features__arrow-3 {
+  position: relative;
+  right: -75px;
+  height: 20px;
+  top: 2px;
+}
+
+.footer {
+  background-color: var(--ifm-color-primary-darkest);
 }

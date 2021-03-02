@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'The open source, end-to-end vision AI platform',
-  tagline: 'The open source, production grade, end-to-end vision AI platform with fully integrated modules for model building, automated labeling, data processing, model training and hyperparameter tuning.',
+  title: 'The open and extensible IDE for computer vision',
+  tagline: 'The open and extensible integrated development environment (IDE) for computer vision',
   url: 'https://docs.onepanel.ai',
   baseUrl: '/',
   favicon: 'img/favicon.png',
@@ -10,24 +10,23 @@ module.exports = {
     colorMode: {
       disableSwitch: true,
     },
-    announcementBar: {
-      id: 'supportus',
-      content:
-        'If you like Onepanel, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/onepanelio/core">GitHub</a>! ⭐️',
-      backgroundColor: '#013d6d',
-      textColor: '#fff',
-    },
+    // announcementBar: {
+    //   id: 'supportus',
+    //   content:
+    //     'If you like Onepanel, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/onepanelio/core">GitHub</a>! ⭐️',
+    //   backgroundColor: '#013d6d',
+    //   textColor: '#fff',
+    // },
     navbar: {
       title: '',
       logo: {
         alt: 'Onepanel logo',
-        src: 'img/icon.png',
+        src: 'img/icon.svg',
       },
       items: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
         {to: 'docs/reference/overview', label: 'User Guide', position: 'left'},
         {to: 'docs/deployment/overview', label: 'Operator Manual', position: 'left'},
-        {to: 'docs/api-sdk/overview', label: 'APIs and SDKs', position: 'left'},
         {href: 'https://github.com/onepanelio/core/releases', label: 'Releases', position: 'left'},
         {href: 'https://github.com/onepanelio/core/milestones?direction=asc&sort=due_date&state=open', label: 'Roadmap', position: 'left'},
         // {to: 'blog', label: 'Changelog', position: 'left'},

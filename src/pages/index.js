@@ -8,108 +8,106 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Image and video annotation with automatic pre-annotation</>,
-    imageUrl: 'img/landing/ann.png',
+    title: <>Prepare <img className="features__arrow-1" src="img/landing/arrow.svg"></img></>,
+    imageUrl: 'img/landing/prepare.svg',
     description: (
       <>
-        Annotate images and video using <a href="https://github.com/opencv/cvat" target="_blank">CVAT</a>, with object tracking and semi-automatic annotation of bounding boxes and polygon masks.
-      </>
-    ),
-  },
-  // {
-  //   title: <>Deploy complete aerial imaging pipelines with photogrammetry tools</>,
-  //   imageUrl: 'img/landing/odm.png',
-  //   description: (
-  //     <>
-  //       Leverage tools like <a href="https://github.com/OpenDroneMap/WebODM" target="_blank">WebODM</a> with GPUs to accelerate image processing and to perform pre-annotation for object detection.
-  //     </>
-  //   ),
-  // },
-  {
-    title: <>Build your models with GPU optimized frameworks and IDEs</>,
-    imageUrl: 'img/landing/env.png',
-    description: (
-      <>
-        Seamlessly switch environments between CPU and GPU machines, preloaded with PyTorch, TensorFlow, JupyterLab, VSCode and <a href="https://github.com/onepanelio/templates/tree/master/workspaces" target="_blank">more</a>. 
+        <ul>
+          <li>
+            <h4>Computer Vision Annotation Tool</h4>
+            Fully integrated image and video annotation
+          </li>
+          <li>
+            <h4>Automatic annotation</h4>
+            Automatic annotation for semantic segmentation and object detection
+          </li>
+          <li>
+            <h4>Data augmentation and processing</h4>
+            Extensible data pre-processing pipelines
+          </li>
+        </ul>
       </>
     ),
   },
   {
-    title: <>Create pipelines as code for model training and data processing</>,
-    imageUrl: 'img/landing/pip.png',
+    title: <>Build <img className="features__arrow-2" src="img/landing/arrow.svg"></img></>,
+    imageUrl: 'img/landing/build.svg',
     description: (
       <>
-        Build reproducible training and data processing pipelines that can perform parallel or distributed tasks on multiple machines.
+        <ul>
+          <li>
+            <h4>JupyterLab and VS Code Workspaces</h4>
+            Elastic JupyterLab and VS Code with TensorFlow, PyTorch and GPU support
+          </li>
+          <li>
+            <h4>Built-in algorithms</h4>
+            Built-in algorithms for object detection and semantic segmentation
+          </li>
+          <li>
+            <h4>Bring your own algorithms and tools</h4>
+            Flexible template and plugin system to bring your own algorithms or tools
+          </li>
+        </ul>
       </>
     ),
   },
   {
-    title: <>Track experiments and visualize model metrics</>,
-    imageUrl: 'img/landing/met.png',
+    title: <>Train and Tune <img className="features__arrow-3" src="img/landing/arrow.svg"></img></>,
+    imageUrl: 'img/landing/train.svg',
     description: (
       <>
-        Track and visualize model metrics and experiments with <a href="https://github.com/tensorflow/tensorboard" target="_blank">TensorBoard</a> or bring your own experiment tracking tools.
-      </>
-    ),
-  },
-  // {
-  //   title: <>Web-based VNC environments that you can access with your browser</>,
-  //   imageUrl: 'img/landing/vnc.png',
-  //   description: (
-  //     <>
-  //       Access and share tools like AirSim, Carla, Gazebo or OpenAI Gym through your browser with VNC enabled workspaces. 
-  //     </>
-  //   ),
-  // },
-  {
-    title: <>Bring your own tools as reproducible templates</>,
-    imageUrl: 'img/landing/mod.png',
-    description: (
-      <>
-        Easily bring your own specialized cloud-native tools for development, annotation, pipelines and more.
+        <ul>
+          <li>
+            <h4>Training pipelines</h4>
+            Automatic infrastructure management and reproducibility
+          </li>
+          <li>
+            <h4>Hyperparameter tuning</h4>
+            Hyperparameter tuning with support for multiple algorithms and GPUs
+          </li>
+          <li>
+            <h4>Built-in visualization tools</h4>
+            Training and tuning visualizations with TensorBoard, NNI Web UI and more
+          </li>
+        </ul>
       </>
     ),
   },
   {
-    title: <>Integrate with existing systems using APIs and SDKs</>,
-    imageUrl: 'img/landing/sdk.png',
+    title: <>Deploy and Manage</>,
+    imageUrl: 'img/landing/deploy.svg',
     description: (
       <>
-        Extend Onepanel with our powerful REST APIs and SDKs to further automate your pipelines and environments.
+        <ul>
+          <li>
+            <h4>Workflow orchestration</h4>
+            Orchestrate and schedule distributed and parallel workflows
+          </li>
+          <li>
+            <h4>Single or ensemble inference</h4>
+            Single or ensemble inference Workflows exposed as APIs
+          </li>
+          <li>
+            <h4>Python SDK and APIs</h4>
+            Programmatically perform any action using Python SDK or APIs
+          </li>
+        </ul>
       </>
     ),
   },
-  // {
-  //   title: <>Infrastructure and workflows as code</>,
-  //   imageUrl: 'img/landing/iac.png',
-  //   description: (
-  //     <>
-  //       Workflows, environments and infrastructure are all defined as code and version controlled, making them reproducible and portable.
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: <>Powered by Kubernetes so you can deploy anywhere</>,
-  //   imageUrl: 'img/landing/k8s.png',
-  //   description: (
-  //     <>
-  //       Powered by Kubernetes so you can deploy anywhere Kubernetes can run.
-  //     </>
-  //   ),
-  // }
 ];
 
 function Feature({imageUrl, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={classnames('col col--4', styles.feature)}>
+    <div className={classnames('col col--3', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
       <h3 className="text--center">{title}</h3>
-      <p className="text--center">{description}</p>
+      <p className="features__list">{description}</p>
     </div>
   );
 }
@@ -123,26 +121,23 @@ function Home() {
       description="The open source vision AI platform with fully integrated modules for model building, automated labeling, data processing, model training and hyperparameter tuning.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__name">Onepanel</h1>
+          <h1 className="hero__name">
+            Onepanel <div>CE</div>
+          </h1>
           {/* <h2 className="hero__title">{siteConfig.title}</h2> */}
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
               className={classnames(
-                'button button--primary button--lg',
+                'button button--primary',
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/getting-started/quickstart')}>
-              DEPLOY ONEPANEL
+              GET STARTED WITH ONEPANEL
             </Link>
-            <Link
-              className={classnames(
-                'button button--outline button--secondary button--lg ml-1',
-                styles.contribute,
-              )}
-              to={useBaseUrl('docs/getting-started/contributing')}>
-              CONTRIBUTE
-            </Link>
+          </div>
+          <div className="hero__platforms">
+            deploy to <img src="img/landing/platforms.svg" alt="aws, azure, gcp, kubernetes"></img>
           </div>
           <div className="hero__video">
             {/* <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
