@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'The open source, end-to-end vision AI platform',
-  tagline: 'The open source integrated development environment (IDE) for computer vision',
+  title: 'The open and extensible IDE for computer vision',
+  tagline: 'The open and extensible integrated development environment (IDE) for computer vision',
   url: 'https://docs.onepanel.ai',
   baseUrl: '/',
   favicon: 'img/favicon.png',
@@ -21,7 +21,7 @@ module.exports = {
       title: '',
       logo: {
         alt: 'Onepanel logo',
-        src: 'img/icon.png',
+        src: 'img/icon.svg',
       },
       items: [
         {to: 'docs/getting-started/quickstart', label: 'Getting Started', position: 'left'},
