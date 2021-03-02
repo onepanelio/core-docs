@@ -27,7 +27,7 @@ body {
   font-family: 'Questrial', sans-serif;
 }
 
-.hero.hero--primary.heroBanner_src-pages- {
+.hero.hero--primary {
   padding: 1.2rem 0 0 0;
   --ifm-hero-background-color: #e4ecf2;
   --ifm-hero-text-color: var(--ifm-font-color-base);
@@ -39,10 +39,6 @@ ol > li::marker {
 
 .menu__link--sublist::after {
   background-size: 1.25rem 1.25rem;
-}
-
-.features_src-pages- a {
-  text-decoration: underline;
 }
 
 .header-icon-link {
@@ -364,12 +360,12 @@ article > div > span.badge--secondary {
   display: none;
 }
 
-section.features_src-pages- {
+section.features {
   background-color: #f8fafc;
   padding: 0.5rem;
 }
 
-.features_src-pages- h3 {
+section.features h3 {
   color: var(--ifm-color-primary);
 }
 
@@ -389,21 +385,21 @@ section.features_src-pages- {
   margin-bottom: 4px;
 }
 
-.features_src-pages- .features__arrow-1 {
+section.features .features__arrow-1 {
   position: relative;
   right: -100px;
   height: 20px;
   top: 2px;
 }
 
-.features_src-pages- .features__arrow-2 {
+section.features .features__arrow-2 {
   position: relative;
   right: -100px;
   height: 20px;
   top: 2px;
 }
 
-.features_src-pages- .features__arrow-3 {
+section.features .features__arrow-3 {
   position: relative;
   right: -75px;
   height: 20px;
