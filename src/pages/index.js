@@ -15,15 +15,15 @@ const features = [
         <ul>
           <li>
             <h4>Computer Vision Annotation Tool</h4>
-            Annotate images and videos with automatic annotation for semantic segmentation and object detection  
+            Fully integrated image and video annotation
+          </li>
+          <li>
+            <h4>Automatic annotation</h4>
+            Automatic annotation for semantic segmentation and object detection
           </li>
           <li>
             <h4>Data augmentation and processing</h4>
-            Augment and pre-process your data using Albumentations, imgaug or bring-your-own library  
-          </li>
-          <li>
-            <h4>Bring your own tools</h4>
-            Bring your own data preparation and annotation tools and integrate them into your pipelines
+            Extensible data pre-processing pipelines
           </li>
         </ul>
       </>
@@ -36,16 +36,16 @@ const features = [
       <>
         <ul>
           <li>
-            <h4>Elastic JupyterLab Workspaces</h4>
-            JupyterLab with TensorBoard, Git, debugging, diffing, Conda, OpenCV, TensorFlow, PyTorch and GPU support  
+            <h4>JupyterLab and VS Code Workspaces</h4>
+            Elastic JupyterLab and VS Code with TensorFlow, PyTorch and GPU support
           </li>
           <li>
-            <h4>Elastic VS Code Workspaces</h4>
-            VSCode environments with the same libraries and tools that are consistent with your other environments  
+            <h4>Built-in algorithms</h4>
+            Built-in algorithms for object detection and semantic segmentation
           </li>
           <li>
-            <h4>Bring your own IDE or VNC tools</h4>
-            Bring your own IDEs or VNC tools using a robust YAML and Docker based templating engine
+            <h4>Bring your own algorithms and tools</h4>
+            Flexible template and plugin system to bring your own algorithms or tools
           </li>
         </ul>
       </>
@@ -59,15 +59,15 @@ const features = [
         <ul>
           <li>
             <h4>Training pipelines</h4>
-            Train models with built-in algorithms for object detection and semantic segmentation
+            Automatic infrastructure management and reproducibility
           </li>
           <li>
             <h4>Hyperparameter tuning</h4>
-            Fully integrated with NNI for hyperparameter tuning for object detection and semantic segmentation
+            Hyperparameter tuning with support for multiple algorithms and GPUs
           </li>
           <li>
-            <h4>Visualization tools</h4>
-            Training and tuning visualizations with TensorBoard and NNI Web UI
+            <h4>Built-in visualization tools</h4>
+            Training and tuning visualizations with TensorBoard, NNI Web UI and more
           </li>
         </ul>
       </>
@@ -81,15 +81,15 @@ const features = [
         <ul>
           <li>
             <h4>Workflow orchestration</h4>
-            Automate, orchestrate and schedule distributed and parallel workflows across multiple machines 
+            Orchestrate and schedule distributed and parallel workflows
           </li>
           <li>
-            <h4>Inference and model ensembles</h4>
-            Use your trained models to run inference Workflows or ensemble multiple models in the same Workflow
+            <h4>Single or ensemble inference</h4>
+            Single or ensemble inference Workflows exposed as APIs
           </li>
           <li>
-            <h4>Python SDK</h4>
-            Programmatically perform any task that is available through the web UI
+            <h4>Python SDK and APIs</h4>
+            Programmatically perform any action using Python SDK or APIs
           </li>
         </ul>
       </>
