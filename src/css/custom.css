@@ -3,7 +3,8 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
- @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
 /* You can override the default Infima variables here. */
 :root {
@@ -368,6 +369,7 @@ article > div > span.badge--secondary {
 
 .features_src-pages- {
   background-color: #f8fafc;
+  padding: 0.5rem !important;
 }
 
 .features_src-pages- h3 {
@@ -388,10 +390,6 @@ article > div > span.badge--secondary {
   font-size: 0.85rem;
   color: var(--ifm-color-primary);
   margin-bottom: 4px;
-}
-
-.features_src-pages- {
-  padding: 0.5rem !important;
 }
 
 .features_src-pages- .features__arrow-1 {
