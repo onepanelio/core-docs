@@ -83,7 +83,7 @@ Once you have created a new task, you can start annotating your data. CVAT suppo
       ![Annotation](/img/cvat_draw_box.png)
 
     - **Polygons**:
-    Similarly, select polygons and follow same procedure for annotation. When annotating for MaskRCNN training, make sure that all images have annotations and that every polygon has at least 5 vertices.
+    Similarly, select polygons and follow same procedure for annotation.
       ![Select annotation](/img/cvat_draw_polygon.png)
 
 3. Press `ctrl` + `s` to save your task.
