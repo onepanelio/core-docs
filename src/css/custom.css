@@ -424,3 +424,19 @@ section.features .features__arrow-3 {
 .footer {
   background-color: var(--ifm-color-primary-darkest);
 }
+
+@media screen and (max-width: 768px) {
+  .hero__video video {
+    width: 90vw;
+  }
+
+  .features__list {
+    text-align: center;
+  }
+
+  .features__arrow-1,
+  .features__arrow-2,
+  .features__arrow-3 {
+    display: none;
+  }
+}
