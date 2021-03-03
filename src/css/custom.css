@@ -386,8 +386,9 @@ section.features h3 {
 
 .features__list ul {
   list-style-type: none;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   line-height: 1.2rem;
+  padding: 0;
 }
 
 .features__list ul li {
@@ -395,28 +396,28 @@ section.features h3 {
 }
 
 .features__list ul li h4 {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--ifm-color-primary);
   margin-bottom: 4px;
 }
 
 section.features .features__arrow-1 {
   position: relative;
-  right: -100px;
+  right: -85px;
   height: 20px;
   top: 2px;
 }
 
 section.features .features__arrow-2 {
   position: relative;
-  right: -100px;
+  right: -115px;
   height: 20px;
   top: 2px;
 }
 
 section.features .features__arrow-3 {
   position: relative;
-  right: -75px;
+  right: -70px;
   height: 20px;
   top: 2px;
 }
