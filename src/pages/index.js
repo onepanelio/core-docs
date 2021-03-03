@@ -118,7 +118,7 @@ function Home() {
   return (
     <Layout
       title="Onepanel"
-      description="The open source vision AI platform with fully integrated modules for model building, automated labeling, data processing, model training and hyperparameter tuning.">
+      description="The open and extensible IDE for computer vision with built-in modules for model building, labeling, data processing, training, hyperparameter tuning and workflows.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__name">
