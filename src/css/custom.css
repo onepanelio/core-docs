@@ -106,6 +106,19 @@ ol > li::marker {
   color: var(--ifm-color-primary);
 }
 
+.button.button--secondary {
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.button.button--secondary:active,
+.button.button--secondary:hover,
+.button.button--secondary.button--active {
+  background-color: var(--ifm-color-primary-dark);
+  border-color: var(--ifm-color-primary-dark);
+}
+
 .hero__name {
   color: var(--ifm-color-primary);
   font-size: 3rem;
@@ -420,6 +433,16 @@ section.features .features__arrow-3 {
   right: -70px;
   height: 20px;
   top: 2px;
+}
+
+section.enterprise {
+  padding: 1.2rem 0;
+  background-color: #e4ecf2;
+  color: var(--ifm-color-primary);
+}
+
+section.enterprise h4 {
+  color: var(--ifm-color-primary);
 }
 
 .footer {
