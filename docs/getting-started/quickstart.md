@@ -525,7 +525,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   ```
 
 :::important
-You will most likely need use a GPU node pool for **Step 3: Train a model on annotated data** below. See [adding more nodes](/docs/deployment/components/nodes) for instructions on adding GPU node pools to your cluster.
+You will most likely need to use a GPU node pool for **Step 3: Train a model on annotated data** below. See [adding more nodes](/docs/deployment/components/nodes) for instructions on adding GPU node pools to your cluster.
 :::
 
 ## Step 2: Annotate your data
