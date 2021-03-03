@@ -124,7 +124,6 @@ function Home() {
           <h1 className="hero__name">
             Onepanel <div>CE</div>
           </h1>
-          {/* <h2 className="hero__title">{siteConfig.title}</h2> */}
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
@@ -137,11 +136,10 @@ function Home() {
             </Link>
           </div>
           <div className="hero__platforms">
-            deploy to <img src="img/landing/platforms.svg" alt="aws, azure, gcp, kubernetes"></img>
+            Runs on: <img src="img/landing/platforms.svg" alt="aws, azure, gcp, kubernetes"></img>
           </div>
           <div className="hero__video">
-            {/* <iframe width="800" height="450" src="https://www.youtube.com/embed/iu6uBdBUV60?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-            <video autoPlay loop muted playsInline width="100%">
+            <video controls autoPlay loop muted playsInline width="100%">
               <source type="video/mp4" src="img/landing/onepanel.mp4" /> 
             </video>
           </div>
