@@ -160,7 +160,7 @@ function Home() {
         <section className="enterprise">
           <div className="container text--center">
             <h4>
-              Need a managed on-premises solution?
+              Need commercial support or enterprise features?
             </h4>
             <a className="button button--secondary" href="https://www.onepanel.ai/contact-core">Book a demo</a>
           </div>
