@@ -136,7 +136,7 @@ function Home() {
             </Link>
           </div>
           <div className="hero__platforms">
-            Runs on: <img src="img/landing/platforms.svg" alt="aws, azure, gcp, kubernetes"></img>
+            Runs on <img src="img/landing/platforms.svg" alt="aws, azure, gcp, kubernetes"></img>
           </div>
           <div className="hero__video">
             <video controls autoPlay loop muted playsInline width="100%">
