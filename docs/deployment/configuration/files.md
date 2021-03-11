@@ -264,32 +264,41 @@ artifactRepository:
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
 ```
 
-GCS and Minio configurations would also be similar except that the endpoint will be different. For GCS, you would need to [create an HMAC key](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create) and use the **Access key** and **Secret** accordingly.
+For GCS, you would need to generate a **serviceAccountKey**.
 
 Here's an example GCS configuration:
 
 ```yaml
 artifactRepository:
-  s3:
-    accessKey: GOOG1EQPAXHU77377T6TGRYGD7NDV6AA3TFYIIKXP2RZLHI3DZB76FIFGDNLQ
+  gcs:
+    # Name of bucket, example: my-bucket
     bucket: my-data-bucket
-    endpoint: storage.googleapis.com
-    region: us-west2 # Note the GCS specific region value
-    secretKey: S3hdxSL6HlPGTAAFZYxG/iaKhtlDHVCbyiIBRPxq
+    # Key Format for objects stored by Workflows. This can reference Workflow variables
+    keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
+    projectId: my-project-id
+    region: us-west1
+    serviceAccountKey: |
+      {
+        "type": "service_account",
+        "project_id": "my-project-id",
+        "private_key_id": "private_key_id",
+        "private_key": "private_key",
+        "client_email": "client_email",
+        "client_id": "client_id",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "cert_url"
+      }
 ```
 
-And example Minio configuration:
-
-```yaml
-artifactRepository:
-  s3:
-    accessKey: AKIAJSIE27KKMHXI3BJQ
-    bucket: my-data-bucket
-    endpoint: my-minio-endpoint.default:9000
-    region: us-west-2 # The label for the Minio server location
-    secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
-    insecure: true  # Set this to true if Minio is deployed internally into the Cluster
+:::note
+You can get the serviceAccount JSON via gcloud.
+```shell script
+gcloud iam service-accounts keys create key.json \
+   --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
 ```
+:::
 
 and finally, Azure Blob Storage configuration example which is different from the S3 compatible object storages:
 
