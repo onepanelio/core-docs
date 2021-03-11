@@ -400,7 +400,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
   ```bash
   opctl init --provider gke \
-    --artifact-repository-provider s3 \
+    --artifact-repository-provider gcs \
     --gpu-device-plugins nvidia
   ```
 
