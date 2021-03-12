@@ -432,9 +432,11 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   </Tabs>
 
   :::note
-  Currently, valid options for `--artifact-repository-provider` flag are `s3` and `abs`. 
+  Currently, valid options for `--artifact-repository-provider` flag are `s3`, `gcs` and `abs`. 
   
-  The `s3` option supports [Amazon S3](https://aws.amazon.com/s3/) and any S3 compatible object storage like [Minio](https://docs.min.io/) and [GCS (with HMAC key enabled)](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create).
+  The `s3` option supports [Amazon S3](https://aws.amazon.com/s3/) and any S3 compatible object storage like [Minio](https://docs.min.io/).
+  
+  The `gcs` option supports [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html).
 
   The `abs` option supports [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/).
   :::
