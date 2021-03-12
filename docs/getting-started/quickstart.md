@@ -436,7 +436,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   
   The `s3` option supports [Amazon S3](https://aws.amazon.com/s3/) and any S3 compatible object storage like [Minio](https://docs.min.io/).
   
-  The `gcs` option supports [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html).
+  The `gcs` option supports [Google Cloud Storage](https://cloud.google.com/storage/).
 
   The `abs` option supports [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/).
   :::
