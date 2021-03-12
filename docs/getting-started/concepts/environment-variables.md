@@ -17,3 +17,7 @@ The following system environment variables are always automatically added to bot
 You can add your own environment variables by navigating to the **Settings** menu and clicking **Add environment variable**.
 
 ![](../../../static/img/environment-variables-155310.png)
+
+:::tip
+These environment variables are also available in `onepanel-default-env` secret in the current namespace if you need to access them in other resources, for example for [private Git repositories](/docs/reference/workflows/artifacts/#git).
+:::
