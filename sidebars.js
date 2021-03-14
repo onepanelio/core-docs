@@ -55,6 +55,8 @@ module.exports = {
         'deployment/configuration/cli',
         'deployment/configuration/files',
         'deployment/configuration/tls',
+        'deployment/configuration/minio',
+        'deployment/configuration/nipio',
       ]
     },
     {

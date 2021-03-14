@@ -302,6 +302,7 @@ gcloud iam service-accounts keys create key.json \
 
 And example Minio configuration:
 
+#### Azure Minio Webapp
 ```yaml
 artifactRepository:
   s3:
@@ -324,6 +325,17 @@ artifactRepository:
     storageAccountKey: VsMyhYqFiFK1rNj5cNhMd6h9m01pCIQaMTDXmUIEOeMDtjspm12HvKxLs1dxvag2RJ1sYTuPWMQBDKvmIGPWIZ==
     # Azure storage account name
     storageAccountName: my-storage-account-name
+```
+
+#### Local Minio Server
+```yaml
+artifactRepository:
+  s3:
+    accessKey: AKIAIOSFODNN7EXAMPLE
+    bucket: my-bucket
+    endpoint: f67f39e6b94d.ngrok.io
+    region: us-west-2
+    secretKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
 
 <!-- ```yaml
