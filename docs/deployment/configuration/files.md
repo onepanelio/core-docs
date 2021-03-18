@@ -246,13 +246,12 @@ nodePool:
 See [adding more nodes](/docs/deployment/components/nodes) for more information on adding additional CPU or GPU nodes to your cluster.
 
 ### artifactRepository
-This section allows you to set up the default object storage for your Workflow and Workspace artifacts, which is used to store logs, models and any other output you designate. Onepanel will automatically upload and download files from this object storage.
+In this section, you can set up the default object storage to store your Workflow and Workspace artifacts. The default object storage is set per namespace and is used to automatically save snapshots of logs, models and any other output from you Workflows or easily sync data between Workspaces and Workflows.
 
-:::note
-Currently only S3 compatible object storages (AWS, GCS and Minio) and Azure Blog Storage are supported
-:::
+Currently Amazon S3, MinIO S3, Google Cloud Storage (GCS) and Azure Blob Storage are supported.
 
-Here's an example AWS S3 configuration:
+#### Amazon S3
+Example Amazon S3 configuration:
 
 ```yaml
 artifactRepository:
@@ -264,9 +263,22 @@ artifactRepository:
     secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
 ```
 
-GCS and Minio configurations would also be similar except that the endpoint will be different. For GCS, you would need to [create an HMAC key](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#create) and use the **Access key** and **Secret** accordingly.
+#### MinIO S3
+MinIO configurations would be similar to Amazon S3 with a different endpoint:
 
-Here's an example GCS configuration:
+```yaml
+artifactRepository:
+  s3:
+    accessKey: AKIAJSIE27KKMHXI3BJQ
+    bucket: my-data-bucket
+    endpoint: my-minio-endpoint.default:9000
+    region: us-west-2 # The label for the Minio server location
+    secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
+    insecure: true  # Set this to true if Minio is deployed internally into the Cluster
+```
+
+#### Google Cloud Storage (GCS)
+Example Google Cloud Storage (GCS) configuration:
 
 ```yaml
 artifactRepository:
@@ -292,28 +304,17 @@ artifactRepository:
       }
 ```
 
-:::note
-You can get the serviceAccount JSON via gcloud.
+:::tip
+You can get the serviceAccount JSON with the following command:
 ```shell script
 gcloud iam service-accounts keys create key.json \
    --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
 ```
 :::
 
-And example Minio configuration:
+#### Azure Blob Storage
 
-```yaml
-artifactRepository:
-  s3:
-    accessKey: AKIAJSIE27KKMHXI3BJQ
-    bucket: my-data-bucket
-    endpoint: my-minio-endpoint.default:9000
-    region: us-west-2 # The label for the Minio server location
-    secretKey: 5bEYu26084qjSFyclM/f2pz4gviSfoOg+mFwBH39
-    insecure: true  # Set this to true if Minio is deployed internally into the Cluster
-```
-
-and finally, Azure Blob Storage configuration example which is different from the S3 compatible object storages:
+Example Azure Blob Storage configuration:
 
 ```yaml
 artifactRepository:
@@ -325,36 +326,6 @@ artifactRepository:
     # Azure storage account name
     storageAccountName: my-storage-account-name
 ```
-
-<!-- ```yaml
-artifactRepository:
- gcs:
-    bucket: my-data-bucket
-    endpoint: storage.googleapis.com
-    insecure: false
-    keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
-    serviceAccountKey: |
-      {
-        "type": "service_account",
-        "project_id": "my-project-id",
-        "private_key_id": "private_key_id",
-        "private_key": "private_key",
-        "client_email": "client_email",
-        "client_id": "client_id",
-        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "token_uri": "https://oauth2.googleapis.com/token",
-        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "client_x509_cert_url": "cert_url"
-      }
-```
-
-:::note
-You can get the serviceAccount JSON via gcloud.
-```shell script
-gcloud iam service-accounts keys create key.json \
-   --iam-account ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
-```
-::: -->
 
 ### certManager
 If you have run `opctl init` with `--enable-https`, `--enable-cert-manager` and `--dns-provider` flags set, you need to configure your respective DNS provider here so that Onepanel can create and renew your TLS certificates for you.
