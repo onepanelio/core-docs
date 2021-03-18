@@ -78,7 +78,7 @@ There are 3 steps for integrating hyperparameter tuning into any training Workfl
 
 3. Update the Workflow Template to use your repository and update the paths in `/mnt/src` to match your repository's directory structure. The `...` indicate sections that were removed for brevity.
 
-    ```yaml {6,26,31,40}
+    ```yaml {7,11,33,46}
     entrypoint: main
     arguments:
         parameters:
