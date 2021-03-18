@@ -6,18 +6,17 @@ description: Onepanel - Hyperparameter tuning
 
 Onepanel supports hyperparameter tuning for your TensorFlow and PyTorch models by fully integrating with [NNI](https://github.com/microsoft/nni) and its [built-in tuners](https://nni.readthedocs.io/en/stable/Tuner/BuiltinTuner.html).
 
-To understand how to add hyperparameter tuning into Onepanel Workflows, we'll walk through this [simple MNIST example](https://github.com/onepanelio/templates/tree/v0.18.0/workflows/hyperparameter-tuning/mnist). Note that this example is also available when you deploy Onepanel under **Workflows** > **Workflow Templates** > **Hyperparameter Tuning Example** and also as a starter template under **Workflows** > **Workflow Templates** > **Create Template** > **Hyperparamter tuning**.
+To understand how to add hyperparameter tuning into Onepanel Workflows, we'll walk through the starter template under **Workflows** > **Workflow Templates** > **Create Template** > **Hyperparameter tuning**.
 
-There are 4 parts to configuring hyperparameter tuning into your Workflows:
+There are 3 steps for integrating hyperparameter tuning into any training Workflow:
 
 1. Model training code - Make minor updates to grab hyperparameters from NNI and report accuracies back to NNI.
-2. Workflow Template - Minor changes to the clone of **Hyperparameter Tuning Example** that describes training pipeline with hyperparameter tuning.
-3. Search space configuration (`search_space.json`) - The search space for hyperparameters and their corresponding ranges
-4. Tuner configuration (`config.yaml`)- This is where you indicate the type of tuner (e.g. TPE), path to your model training code, whether to use GPUs, etc.
+2. Workflow Template - Minor changes to the **Hyperparameter tuning** starter template to point to your code repository and paths.
+3. Configuration - This is a field in the Workflow Template and it is where you indicate the type of tuner (e.g. TPE), the search space for hyperparameters and their corresponding ranges, path to your model training code, whether to use GPUs, etc.
 
 ## Setting up your Workflow Template
 
-1. First, make changes to your training code to grab the parameters from NNI and report results back to NNI. Highlighted below are all the changes we had to make to [MNIST example code](https://github.com/onepanelio/templates/tree/v0.18.0/workflows/hyperparameter-tuning/mnist/main.py) to support hyperparameter tuning. The `...` indicate code that was removed for brevity.
+1. First, make changes to your training code to grab the parameters from NNI and report results back to NNI. Highlighted below are all the changes we had to make to [MNIST example code](https://github.com/onepanelio/templates/tree/v0.18.0/workflows/hyperparameter-tuning/mnist/main.py) which is used in the **Hyperparameter tuning** starter template to support hyperparameter tuning. The `...` indicate code that was removed for brevity.
 
     ```python {1,4-7,25,32,49-50}
     import nni
@@ -75,9 +74,10 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
         main(parser.parse_args(), params)
     ```
 
-2. Go to **Workflows** > **Workflow Templates** > **Create Template** and select **Hyperparamter tuning**.
+2. Go to **Workflows** > **Workflow Templates** > **Create Template** and select **Hyperparameter tuning**.
 
 3. Update the Workflow Template to use your repository and update the paths in `/mnt/src` to match your repository's directory structure. The `...` indicate sections that were removed for brevity.
+
     ```yaml {6,26,31,40}
     entrypoint: main
     arguments:
@@ -114,20 +114,18 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
           path: /mnt/data/src/<path-to-training-code-directory>/config.yaml
           raw:
             data: '{{workflow.parameters.config}}'
-        - name: search-space
-          # [CHANGE] Path where search_space.json will be generated or already exists
-          # Update the path below so that search_space.json is written to the same directory as your main.py file
-          # Note that your source code is cloned to /mnt/data/src
-          path: /mnt/data/src/<path-to-training-code-directory>/search_space.json
-          raw:
-            data: '{{workflow.parameters.search-space}}'
     ...
       container:
-        image: onepanel/dl:0.17.0
+        image: onepanel/dl:0.20.0
+        command:
+          - sh
+          - -c
         args:
-            - --config
-            # [CHANGE] Update the path below to point to config.yaml path as described above
-            - /mnt/data/src/<path-to-training-code-directory>/config.yaml
+          # [CHANGE] Update the path below to point to your code and config.yaml path as described above
+          # Note that you can "pip install" additional tools here if necessary
+          - |
+            cd /mnt/data/src/<path-to-training-code-directory>/ && \
+            python -u /opt/onepanel/nni/start.py --config config.yaml
     ...
     ```
 
@@ -135,47 +133,50 @@ There are 4 parts to configuring hyperparameter tuning into your Workflows:
 
 ## Understanding the configurations
 
-When you attempt to execute the hyperparameter tuning Workflow Template, you'll notice two parameters, `Configuration` and `Search space configuration`. The former is the tuner configuration and the latter is the configuration for your hyperparameters and their corresponding search spaces.
+When executing your new hyperparameter tuning Workflow Template, you will most likely need to adjust the `Configuration` parameter to indicate the type of tuner (e.g. TPE), update the search space for hyperparameters and their corresponding ranges, set the path to your model training code and set the number of GPUs.
 
 Here is a description of each of the fields in the `Configuration` parameter:
 
 ```yaml
-authorName: Onepanel, Inc.          # Name of the author
-experimentName: MNIST TF v2.x       # Name of experiment
-trialConcurrency: 1                 # Concurrency of trials, note that if on GPU, this should match gpuNum
-maxExecDuration: 1h                 # Maximum duration of each trial
-maxTrialNum: 10                     # Maximum number of trials
-trainingServicePlatform: local      # This should always be set to `local`
-searchSpacePath: search_space.json  # Path to search_space.json file - you don't have to change this if you follow the steps above
-useAnnotation: false
+experimentName: MNIST TF v2.x
+maxExperimentDuration: 1h
+maxTrialNumber: 10
+trainingService:
+  platform: local
+  useActiveGpu: True
 tuner:
-    # gpuIndices: '0'               # Uncomment and update to the GPU indices to assign this tuner
-    builtinTunerName: TPE           # Choices: TPE, Random, Anneal, Evolution, BatchTuner, MetisTuner, GPTuner
-    classArgs:
-        optimize_mode: maximize     # Choices: maximize, minimize
-trial:
-    command: python main.py --output /mnt/output    # Command to execute your training code
-    codeDir: .
-    # gpuNum: 1                     # Uncomment and update to number of GPUs
+  name: TPE                  # choices: TPE, Random, Anneal, Evolution, BatchTuner, MetisTuner, GPTuner
+  classArgs:
+    optimize_mode: maximize  # choices: maximize, minimize
+trialConcurrency: 1
+trialGpuNumber: 0            # update number to number of GPUs if GPU is present
+trialCommand: python main.py --output /mnt/output
+# [CHANGE] Search space configuration
+# Change according to your hyperparameters and ranges
+searchSpace:
+  dropout_rate:
+    _type: uniform
+    _value: [0.5,0.9]
+  conv_size:
+    _type: choice
+    _value: [2,3,5,7]
+  hidden_size:
+    _type: choice
+    _value: [124,512,1024]
+  batch_size:
+    _type: choice
+    _value: [16,32]
+  learning_rate:
+    _type: choice
+    _value: [0.0001,0.001,0.01,0.1]
+  epochs:
+    _type: choice
+    _value: [10]
 ```
 
 :::important
-See [NNI's Experiment Config Reference](https://nni.readthedocs.io/en/stable/Tutorial/ExperimentConfig.html) for more information and list of all available fields.
+See [NNI's Experiment Config Reference](https://nni.readthedocs.io/en/stable/reference/experiment_config.html) for more information and list of all available fields.
 :::
-
-`Search space configuration` content is in JSON format and it depends on the hyperparameters you intend to use in your training code. Example from the MNIST code above is as follows:
-
-```json
-{
-    "dropout_rate": { "_type": "uniform", "_value": [0.5, 0.9] },
-    "conv_size": { "_type": "choice", "_value": [2, 3, 5, 7] },
-    "hidden_size": { "_type": "choice", "_value": [124, 512, 1024] },
-    "batch_size": { "_type": "choice", "_value": [16, 32] },
-    "learning_rate": { "_type": "choice", "_value": [0.0001, 0.001, 0.01, 0.1] },
-    "epochs": { "_type": "choice", "_value": [10] }
-}
-```
-
 
 ## Executing your Workflow
 
