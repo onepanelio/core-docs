@@ -162,7 +162,7 @@ function Home() {
             <h4>
               Need commercial support or enterprise features?
             </h4>
-            <a className="button button--secondary" href="https://www.onepanel.ai/contact-core">Book a demo</a>
+            <a className="button button--secondary" href="https://www.onepanel.ai/">Book a demo</a>
           </div>
         </section>
       </main>
