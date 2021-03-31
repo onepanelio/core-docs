@@ -10,7 +10,7 @@ It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and
 
 In this quick start, we will walk you through:
 
-1. Deploying Onepanel to one of the major cloud providers.
+1. Deploying Onepanel to one of the major cloud providers or locally.
 2. Labelling your images or video using the integrated annotation Workspace.
 3. Training your model with the newly labelled data using the integrated training Workflows.
 4. Automatically annotating new data using your newly trained model.
@@ -35,8 +35,7 @@ Let's get started by creating a Kubernetes cluster in one of the following cloud
     { label: 'Azure AKS', value: 'aks', },
     { label: 'Amazon EKS', value: 'eks', },
     { label: 'Google Cloud GKE', value: 'gke', },
-    // { label: 'Minikube', value: 'minikube', },
-    // { label: 'Microk8s', value: 'microk8s', },
+    { label: 'Microk8s', value: 'microk8s', },
   ]
 }>
 <TabItem value="aks">
@@ -137,170 +136,74 @@ The command above will automatically retrieve your cluster's access credentials 
 ```
 gcloud container clusters get-credentials <cluster-name> --zone <zone>
 ```
-
-</TabItem>
-<TabItem value="minikube">
-
-:::note
-Make sure [Minikube](https://minikube.sigs.k8s.io/docs/start/) (`minikube`) is installed before proceeding.
-:::
-
-Run the following `minikube` command to create a cluster:
-<Tabs
-  groupId="operating-systems"
-  defaultValue="linux"
-  values={[
-      { label: 'Linux', value: 'linux', },
-      { label: 'macOS', value: 'macos', },
-      { label: 'Windows', value: 'windows', },
-    ]
-  }>
-<TabItem value="linux">
-
-```shell script
-minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
-    --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
-    --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub \
-    --extra-config=apiserver.service-account-issuer=api \
-    --extra-config=apiserver.service-account-api-audiences=api,nats \
-    --extra-config=apiserver.authorization-mode=Node,RBAC
-```
 </TabItem>
 
-<TabItem value="macos">
-
-```shell script
-minikube start --driver=virtualbox --memory '8gb' --cpus=4 --disk-size '40g' \
-    --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
-    --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub \
-    --extra-config=apiserver.service-account-issuer=api \
-    --extra-config=apiserver.service-account-api-audiences=api,nats \
-    --extra-config=apiserver.authorization-mode=Node,RBAC
-```
-</TabItem>
-
-<TabItem value="windows">
-
-```shell script
-minikube start --driver=virtualbox --memory="8gb" --cpus=4 --disk-size="40gb"^
-    --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key^
-    --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub^
-    --extra-config=apiserver.service-account-issuer=api^
-    --extra-config=apiserver.service-account-api-audiences=api,nats^
-    --extra-config=apiserver.authorization-mode=Node,RBAC
-```
-</TabItem>
-</Tabs>
-
-Your kubectl context will be automatically updated once minikube finishes starting.
-
-</TabItem>
 <TabItem value="microk8s">
 
-First, install Multipass for your operating system:
-
-<Tabs
-  groupId="operating-system"
-  defaultValue="linux"
-  values={[
-    { label: 'Linux', value: 'linux', },
-    { label: 'macOS', value: 'macos', },
-    { label: 'Windows', value: 'windows', },
-  ]
-}>
-<TabItem value="linux">
-
-:::info Instructions
-See [Installing on Linux](https://multipass.run/docs/installing-on-linux)
+:::note
+Microk8s is currently only supported on Ubuntu 20.04.
 :::
 
-</TabItem>
-<TabItem value="macos">
+## Install Microk8s
 
-:::info Instructions
-See [Installing on macOS](https://multipass.run/docs/installing-on-macos)
-:::
+1. First, install microk8s.
 
-</TabItem>
-<TabItem value="windows">
+    ```bash
+    sudo snap install microk8s --channel=1.19/stable --classic
+    ```
 
-:::info Instructions
-See [Installing on Windows](https://multipass.run/docs/installing-on-windows)
-:::
+2. Make sure your current user has permissions to work with microk8s.
 
-</TabItem>
-</Tabs>
+    ```bash
+    sudo usermod -a -G microk8s $USER
+    sudo chown -f -R $USER ~./kube
+    ```
 
-Run the following `multipass` command to launch Multipass:
+   :::note
+   You will have restart your machine for this change to take effect.
+   :::
 
-```shell script
-multipass launch --name microk8s-vm --mem 8G --disk 40G --cpus 4 # 8G ram recommended for Istio
-```
+   Wait for it to be ready.
 
-Multipass creates a virtual machine (VM). Inside that VM, we will create a Kubernetes cluster with microk8s.
+   ```bash
+   microk8s status --wait-ready
+   ```
 
-Run a shell into your VM:
+3. Enable the following required add-ons:
 
-```bash
-multipass shell microk8s-vm
-```
+    ```bash
+    sudo microk8s enable storage dns rbac
+    ```
 
-Install the MicroK8s snap and configure the network:
+4. Enable TokenRequest feature (required by Istio) by passing in extra arguments to the api server.
+    ```shell script
+    sudo nano /var/snap/microk8s/current/args/kube-apiserver
+    ```
 
-```bash
-sudo snap install microk8s --classic --channel=1.18/stable
-sudo iptables -P FORWARD ACCEPT
-```
+   Add these lines:
+    ```text
+    --service-account-signing-key-file=${SNAP_DATA}/certs/serviceaccount.key
+    --service-account-key-file=${SNAP_DATA}/certs/serviceaccount.key
+    --service-account-issuer=api
+    --service-account-api-audiences=api,nats
+    ```
+   Make sure this line is set to these values:
+    ```text
+    --authorization-mode=RBAC,Node
+    ```
 
-You will also need to add `ubuntu` user to `microk8s` group as follows:
+   Save your changes.
 
-```bash
-sudo usermod -a -G microk8s ubuntu
+5. Restart daemon-apiserver for changes to take effect
 
-# Re-enter bash session for group changes
-exit
-multipass shell microk8s-vm
-```
+    ```bash
+    sudo systemctl restart snap.microk8s.daemon-apiserver
+    ```
 
-Then, enable the following required add-ons:
-
-```bash
-sudo microk8s.enable storage dns rbac dashboard
-```
-
-Enable TokenRequest feature (required by Istio) by passing in extra argument to `kube-apiserver`.
-
-```shell script
-nano /var/snap/microk8s/current/args/kube-apiserver
-```
-Add the lines:
-```text
---service-account-signing-key-file=${SNAP_DATA}/certs/serviceaccount.key
---service-account-key-file=${SNAP_DATA}/certs/serviceaccount.key
---service-account-issuer=api
---service-account-api-audiences=api,nats
-```
-Make sure this line is set to these values:
-```text
---authorization-mode=RBAC,Node
-```
-
-Save your changes.
-Execute to make changes take effect
-```shell script
-sudo systemctl restart snap.microk8s.daemon-apiserver
-```
-
-Exit out of the VM for the next steps.
-```shell script
-exit
-```
-
-Next, get the kubeconfig by running
-
-```shell script
-   multipass exec microk8s-vm -- /snap/bin/microk8s.config > kubeconfig
- ```
+   Check microk8s is running with
+   ```bash
+   microk8s status --wait-ready
+   ```
 
 </TabItem>
 </Tabs>
@@ -320,8 +223,10 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
       { label: 'Linux', value: 'linux', },
       { label: 'macOS', value: 'macos', },
       { label: 'Windows', value: 'windows', },
+      { label: 'Microk8s', value: 'microk8s', },
     ]
   }>
+
   <TabItem value="linux">
 
   ```bash
@@ -363,6 +268,24 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   :::
 
   </TabItem>
+
+  <TabItem value="microk8s">
+
+  ```bash
+  # Download the binary
+  curl -sLO https://github.com/onepanelio/core/releases/latest/download/opctl-linux-amd64
+
+  # Make binary executable
+  chmod +x opctl-linux-amd64
+
+  # Move binary to path
+  mv ./opctl-linux-amd64 /usr/local/bin/opctl
+
+  # Test installation
+  opctl version
+  ```
+
+  </TabItem>
   </Tabs>
 
 2. Run the following command to initialize a `params.yaml` template for your provider:
@@ -374,8 +297,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      // { label: 'Minikube', value: 'minikube', },
-      // { label: 'Microk8s', value: 'microk8s', },
+      { label: 'Microk8s', value: 'microk8s', },
     ]
   }>
   <TabItem value="aks">
@@ -406,28 +328,13 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
   </TabItem>
 
-  <TabItem value="minikube">
-
-  ```bash
-  opctl init --provider minikube \
-      --enable-metallb \
-      --artifact-repository-provider s3
-  ```
-
-  </TabItem>
-
   <TabItem value="microk8s">
 
   ```bash
   opctl init --provider microk8s \
-      --enable-metallb \
-      --artifact-repository-provider s3
+             --enable-metallb \
+             --artifact-repository-provider abs
   ```
-
-  :::note
-  If you have GPU nodes, you need to set the `--gpu-device-plugins` flag. Valid values are `nvidia` and `amd` or a comma separated combination of both `nvidia,amd`.
-  :::
-
   </TabItem>
   </Tabs>
 
@@ -452,8 +359,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      // { label: 'Minikube', value: 'minikube', },
-      // { label: 'Microk8s', value: 'microk8s', },
+      { label: 'Microk8s', value: 'microk8s', },
     ]
   }>
   <TabItem value="aks">
@@ -478,32 +384,23 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
   </TabItem>
 
-  <TabItem value="minikube">
-
-  ```bash
-  opctl apply
-  ```
-
-  </TabItem>
-
   <TabItem value="microk8s">
 
   ```bash
+  microk8s config > kubeconfig
   KUBECONFIG=./kubeconfig opctl apply
   ```
-
-  :::note
-  If you do not have a loadbalancer setup, you can use metallb
-  ```shell script
-  opctl init --provider microk8s --enable-metallb
-  ```
-  :::
 
   </TabItem>
   </Tabs>
 
   :::note
   If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page.
+  :::
+
+  :::important
+  Although this is enough to get started, you'll want to configure dns to have access to workspaces.
+  Check out the guide here [microk8s dns setup](/docs/deployment/baremetal/microk8s#set-up-dns)
   :::
 
 5. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
