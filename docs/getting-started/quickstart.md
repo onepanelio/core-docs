@@ -35,7 +35,7 @@ Let's get started by creating a Kubernetes cluster in one of the following cloud
     { label: 'Azure AKS', value: 'aks', },
     { label: 'Amazon EKS', value: 'eks', },
     { label: 'Google Cloud GKE', value: 'gke', },
-    { label: 'Microk8s', value: 'microk8s', },
+    { label: 'MicroK8s', value: 'microk8s', },
   ]
 }>
 <TabItem value="aks">
@@ -141,18 +141,18 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 <TabItem value="microk8s">
 
 :::note
-Microk8s is currently only supported on Ubuntu 20.04.
+MicroK8s is currently only supported on Ubuntu 20.04.
 :::
 
-## Install Microk8s
+## Install MicroK8s
 
-1. First, install microk8s.
+1. First, install `microk8s`.
 
     ```bash
     sudo snap install microk8s --channel=1.19/stable --classic
     ```
 
-2. Make sure your current user has permissions to work with microk8s.
+2. Make sure your current user has permissions to work with `microk8s`.
 
     ```bash
     sudo usermod -a -G microk8s $USER
@@ -223,7 +223,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
       { label: 'Linux', value: 'linux', },
       { label: 'macOS', value: 'macos', },
       { label: 'Windows', value: 'windows', },
-      { label: 'Microk8s', value: 'microk8s', },
+      { label: 'MicroK8s', value: 'microk8s', },
     ]
   }>
 
@@ -297,7 +297,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      { label: 'Microk8s', value: 'microk8s', },
+      { label: 'MicroK8s', value: 'microk8s', },
     ]
   }>
   <TabItem value="aks">
@@ -359,7 +359,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      { label: 'Microk8s', value: 'microk8s', },
+      { label: 'MicroK8s', value: 'microk8s', },
     ]
   }>
   <TabItem value="aks">
