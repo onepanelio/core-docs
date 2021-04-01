@@ -403,25 +403,112 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   Check out the guide here [microk8s dns setup](/docs/deployment/baremetal/microk8s#set-up-dns)
   :::
 
-5. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
-  
-  ```bash
-  opctl app status
-  ```
+5. Set up DNS
 
-6. Create the appropriate DNS record in your DNS provider based on the instructions above.
+  <Tabs
+      groupId="cloud-provider"
+      defaultValue="aks"
+      values={[
+      { label: 'Azure AKS', value: 'aks', },
+      { label: 'Amazon EKS', value: 'eks', },
+      { label: 'Google Cloud GKE', value: 'gke', },
+      { label: 'Microk8s', value: 'microk8s', },
+      ]
+  }>
+  <TabItem value="aks">
 
-7. Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
+    Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+    
+    ```bash
+    opctl app status
+    ```
+    
+    Create the appropriate DNS record in your DNS provider based on the instructions above.
+    
+    Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
-  :::note
-  If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, reach out in [Slack](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or [GitHub discussions](https://github.com/onepanelio/core/discussions).
-  :::
+  </TabItem>
+  <TabItem value="eks">
 
-8. Use the following command to get your auth token to log into Onepanel:
+    Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+    
+    ```bash
+    opctl app status
+    ```
+    
+    Create the appropriate DNS record in your DNS provider based on the instructions above.
+    
+    Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
+
+  </TabItem>
+  <TabItem value="gke">
+
+    Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+    
+    ```bash
+    opctl app status
+    ```
+    
+    Create the appropriate DNS record in your DNS provider based on the instructions above.
+    
+    Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
+
+  </TabItem>
+  <TabItem value="microk8s">
+
+    With a local deployment, you have a lot of options for DNS. If you want to use wildcards, check out [DNSMASQ](/docs/deployment/configuration/dns)
+
+  </TabItem>
+  </Tabs>
+
+6. Log in
+
+ Use the following command to get your auth token to log into Onepanel:
+
+  <Tabs
+  groupId="cloud-provider"
+  defaultValue="aks"
+  values={[
+  { label: 'Azure AKS', value: 'aks', },
+  { label: 'Amazon EKS', value: 'eks', },
+  { label: 'Google Cloud GKE', value: 'gke', },
+  { label: 'Microk8s', value: 'microk8s', },
+  ]
+  }>
+  <TabItem value="aks">
 
   ```bash
   opctl auth token
   ```
+
+  </TabItem>
+  <TabItem value="eks">
+
+  ```bash
+  opctl auth token
+  ```
+
+  </TabItem>
+  <TabItem value="gke">
+
+  ```bash
+  opctl auth token
+  ```
+
+  </TabItem>
+  <TabItem value="microk8s">
+
+  ```bash
+  microk8s config > kubeconfig
+  KUBECONFIG=./kubeconfig opctl auth token
+  ```
+
+  </TabItem>
+  </Tabs>
+
+:::note
+If the application is not loading, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page for some steps that can help resolve most issues. If you are still having issues, reach out in [Slack](https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg) or [GitHub discussions](https://github.com/onepanelio/core/discussions).
+:::
 
 :::important
 You will most likely need to use a GPU node pool for **Step 3: Train a model on annotated data** below. See [adding more nodes](/docs/deployment/components/nodes) for instructions on adding GPU node pools to your cluster.
