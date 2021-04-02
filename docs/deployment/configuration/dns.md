@@ -10,6 +10,11 @@ This guide is for Ubuntu 20.04
 
 ## Set up DNS with DNSMASQ
 
+:::important
+Make sure you have an ip address and the domain you want to use ready.
+:::
+
+
 1. We're going to be using dnsmasq so we can use wildcards.
 
    First, install dnsmasq
@@ -28,8 +33,7 @@ This guide is for Ubuntu 20.04
     # This option is also commented above in the file, but we add it to the end for ease of use.
     bind-interfaces
     
-    # The line below comes from what domain you set up in params.yaml
-    # and the ip you get from the cli 
+    # The line below comes from the domain you want to use and what ip you want to point it to
     address=/.onepanel.test/192.168.99.0
     ```
 

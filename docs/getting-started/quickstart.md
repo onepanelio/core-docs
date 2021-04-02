@@ -456,7 +456,25 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   </TabItem>
   <TabItem value="microk8s">
 
-    With a local deployment, you have a lot of options for DNS. If you want to use wildcards, check out [DNSMASQ](/docs/deployment/configuration/dns)
+    With a local deployment, you'll need to set up DNS with a wildcard so you can access the various parts of the onepanel system.
+    We're going to set up DNSMASQ. First, we need to get some information about our setup.
+
+    Run
+
+    ```bash
+    opctl app status
+    ```
+
+    The message will be something like this
+
+    ```text
+    In your DNS, add an A record for *.onepanel.test and point it to '198.168.99.0'
+    Once complete, your application will be running at https://app.onepanel.test
+    ```
+
+    Record the ip address, `198.168.99.0` and the domain `.onepanel.test`.
+
+    Then, go to our guide to setting up [DNSMASQ](/docs/deployment/configuration/dns)
 
   </TabItem>
   </Tabs>
