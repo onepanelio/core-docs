@@ -35,18 +35,6 @@ module.exports = {
       type: 'doc',
       id: 'deployment/overview',
     },
-    // { 
-    //   type: 'category',
-    //   label: 'Deployment',
-    //   collapsed: false,
-    //   items: [
-    //     'deployment/public/aks',
-    //     'deployment/public/eks',
-    //     'deployment/public/gke',
-    //     // 'deployment/single-node/microk8s',
-    //     // 'deployment/single-node/minikube',
-    //   ]
-    // },
     { 
       type: 'category',
       label: 'Configuration',
@@ -55,6 +43,7 @@ module.exports = {
         'deployment/configuration/cli',
         'deployment/configuration/files',
         'deployment/configuration/tls',
+        'deployment/configuration/dns',
       ]
     },
     {
