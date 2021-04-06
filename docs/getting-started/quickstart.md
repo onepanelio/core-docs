@@ -10,7 +10,7 @@ It's easy to get started with Onepanel. First, you install the CLI (`opctl`) and
 
 In this quick start, we will walk you through:
 
-1. Deploying Onepanel to one of the major cloud providers or locally.
+1. Deploying Onepanel to one of the major cloud providers or locally on MicroK8s.
 2. Labelling your images or video using the integrated annotation Workspace.
 3. Training your model with the newly labelled data using the integrated training Workflows.
 4. Automatically annotating new data using your newly trained model.
@@ -26,7 +26,7 @@ You can also follow along with our getting started videos, but be sure to use th
 :::
 
 ## Step 0: Create a Kubernetes cluster
-Let's get started by creating a Kubernetes cluster in one of the following cloud providers:
+Let's get started by creating a Kubernetes cluster in one of the major cloud providers or locally with MicroK8s:
 
 <Tabs
   groupId="cloud-provider"
