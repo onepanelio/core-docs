@@ -144,8 +144,6 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 MicroK8s is currently only supported on Ubuntu 20.04.
 :::
 
-## Install MicroK8s
-
 1. First, install `microk8s`.
 
     ```bash
