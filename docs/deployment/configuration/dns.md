@@ -1,14 +1,14 @@
 ---
-title: DNS
-sidebar_label: Local DNS
-description: Set up DNS for microk8s
+title: Local DNS with Dnsmasq
+sidebar_label: Local DNS with Dnsmasq
+description: Setup local DNS with Dnsmasq for MicroK8s
 ---
 
 :::note
 This guide is for Ubuntu 20.04
 :::
 
-## Set up DNS with DNSMASQ
+## Set up DNS with Dnsmasq
 
 :::important
 Make sure you have an ip address and the domain you want to use ready.

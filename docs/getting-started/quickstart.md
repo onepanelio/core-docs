@@ -350,7 +350,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
-4. Finally, run the following command to deploy Onepanel to your cluster:
+4. Run the following command to deploy Onepanel to your cluster:
 
   <Tabs
     groupId="cloud-provider"
@@ -403,7 +403,11 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   Check out the guide here [microk8s dns setup](/docs/deployment/baremetal/microk8s#set-up-dns)
   :::
 
-5. Set up DNS
+5. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+
+    ```bash
+    opctl app status
+    ```
 
   <Tabs
       groupId="cloud-provider"
@@ -412,43 +416,22 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
       { label: 'Azure AKS', value: 'aks', },
       { label: 'Amazon EKS', value: 'eks', },
       { label: 'Google Cloud GKE', value: 'gke', },
-      { label: 'Microk8s', value: 'microk8s', },
+      { label: 'MicroK8s', value: 'microk8s', },
       ]
   }>
   <TabItem value="aks">
-
-    Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
-    
-    ```bash
-    opctl app status
-    ```
-    
     Create the appropriate DNS record in your DNS provider based on the instructions above.
     
     Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
   </TabItem>
   <TabItem value="eks">
-
-    Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
-    
-    ```bash
-    opctl app status
-    ```
-    
     Create the appropriate DNS record in your DNS provider based on the instructions above.
     
     Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
   </TabItem>
   <TabItem value="gke">
-
-    Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
-    
-    ```bash
-    opctl app status
-    ```
-    
     Create the appropriate DNS record in your DNS provider based on the instructions above.
     
     Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
@@ -456,32 +439,29 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   </TabItem>
   <TabItem value="microk8s">
 
-    With a local deployment, you'll need to set up DNS with a wildcard so you can access the various parts of the onepanel system.
-    We're going to set up DNSMASQ. First, we need to get some information about our setup.
+    With a local deployment, you may also need to set up DNS locally. Follow the instructions below to do this using [Dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html).
 
-    Run
+    Run the following command:
 
     ```bash
     opctl app status
     ```
 
-    The message will be something like this
+    You'll get a similar output to below:
 
     ```text
     In your DNS, add an A record for *.onepanel.test and point it to '198.168.99.0'
     Once complete, your application will be running at https://app.onepanel.test
     ```
 
-    Record the ip address, `198.168.99.0` and the domain `.onepanel.test`.
+    Record the IP address, `198.168.99.0` and the domain `*.onepanel.test`.
 
-    Then, go to our guide to setting up [DNSMASQ](/docs/deployment/configuration/dns)
+    Then, follow the instructions at [Local DNS with Dnsmasq](/docs/deployment/configuration/dns) to set up local DNS.
 
   </TabItem>
   </Tabs>
 
-6. Log in
-
- Use the following command to get your auth token to log into Onepanel:
+6. Use the following command to get your auth token to log into Onepanel:
 
   <Tabs
   groupId="cloud-provider"
@@ -490,7 +470,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   { label: 'Azure AKS', value: 'aks', },
   { label: 'Amazon EKS', value: 'eks', },
   { label: 'Google Cloud GKE', value: 'gke', },
-  { label: 'Microk8s', value: 'microk8s', },
+  { label: 'MicroK8s', value: 'microk8s', },
   ]
   }>
   <TabItem value="aks">
