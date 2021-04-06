@@ -398,11 +398,6 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page.
   :::
 
-  :::important
-  Although this is enough to get started, you'll want to configure dns to have access to workspaces.
-  Check out the guide here [microk8s dns setup](/docs/deployment/baremetal/microk8s#set-up-dns)
-  :::
-
 5. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
     ```bash
