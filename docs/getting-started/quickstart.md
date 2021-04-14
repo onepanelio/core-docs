@@ -348,16 +348,44 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
-4. Label your node
-    
-   To allow workspaces to run on your machine(s) we need to label them.
-   First, get the names of your nodes with
-   
+4. Label your nodes
+
+  <Tabs
+  groupId="cloud-provider"
+  defaultValue="aks"
+  values={[
+  { label: 'Azure AKS', value: 'aks', },
+  { label: 'Amazon EKS', value: 'eks', },
+  { label: 'Google Cloud GKE', value: 'gke', },
+  { label: 'MicroK8s', value: 'microk8s', },
+  ]
+  }>
+  <TabItem value="aks">
+  
+    Azure AKS automatically labels the nodes, there is nothing to do for this step.
+  
+    </TabItem>
+    <TabItem value="eks">
+  
+    Amazon EKS automatically labels the nodes, there is nothing to do for this step.
+  
+    </TabItem>
+    <TabItem value="gke">
+  
+    Google Cloud GKE automatically labels the nodes, there is nothing to do for this step.
+  
+    </TabItem>
+  
+    <TabItem value="microk8s">
+
+    To allow workspaces to run on your machine(s) we need to label them.
+    First, get the names of your nodes with
+
    ```bash
    microk8s kubectl get nodes
    ```
 
-   A result might be
+    A result might be
 
     ```bash
     NAME     STATUS   ROLES    AGE   VERSION
@@ -384,6 +412,9 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
     ```bash
     microk8s kubectl label node sample node.kubernetes.io/instance-type=local
     ```
+
+    </TabItem>
+    </Tabs>
 
 5. Run the following command to deploy Onepanel to your cluster:
 
