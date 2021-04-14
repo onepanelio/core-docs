@@ -348,7 +348,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
-4. Label your nodes
+4. Label your nodes if applicable.
 
   <Tabs
   groupId="cloud-provider"
@@ -362,59 +362,55 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   }>
   <TabItem value="aks">
   
-    Azure AKS automatically labels the nodes, there is nothing to do for this step.
+  Azure AKS automatically labels nodes with `node.kubernetes.io/instance-type=<cloud-provider-instance-type>`.
   
-    </TabItem>
-    <TabItem value="eks">
+  </TabItem>
+  <TabItem value="eks">
+
+  Amazon EKS automatically labels nodes with `node.kubernetes.io/instance-type=<cloud-provider-instance-type>`.
+
+  </TabItem>
+  <TabItem value="gke">
+
+  Google Cloud GKE automatically labels nodes with `node.kubernetes.io/instance-type=<cloud-provider-instance-type>`.
+
+  </TabItem>
+
+  <TabItem value="microk8s">
+
+  To allow Workspaces to run on your machine(s) you need to label them.
   
-    Amazon EKS automatically labels the nodes, there is nothing to do for this step.
+  First, get the names of your nodes by running:
+
+  ```bash
+  microk8s kubectl get nodes
+  ```
+
+  You will get results similar to below:
+
+  ```bash
+  NAME     STATUS   ROLES    AGE   VERSION
+  sample   Ready    <none>   11m   v1.19.8-34+811e9feeade1d3
+  ```
+
+  Then, for each node name, add the label from your `application.nodePool.label` from your `params.yaml`, for example if you have:
   
-    </TabItem>
-    <TabItem value="gke">
+  ```yaml
+  nodePool:
+      label: node.kubernetes.io/instance-type
+      options:
+        - name: 'Local machine'
+          value: local
+  ```
   
-    Google Cloud GKE automatically labels the nodes, there is nothing to do for this step.
+  and the node above is called `sample`, you can label the node as follows:
   
-    </TabItem>
-  
-    <TabItem value="microk8s">
+  ```bash
+  microk8s kubectl label node sample node.kubernetes.io/instance-type=local
+  ```
 
-    To allow workspaces to run on your machine(s) we need to label them.
-    First, get the names of your nodes with
-
-   ```bash
-   microk8s kubectl get nodes
-   ```
-
-    A result might be
-
-    ```bash
-    NAME     STATUS   ROLES    AGE   VERSION
-    sample   Ready    <none>   11m   v1.19.8-34+811e9feeade1d3
-    ```
-
-    Then, for each node name, add the label from your `application.nodePool.label`
-    from above.
-    
-    An example `params.yaml` might have
-    
-    ```yaml
-    nodePool:
-       label: node.kubernetes.io/instance-type
-       options:
-          - name: 'Local machine'
-            value: local
-    ```
-    
-    and the node above is called `sample`
-    
-    So I use
-    
-    ```bash
-    microk8s kubectl label node sample node.kubernetes.io/instance-type=local
-    ```
-
-    </TabItem>
-    </Tabs>
+  </TabItem>
+  </Tabs>
 
 5. Run the following command to deploy Onepanel to your cluster:
 
