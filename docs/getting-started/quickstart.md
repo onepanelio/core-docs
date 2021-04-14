@@ -348,7 +348,44 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
 
 3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
-4. Run the following command to deploy Onepanel to your cluster:
+4. Label your node
+    
+   To allow workspaces to run on your machine(s) we need to label them.
+   First, get the names of your nodes with
+   
+   ```bash
+   microk8s kubectl get nodes
+   ```
+
+   A result might be
+
+    ```bash
+    NAME     STATUS   ROLES    AGE   VERSION
+    sample   Ready    <none>   11m   v1.19.8-34+811e9feeade1d3
+    ```
+
+    Then, for each node name, add the label from your `application.nodePool.label`
+    from above.
+    
+    An example `params.yaml` might have
+    
+    ```yaml
+    nodePool:
+       label: node.kubernetes.io/instance-type
+       options:
+          - name: 'Local machine'
+            value: local
+    ```
+    
+    and the node above is called `sample`
+    
+    So I use
+    
+    ```bash
+    microk8s kubectl label node sample node.kubernetes.io/instance-type=local
+    ```
+
+5. Run the following command to deploy Onepanel to your cluster:
 
   <Tabs
     groupId="cloud-provider"
@@ -396,7 +433,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   If the command completes but it indicates that your cluster is not ready, you can check status again by running `opctl app status`. If you're still seeing issues, visit our [Troubleshooting](/docs/deployment/troubleshooting/overview) page.
   :::
 
-5. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+6. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
 
     ```bash
     opctl app status
