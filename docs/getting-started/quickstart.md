@@ -140,8 +140,10 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 
 <TabItem value="microk8s">
 
-:::note
+:::important
 MicroK8s is currently only supported on Ubuntu 20.04.
+
+See [MicroK8s on remote machines](/docs/deployment/configuration/remote-microk8s) if you are deploying to a remote VM or using Multipass.
 :::
 
 1. First, install `microk8s`.
