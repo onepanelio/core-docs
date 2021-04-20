@@ -461,10 +461,37 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   :::
 
 6. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
-
+  <Tabs
+      groupId="cloud-provider"
+      defaultValue="aks"
+      values={[
+      { label: 'Azure AKS', value: 'aks', },
+      { label: 'Amazon EKS', value: 'eks', },
+      { label: 'Google Cloud GKE', value: 'gke', },
+      { label: 'MicroK8s', value: 'microk8s', },
+      ]
+  }>
+  <TabItem value="aks">
     ```bash
     opctl app status
     ```
+  </TabItem>
+  <TabItem value="eks">
+    ```bash
+    opctl app status
+    ```
+  </TabItem>
+  <TabItem value="gke">
+    ```bash
+    opctl app status
+    ```
+  </TabItem>
+  <TabItem value="microk8s">
+    ```bash
+    KUBECONFIG=./kubeconfig opctl app status
+    ```
+  </TabItem>
+  </Tabs>
 
   <Tabs
       groupId="cloud-provider"
