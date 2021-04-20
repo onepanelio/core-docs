@@ -1,7 +1,7 @@
 ---
-title: Remote Microk8s
-sidebar_label: Remote Microk8s
-description: Set up microk8s on a remote vm.
+title: MicroK8s on remote machines
+sidebar_label: MicroK8s on remote machines
+description: Onepanel - Setting up MicroK8s on a remote machines
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -45,7 +45,7 @@ Ubuntu 20.04 or higher.
   All further instructions are in your remote computer/vm unless otherwise indicated.
   :::
 
-2. Install Microk8s
+2. Install MicroK8s
 
   ```bash
   sudo snap install microk8s --channel=1.19/stable --classic
