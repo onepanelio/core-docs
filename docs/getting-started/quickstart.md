@@ -461,6 +461,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   :::
 
 6. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+
   <Tabs
       groupId="cloud-provider"
       defaultValue="aks"
