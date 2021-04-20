@@ -40,6 +40,7 @@ module.exports = {
       label: 'Configuration',
       collapsed: false,
       items: [
+        'deployment/configuration/remote_microk8s',
         'deployment/configuration/cli',
         'deployment/configuration/files',
         'deployment/configuration/tls',
