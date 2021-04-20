@@ -461,11 +461,6 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   :::
 
 6. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
-
-    ```bash
-    opctl app status
-    ```
-
   <Tabs
       groupId="cloud-provider"
       defaultValue="aks"
@@ -477,23 +472,41 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
       ]
   }>
   <TabItem value="aks">
+
+    ```bash
+    opctl app status
+    ```
+
     Create the appropriate DNS record in your DNS provider based on the instructions above.
     
     Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
   </TabItem>
+
   <TabItem value="eks">
+
+    ```bash
+    opctl app status
+    ```
+
     Create the appropriate DNS record in your DNS provider based on the instructions above.
     
     Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
   </TabItem>
+
   <TabItem value="gke">
+
+    ```bash
+    opctl app status
+    ```
+
     Create the appropriate DNS record in your DNS provider based on the instructions above.
     
     Wait a few minutes and check the URL mentioned in the instructions above. Your applications should load with a screen prompting you to enter a token.
 
   </TabItem>
+  
   <TabItem value="microk8s">
 
     With a local deployment, you may also need to set up DNS locally. Follow the instructions below to do this using [Dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html).
@@ -501,7 +514,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
     Run the following command:
 
     ```bash
-    opctl app status
+    KUBECONFIG=./kubeconfig opctl app status
     ```
 
     You'll get a similar output to below:
