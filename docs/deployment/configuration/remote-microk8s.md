@@ -6,9 +6,15 @@ description: Onepanel - Setting up MicroK8s on a remote machines
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-You can set up and access Onepanel on a remote computer that you can SSH to.
-This can be a VM in the cloud, or multipass running locally. In either case, it has to be running
-Ubuntu 20.04 or higher.
+:::important
+We are only providing this guide as a reference. Due to the complexity of different installations, we can only provide open source support for clusters running Ubuntu 20.04 or higher as host OS on a local cluster.
+
+Please visit our [Website](https://www.onepanel.ai/) and contact us for other bare metal installation options.
+:::
+
+You can set up and access Onepanel on a remote computer that you can access via SSH.
+
+This can be a VM in the cloud, or Multipass running locally. In either case, it has to be running Ubuntu 20.04 or higher.
 
 1. Set up your VM
 
