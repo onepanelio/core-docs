@@ -80,6 +80,7 @@ module.exports = {
         'reference/workspaces/upgrade',
         'reference/workspaces/delete',
         'reference/workspaces/templates',
+        'reference/workspaces/filesyncer',
       ]
     },
     { 
