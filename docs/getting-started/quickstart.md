@@ -141,7 +141,7 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 <TabItem value="microk8s">
 
 :::important
-MicroK8s is currently only supported on Ubuntu 20.04 or higher running as host OS on a local cluster.
+MicroK8s deployment is currently only supported on Ubuntu 20.04 or higher running as host OS on a local cluster.
 
 See [MicroK8s on remote machines](/docs/deployment/configuration/remote-microk8s) for reference if you are deploying to a remote VM or using Multipass.
 :::
