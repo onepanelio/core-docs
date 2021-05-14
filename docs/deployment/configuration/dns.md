@@ -4,8 +4,8 @@ sidebar_label: Local DNS with Dnsmasq
 description: Setup local DNS with Dnsmasq for MicroK8s
 ---
 
-:::note
-This guide is for Ubuntu 20.04
+:::important
+This guide is for Ubuntu 20.04 or higher installed as host OS on a local cluster.
 :::
 
 ## Set up DNS with Dnsmasq

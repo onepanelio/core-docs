@@ -140,8 +140,10 @@ gcloud container clusters get-credentials <cluster-name> --zone <zone>
 
 <TabItem value="microk8s">
 
-:::note
-MicroK8s is currently only supported on Ubuntu 20.04.
+:::important
+MicroK8s deployment is currently only supported on Ubuntu 20.04 or higher running as host OS on a local cluster.
+
+See [MicroK8s on remote machines](/docs/deployment/configuration/remote-microk8s) for reference if you are deploying to a remote VM or using Multipass.
 :::
 
 1. First, install `microk8s`.
@@ -461,6 +463,7 @@ Once you are done with these quick start steps, see [adding more nodes](/docs/de
   :::
 
 6. Once the deployment completes, the CLI will display the host name and wildcard domain you need to use to setup your DNS. You can also get this information again by running:
+
   <Tabs
       groupId="cloud-provider"
       defaultValue="aks"
