@@ -32,7 +32,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 
   :::important
   Onepanel requires at least 40GB of hard disk space, so if your VM doesn't have that much you'll
-  have to mount an external disk. In that case, make sure to do step 5.
+  have to [mount](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal#connect-to-the-linux-vm-to-mount-the-new-disk) an external disk. In that case, make sure to do step 5.
   :::
 
   </TabItem>
@@ -48,6 +48,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   </Tabs>
 
   :::note
+  Before proceeding make sure you have [CUDA Drivers](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/n-series-driver-setup#install-cuda-drivers-on-n-series-vms) and [NVIDIA Docker](https://github.com/NVIDIA/k8s-device-plugin/blob/master/README.md#preparing-your-gpu-nodes) installed  
   All further instructions are in your remote computer/vm unless otherwise indicated.
   :::
 
