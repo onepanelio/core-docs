@@ -46,7 +46,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   </TabItem>
   </Tabs>
 
-  :::note
+  :::important
   For VMs running with GPU nodes make sure you have the latest [CUDA Driver](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/n-series-driver-setup#install-cuda-drivers-on-n-series-vms) and [NVIDIA Docker](https://github.com/NVIDIA/k8s-device-plugin/blob/master/README.md#preparing-your-gpu-nodes) installed.  
   And then [enable GPU with Microk8s](https://microk8s.io/docs/addon-gpu).  
   All further instructions are in your remote computer/vm unless otherwise indicated.
