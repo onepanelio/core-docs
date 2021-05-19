@@ -139,7 +139,7 @@ function Home() {
             Runs on <img src="img/landing/platforms.svg" alt="aws, azure, gcp, kubernetes"></img>
           </div>
           <div className="hero__video">
-            <video controls autoPlay loop muted playsInline width="100%">
+            <video controls autoPlay muted playsInline width="100%">
               <source type="video/mp4" src="img/landing/onepanel.mp4" /> 
             </video>
           </div>
