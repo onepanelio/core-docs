@@ -7,46 +7,63 @@ description: Deploy your cluster with MinIO operator
 ## Create a Minio Tenant
 :::note
 Make sure to use `microk8s kubectl` as you follow through the guide with creating the tenant.  
-also microk8s stores certificates in `/var/snap/microk8s/current/certs/` directory.
+Also, this will only work if you initiated your deployment with **--artifact-repository-provider s3**
 :::
 
-1. To map a local storage volume within a Microk8s deployment, users must first deploy a [MinIO Tenant](https://github.com/minio/operator#create-a-minio-tenant) inside the cluster.
+1. One option to map a local storage volume within a Microk8s deployment is with [MinIO Tenants](https://github.com/minio/operator#create-a-minio-tenant).  
 
-2. Once complete, users can access the tenant and use the generated credentials after it was created.
+    By default these tenants run with **TLS**, we can disable this by using this [example](https://github.com/minio/operator/blob/master/examples/tenant-with-autocert-encryption-disabled.yaml) and changing **requestAutoCert** to **false**.  
+    
+    feel free to update pools to the storage size you'll use for the deployment, then run.  
     ```bash
-    microk8s kubectl port-forward svc/minio -n minio-tenant-1 443:443
+    kubectl apply -f file.yaml --namespace minio-tenant-1
     ```
 
-3. note that you will need to use `https:\\localhost:<port>` when you open the service in a browser.
-    ![](/img/microk8s/minio.png)
+2. Make sure that the tenant pods is running.
+    ```bash
+    kubectl get pods -A
+    NAMESPACE            NAME                                      READY   STATUS    RESTARTS   AGE
+    minio-tenant-1       minio-tenant-ss-0-0                       2/2     Running   0          151m
+    ```
 
-4. Create a bucket
+3. Next, you'll need to **create a bucket**, to do this you can use port-forwarding with kubectl.  
+   ```bash
+   kubectl port-forward svc/minio -n minio-tenant-1 9000:80    
+   ```
+   You can use the following credentials for this example  
+   Accesskey: **minio**  
+   Secretkey: **minio123**
 
-5. Once deployed update `params.yaml` and under `artifactRepository`
-    ```yaml
+4. Next, fetch the ip address from the tenant's pod.
+   ```bash
+   kubectl describe pods minio-tenant-ss-0-0 -n minio-tenant-1 | grep "IP"
+   ```
+
+5. Next, update **params.yaml**.  
+    ```bash
     artifactRepository:
-    s3:
-        # S3 access key
-        accessKey: tenant_access_key
-        # Name of bucket, example: my-bucket
-        bucket: bucket_name
-        # Endpoint for S3 compatible storage
-        # Supported provider endpoints:
-        #   AWS: s3.amazonaws.com
-        #   GCS: storage.googleapis.com
-        #   Minio: my-minio-endpoint.default:9000
-        endpoint: minio.minio-tenant-1.svc.cluster.local:443
-        # Change to true if endpoint does NOT support HTTPS
-        insecure: false
-        # Key Format for objects stored by Workflows. This can reference Workflow variables
-        keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
-        # Bucket region
-        region: us-west-2
-        # S3 secret key
-        secretKey: tenant_secret_key
+        s3:
+            # S3 access key
+            accessKey: minio
+            # Name of bucket, example: my-bucket
+            bucket: test
+            # Endpoint for S3 compatible storage
+            # Supported provider endpoints:
+            #   AWS: s3.amazonaws.com
+            #   GCS: storage.googleapis.com
+            #   Minio: my-minio-endpoint.default:9000
+            endpoint: <pod-ip-address>:9000
+            # Change to true if endpoint does NOT support HTTPS
+            insecure: true
+            # Key Format for objects stored by Workflows. This can reference Workflow variables
+            keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
+            # Bucket region
+            region: us-west-2
+            # S3 secret key
+            secretKey: minio123
     ```
 
-6. Finally deploy Onepanel with Minio Tenant
+6. Finally, deploy Onepanel with Minio Tenant.
     ```bash
     KUBECONFIG=./kubeconfig opctl apply
     ```
