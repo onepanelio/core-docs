@@ -44,7 +44,7 @@ module.exports = {
         'deployment/configuration/files',
         'deployment/configuration/tls',
         'deployment/configuration/dns',
-        'deployment/configuration/microk8s-minio'
+        'deployment/configuration/remote-microk8s',
       ]
     },
     {
