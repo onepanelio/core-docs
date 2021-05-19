@@ -1,12 +1,12 @@
 ---
-title: Architecture and cost estimates
-sidebar_label: Architecture  and cost estimates
+title: Cluster information
+sidebar_label: Cluster information
 description: Architecture diagrams and cost estimates for AWS, Azure and GCP
 ---
 
-## Kubernetes cluster architecture
+## Kubernetes cluster
 
-Note that minimum supported Kubernetes version is 1.16.0. All the provided cloud provider CLI commands at minimum install Kubernetes 1.18.x.
+Note that minimum supported Kubernetes version is 1.16.0. All the provided cloud provider CLI commands at minimum install Kubernetes 1.16.0.
 
 ### Diagram
 :::note
