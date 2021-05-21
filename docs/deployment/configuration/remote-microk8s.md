@@ -304,11 +304,13 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   
   ```text
   location / {
+    client_max_body_size 0; # No size limit to upload requests    
     proxy_pass http://192.168.99.0; # the ip address you gave metallb
     proxy_set_header Host $host;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
+    proxy_request_buffering off; 
   }
   ```
 
