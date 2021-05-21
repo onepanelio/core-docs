@@ -31,7 +31,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   Set up your VM according to your cloud provider instructions.
 
   :::important
-  Onepanel requires at least 40GB of hard disk space, so if your VM doesn't have that much you'll
+  Onepanel requires at least 40GB of hard disk space. If your VM doesn't have that much you'll
   have to mount an external disk. In that case, make sure to do step 5.
   :::
 
@@ -51,13 +51,15 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   All further instructions are in your remote computer/vm unless otherwise indicated.
   :::
 
-2. Install MicroK8s
+## Install MicroK8s
+
+1. Install MicroK8s
 
   ```bash
   sudo snap install microk8s --channel=1.19/stable --classic
   ```
 
-3. Update your permissions
+2. Update your permissions
 
   ```bash
   sudo usermod -a -G microk8s $USER
@@ -72,7 +74,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   microk8s status --wait-ready
   ```
 
-4. Update API server config
+3. Update API server config
 
   ```bash
   sudo nano /var/snap/microk8s/current/args/kube-apiserver
@@ -93,7 +95,62 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   microk8s stop && microk8s start && microk8s status --wait-ready
   ```
 
-5. (Optional) Mount external disks
+4. Enable microk8s addons
+
+  ```bash
+  sudo microk8s enable storage dns rbac
+  microk8s status --wait-ready
+  ```
+
+5. Configure DNS
+
+  <Tabs
+  groupId="provider"
+  defaultValue="cloud_vm"
+  values={[
+  { label: 'Cloud VM', value: 'cloud_vm', },
+  { label: 'Multipass', value: 'multipass', },
+  ]
+  }>
+  <TabItem value="cloud_vm">
+  
+  i. Edit the resolvconf
+  
+    ```bash
+    sudo nano /var/snap/microk8s/current/args/kubelet
+    ```
+  
+  Add to the top
+  
+    ```bash
+    --resolv-conf=/run/systemd/resolve/resolv.conf
+    ```
+  
+  ii. Edit coredns configmap so we point to the resolv.conf file
+  
+    ```bash
+    microk8s kubectl edit cm coredns -n kube-system
+    ```
+  
+  Set the forward section to:
+  
+    ```bash
+    forward . /etc/resolv.conf 8.8.8.8  8.8.4.4
+    ```
+  
+  iii. Restart microk8s
+  
+    ```bash
+    microk8s stop && microk8s start && microk8s status --wait-ready
+    ```
+  
+    </TabItem>
+    <TabItem value="multipass">
+    No configuration is required for multipass.
+    </TabItem>
+    </Tabs>
+
+## (Optional) Mount external disks
   
   If you are using a VM in the cloud, you need at least 40GB of hard disk space.
   Mount your disk if you haven't already. We'll assume your disk is mounted at `/data`
@@ -128,62 +185,9 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   microk8s stop && microk8s start && microk8s status --wait-ready
   ```
 
-6. Enable microk8s addons
+## Install Onepanel
 
-  ```bash
-  sudo microk8s enable storage dns rbac
-  microk8s status --wait-ready
-  ```
-
-7. Configure DNS
-
-  <Tabs
-  groupId="provider"
-  defaultValue="cloud_vm"
-  values={[
-  { label: 'Cloud VM', value: 'cloud_vm', },
-  { label: 'Multipass', value: 'multipass', },
-  ]
-  }>
-  <TabItem value="cloud_vm">
-
-  i. Edit the resolvconf
-
-  ```bash
-  sudo nano /var/snap/microk8s/current/args/kubelet
-  ```
-  
-  Add to the top
-  
-  ```bash
-  --resolv-conf=/run/systemd/resolve/resolv.conf
-  ```
-  
-  ii. Edit coredns configmap so we point to the resolv.conf file
-  
-  ```bash
-  microk8s kubectl edit cm coredns -n kube-system
-  ```
-
-  Set the forward section to:
-  
-  ```bash
-  forward . /etc/resolv.conf 8.8.8.8  8.8.4.4
-  ```
-  
-  iii. Restart microk8s
-
-  ```bash
-  microk8s stop && microk8s start && microk8s status --wait-ready
-  ```
-  
-  </TabItem>
-  <TabItem value="multipass">
-  No configuration is required for multipass.
-  </TabItem>
-  </Tabs>
-
-8. Install Onepanel
+1. Install
 
   ```bash
   curl -sLO https://github.com/onepanelio/onepanel/releases/download/v0.21.0/opctl-linux-amd64
@@ -191,7 +195,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   sudo mv ./opctl-linux-amd64 /usr/local/bin/opctl
   ```
 
-9. Initialize Onepanel
+2. Initialize Onepanel
 
   ```bash
   opctl init --provider microk8s \
@@ -203,7 +207,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   I used Azure Block Storage (abs) as the artifact-repository-provider above, but you can use s3, abs, or gcs
   :::
 
-10. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
+3. Populate `params.yaml` by following the instructions in the template, and referring to [configuration file sections](/docs/deployment/configuration/files#sections) for more detailed information.
 
   Here's a mostly filled out `params.yaml` for a quickstart. You'll need to fill out `artifactRepository`
 
@@ -234,14 +238,14 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
       - 192.168.99.0/32
   ```
   
-11. Deploy onepanel
+4. Deploy onepanel
 
   ```bash
   microk8s config > kubeconfig
   KUBECONFIG=./kubeconfig opctl apply
   ```
 
-12. Label your nodes
+5. Label your nodes
 
   To allow Workspaces to run on your machine(s) you need to label them.
   
@@ -274,7 +278,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
     microk8s kubectl label node sample node.kubernetes.io/instance-type=local
     ```
 
-13. Expose onepanel using Nginx
+## Expose Onepanel using Nginx
 
   Since Onepanel is running inside a VM, we need to expose it so we can access it on our local computers.
   To do so, we use nginx.
@@ -310,7 +314,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
-    proxy_request_buffering off; 
+    proxy_request_buffering off;
   }
   ```
 
@@ -319,10 +323,12 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   sudo nginx -s reload
   ```
 
-14. Configure DNS 
+## Configure Local DNS
 
   On your local machine, we need to point DNS so it knows about Onepanel.
   
+  Below we edit the hosts file, but you can use DNSMasq for a more robust set up.
+
   Get the IP address of your VM. For VMs in the cloud, this is given to you. 
   In multipass you can see it with `multipass list`
 
@@ -363,7 +369,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   15.92.2.237 app.onepanel.test
   ```
 
-15. Use Onepanel
+## Use Onepanel
 
   In your VM, Get your authentication login with
   ```bash
