@@ -16,6 +16,8 @@ You can set up and access Onepanel on a remote computer that you can access via 
 
 This can be a VM in the cloud, or Multipass running locally. In either case, it has to be running Ubuntu 20.04 or higher.
 
+## Microk8s installation and set up
+
 1. Set up your VM
 
   <Tabs
@@ -30,10 +32,6 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 
   Set up your VM according to your cloud provider instructions.
 
-  :::important
-  We recommend [mounting an external disk](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal#connect-to-the-linux-vm-to-mount-the-new-disk) of at least 30GB, then do step 5.
-  :::
-
   </TabItem>
   <TabItem value="multipass">
 
@@ -45,12 +43,6 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 
   </TabItem>
   </Tabs>
-
-  :::note
-  For VMs running with GPU nodes make sure you have the latest [CUDA Driver](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/n-series-driver-setup#install-cuda-drivers-on-n-series-vms) and [NVIDIA Docker](https://github.com/NVIDIA/k8s-device-plugin/blob/master/README.md#preparing-your-gpu-nodes) installed.  
-  And then [enable GPU with Microk8s](https://microk8s.io/docs/addon-gpu).  
-  All further instructions are in your remote computer/vm unless otherwise indicated.
-  :::
 
 2. Install MicroK8s
 
@@ -371,3 +363,104 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   ```
   
   Open up `app.onepanel.test` in your browser, paste in the credentials, and you are good to go!
+
+
+## Optional GPU Setup
+:::note
+For instances running with GPUs we recommend having a disk size of at least 80-100GB.  
+All further instructions are in your remote computer/vm unless otherwise indicated.
+:::
+
+### CUDA installation
+##### 1. Verify You Have a CUDA-Capable GPU
+To verify that your GPU is CUDA-capable, go to your distribution's equivalent of System Properties, or, from the command line, enter:
+```bash
+lspci | grep -i nvidia
+```
+##### 2. Verify You Have a Supported Version of Linux
+To determine which distribution and release number you're running, type the following at the command line:
+```bash
+uname -m && cat /etc/*release
+```
+You should see an output similar to the following, modified for your particular system:
+```bash
+x86_64
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION="Ubuntu 20.04.2 LTS"
+```
+##### 3. Verify the System Has gcc Installed
+The gcc compiler is required for development using the CUDA Toolkit. It is not required for running CUDA applications. It is generally installed as part of the Linux installation, and in most cases the version of gcc installed with a supported version of Linux will work correctly.
+
+To verify the version of gcc installed on your system, type the following on the command line:
+```bash
+gcc --version
+```
+
+##### 4. Verify the System has the Correct Kernel Headers and Development Packages Installed
+The CUDA Driver requires that the kernel headers and development packages for the running version of the kernel be installed at the time of the driver installation, as well whenever the driver is rebuilt.
+
+The version of the kernel your system is running can be found by running the following command:
+```bash
+uname -r
+```
+The kernel headers and development packages for the currently running kernel can be installed with:
+```bash
+sudo apt-get install linux-headers-$(uname -r)
+```
+
+##### 5. Download the NVIDIA CUDA Toolkit
+The NVIDIA CUDA Toolkit is available at https://developer.nvidia.com/cuda-downloads.
+
+Or you can install by following the commands below:
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/11.3.1/local_installers/cuda-repo-ubuntu2004-11-3-local_11.3.1-465.19.01-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2004-11-3-local_11.3.1-465.19.01-1_amd64.deb
+sudo apt-key add /var/cuda-repo-ubuntu2004-11-3-local/7fa2af80.pub
+sudo apt-get update
+sudo apt-get -y install cuda
+```
+
+##### 6. Enable GPU with Microk8s
+This addon enables NVIDIA GPU support for MicroK8s.
+```bash
+microk8s enable gpu
+```
+
+##### 6. Update Params.yaml
+on your params.yaml make sure to update the section under `nodePool:`
+
+should look something like this:
+```yaml
+nodePool:
+    # Cloud providers will automatically set label key as "node.kubernetes.io/instance-type" on all nodes
+    # For Kubernetes 1.16.x, use "beta.kubernetes.io/instance-type"
+    label: node.kubernetes.io/instance-type
+    # These are the machine type options that will be available in Onepanel
+    #   `name` can be any user friendly name
+    #   `value` should be the instance type in your cloud provider
+    #   `resources.limits` should only be set if the node pool has GPUs
+    # The first option will be used as default.
+    options:
+      - name: 'Local machine'
+        value: local
+      - name: 'Local GPU'
+        value: gpu
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+```
+and then add the label for your gpu node
+```bash
+microk8s kubectl label node samplegpu node.kubernetes.io/instance-type=gpu
+```
+
+##### 7. Apply Changes to Onepanel
+Make sure to apply changes to use GPU nodes under your deployment:
+```bash
+microk8s config > kubeconfig
+KUBECONFIG=./kubeconfig opctl apply
+```
