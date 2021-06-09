@@ -424,6 +424,24 @@ sudo apt-get update
 sudo apt-get -y install cuda
 ```
 
+verify installation with:
+```bash
+$ nvidia-smi
+
+Output:
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 466.27       Driver Version: 466.27       CUDA Version: 11.3     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name            TCC/WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ... WDDM  | 00000000:01:00.0  On |                  N/A |
+| N/A   59C    P0    14W /  N/A |    641MiB /  4096MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+```
+
 ##### 6. Enable GPU with Microk8s
 This addon enables NVIDIA GPU support for MicroK8s.
 ```bash
