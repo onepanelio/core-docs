@@ -3,25 +3,121 @@ title: Microk8s Local Storage Deployment(MinIO)
 sidebar_label: Microk8s Local Storage Deployment(MinIO)
 description: Deploy your cluster with MinIO operator
 ---
+One option to map a local storage volume within a Microk8s deployment is with [MinIO Operators](https://github.com/minio/operator#create-a-minio-tenant). 
 
-## Create a Minio Tenant
 :::note
-Make sure to use `microk8s kubectl` as you follow through the guide with creating the tenant.  
-Also, this will only work if you initiated your deployment with **--artifact-repository-provider s3**
+* Make sure you have [Microk8s](/docs/getting-started/quickstart) installed before proceeding.  
+* This process should be completed/running before you launch Onepanel.  
+* Make sure that you initiated Onepanel with `--artifact-repository-provider s3`
 :::
 
-1. One option to map a local storage volume within a Microk8s deployment is with [MinIO Tenants](https://github.com/minio/operator#create-a-minio-tenant).  
 
-    By default these tenants run with **TLS**, we can disable this by using this [example](https://github.com/minio/operator/blob/master/examples/tenant-with-autocert-encryption-disabled.yaml) and changing **requestAutoCert** to **false**.  
-    
-    feel free to update pools to the storage size you'll use for the deployment, then run.  
+## Step 0: Create a Minio Tenant 
+Let's get started by creating a MinIO tenant
+
+1. First, create a namespace
     ```bash
-    kubectl apply -f file.yaml --namespace minio-tenant-1
+    microk8s kubectl create ns minio-tenant
     ```
 
-2. Make sure that the tenant pods is running.
+2. By default tenants runs with **TLS** enabled, to disable this set `requestAutoCert: true` to false.  
+    Then, copy configurations below and save as operator.yaml
+    
     ```bash
-    kubectl get pods -A
+    ## Secret to be used as MinIO Root Credentials
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      namespace: <namespace> # Your namespace here
+      name: minio-autocert-no-encryption-minio-creds-secret
+    type: Opaque
+    data:
+      ## Access Key for MinIO Tenant, base64 encoded (echo -n 'minio' | base64)
+      accesskey: bWluaW8=
+      ## Secret Key for MinIO Tenant, base64 encoded (echo -n 'minio123' | base64)
+      secretkey: bWluaW8xMjM=
+    ---
+    ## Secret to be used for MinIO Console
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      namespace: <namespace> # Your namespace here
+      name: minio-autocert-no-encryption-console-secret
+    type: Opaque
+    data:
+      ## Passphrase to encrypt jwt payload, base64 encoded (echo -n 'SECRET' | base64)
+      CONSOLE_PBKDF_PASSPHRASE: U0VDUkVU
+      ## Salt to encrypt jwt payload, base64 encoded (echo -n 'SECRET' | base64)
+      CONSOLE_PBKDF_SALT: U0VDUkVU
+      ## MinIO User Access Key (used for Console Login), base64 encoded (echo -n 'YOURCONSOLEACCESS' | base64)
+      CONSOLE_ACCESS_KEY: WU9VUkNPTlNPTEVBQ0NFU1M=
+      ## MinIO User Secret Key (used for Console Login), base64 encoded (echo -n 'YOURCONSOLESECRET' | base64)
+      CONSOLE_SECRET_KEY: WU9VUkNPTlNPTEVTRUNSRVQ=
+    ---
+    ## MinIO Tenant Definition
+    apiVersion: minio.min.io/v2
+    kind: Tenant
+    metadata:
+      namespace: <namespace>
+      name: minio-autocert-no-encryption
+      ## Optionally pass labels to be applied to the statefulset pods
+      labels:
+        app: minio-autocert-no-encryption-minio
+      ## Annotations for MinIO Tenant Pods
+      annotations:
+        prometheus.io/path: /minio/prometheus/metrics
+        prometheus.io/port: "9000"
+        prometheus.io/scrape: "true"
+
+    spec:
+      ## Registry location and Tag to download MinIO Server image
+      image: minio/minio:RELEASE.2021-05-27T22-06-31Z
+      imagePullPolicy: IfNotPresent
+
+      ## Refers to the secret object created above.
+      credsSecret:
+        name: minio-autocert-no-encryption-minio-creds-secret
+
+      ## Specification for MinIO Pool(s) in this Tenant.
+      pools:
+        - servers: 1
+          volumesPerServer: 4
+          volumeClaimTemplate:
+            metadata:
+              name: data
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 30Gi
+      ## Mount path where PV will be mounted inside container(s).
+      mountPath: /export
+
+      ## Disables TLS
+      requestAutoCert: false
+
+      ## PodManagement policy for MinIO Tenant Pods. Can be "OrderedReady" or "Parallel"
+      ## Refer https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#pod-management-policy for details.
+      podManagementPolicy: Parallel
+
+      ## Define configuration for Console (Graphical user interface for MinIO)
+      ## Refer https://github.com/minio/console
+      console:
+        image: minio/console:v0.7.4
+        replicas: 2
+        consoleSecret:
+          name: minio-autocert-no-encryption-console-secret
+    ```
+
+3.  Update pool sizes as necessary, then run:
+    ```bash
+    microk8s kubectl apply -f file.yaml --namespace minio-tenant
+    ```
+
+    To check if pod is running run:
+    ```bash
+    microk8s kubectl get pods -A
     NAMESPACE            NAME                                      READY   STATUS    RESTARTS   AGE
     minio-tenant-1       minio-tenant-ss-0-0                       2/2     Running   0          151m
     ```
