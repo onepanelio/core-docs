@@ -32,7 +32,6 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 
   Set up your VM according to your cloud provider instructions.
 
-
   :::important
   Onepanel requires at least 40GB of hard disk space. If your VM doesn't have that much you'll
   have to mount an external disk. In that case, make sure to do step 5.
@@ -443,7 +442,7 @@ sudo apt-get -y install cuda
 
 verify installation with:
 ```bash
-$ nvidia-smi
+nvidia-smi
 
 Output:
 +-----------------------------------------------------------------------------+
