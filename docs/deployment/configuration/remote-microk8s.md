@@ -49,7 +49,6 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   </TabItem>
   </Tabs>
 
-
 2. Install MicroK8s
 
   :::note
