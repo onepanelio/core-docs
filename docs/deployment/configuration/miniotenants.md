@@ -8,27 +8,28 @@ One option to map a local storage volume within a Microk8s deployment is with [M
 :::note
 * Make sure you have [Microk8s](/docs/getting-started/quickstart) installed before proceeding.  
 * This process should be completed/running before you launch Onepanel.  
-* Make sure that you initiated Onepanel with `--artifact-repository-provider s3`
 :::
 
 
-## Step 0: Create a Minio Tenant 
+## Create a Minio Tenant 
 Let's get started by creating a MinIO tenant
 
 1. First, create a namespace
-    ```bash
-    microk8s kubectl create ns minio-tenant
-    ```
+  ```bash
+  microk8s kubectl create ns minio-tenant
+  ```
 
-2. By default tenants runs with **TLS** enabled, to disable this set `requestAutoCert: true` to false.  
-    Then, copy configurations below and save as operator.yaml
-    
+2. Then apply yaml to initialize the operator.
+  ```bash
+  microk8s kubectl apply -f minio_init.yaml
+  ```
+
+3. By default tenants runs with **TLS** enabled, to disable this set `requestAutoCert: true` to false.  
     ```bash
     ## Secret to be used as MinIO Root Credentials
     apiVersion: v1
     kind: Secret
     metadata:
-      namespace: <namespace> # Your namespace here
       name: minio-autocert-no-encryption-minio-creds-secret
     type: Opaque
     data:
@@ -41,7 +42,6 @@ Let's get started by creating a MinIO tenant
     apiVersion: v1
     kind: Secret
     metadata:
-      namespace: <namespace> # Your namespace here
       name: minio-autocert-no-encryption-console-secret
     type: Opaque
     data:
@@ -58,7 +58,6 @@ Let's get started by creating a MinIO tenant
     apiVersion: minio.min.io/v2
     kind: Tenant
     metadata:
-      namespace: <namespace>
       name: minio-autocert-no-encryption
       ## Optionally pass labels to be applied to the statefulset pods
       labels:
@@ -71,7 +70,7 @@ Let's get started by creating a MinIO tenant
 
     spec:
       ## Registry location and Tag to download MinIO Server image
-      image: minio/minio:RELEASE.2021-05-27T22-06-31Z
+      image: minio/minio:RELEASE.2021-06-07T21-40-51Z
       imagePullPolicy: IfNotPresent
 
       ## Refers to the secret object created above.
@@ -109,57 +108,57 @@ Let's get started by creating a MinIO tenant
         consoleSecret:
           name: minio-autocert-no-encryption-console-secret
     ```
-
-3.  Update pool sizes as necessary, then run:
+    save configurations as **minio-tenant.yaml** then apply by running:
     ```bash
-    microk8s kubectl apply -f file.yaml --namespace minio-tenant
+    microk8s kubectl apply -f minio-tenant.yaml --namespace minio-tenant
     ```
 
-    To check if pod is running run:
+4.  Check pods to make sure everthing's running:
     ```bash
     microk8s kubectl get pods -A
     NAMESPACE            NAME                                      READY   STATUS    RESTARTS   AGE
-    minio-tenant-1       minio-tenant-ss-0-0                       2/2     Running   0          151m
+    minio-operator   minio-operator-c4cc8db47-tz72d                         1/1     Running   0          32m
+    minio-operator   console-5f978bcbdf-wcclf                               1/1     Running   0          32m
+    minio-tenant     minio-autocert-no-encryption-ss-0-0                    1/1     Running   0          31m
+    minio-tenant     minio-autocert-no-encryption-console-8d9fdb969-mzhhs   1/1     Running   0          29m
+    minio-tenant     minio-autocert-no-encryption-console-8d9fdb969-6xnw6   1/1     Running   0          29m
     ```
 
-3. Next, you'll need to **create a bucket**, to do this you can use port-forwarding with kubectl.  
+5. Next, you'll need to create a bucket  
+to do this you can use port-forwarding with kubectl to access web UI.  
    ```bash
-   kubectl port-forward svc/minio -n minio-tenant-1 9000:80    
+   kubectl port-forward svc/minio -n minio-tenant 9000:80    
    ```
-   You can use the following credentials for this example  
+   This example uses the following credentials:  
    Accesskey: **minio**  
    Secretkey: **minio123**
 
-4. Next, fetch the ip address from the tenant's pod.
-   ```bash
-   kubectl describe pods minio-tenant-ss-0-0 -n minio-tenant-1 | grep "IP"
-   ```
+6. Deploy [Onepanel](/docs/getting-started/quickstart#step-1-install-onepanel).
+:::note
+make sure to select **Microk8s** under the tabs  
+Initiate Onepanel with `opctl init --provider microk8s --enable-metallb --artifact-repository-provider s3`
+:::
 
-5. Next, update **params.yaml**.  
+7. Then under `artifactRepository:` use the following configuration.  
     ```bash
     artifactRepository:
-        s3:
-            # S3 access key
-            accessKey: minio
-            # Name of bucket, example: my-bucket
-            bucket: test
-            # Endpoint for S3 compatible storage
-            # Supported provider endpoints:
-            #   AWS: s3.amazonaws.com
-            #   GCS: storage.googleapis.com
-            #   Minio: my-minio-endpoint.default:9000
-            endpoint: <pod-ip-address>:9000
-            # Change to true if endpoint does NOT support HTTPS
-            insecure: true
-            # Key Format for objects stored by Workflows. This can reference Workflow variables
-            keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
-            # Bucket region
-            region: us-west-2
-            # S3 secret key
-            secretKey: minio123
+      s3:
+        # S3 access key
+        accessKey: 'minio'
+        # Name of bucket, example: my-bucket
+        bucket: 'my-bucket' # Your bucket here
+        endpoint: 'minio.example.cluster.local' # replace example with your namespace
+        # Change to true if endpoint does NOT support HTTPS
+        insecure: true
+        # Key Format for objects stored by Workflows. This can reference Workflow variables
+        keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
+        # Bucket region
+        region: us-west-2
+        # S3 secret key
+        secretKey: 'minio123'
     ```
 
-6. Finally, deploy Onepanel with Minio Tenant.
+8. Finally, deploy Onepanel
     ```bash
     KUBECONFIG=./kubeconfig opctl apply
     ```
