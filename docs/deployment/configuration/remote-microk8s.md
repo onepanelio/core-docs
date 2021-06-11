@@ -382,17 +382,17 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 
 ## GPU Setup
 :::note
-For instances running with GPUs we recommend having a disk size of at least 80-100GB.  
+For instances running with GPUs we recommend having a disk size of at least 100GB.  
 All further instructions are in your remote computer/vm unless otherwise indicated.
 :::
 
 1. Verify you have a CUDA capable GPU.
 
-  To do this go to your distribution's equivalent of System Properties, or, from the command line, enter:
+  From the command line, enter
   ```bash
   lspci | grep -i nvidia
   ```
-  sample output:
+  sample output
   ```bash
   0001:00:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)
   ```
@@ -410,9 +410,11 @@ All further instructions are in your remote computer/vm unless otherwise indicat
   sudo apt-get install linux-headers-$(uname -r)
   ```
 
-3. NVIDIA CUDA toolkit can be downloaded at https://developer.nvidia.com/cuda-downloads.
+3. Install NVIDIA CUDA 
 
-  Or install by following the commands below:
+  You can download it at https://developer.nvidia.com/cuda-downloads
+
+  Or run the commands below
   ```bash
   wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
   sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -453,14 +455,14 @@ All further instructions are in your remote computer/vm unless otherwise indicat
   +-----------------------------------------------------------------------------+
   ```
 
-5. This addon enables NVIDIA GPU support for MicroK8s.
+5. Enable NVIDIA GPU support for MicroK8s.
   ```bash
   microk8s enable gpu
   ```
 
-6. On your `params.yaml` make sure to update the `nodePool:` section
+6. In your `params.yaml` make sure to update the `nodePool:` section
 
-  should look something like this:
+  It should look something like this:
   ```yaml
   nodePool:
       # Cloud providers will automatically set label key as "node.kubernetes.io/instance-type" on all nodes
@@ -483,7 +485,7 @@ All further instructions are in your remote computer/vm unless otherwise indicat
   microk8s kubectl label node sample node.kubernetes.io/instance-type=gpu --overwrite
   ```
 
-7. Make sure to apply changes to use GPU nodes under your deployment:
+7. Make sure to apply changes to use GPU nodes in your deployment:
   ```bash
   microk8s config > kubeconfig
   KUBECONFIG=./kubeconfig opctl apply
