@@ -16,6 +16,8 @@ You can set up and access Onepanel on a remote computer that you can access via 
 
 This can be a VM in the cloud, or Multipass running locally. In either case, it has to be running Ubuntu 20.04 or higher.
 
+## Microk8s installation and setup
+
 1. Set up your VM
 
   <Tabs
@@ -47,13 +49,11 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   </TabItem>
   </Tabs>
 
+2. Install MicroK8s
+
   :::note
   All further instructions are in your remote computer/vm unless otherwise indicated.
   :::
-
-## Install MicroK8s
-
-1. Install MicroK8s
 
   ```bash
   sudo snap install microk8s --channel=1.19/stable --classic
@@ -378,3 +378,115 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   ```
   
   Open up `app.onepanel.test` in your browser, paste in the credentials, and you are good to go!
+
+
+## GPU Setup
+:::note
+For instances running with GPUs we recommend having a disk size of at least 100GB.  
+All further instructions are in your remote computer/vm unless otherwise indicated.
+:::
+
+1. Verify you have a CUDA capable GPU.
+
+  From the command line, enter
+  ```bash
+  lspci | grep -i nvidia
+  ```
+  sample output
+  ```bash
+  0001:00:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)
+  ```
+
+2. Verify the system has the correct kernel headers and development packages installed
+
+  The CUDA Driver requires that the kernel headers and development packages for the running version of the kernel be installed at the time of the driver installation, as well whenever the driver is rebuilt.
+
+  The version of the kernel your system is running can be found by running the following command:
+  ```bash
+  uname -r
+  ```
+  The kernel headers and development packages for the currently running kernel can be installed with:
+  ```bash
+  sudo apt-get install linux-headers-$(uname -r)
+  ```
+
+3. Install NVIDIA CUDA 
+
+  You can download it at https://developer.nvidia.com/cuda-downloads
+
+  Or run the commands below
+  ```bash
+  wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+  sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+  wget https://developer.download.nvidia.com/compute/cuda/11.3.1/local_installers/cuda-repo-ubuntu2004-11-3-local_11.3.1-465.19.01-1_amd64.deb
+  sudo dpkg -i cuda-repo-ubuntu2004-11-3-local_11.3.1-465.19.01-1_amd64.deb
+  sudo apt-key add /var/cuda-repo-ubuntu2004-11-3-local/7fa2af80.pub
+  sudo apt-get update
+  sudo apt-get -y install cuda
+  ```
+
+  You'll need to restart your machine after installation.
+
+4. Verify installation with:
+  ```bash
+  nvidia-smi
+  ```
+
+  sample output:
+  ```bash
+  +-----------------------------------------------------------------------------+
+  | NVIDIA-SMI 465.19.01    Driver Version: 465.19.01    CUDA Version: 11.3     |
+  |-------------------------------+----------------------+----------------------+
+  | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+  | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+  |                               |                      |               MIG M. |
+  |===============================+======================+======================|
+  |   0  NVIDIA Tesla K80    On   | 00000001:00:00.0 Off |                    0 |
+  | N/A   41C    P8    25W / 149W |      0MiB / 11441MiB |      0%      Default |
+  |                               |                      |                  N/A |
+  +-------------------------------+----------------------+----------------------+
+
+  +-----------------------------------------------------------------------------+
+  | Processes:                                                                  |
+  |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+  |        ID   ID                                                   Usage      |
+  |=============================================================================|
+  |  No running processes found                                                 |
+  +-----------------------------------------------------------------------------+
+  ```
+
+5. Enable NVIDIA GPU support for MicroK8s.
+  ```bash
+  microk8s enable gpu
+  ```
+
+6. In your `params.yaml` make sure to update the `nodePool:` section
+
+  It should look something like this:
+  ```yaml
+  nodePool:
+      # Cloud providers will automatically set label key as "node.kubernetes.io/instance-type" on all nodes
+      # For Kubernetes 1.16.x, use "beta.kubernetes.io/instance-type"
+      label: node.kubernetes.io/instance-type
+      # These are the machine type options that will be available in Onepanel
+      #   `name` can be any user friendly name
+      #   `value` should be the instance type in your cloud provider
+      #   `resources.limits` should only be set if the node pool has GPUs
+      # The first option will be used as default.
+      options:
+        - name: 'Local GPU'
+          value: gpu
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+  ```
+  and then overwrite the label for your gpu nodes.
+  ```bash
+  microk8s kubectl label node sample node.kubernetes.io/instance-type=gpu --overwrite
+  ```
+
+7. Make sure to apply changes to use GPU nodes in your deployment:
+  ```bash
+  microk8s config > kubeconfig
+  KUBECONFIG=./kubeconfig opctl apply
+  ```
