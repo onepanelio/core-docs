@@ -16,7 +16,7 @@ You can set up and access Onepanel on a remote computer that you can access via 
 
 This can be a VM in the cloud, or Multipass running locally. In either case, it has to be running Ubuntu 20.04 or higher.
 
-## Microk8s installation and set up
+## Microk8s installation and setup
 
 1. Set up your VM
 
