@@ -80,7 +80,14 @@ module.exports = {
         'reference/workspaces/upgrade',
         'reference/workspaces/delete',
         'reference/workspaces/templates',
-        'reference/workspaces/filesyncer',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'Sidecars',
+      collapsed: false,
+      items: [
+        'reference/sidecars/filesyncer',
       ]
     },
     { 
