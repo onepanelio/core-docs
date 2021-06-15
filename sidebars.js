@@ -85,6 +85,14 @@ module.exports = {
     },
     { 
       type: 'category',
+      label: 'Sidecars',
+      collapsed: false,
+      items: [
+        'reference/sidecars/filesyncer',
+      ]
+    },
+    { 
+      type: 'category',
       label: 'Workflows',
       collapsed: false,
       items: [
