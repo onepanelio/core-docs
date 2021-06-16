@@ -1,17 +1,20 @@
 ---
-title: Microk8s + Minio Operators
-sidebar_label: Microk8s + Minio Operators
-description: Deploy your cluster with MinIO operator
+title: Microk8s + Local Minio
+sidebar_label: Microk8s + Local MinIO
+description: Deploy your cluster with MinIO running locally
 ---
-One option to map a local storage volume within a Microk8s deployment is with [MinIO Operators](https://github.com/minio/operator#create-a-minio-tenant). 
 
 :::note
 * Make sure you have [Microk8s](/docs/getting-started/quickstart) installed before proceeding.  
-* This process should be completed/running before you launch Onepanel.  
+* This process should be completed before you launch Onepanel.  
 :::
 
 
-## Install the MinIO Operator
+Sometimes you don't want to use cloud storage, but have it be on your local machine.
+To achieve this, you can run MinIO locally.
+
+## Install MinIO 
+
 1. Install [krew](https://krew.sigs.k8s.io/docs/user-guide/setup/install/)
 
 2. Then run the following command to install the MinIO Operator and Plugin:
@@ -20,7 +23,7 @@ One option to map a local storage volume within a Microk8s deployment is with [M
   microk8s kubectl krew install minio
   ```
 
-3. Generate a yaml file so we can initialize operator:
+3. Generate a yaml file so we can initialize the operator:
   ```bash
   microk8s kubectl minio init --output > minio_init.yaml
   ```
@@ -31,8 +34,10 @@ One option to map a local storage volume within a Microk8s deployment is with [M
   ```
 
 ## Create a New Tenant
+
 :::note
-The namespace used for MinIO tenants should be the same when you deploy Onepanel.
+The namespace used for MinIO tenants should be the same as the one you use for Onepanel.
+This is the `application.defaultNamespace` value in your `params.yaml`
 :::
 
 1. To create a tenant we must first create a namespace.
@@ -41,12 +46,13 @@ The namespace used for MinIO tenants should be the same when you deploy Onepanel
   microk8s kubectl create ns example
   ```
 
-2. Then on your editor create a yaml file and copy this configuration and save as `minio-tenant.yaml`. 
+2. Then create a file called `minio-tenant.yaml` and fill it with the content below. 
   ```yaml
   ## Secret to be used as MinIO Root Credentials
   apiVersion: v1
   kind: Secret
   metadata:
+    namespace: example # your namespace here
     name: minio-autocert-no-encryption-minio-creds-secret
   type: Opaque
   data:
@@ -107,7 +113,7 @@ The namespace used for MinIO tenants should be the same when you deploy Onepanel
               - ReadWriteOnce
             resources:
               requests:
-                storage: 30Gi # your storage here. 
+                storage: 10Gi # your storage here. 
 
     ## Mount path where PV will be mounted inside container(s).
     mountPath: /data
@@ -132,16 +138,19 @@ The namespace used for MinIO tenants should be the same when you deploy Onepanel
         name: minio-autocert-no-encryption-console-secret
   ```
 
-  Apply configurations by running:
+  In the above file, change the `namespace` to be your namespace. Also, make sure to set the `storage` value to however much space you want to give the tenant.
+  Keep in mind it creates 4 volumes, so it's storage * 4. 
+
+  Apply the configuration:
   ```bash
-  microk8s kubectl apply -f minio-tenant.yaml --namespace example
+  microk8s kubectl apply -f minio-tenant.yaml
   ```
 
-3.  Check pods and make sure everthing's running:
+3. Make sure everything is running
   ```bash
   microk8s kubectl get pods -A
   ```
-  Output should look similar to this:
+  The output should look similar to this:
   ```bash
   minio-operator   minio-operator-c4cc8db47-mrpnc                          1/1     Running   0          11m
   minio-operator   console-5f978bcbdf-d2wmn                                1/1     Running   0          11m
@@ -149,8 +158,7 @@ The namespace used for MinIO tenants should be the same when you deploy Onepanel
   example          minio-autocert-no-encryption-console-7887db8b54-n8nvg   1/1     Running   0          2s
   example          minio-autocert-no-encryption-console-7887db8b54-brvkq   1/1     Running   0          2s
   ```
-
-4. Next, we'll need to create a bucket.
+## Create a bucket
 
   Use port-forwarding to access web UI.  
   ```bash
@@ -160,14 +168,22 @@ The namespace used for MinIO tenants should be the same when you deploy Onepanel
   Accesskey: **minio**  
   Secretkey: **minio123**
 
-5. Deploy [Onepanel](/docs/getting-started/quickstart#step-1-install-onepanel), and initialize with:
+## Onepanel Configuration
+
+1. Set the `--artifact-repository-provider` flag to `s3`
+
+  For example
+
   ```bash
   opctl init --provider microk8s \
   --enable-metallb \
   --artifact-repository-provider s3
   ```
 
-6. Under `artifactRepository:` use the following configuration.  
+2. Params configuration
+
+  In your `params.yaml` use the following for the `artifactRepository` configuration
+
   ```bash
   artifactRepository:
     s3:
@@ -175,18 +191,13 @@ The namespace used for MinIO tenants should be the same when you deploy Onepanel
       accessKey: 'minio'
       # Name of bucket, example: my-bucket
       bucket: 'test-bucket' # Your bucket here
-      endpoint: 'minio.example.svc.cluster.local' # replace example with your namespace
+      endpoint: 'minio.example.svc.cluster.local' # replace `example` with your namespace
       # Change to true if endpoint does NOT support HTTPS
       insecure: true
       # Key Format for objects stored by Workflows. This can reference Workflow variables
       keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
-      # Bucket region
+      # Bucket region, this can be anything since it is running locally
       region: us-west-2
       # S3 secret key
       secretKey: 'minio123'
-  ```
-
-7. Finally, deploy Onepanel
-  ```bash
-  KUBECONFIG=./kubeconfig opctl apply
   ```
