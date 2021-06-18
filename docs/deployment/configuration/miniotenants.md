@@ -6,6 +6,7 @@ description: Deploy your cluster with MinIO running locally
 
 :::note
 * Make sure you have [Microk8s](/docs/getting-started/quickstart) installed before proceeding.  
+* Enable storage with `sudo microk8s enable storage`  
 * This process should be completed before you launch Onepanel.  
 :::
 
@@ -65,6 +66,7 @@ This is the `application.defaultNamespace` value in your `params.yaml`
   apiVersion: v1
   kind: Secret
   metadata:
+    namespace: example # your namespace here
     name: minio-autocert-no-encryption-console-secret
   type: Opaque
   data:
@@ -81,6 +83,7 @@ This is the `application.defaultNamespace` value in your `params.yaml`
   apiVersion: minio.min.io/v2
   kind: Tenant
   metadata:
+    namespace: example # your namespace here
     name: minio-autocert-no-encryption
     ## Optionally pass labels to be applied to the statefulset pods
     labels:
@@ -159,14 +162,41 @@ This is the `application.defaultNamespace` value in your `params.yaml`
   example          minio-autocert-no-encryption-console-7887db8b54-brvkq   1/1     Running   0          2s
   ```
 ## Create a bucket
-
-  Use port-forwarding to access web UI.  
-  ```bash
-  microk8s kubectl port-forward svc/minio -n example 9000:80
-  ```
+:::note
   This example uses the following credentials:  
   Accesskey: **minio**  
   Secretkey: **minio123**
+:::
+
+  1. Download **MinIO client**:
+    ```bash
+    wget https://dl.min.io/client/mc/release/linux-amd64/mc
+    chmod +x mc
+    sudo mv ./mc /usr/local/bin/mc
+    ```
+  2. Get the endpoint for MinIO:
+    ```bash
+    microk8s kubectl get endpoint -A  
+
+    output:
+    NAMESPACE        NAME                                   ENDPOINTS                                           AGE  
+    example          minio                                  10.1.131.146:9000                                   6m46s
+    ```
+  3. Create a MinIO client alias:
+    ```bash
+    mc alias set minio http://10.1.131.146:9000 minio minio123
+    ```
+  4. You can then proceed to create the bucket by running:
+    ```bash
+    mc mb minio/mybucket
+    ```
+  5. Verify if bucket was successfully created by running:
+    ```bash
+    mc ls minio
+
+    output:
+    [2021-06-18 18:55:32 UTC]     0B mybucket/
+    ```
 
 ## Onepanel Configuration
 
@@ -190,7 +220,7 @@ This is the `application.defaultNamespace` value in your `params.yaml`
       # S3 access key
       accessKey: 'minio'
       # Name of bucket, example: my-bucket
-      bucket: 'test-bucket' # Your bucket here
+      bucket: 'mybucket' # Your bucket here
       endpoint: 'minio.example.svc.cluster.local' # replace `example` with your namespace
       # Change to true if endpoint does NOT support HTTPS
       insecure: true
