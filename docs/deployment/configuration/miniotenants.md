@@ -4,6 +4,12 @@ sidebar_label: Microk8s + Local MinIO
 description: Deploy your cluster with MinIO running locally
 ---
 
+:::important
+We are only providing this guide as a reference. Due to the complexity of different installations, we can only provide open source support for clusters running Ubuntu 20.04 or higher as host OS on a local cluster.
+
+Please visit our [Website](https://www.onepanel.ai/) and contact us for other bare metal installation options.
+:::
+
 :::note
 * Make sure you have [Microk8s](/docs/getting-started/quickstart) installed before proceeding.  
 * Enable storage with `sudo microk8s enable storage`  
@@ -11,12 +17,17 @@ description: Deploy your cluster with MinIO running locally
 :::
 
 
-Sometimes you don't want to use cloud storage, but have it be on your local machine.
+Sometimes you don't want to use cloud storage and use your local machine instead.
 To achieve this, you can run MinIO locally.
 
 ## Install MinIO 
 
 1. Install [krew](https://krew.sigs.k8s.io/docs/user-guide/setup/install/)
+  
+  Make sure to add it to your path
+  ```bash
+  export PATH="${PATH}:${HOME}/.krew/bin"
+  ```
 
 2. Then run the following command to install the MinIO Operator and Plugin:
   ```bash
@@ -176,9 +187,8 @@ This is the `application.defaultNamespace` value in your `params.yaml`
     ```
   2. Get the endpoint for MinIO:
     ```bash
-    microk8s kubectl get endpoint -A  
+    microk8s kubectl get endpoints -A  
 
-    output:
     NAMESPACE        NAME                                   ENDPOINTS                                           AGE  
     example          minio                                  10.1.131.146:9000                                   6m46s
     ```
