@@ -51,11 +51,16 @@ We will walk through updating the [DEtection TRansformer (DETR)](https://github.
 
 In this step, you will launch a JupyterLab Workspace in Onepanel to test and adjust your code before it is added to the the CVAT training Workflow Template. The JupyterLab Workspace Template just like the CVAT training Workflow Template, uses the `onepanel/dl` Docker image which has both PyTorch 1.6 and TensorFlow 2.3 installed and provides a consistent environment for testing and deploying your training code.
 
-1. Fork the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) repository.
+1. From **CVAT** assuming you have the data and annotations set up, export data & annotations by clicking  
+**Actions** > **Export as dataset** > **MS COCO**.
 
-2. Launch a **JupyterLab** Workspace on a GPU node pool, then [clone](/docs/reference/jupyterlab/git#cloning) your fork. You can optionally run on a CPU node pool but it will take much longer to test.
+2. You can then sync the output into your object storage to use for training.
 
-3. In JupyterLab, open the `detr` directory and navigate to `datasets/coco.py`; then update the following lines:
+3. Fork the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) repository.
+
+4. Launch a **JupyterLab** Workspace on a GPU node pool, then [clone](/docs/reference/jupyterlab/git#cloning) your fork. You can optionally run on a CPU node pool but it will take much longer to test.
+
+5. In JupyterLab, open the `detr` directory and navigate to `datasets/coco.py`; then update the following lines:
 
     ```python
     PATHS = {
@@ -77,7 +82,7 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
     For simplicity, the same data for train and validation sets. You can write a script or add another task that runs prior to this task in the CVAT training Workflow Template that splits this data accordingly. See our [Albumentations Workflow Template](https://github.com/onepanelio/templates/tree/release-v0.18.0/workflows/albumentations-preprocessing) or the [built-in training Workflows](/docs/reference/workflows/training) for reference on how to do this.
     :::
 
-4. Upload your data dump from CVAT into JupyterLab and then copy or move the data to `/mnt/data/datasets`. Note that the JupyterLab default directory is `/data`.
+6. Sync your data dump from CVAT into JupyterLab and then copy or move the data to `/mnt/data/datasets`. Note that the JupyterLab default directory is `/data`.
 
     ```bash
     mkdir -p /mnt/data/datasets
@@ -85,25 +90,24 @@ In this step, you will launch a JupyterLab Workspace in Onepanel to test and adj
     ```
 
     :::note
-    The data and directories are automatically mounted and created in CVAT training Workflow, so you do not have to do this when you add this code the Workflow.
+    The data and directories are automatically mounted and created in CVAT training Workflow, so you do not have to do this when you add this code to the Workflow.
     :::
 
-5. Run the following command to test your changes:
+7. Install pre-requisites by going into the `/detr` directory and running:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+8. Run the following command to test your changes:
 
     ```bash
     # if you are running on CPU, add  `--device cpu` flag
-    python main.py --coco_path /mnt/data/datasets --output_dir /mnt/output --epochs 1 --batch_size 300
-    ```
-
-    You will get an error that `pycocotools` is missing, install it by running:
-
-    ```bash
-    pip install pycocotools
+    python main.py --coco_path /mnt/data/datasets --output_dir /mnt/output --epochs 1 --batch_size 5
     ```
 
     Take a note of these commands, you will be adding them to the CVAT training Workflow Template in later steps.
 
-6. [Commit and push](/docs/reference/jupyterlab/git#other-git-actions) your changes back to your repository.
+9. [Commit and push](/docs/reference/jupyterlab/git#other-git-actions) your changes back to your repository.
 
 As mentioned before, the annotation data from CVAT is automatically dumped into `/mnt/data/datasets`. Since this code takes this path as an argument (`--coco_path`), you will pass the correct path in the Workflow Template later. Same applies to passing `/mnt/output` to  `--output_dir`. If your training code doesn't have these parameters, we recommend you add them instead of hard coding these paths in your code.
 
@@ -198,6 +202,7 @@ Now that your code is update properly, you will need to add it in as a Workflow 
     - container:
         # [CHANGE] Bash command to run your code
         # Note that your code will be cloned into /mnt/src/train, so you will need to change to the appropriate directory
+        # if you are running on CPU, add  `--device cpu` flag
         args:
         - |
             pip install pycocotools && \
@@ -208,12 +213,13 @@ Now that your code is update properly, you will need to add it in as a Workflow 
                 --batch_size="{{workflow.parameters.batch-size}}"
     ```
 
-10. (Optional) If your training code is not compatible TensorFlow 2.3 or PyTorch 1.5, you will need to update `image` to use a Docker image that is compatible with your training code.
+10. (Optional) If your training code is not compatible TensorFlow 2.3 or PyTorch 1.6, you will need to update `image` to use a Docker image that is compatible with your training code.
 
-    ```yaml {16}
+    ```yaml {17}
     - container:
         # [CHANGE] Bash command to run your code
         # Note that your code will be cloned into /mnt/src/train, so you will need to change to the appropriate directory
+        # if you are running on CPU, add  `--device cpu` flag
         args:
         - |
             pip install pycocotools && \
@@ -224,9 +230,9 @@ Now that your code is update properly, you will need to add it in as a Workflow 
                 --batch_size="{{workflow.parameters.batch-size}}"
         ...
         # [CHANGE] Docker image to use to run your code
-        # You can keep this as is if your code uses TensorFlow 2.3 or PyTorch 1.5
+        # You can keep this as is if your code uses TensorFlow 2.3 or PyTorch 1.6
         # For private Docker repositories use imagePullSecrets: https://github.com/argoproj/argo/blob/master/examples/image-pull-secrets.yaml#L10-L11
-        image: onepanel/dl:0.17.0
+        image: onepanel/dl:v0.20.0
     ```
 
 11. (Optional) If your training code has TensorBoard callbacks, make sure to write the TensorBoard logs to `/mnt/output` (we generally recommend writing to `/mnt/output/tensorboard` to better organize your output). You can then [access TensorBoard](/docs/reference/workflows/tensorboard) when this training Workflow is running.
