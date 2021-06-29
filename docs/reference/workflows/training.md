@@ -107,3 +107,24 @@ In `stage_1`, the model learns to classify from extracted features. In `stage_2`
 If you are training images that are similar to the ones in the COCO dataset, it is best to train more epochs in `stage_1`, otherwise it's best to train more epochs in `stage_2` where the model is learning to better extract features.
 
 If you have ~1000 images, then you don't have to change any parameters.
+
+## Fine-tuning and checkpoints
+
+Fine-tuning is a common technique for transfer learning. The target model copies all model designs with their parameters from the source model except the output layer, and fine-tunes these parameters based on the target dataset.
+
+
+To do this:
+1. Go into your completed/failed workflow, then under **Outputs** select the `output` folder
+	![](../../../static/img/checkpoints/output-path.png)
+
+	:::note
+	* If a training Workflow completes successfully, you can use the `/output/models` folder to further fine-tune the model in a subsequent training Workflow
+
+	* If a training Workflow does not complete successfully, you can continue training from a checkpoint by using the `/output/checkpoints` folder
+	:::
+
+2. Copy the path by clicking the icon indicated below:
+	![](../../../static/img/checkpoints/copy-path.png)
+
+3. And then paste the copied path under `checkpoint path` when re-running your workflows to fine-tune or continue from a checkpoint.
+	![](../../../static/img/checkpoints/checkpoint.png)
