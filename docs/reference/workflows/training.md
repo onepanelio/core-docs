@@ -110,13 +110,15 @@ If you have ~1000 images, then you don't have to change any parameters.
 
 ## Fine-tuning and checkpoints
 
-To fine-tune a model or continue from a checkpoint from previous training Workflow execution:
+To fine-tune a model or continue from a checkpoint from a previous training Workflow execution:
 
-1. Go to a completed or failed Workflow, click the training task, and in task panel under **Outputs** > **Artifacts**, click on the output folder. If Workflow has completed successfully, click the **models** folder and copy its path. If Workflow was not successful, click the **checkpoints** folder and copy its path.
+1. Go to a completed or failed Workflow, click the training task, and in task panel under **Outputs** > **Artifacts**, click on the **output** folder.
 	![](../../../static/img/checkpoints/output-path.png)
 
-2. Copy the path by clicking the icon indicated below:
+2. If Workflow has completed successfully, click the **model** folder and copy its path. If Workflow was not successful, click the **checkpoints** folder and copy its path.
+
+3. Copy the path by clicking the icon indicated below.
 	![](../../../static/img/checkpoints/copy-path.png)
 
-3. Click **Execute Workflow** or **Run Again** if in **Workflows**, or if in CVAT click **Execute training Workflow**, and then paste the copied path into **Checkpoint path**
+4. Click **Execute Workflow** or **Run Again** if you are under **Workflows**. If in CVAT Workspace, click **Execute training Workflow**, and then paste the path you copied above into **Checkpoint path**.
 	![](../../../static/img/checkpoints/checkpoint.png)
