@@ -110,21 +110,13 @@ If you have ~1000 images, then you don't have to change any parameters.
 
 ## Fine-tuning and checkpoints
 
-Fine-tuning is a common technique for transfer learning. The target model copies all model designs with their parameters from the source model except the output layer, and fine-tunes these parameters based on the target dataset.
+To fine-tune a model or continue from a checkpoint from previous training Workflow execution:
 
-
-To do this:
-1. Go into your completed/failed workflow, then under **Outputs** select the `output` folder
+1. Go to a completed or failed Workflow, click the training task, and in task panel under **Outputs** > **Artifacts**, click on the output folder. If Workflow has completed successfully, click the **models** folder and copy its path. If Workflow was not successful, click the **checkpoints** folder and copy its path.
 	![](../../../static/img/checkpoints/output-path.png)
-
-	:::note
-	* If a training Workflow completes successfully, you can use the `/output/models` folder to further fine-tune the model in a subsequent training Workflow
-
-	* If a training Workflow does not complete successfully, you can continue training from a checkpoint by using the `/output/checkpoints` folder
-	:::
 
 2. Copy the path by clicking the icon indicated below:
 	![](../../../static/img/checkpoints/copy-path.png)
 
-3. And then paste the copied path under `checkpoint path` when re-running your workflows to fine-tune or continue from a checkpoint.
+3. Click **Execute Workflow** or **Run Again** if in **Workflows**, or if in CVAT click **Execute training Workflow**, and then paste the copied path into **Checkpoint path**
 	![](../../../static/img/checkpoints/checkpoint.png)
