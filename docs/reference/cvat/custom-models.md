@@ -60,11 +60,11 @@ Step 1 assumes you have created a task and annotated it in CVAT.
 
 2. Click `Copy directory path`
    
-  <img src="/static/img/cvat_export_complete.png" height="200" />
+  <img src="/img/cvat_export_complete.png" height="200" />
 
 3. Open up the Onepanel info tab by clicking the onepanel icon
 
-  <img src="/static/img/icon-circle.png" />
+  <img src="/img/icon-circle.png" />
 
 4. Paste the directory path into `Workspace path`
 
@@ -72,7 +72,7 @@ Step 1 assumes you have created a task and annotated it in CVAT.
 
 6. Click Sync to object storage
 
-  <img src="/static/img/workspace_sync_files.png" height="300" />
+  <img src="/img/workspace_sync_files.png" height="300" />
 
 7. Fork the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) repository.
 
