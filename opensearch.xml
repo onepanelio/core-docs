@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-  <ShortName>The open source, end-to-end computer vision platform</ShortName>
-  <Description>Search The open source, end-to-end computer vision platform</Description>
+  <ShortName>The open and extensible IDE for computer vision</ShortName>
+  <Description>Search The open and extensible IDE for computer vision</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Image width="16" height="16" type="image/x-icon">https://docs.onepanel.ai/img/favicon.png</Image>
   <Url type="text/html" method="get" template="https://docs.onepanel.ai/search?q={searchTerms}"/>
