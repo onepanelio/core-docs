@@ -479,6 +479,7 @@ All further instructions are in your remote computer/vm unless otherwise indicat
           resources:
             limits:
               nvidia.com/gpu: 1
+  provider: microk8s
   ```
   and then overwrite the label for your gpu nodes.
   ```bash
