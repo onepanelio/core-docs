@@ -56,7 +56,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   :::
 
   ```bash
-  sudo snap install microk8s --channel=1.19/stable --classic
+  sudo snap install microk8s --channel=latest/edge --classic
   ```
 
 2. Update your permissions
@@ -132,7 +132,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
     microk8s kubectl edit cm coredns -n kube-system
     ```
   
-  Set the forward section to:
+  Set all the forward section to:
   
     ```bash
     forward . /etc/resolv.conf 8.8.8.8  8.8.4.4
@@ -190,7 +190,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 1. Install
 
   ```bash
-  curl -sLO https://github.com/onepanelio/onepanel/releases/download/v0.21.0/opctl-linux-amd64
+  curl -sLO https://github.com/onepanelio/onepanel/releases/download/v1.0.0/opctl-linux-amd64
   chmod +x opctl-linux-amd64
   sudo mv ./opctl-linux-amd64 /usr/local/bin/opctl
   ```
@@ -226,13 +226,6 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   # You need to fill this part out according to your artifact repository provider
   artifactRepository:
   # FILL ME OUT
-  database:
-    databaseName: onepanel
-    driverName: postgres
-    host: postgres
-    password: sample12!
-    port: 5432
-    username: admin
   metalLb:
     addresses:
       - 192.168.99.0/32
@@ -382,85 +375,16 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 
 ## GPU Setup
 :::note
-For instances running with GPUs we recommend having a disk size of at least 100GB.  
+For instances running with GPUs we recommend having a disk size of at least 64GB.  
 All further instructions are in your remote computer/vm unless otherwise indicated.
 :::
 
-1. Verify you have a CUDA capable GPU.
-
-  From the command line, enter
-  ```bash
-  lspci | grep -i nvidia
-  ```
-  sample output
-  ```bash
-  0001:00:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)
-  ```
-
-2. Verify the system has the correct kernel headers and development packages installed
-
-  The CUDA Driver requires that the kernel headers and development packages for the running version of the kernel be installed at the time of the driver installation, as well whenever the driver is rebuilt.
-
-  The version of the kernel your system is running can be found by running the following command:
-  ```bash
-  uname -r
-  ```
-  The kernel headers and development packages for the currently running kernel can be installed with:
-  ```bash
-  sudo apt-get install linux-headers-$(uname -r)
-  ```
-
-3. Install NVIDIA CUDA 
-
-  You can download it at https://developer.nvidia.com/cuda-downloads
-
-  Or run the commands below
-  ```bash
-  wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-  sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-  wget https://developer.download.nvidia.com/compute/cuda/11.3.1/local_installers/cuda-repo-ubuntu2004-11-3-local_11.3.1-465.19.01-1_amd64.deb
-  sudo dpkg -i cuda-repo-ubuntu2004-11-3-local_11.3.1-465.19.01-1_amd64.deb
-  sudo apt-key add /var/cuda-repo-ubuntu2004-11-3-local/7fa2af80.pub
-  sudo apt-get update
-  sudo apt-get -y install cuda
-  ```
-
-  You'll need to restart your machine after installation.
-
-4. Verify installation with:
-  ```bash
-  nvidia-smi
-  ```
-
-  sample output:
-  ```bash
-  +-----------------------------------------------------------------------------+
-  | NVIDIA-SMI 465.19.01    Driver Version: 465.19.01    CUDA Version: 11.3     |
-  |-------------------------------+----------------------+----------------------+
-  | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-  | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-  |                               |                      |               MIG M. |
-  |===============================+======================+======================|
-  |   0  NVIDIA Tesla K80    On   | 00000001:00:00.0 Off |                    0 |
-  | N/A   41C    P8    25W / 149W |      0MiB / 11441MiB |      0%      Default |
-  |                               |                      |                  N/A |
-  +-------------------------------+----------------------+----------------------+
-
-  +-----------------------------------------------------------------------------+
-  | Processes:                                                                  |
-  |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-  |        ID   ID                                                   Usage      |
-  |=============================================================================|
-  |  No running processes found                                                 |
-  +-----------------------------------------------------------------------------+
-  ```
-
-5. Enable NVIDIA GPU support for MicroK8s.
+1. Enable NVIDIA GPU support for MicroK8s.
   ```bash
   microk8s enable gpu
   ```
 
-6. In your `params.yaml` make sure to update the `nodePool:` section
+2. In your `params.yaml` make sure to update the `nodePool:` section
 
   It should look something like this:
   ```yaml
@@ -486,7 +410,7 @@ All further instructions are in your remote computer/vm unless otherwise indicat
   microk8s kubectl label node sample node.kubernetes.io/instance-type=gpu --overwrite
   ```
 
-7. Make sure to apply changes to use GPU nodes in your deployment:
+3. Make sure to apply changes to use GPU nodes in your deployment:
   ```bash
   microk8s config > kubeconfig
   KUBECONFIG=./kubeconfig opctl apply
