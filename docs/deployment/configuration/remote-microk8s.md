@@ -384,7 +384,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 :::note
 For instances running with GPUs we recommend having a disk size of at least 100GB.  
 All further instructions are in your remote computer/vm unless otherwise indicated.  
-Deployments using **ABS** as default storage will need to edit `/etc/hosts` in the VM and add:  
+Deployments using **ABS** as default storage will need to edit `/etc/hosts` and add an entry that matches their metalLb address and fqdn.  
 `192.168.99.0 app.onepanel.test`
 :::
 
