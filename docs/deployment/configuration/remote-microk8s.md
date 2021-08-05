@@ -237,6 +237,10 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
     addresses:
       - 192.168.99.0/32
   ```
+
+  Since we're using Azure Block Storage (abs) as default storage we'll also need to edit the host file, add an entry and use `metalLb address` and `fqdn`.  
+  Example:  
+  *192.168.99.0 app.onepanel.test*
   
 4. Deploy onepanel
 
@@ -383,9 +387,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 ## GPU Setup
 :::note
 For instances running with GPUs we recommend having a disk size of at least 100GB.  
-All further instructions are in your remote computer/vm unless otherwise indicated.  
-Deployments using **ABS** as default storage will need to edit `/etc/hosts` and add an entry that matches their metalLb address and fqdn.  
-`192.168.99.0 app.onepanel.test`
+All further instructions are in your remote computer/vm unless otherwise indicated.
 :::
 
 1. Verify you have a CUDA capable GPU.
