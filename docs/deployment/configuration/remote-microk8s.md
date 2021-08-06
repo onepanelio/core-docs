@@ -230,13 +230,6 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
     # Enter certificate admin email
     # Example: admin@example.com
     email: <cert-admin-email>
-  database:
-    databaseName: onepanel
-    driverName: postgres
-    host: postgres
-    password: sample12!
-    port: 5432
-    username: admin
   metalLb:
     addresses:
       - 192.168.99.0/32
