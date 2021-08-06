@@ -226,6 +226,10 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   # You need to fill this part out according to your artifact repository provider
   artifactRepository:
   # FILL ME OUT
+  certManager:
+    # Enter certificate admin email
+    # Example: admin@example.com
+    email: <cert-admin-email>
   database:
     databaseName: onepanel
     driverName: postgres
