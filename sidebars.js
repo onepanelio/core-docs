@@ -109,6 +109,14 @@ module.exports = {
     },
     { 
       type: 'category',
+      label: 'Serverless Inference',
+      collapsed: false,
+      items: [
+        'reference/kfserving/getting_started',
+      ]
+    },
+    { 
+      type: 'category',
       label: 'Built-in and custom Workflows',
       collapsed: false,
       items: [
