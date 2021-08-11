@@ -47,3 +47,44 @@ This example uses [ssd_mobilenet_v2](https://tfhub.dev/tensorflow/ssd_mobilenet_
 7. Remove comments from the YAML and click **Create**
 8. Wait for model to be created and confirm it's ready as indicated below:
 	![](../../../static/img/kfserving/inference-conditions.png)
+
+## Creating model servers using Workflows
+1. Using the same example data uploaded to your object storage.
+2. Go to **Workflows** > **Workflow Templates** > **Create Template**
+3. Assign template name and then under manifest paste the following:
+	```yaml
+	entrypoint: main
+	templates:
+	  - dag:
+	      tasks:
+	        - name: deploy
+	          template: deploy
+	    name: main
+	  - name: deploy
+	    resource:
+	      successCondition: status.address.url
+	      action: create
+	      manifest: |
+	        apiVersion: "serving.kubeflow.org/v1beta1"
+	        kind: "InferenceService"
+	        metadata:
+	          namespace: "{{workflow.namespace}}"
+	          name: "{{workflow.name}}"
+	        spec:
+	          transformer:
+	            containers:
+	            - image:  andreyonepanel/transformer:image-2
+	              name: kfserving-container
+	              env:
+	               - name: STORAGE_URI
+	                 value: "s3://ssd"
+	               - name: model
+	                 value: "{{workflow.name}}"
+	          predictor:
+	            tensorflow:
+	              runtimeVersion: "2.5.1"
+	              storageUri: "s3://ssd"
+	```
+4. This will generate the model servers and assign names automatically.
+5. Note that you can create custom definitions with your preferred predictor by updating the template indicated above.
+6. You can use [kfserving examples](https://github.com/kubeflow/kfserving/tree/master/docs/samples/v1beta1) as reference.
