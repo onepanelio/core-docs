@@ -26,7 +26,7 @@ To deploy a simple model, we can use the [flowers prediction example](https://gi
 	```
 4. Wait for the resource to finish setting up, to confirm it's running you should see a green check as indicated.
 	![](../../../static/img/kfserving/model-created.png)
-5. To test the model, we can use this [jupyter notebook](https://github.com/onepanelio/python-sdk/tree/master/examples)
+5. To test the model, we can use this [jupyter notebook](https://github.com/onepanelio/python-sdk/blob/master/examples/inferenceservice-flowers.ipynb)
 
 ## Create custom model servers with the UI
 
@@ -78,7 +78,7 @@ We'll be using [ssd_mobilenet_v2](https://tfhub.dev/tensorflow/ssd_mobilenet_v2/
 	```
 6. Click **Create**
 
-7. To test the model, use this [jupyter notebook](https://github.com/onepanelio/python-sdk/tree/master/examples)
+7. To test the model, use this [jupyter notebook](https://github.com/onepanelio/python-sdk/blob/master/examples/deploy-and-consume-inference-api.ipynb)
 
 ## Create custom model servers with Workflows
 
