@@ -112,7 +112,7 @@ module.exports = {
       label: 'Serverless Inference',
       collapsed: false,
       items: [
-        'reference/kfserving/getting_started',
+        'reference/inferenceservice/getting_started',
       ]
     },
     { 
