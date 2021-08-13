@@ -226,6 +226,9 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   # You need to fill this part out according to your artifact repository provider
   artifactRepository:
   # FILL ME OUT
+  certManager:
+  # Example: admin@example.com
+  email: <cert-admin-email>
   metalLb:
     addresses:
       - 192.168.99.0/32
