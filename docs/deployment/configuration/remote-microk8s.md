@@ -225,14 +225,9 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
     provider: microk8s
   # You need to fill this part out according to your artifact repository provider
   artifactRepository:
-  # FILL ME OUT
-  database:
-    databaseName: onepanel
-    driverName: postgres
-    host: postgres
-    password: sample12!
-    port: 5432
-    username: admin
+    # FILL ME OUT
+  certManager:
+    email: test@test.com # Not used in local deployments as certs are generated locally
   metalLb:
     addresses:
       - 192.168.99.0/32
