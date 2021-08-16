@@ -14,15 +14,15 @@ To deploy a simple model, we can use the [flowers prediction example](https://gi
 	![](../../../static/img/kfserving/create-model.png)
 3. Copy and paste the yaml below, filling in your namespace for &lt;namespace&gt;, then click **Create**.
 	```yaml
-	apiVersion: "serving.kubeflow.org/v1beta1"
-	kind: "InferenceService"
-	metadata:
-		namespace: <namespace>
-		name: "flower-sample"
-	spec:
-	  predictor:
-	    tensorflow:
-	      storageUri: "gs://kfserving-samples/models/tensorflow/flowers"
+    apiVersion: "serving.kubeflow.org/v1beta1"
+    kind: "InferenceService"
+    metadata:
+    	namespace: <namespace>
+    	name: "flower-sample"
+    spec:
+      predictor:
+        tensorflow:
+          storageUri: "gs://kfserving-samples/models/tensorflow/flowers"
 	```
 4. Wait for the resource to finish setting up, to confirm it's running you should see a green check as indicated.
 	![](../../../static/img/kfserving/model-created.png)
@@ -56,25 +56,25 @@ We'll be using [ssd_mobilenet_v2](https://tfhub.dev/tensorflow/ssd_mobilenet_v2/
 4. Then go to **Models** > **New Model Server**.
 5. Copy and paste the YAML below, replacing &lt;namespace&gt; with your namespace
 	```yaml
-	apiVersion: "serving.kubeflow.org/v1beta1"
-	kind: "InferenceService"
-	metadata:
-    namespace: <namespace>
-    name: ssd # name of model server
-	spec:
-    transformer:
-      containers:
-      - image:  onepanel/transformer-tfod-base64:v1.0.0
-        name: kfserving-container
-        env:
-         - name: STORAGE_URI
-           value: "s3://ssd/" # since Onepanel uses minio, all cloud providers can use the s3 prefix
-         - name: model
-           value: ssd # make sure this is the same as metadata.name
-    predictor:
-      tensorflow:
-        runtimeVersion: "2.5.1"
-        storageUri: "s3://ssd/"
+  	apiVersion: "serving.kubeflow.org/v1beta1"
+  	kind: "InferenceService"
+  	metadata:
+      namespace: <namespace>
+      name: ssd # name of model server
+  	spec:
+      transformer:
+        containers:
+        - image:  onepanel/transformer-tfod-base64:v1.0.0
+          name: kfserving-container
+          env:
+           - name: STORAGE_URI
+             value: "s3://ssd/" # since Onepanel uses minio, all cloud providers can use the s3 prefix
+           - name: model
+             value: ssd # make sure this is the same as metadata.name
+      predictor:
+        tensorflow:
+          runtimeVersion: "2.5.1"
+          storageUri: "s3://ssd/"
 	```
 6. Click **Create**
 
@@ -88,37 +88,37 @@ Using the `ssd` example above, we can replace step 5 with the following
 1. Go to **Workflows** > **Workflow Templates** > **Create Template**
 2. Assign template name and then under manifest paste the following:
 	```yaml
-	entrypoint: main
-	templates:
-    - dag:
-        tasks:
-          - name: deploy
-            template: deploy
-      name: main
-    - name: deploy
-      resource:
-        successCondition: status.address.url
-        action: create
-        manifest: |
-          apiVersion: "serving.kubeflow.org/v1beta1"
-          kind: "InferenceService"
-          metadata:
-            namespace: "{{workflow.namespace}}"
-            name: "{{workflow.name}}"
-          spec:
-            transformer:
-              containers:
-              - image: onepanel/transformer-tfod-base64:v1.0.0
-                name: kfserving-container
-                env:
-                 - name: STORAGE_URI
-                   value: "s3://ssd"
-                 - name: model
-                   value: "{{workflow.name}}"
-            predictor:
-              tensorflow:
-                runtimeVersion: "2.5.1"
-                storageUri: "s3://ssd"
+  	entrypoint: main
+  	templates:
+      - dag:
+          tasks:
+            - name: deploy
+              template: deploy
+        name: main
+      - name: deploy
+        resource:
+          successCondition: status.address.url
+          action: create
+          manifest: |
+            apiVersion: "serving.kubeflow.org/v1beta1"
+            kind: "InferenceService"
+            metadata:
+              namespace: "{{workflow.namespace}}"
+              name: "{{workflow.name}}"
+            spec:
+              transformer:
+                containers:
+                - image: onepanel/transformer-tfod-base64:v1.0.0
+                  name: kfserving-container
+                  env:
+                   - name: STORAGE_URI
+                     value: "s3://ssd"
+                   - name: model
+                     value: "{{workflow.name}}"
+              predictor:
+                tensorflow:
+                  runtimeVersion: "2.5.1"
+                  storageUri: "s3://ssd"
 	```
 3. This will generate the model servers and assign names automatically.
 4. Execute the workflow
