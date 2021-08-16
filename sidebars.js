@@ -109,10 +109,13 @@ module.exports = {
     },
     { 
       type: 'category',
-      label: 'Serverless Inference',
+      label: 'Serverless Inference APIs',
       collapsed: false,
       items: [
-        'reference/inferenceservice/getting_started',
+        'reference/inferenceservice/overview',
+        'reference/inferenceservice/create-with-web-ui',
+        'reference/inferenceservice/create-with-workflow-task',
+        'reference/inferenceservice/create-with-python-sdk',
       ]
     },
     { 
