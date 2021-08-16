@@ -84,8 +84,8 @@ const features = [
             Orchestrate and schedule distributed and parallel workflows
           </li>
           <li>
-            <h4>Single or ensemble inference</h4>
-            Single or ensemble inference Workflows exposed as APIs
+            <h4>Serverless model serving</h4>
+            Serve models with gRPC or REST endpoints that scale on demand
           </li>
           <li>
             <h4>Python SDK and APIs</h4>
@@ -118,7 +118,7 @@ function Home() {
   return (
     <Layout
       title="Onepanel"
-      description="The open and extensible IDE for computer vision with built-in modules for model building, labeling, data processing, training, hyperparameter tuning and workflows.">
+      description="Open source, end-to-end computer vision platform with modules for model building, labeling, training, hyperparameter tuning, workflow orchestration and model serving">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__name">
@@ -160,9 +160,9 @@ function Home() {
         <section className="enterprise">
           <div className="container text--center">
             <h4>
-              Need commercial support or enterprise features?
+              Need enterprise features and support?
             </h4>
-            <a className="button button--secondary" href="https://www.onepanel.ai/">Book a demo</a>
+            <a className="button button--secondary" href="https://www.onepanel.ai/">Request a demo</a>
           </div>
         </section>
       </main>
