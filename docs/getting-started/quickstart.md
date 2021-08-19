@@ -71,8 +71,6 @@ az aks get-credentials --resource-group <resource-group> --name <cluster-name> -
 
 :::important
 Make sure the **latest version** of [Amazon EKS CLI](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) (`eksctl`) is installed before proceeding.
-  
-Current stable version is [v0.55.0](https://github.com/weaveworks/eksctl/releases/tag/0.55.0)
 :::
 
 Run this `eksctl` commands to create a bare minimum cluster with 2 `m5.xlarge` nodes:
@@ -86,6 +84,7 @@ eksctl create cluster --name=<cluster-name> --region <region> --zones <<region>a
     --nodes-max 5 \
     --asg-access \
     --ssh-access \
+    --managed=false \
     --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=m5.xlarge"
 ```
 
