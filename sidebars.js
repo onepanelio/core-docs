@@ -20,6 +20,7 @@ module.exports = {
         'getting-started/concepts/namespaces',
         'getting-started/concepts/workspaces',
         'getting-started/concepts/workflows',
+        'getting-started/concepts/inference-apis',
         'getting-started/concepts/labels',
         'getting-started/concepts/environment-variables',
         'getting-started/concepts/sdk',
@@ -86,14 +87,6 @@ module.exports = {
     },
     { 
       type: 'category',
-      label: 'Sidecars',
-      collapsed: false,
-      items: [
-        'reference/sidecars/filesyncer',
-      ]
-    },
-    { 
-      type: 'category',
       label: 'Workflows',
       collapsed: false,
       items: [
@@ -105,6 +98,17 @@ module.exports = {
         'reference/workflows/tensorboard',
         'reference/workflows/hyperparameter-tuning',
         'reference/workflows/troubleshooting',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'Inference APIs',
+      collapsed: false,
+      items: [
+        'reference/inference-apis/overview',
+        'reference/inference-apis/create-with-web-ui',
+        'reference/inference-apis/create-with-workflow-task',
+        'reference/inference-apis/create-with-python-sdk',
       ]
     },
     { 
@@ -137,6 +141,14 @@ module.exports = {
         'reference/jupyterlab/tensorboard',
         'reference/jupyterlab/debugging',
         'reference/jupyterlab/language-server',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'Sidecars',
+      collapsed: false,
+      items: [
+        'reference/sidecars/filesyncer',
       ]
     },
     { 

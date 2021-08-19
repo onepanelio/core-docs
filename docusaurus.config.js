@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'The open and extensible IDE for computer vision',
-  tagline: 'The open and extensible integrated development environment (IDE) for computer vision',
+  title: 'The open source, end-to-end computer vision platform',
+  tagline: 'The open source, end-to-end computer vision platform that runs on any cloud and on-premises.',
   url: 'https://docs.onepanel.ai',
   baseUrl: '/',
   favicon: 'img/favicon.png',

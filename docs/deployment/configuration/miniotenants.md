@@ -232,6 +232,7 @@ This is the `application.defaultNamespace` value in your `params.yaml`
       # Name of bucket, example: my-bucket
       bucket: 'mybucket' # Your bucket here
       endpoint: 'minio.example.svc.cluster.local' # replace `example` with your namespace
+      publicEndpoint: 10.1.131.146:9000 # The IP address from minio
       # Change to true if endpoint does NOT support HTTPS
       insecure: true
       # Key Format for objects stored by Workflows. This can reference Workflow variables
