@@ -229,7 +229,8 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
   certManager:
     # Enter certificate admin email
     # Example: admin@example.com
-    email: <cert-admin-email>
+    email: test@test.com # Not used in local deployments as certs are generated locally
+
   metalLb:
     addresses:
       - 192.168.99.0/32
