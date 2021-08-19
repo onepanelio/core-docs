@@ -1,10 +1,11 @@
 ---
 title: Create with Workflow Task
 sidebar_label: Create with Workflow Task
-description: Deploy an inference service using a workflow task
+description: Deploy a model using Workflow Tasks
 ---
 
-In this example, we'll take a pre-existing tensorflow model and modify it to make it deployable.
+In this example, we'll take a pre-existing TensorFlow model and modify it to make it deployable.
+
 We'll use a workflow to deploy the inference service and, as a bonus, we'll use a transformer to make the input take a base64 image and output a base64 image with the bounding boxes drawn.
 
 We'll be using [ssd_mobilenet_v2](https://tfhub.dev/tensorflow/ssd_mobilenet_v2/fpnlite_320x320/1), an object detection model trained on COCO dataset with training images scaled to 320x320.
@@ -64,4 +65,4 @@ We'll be using [ssd_mobilenet_v2](https://tfhub.dev/tensorflow/ssd_mobilenet_v2/
    ```
 6. This will generate the model servers and assign names automatically.
 7. Execute the workflow
-8. To test the model, use this [jupyter notebook](https://github.com/onepanelio/python-sdk/blob/master/examples/deploy-and-consume-inference-api.ipynb)
+8. To test the model, use this [JupyterLab notebook](https://github.com/onepanelio/python-sdk/blob/master/examples/deploy-and-consume-inference-api.ipynb)

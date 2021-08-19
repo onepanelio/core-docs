@@ -20,6 +20,7 @@ module.exports = {
         'getting-started/concepts/namespaces',
         'getting-started/concepts/workspaces',
         'getting-started/concepts/workflows',
+        'getting-started/concepts/serverless-inference',
         'getting-started/concepts/labels',
         'getting-started/concepts/environment-variables',
         'getting-started/concepts/sdk',
@@ -86,14 +87,6 @@ module.exports = {
     },
     { 
       type: 'category',
-      label: 'Sidecars',
-      collapsed: false,
-      items: [
-        'reference/sidecars/filesyncer',
-      ]
-    },
-    { 
-      type: 'category',
       label: 'Workflows',
       collapsed: false,
       items: [
@@ -112,10 +105,10 @@ module.exports = {
       label: 'Serverless Inference APIs',
       collapsed: false,
       items: [
-        'reference/inferenceservice/overview',
-        'reference/inferenceservice/create-with-web-ui',
-        'reference/inferenceservice/create-with-workflow-task',
-        'reference/inferenceservice/create-with-python-sdk',
+        'reference/serverless-inference/overview',
+        'reference/serverless-inference/create-with-web-ui',
+        'reference/serverless-inference/create-with-workflow-task',
+        'reference/serverless-inference/create-with-python-sdk',
       ]
     },
     { 
@@ -148,6 +141,14 @@ module.exports = {
         'reference/jupyterlab/tensorboard',
         'reference/jupyterlab/debugging',
         'reference/jupyterlab/language-server',
+      ]
+    },
+    { 
+      type: 'category',
+      label: 'Sidecars',
+      collapsed: false,
+      items: [
+        'reference/sidecars/filesyncer',
       ]
     },
     { 

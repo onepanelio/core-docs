@@ -1,10 +1,10 @@
 ---
 title: Create with Web UI
 sidebar_label: Create with Web UI
-description: Deploy an inference service using the web ui
+description: Deploy a model using the Web UI
 ---
 
-To deploy a simple model, we can use the [flowers prediction example](https://github.com/kubeflow/kfserving/tree/master/docs/samples/v1beta1/tensorflow) from kfserving
+To deploy a simple model, we can use the [flowers prediction example](https://github.com/kubeflow/kfserving/tree/master/docs/samples/v1beta1/tensorflow) from KFServing.
 
 1. To do this, go to **Models**.
    ![](../../../static/img/kfserving/menu-models.png)
@@ -24,4 +24,4 @@ To deploy a simple model, we can use the [flowers prediction example](https://gi
    ```
 4. Wait for the resource to finish setting up, to confirm it's running you should see a green check as indicated.
    ![](../../../static/img/kfserving/model-created.png)
-5. To test the model, we can use this [jupyter notebook](https://github.com/onepanelio/python-sdk/blob/master/examples/inferenceservice-flowers.ipynb)
+5. To test the model, we can use this [JupyterLab notebook](https://github.com/onepanelio/python-sdk/blob/master/examples/inferenceservice-flowers.ipynb)
