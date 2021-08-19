@@ -102,7 +102,7 @@ module.exports = {
     },
     { 
       type: 'category',
-      label: 'Serverless Inference APIs',
+      label: 'Inference APIs',
       collapsed: false,
       items: [
         'reference/inference-apis/overview',
