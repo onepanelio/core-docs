@@ -20,7 +20,7 @@ module.exports = {
         'getting-started/concepts/namespaces',
         'getting-started/concepts/workspaces',
         'getting-started/concepts/workflows',
-        'getting-started/concepts/serverless-inference',
+        'getting-started/concepts/inference-apis',
         'getting-started/concepts/labels',
         'getting-started/concepts/environment-variables',
         'getting-started/concepts/sdk',
@@ -105,10 +105,10 @@ module.exports = {
       label: 'Serverless Inference APIs',
       collapsed: false,
       items: [
-        'reference/serverless-inference/overview',
-        'reference/serverless-inference/create-with-web-ui',
-        'reference/serverless-inference/create-with-workflow-task',
-        'reference/serverless-inference/create-with-python-sdk',
+        'reference/inference-apis/overview',
+        'reference/inference-apis/create-with-web-ui',
+        'reference/inference-apis/create-with-workflow-task',
+        'reference/inference-apis/create-with-python-sdk',
       ]
     },
     { 

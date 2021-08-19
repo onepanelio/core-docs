@@ -84,7 +84,7 @@ const features = [
             Orchestrate and schedule distributed and parallel workflows
           </li>
           <li>
-            <h4>Serverless inference APIs</h4>
+            <h4>Serverless Inference APIs</h4>
             Serve models with gRPC or REST endpoints that scale on demand
           </li>
           <li>
