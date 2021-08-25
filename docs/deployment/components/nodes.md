@@ -80,7 +80,7 @@ eksctl create nodegroup --name mygpunodegroup --cluster my-cluster-name --region
   --nodes-max 5 \
   --asg-access \
   --ssh-access \
-  --managed=false
+  --managed=false \
   --tags "onepanel.io/enabled=true,k8s.io/cluster-autoscaler/node-template/label/node.kubernetes.io/instance-type=p3.2xlarge"
 ```
 
