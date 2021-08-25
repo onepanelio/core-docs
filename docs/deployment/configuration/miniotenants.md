@@ -93,7 +93,7 @@ This is the `application.defaultNamespace` value in your `params.yaml`
   ## MinIO Tenant Definition
   apiVersion: minio.min.io/v2
   kind: Tenant
-  metadata:
+  metadata: 
     namespace: example # your namespace here
     name: minio-autocert-no-encryption
     ## Optionally pass labels to be applied to the statefulset pods
@@ -101,20 +101,25 @@ This is the `application.defaultNamespace` value in your `params.yaml`
       app: minio-autocert-no-encryption-minio
     ## Annotations for MinIO Tenant Pods
     annotations:
-      prometheus.io/path: /minio/prometheus/metrics
+      prometheus.io/path: /minio/v2/metrics/cluster
       prometheus.io/port: "9000"
       prometheus.io/scrape: "true"
-
+  
+  ## If a scheduler is specified here, Tenant pods will be dispatched by specified scheduler.
+  ## If not specified, the Tenant pods will be dispatched by default scheduler.
+  # scheduler:
+  #  name: my-custom-scheduler
+  
   spec:
     ## Registry location and Tag to download MinIO Server image
-    image: minio/minio:RELEASE.2021-06-07T21-40-51Z
+    image: minio/minio:RELEASE.2021-08-17T20-53-08Z
     imagePullPolicy: IfNotPresent
-
+  
     ## Secret with credentials to be used by MinIO Tenant.
     ## Refers to the secret object created above.
     credsSecret:
       name: minio-autocert-no-encryption-minio-creds-secret
-
+  
     ## Specification for MinIO Pool(s) in this Tenant.
     pools:
       - servers: 1
@@ -127,29 +132,40 @@ This is the `application.defaultNamespace` value in your `params.yaml`
               - ReadWriteOnce
             resources:
               requests:
-                storage: 10Gi # your storage here. 
-
+                storage: 10Gi # your storage here
     ## Mount path where PV will be mounted inside container(s).
     mountPath: /data
       ## Sub path inside Mount path where MinIO stores data.
       # subPath: /data
-
+  
     ## Enable automatic Kubernetes based certificate generation and signing as explained in
     ## https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster
     requestAutoCert: false
-
+  
+    ## This field is used only when "requestAutoCert" is set to true. Use this field to set CommonName
+    ## for the auto-generated certificate. Internal DNS name for the pod will be used if CommonName is
+    ## not provided. DNS name format is *.minio.default.svc.cluster.local
+    certConfig:
+      commonName: ""
+      organizationName: []
+      dnsNames: []
+  
     ## PodManagement policy for MinIO Tenant Pods. Can be "OrderedReady" or "Parallel"
     ## Refer https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#pod-management-policy
     ## for details.
     podManagementPolicy: Parallel
-
-    ## Define configuration for Console (Graphical user interface for MinIO)
-    ## Refer https://github.com/minio/console
-    console:
-      image: minio/console:v0.7.4
-      replicas: 2
-      consoleSecret:
-        name: minio-autocert-no-encryption-console-secret
+  
+    ## Add environment variables to be set in MinIO container (https://github.com/minio/minio/tree/master/docs/config)
+    # env:
+    # - name: MINIO_BROWSER
+    #   value: "off" # to turn-off browser
+    # - name: MINIO_STORAGE_CLASS_STANDARD
+    #   value: "EC:2"
+  
+    ## PriorityClassName indicates the Pod priority and hence importance of a Pod relative to other Pods.
+    ## This is applied to MinIO pods only.
+    ## Refer Kubernetes documentation for details https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass/
+    # priorityClassName: high-priority
   ```
 
   In the above file, change the `namespace` to be your namespace. Also, make sure to set the `storage` value to however much space you want to give the tenant.
