@@ -190,7 +190,7 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 1. Install
 
   ```bash
-  curl -sLO https://github.com/onepanelio/onepanel/releases/download/v0.21.0/opctl-linux-amd64
+  curl -sLO https://github.com/onepanelio/onepanel/releases/latest/download/opctl-linux-amd64
   chmod +x opctl-linux-amd64
   sudo mv ./opctl-linux-amd64 /usr/local/bin/opctl
   ```
