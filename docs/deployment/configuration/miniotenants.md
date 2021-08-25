@@ -64,7 +64,7 @@ This is the `application.defaultNamespace` value in your `params.yaml`
   apiVersion: v1
   kind: Secret
   metadata:
-    namespace:example # your namespace here
+    namespace: example # your namespace here
     name: minio-autocert-no-encryption-minio-creds-secret
   type: Opaque
   data:
@@ -77,7 +77,7 @@ This is the `application.defaultNamespace` value in your `params.yaml`
   apiVersion: v1
   kind: Secret
   metadata:
-    namespace:example # your namespace here
+    namespace: example # your namespace here
     name: minio-autocert-no-encryption-console-secret
   type: Opaque
   data:
@@ -94,7 +94,7 @@ This is the `application.defaultNamespace` value in your `params.yaml`
   apiVersion: minio.min.io/v2
   kind: Tenant
   metadata: 
-    namespace:example # your namespace here
+    namespace: example # your namespace here
     name: minio-autocert-no-encryption
     ## Optionally pass labels to be applied to the statefulset pods
     labels:
