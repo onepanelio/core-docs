@@ -321,7 +321,7 @@ artifactRepository:
   abs:
     # Name of Azure block storage container, example: my-container
     container: my-data-container
-    # Azure storagee account key
+    # Azure storage account key
     storageAccountKey: VsMyhYqFiFK1rNj5cNhMd6h9m01pCIQaMTDXmUIEOeMDtjspm12HvKxLs1dxvag2RJ1sYTuPWMQBDKvmIGPWIZ==
     # Azure storage account name
     storageAccountName: my-storage-account-name
