@@ -320,14 +320,14 @@ This can be a VM in the cloud, or Multipass running locally. In either case, it 
 
 ## Configure Local DNS
 
-  On your local machine, we need to point DNS so it knows about Onepanel.
+  On the client machine, we need to point DNS so your browser can find Onepanel using the FQDN you configured.
   
   Below we edit the hosts file, but you can use DNSMasq for a more robust set up.
 
   Get the IP address of your VM. For VMs in the cloud, this is given to you. 
   In multipass you can see it with `multipass list`
 
-  For this example, we'll assume the IP is: `15.92.2.237`
+  For this example, we will assume the IP is: `15.92.2.237`
 
   Then, edit your hosts file using a text editor. The location depends on your operation system.
 
