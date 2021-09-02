@@ -238,6 +238,8 @@ This is the `application.defaultNamespace` value in your `params.yaml`
 
 2. Params configuration
 
+## Local machine
+
   In your `params.yaml` use the following for the `artifactRepository` configuration
 
   ```bash
@@ -257,4 +259,60 @@ This is the `application.defaultNamespace` value in your `params.yaml`
       region: us-west-2
       # S3 secret key
       secretKey: 'minio123'
+  ```
+
+## Remote machine, using Nginx
+
+In your `params.yaml` use the following for the `artifactRepository` configuration
+
+  ```bash
+  artifactRepository:
+    s3:
+      # S3 access key
+      accessKey: 'minio'
+      # Name of bucket, example: my-bucket
+      bucket: 'mybucket' # Your bucket here
+      endpoint: 'minio.example.svc.cluster.local' # replace `example` with your namespace
+      publicEndpoint: <remote machine ip>:9000 # The IP address of the machine running microk8s
+      # Change to true if endpoint does NOT support HTTPS
+      insecure: true
+      # Key Format for objects stored by Workflows. This can reference Workflow variables
+      keyFormat: artifacts/{{workflow.namespace}}/{{workflow.name}}/{{pod.name}}
+      # Bucket region, this can be anything since it is running locally
+      region: us-west-2
+      # S3 secret key
+      secretKey: 'minio123'
+  ```
+
+  Then to edit your nginx config
+
+  ```bash
+  sudo nano /etc/nginx/sites-available/default 
+  ```
+
+  Add below `#Default server configuration`
+
+  ```
+  # Default server configuration
+  #
+  
+  server {
+          listen 9000 default_server;
+          listen [::]:9000 default_server;
+  
+          server_name _;
+  
+          location / {
+                  proxy_pass http://10.1.131.146:9000; # 10.1.131.146 is the ip address of minio
+          }
+  }
+  
+  # original server config, keep this
+  server {
+        listen 80 default_server;
+  ```
+
+  Finally, reload your configuration 
+  ```bash
+  sudo nginx -s reload
   ```
