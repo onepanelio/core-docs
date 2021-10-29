@@ -9,7 +9,9 @@ This version of CVAT has one significant difference from previous versions - the
 
 However, you can use Onepanel's Models to replace these. 
 
-# Onepanel Model in CVAT
+# MASK RCNN
+
+A MASK RCNN model is available, to deploy it and use it in cvat:
 
 1. Go to `Models` in the navigation bar
 2. Create a Model
@@ -45,3 +47,5 @@ However, you can use Onepanel's Models to replace these.
 
 4. This model has a label `"used-by": cvat` that will allow it to show in CVAT.
 5. You can use this model in CVAT as before.
+
+For more information about this particular model, check out https://github.com/onepanelio/transformers
