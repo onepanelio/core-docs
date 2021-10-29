@@ -129,6 +129,7 @@ module.exports = {
         'reference/cvat/built-in-models',
         'reference/cvat/automatic-annotation',
         'reference/cvat/custom-models',
+        'reference/cvat/cvat_1_6',
       ]
     },
     { 
