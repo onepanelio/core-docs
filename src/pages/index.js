@@ -157,14 +157,6 @@ function Home() {
             </div>
           </section>
         )}
-        <section className="enterprise">
-          <div className="container text--center">
-            <h4>
-              Need enterprise features and support?
-            </h4>
-            <a className="button button--secondary" href="https://www.onepanel.ai/">Request a demo</a>
-          </div>
-        </section>
       </main>
     </Layout>
   );
