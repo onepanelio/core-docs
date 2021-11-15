@@ -29,12 +29,6 @@ module.exports = {
           label: 'GitHub',
         },
         {
-          href: 'https://join.slack.com/t/onepanel-ce/shared_invite/zt-eyjnwec0-nLaHhjif9Y~gA05KuX6AUg',
-          position: 'right',
-          className: 'header-icon-link header-slack-link',
-          label: 'Slack',
-        },
-        {
           href: 'https://twitter.com/onepanelai',
           position: 'right',
           className: 'header-icon-link header-twitter-link',
